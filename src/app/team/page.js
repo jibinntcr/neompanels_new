@@ -32,7 +32,7 @@ const LEADERSHIP_TEAM = [
     name: 'Muhamad Raneef T A',
     role: 'Chief Financial Officer',
     focus: 'Financial Planning, Commercial Discipline & People Development',
-    photo: null,
+    photo: '/assets/team/muhamad-raneef.jpeg',
     initials: 'MR',
     bio: 'Raneef oversees NEOM Panels’ financial planning and commercial discipline, supporting responsible resource allocation and sustainable business growth. An HRM postgraduate and national-level medal-winning athlete, he brings a people-focused outlook, discipline and a collaborative approach to the leadership team.',
     linkedin: 'https://www.linkedin.com/in/muhamad-raneef-t-a-752832232/'
