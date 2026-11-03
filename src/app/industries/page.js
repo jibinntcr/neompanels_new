@@ -3,7 +3,7 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Industries & Applications — B2B Wood-Panel Requirements',
   description:
-    'Start with the application. Share your panel specification and purchasing requirements for furniture manufacturing, modular systems, commercial interiors, institutional procurement or distribution.'
+    'Start with the application. Share your panel specification and purchasing requirements for furniture manufacturing, modular systems, commercial interiors, industrial packaging, institutional procurement or distribution.'
 };
 
 export default function IndustriesPage() {
@@ -39,6 +39,9 @@ export default function IndustriesPage() {
             </a>
             <a href="#architects-designers" className="industry-jump-link">
               06. Architects &amp; Designers
+            </a>
+            <a href="#industrial-packaging" className="industry-jump-link">
+              07. Industrial Packaging
             </a>
           </nav>
         </div>
@@ -301,8 +304,8 @@ export default function IndustriesPage() {
               </p>
               <p>
                 NEOM Panels seeks long-term channel relationships with established trade partners
-                looking to represent our brands, including Starwoods, in defined markets across
-                India.
+                looking to represent our brands, including Starwoods and NEOM Packing Plywood, in
+                defined markets across India.
               </p>
             </div>
             <div className="enquiry-checklist-box">
@@ -317,8 +320,8 @@ export default function IndustriesPage() {
                   handled, warehousing capacity and customer base.
                 </li>
                 <li>
-                  <strong>Brand interest:</strong> Interest in Starwoods or broader NEOM Panels
-                  supply programmes.
+                  <strong>Brand interest:</strong> Interest in Starwoods, NEOM Packing Plywood or
+                  broader NEOM Panels supply programmes.
                 </li>
                 <li>
                   <strong>Frequency:</strong> Indicative stocking and dispatch expectations.
@@ -375,6 +378,85 @@ export default function IndustriesPage() {
               >
                 Request Specification Information
               </Link>
+            </div>
+          </article>
+
+          {/* 07. Industrial Packaging & Packing-Case Manufacturing */}
+          <article className="industry-section-block reveal-once" id="industrial-packaging">
+            <div>
+              <p className="eyebrow">07 · INDUSTRIAL PACKAGING</p>
+              <h2 className="section-title">
+                Industrial Packaging &amp; Packing-Case Manufacturing
+              </h2>
+              <p className="lead-text">
+                Packaging manufacturers and industrial buyers source plywood around packing designs,
+                fabrication requirements and dispatch schedules. NEOM Packing Plywood provides a
+                dedicated brand for moisture-resistant packaging-grade plywood enquiries.
+              </p>
+              <p>
+                Share the packaging application, required sheet dimensions, thicknesses and purchase
+                volume so our team can discuss the relevant material and supply information.
+              </p>
+              <figure
+                className="architectural-photo-card"
+                style={{ marginTop: 'var(--space-5)', marginBottom: 0 }}
+              >
+                <img
+                  src="/assets/packing-plywood-crates.jpg"
+                  alt="Clean packing-case fabrication workbench showing slotted plywood crate dividers, stacked multi-ply panels and a steel vernier caliper for thickness measurement."
+                  width="1400"
+                  height="933"
+                  loading="lazy"
+                />
+                <figcaption className="architectural-photo-meta">
+                  <span>Packing Cases, Crates &amp; Industrial Packaging Components</span>
+                  <span>07 · NEOM Packing Plywood</span>
+                </figcaption>
+              </figure>
+            </div>
+            <div className="enquiry-checklist-box">
+              <div style={{ marginBottom: 'var(--space-3)' }}>
+                <img
+                  src="/assets/neom-packing-plywood-logo-compact.svg"
+                  alt="NEOM Packing Plywood"
+                  className="packing-logo-img--xs"
+                  width="540"
+                  height="112"
+                />
+              </div>
+              <h3 className="enquiry-checklist-title">What to share in your enquiry</h3>
+              <ul className="checklist-items">
+                <li>
+                  <strong>Application:</strong> Packing case, crate panel, liner, divider or other
+                  packaging component.
+                </li>
+                <li>
+                  <strong>Specification:</strong> Required thickness, sheet dimensions and any
+                  buyer-defined material requirements.
+                </li>
+                <li>
+                  <strong>Quantity and frequency:</strong> Initial quantity and expected repeat
+                  purchasing schedule.
+                </li>
+                <li>
+                  <strong>Destination and timing:</strong> Delivery location and required delivery
+                  date.
+                </li>
+              </ul>
+              <div className="btn-group">
+                <Link
+                  href="/enquiry?brand=neom-packing-plywood&category=industrial-packaging"
+                  className="btn btn--primary"
+                >
+                  Discuss Packaging Supply
+                </Link>
+                <Link href="/brands/neom-packing-plywood" className="editorial-link">
+                  <span>Explore NEOM Packing Plywood</span>
+                  <span className="link-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
+              </div>
             </div>
           </article>
         </div>

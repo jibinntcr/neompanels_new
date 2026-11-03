@@ -4,6 +4,42 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
+const normalizeBrandParam = (raw) => {
+  if (!raw) return '';
+  const lower = raw.trim().toLowerCase();
+  if (lower === 'neom-packing-plywood' || lower === 'neom packing plywood' || lower === 'packing-plywood') {
+    return 'NEOM Packing Plywood';
+  }
+  if (lower === 'starwoods' || lower === 'starwood') {
+    return 'Starwoods';
+  }
+  if (
+    lower === 'general' ||
+    lower === 'general-neom-panels-enquiry' ||
+    lower === 'general neom panels enquiry' ||
+    lower === 'neom panels (corporate)'
+  ) {
+    return 'General NEOM Panels Enquiry';
+  }
+  if (lower === 'help-me-choose' || lower === 'help me choose') {
+    return 'Help Me Choose';
+  }
+  return raw;
+};
+
+const normalizeCategoryParam = (raw) => {
+  if (!raw) return '';
+  const lower = raw.trim().toLowerCase();
+  if (
+    lower === 'industrial-packaging' ||
+    lower === 'packing-plywood' ||
+    lower === 'industrial packaging / packing plywood'
+  ) {
+    return 'Industrial Packaging / Packing Plywood';
+  }
+  return raw;
+};
+
 export default function EnquiryFormClient() {
   const searchParams = useSearchParams();
 
@@ -11,12 +47,21 @@ export default function EnquiryFormClient() {
   const [backendLive, setBackendLive] = useState(true);
 
   // Step 1 fields
+  const [brand, setBrand] = useState('');
   const [category, setCategory] = useState('');
   const [purchasingFrequency, setPurchasingFrequency] = useState('');
   const [procurementReference, setProcurementReference] = useState('');
   const [territory, setTerritory] = useState('');
+
+  // Packaging-specific conditional fields
+  const [packagingApplication, setPackagingApplication] = useState('');
+  const [requiredThickness, setRequiredThickness] = useState('');
+  const [sheetDimensions, setSheetDimensions] = useState('');
+  const [purchaseFrequency, setPurchaseFrequency] = useState('');
+  const [additionalSpecifications, setAdditionalSpecifications] = useState('');
+
+  // Shared Step 1 fields
   const [requirementDescription, setRequirementDescription] = useState('');
-  const [brand, setBrand] = useState('');
   const [applicationProduct, setApplicationProduct] = useState('');
   const [quantity, setQuantity] = useState('');
   const [quantityUnit, setQuantityUnit] = useState('Sheets');
@@ -48,6 +93,9 @@ export default function EnquiryFormClient() {
   const errorBannerRef = useRef(null);
   const successHeadingRef = useRef(null);
 
+  const isPackagingFlow =
+    category === 'Industrial Packaging / Packing Plywood' || brand === 'NEOM Packing Plywood';
+
   useEffect(() => {
     fetch('/api/health', { headers: { Accept: 'application/json' } })
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('offline'))))
@@ -61,9 +109,30 @@ export default function EnquiryFormClient() {
     const paramApp = searchParams.get('application');
     const paramDoc = searchParams.get('document');
 
-    if (paramCat) setCategory(paramCat);
-    if (paramBrand) setBrand(paramBrand);
-    if (paramApp) setApplicationProduct(paramApp);
+    const resolvedBrand = normalizeBrandParam(paramBrand);
+    const resolvedCat = normalizeCategoryParam(paramCat);
+
+    if (resolvedBrand) {
+      setBrand(resolvedBrand);
+      if (resolvedBrand === 'NEOM Packing Plywood' && !resolvedCat) {
+        setCategory('Industrial Packaging / Packing Plywood');
+      }
+    }
+    if (resolvedCat) {
+      setCategory(resolvedCat);
+      if (resolvedCat === 'Industrial Packaging / Packing Plywood' && !resolvedBrand) {
+        setBrand('NEOM Packing Plywood');
+      }
+    }
+    if (paramApp) {
+      setApplicationProduct(paramApp);
+      if (
+        resolvedBrand === 'NEOM Packing Plywood' ||
+        resolvedCat === 'Industrial Packaging / Packing Plywood'
+      ) {
+        setPackagingApplication(paramApp);
+      }
+    }
     if (paramDoc) {
       setRequirementDescription((prev) =>
         prev
@@ -213,16 +282,28 @@ export default function EnquiryFormClient() {
     formData.append('category', category);
     formData.append('requirementDescription', requirementDescription.trim());
     formData.append('brand', brand);
-    formData.append('applicationProduct', applicationProduct.trim());
+    formData.append(
+      'applicationProduct',
+      (applicationProduct || packagingApplication).trim()
+    );
     formData.append('quantity', quantity.trim());
     formData.append('quantityUnit', quantityUnit);
     formData.append('destination', destination.trim());
     formData.append('requestedDate', requestedDate);
     formData.append('company_website_hp', honeypot);
 
-    formData.append('purchasingFrequency', purchasingFrequency);
+    formData.append('purchasingFrequency', purchasingFrequency || purchaseFrequency);
     formData.append('procurementReference', procurementReference.trim());
     formData.append('territory', territory.trim());
+
+    // Packaging-specific conditional payload fields
+    formData.append('packagingApplication', packagingApplication.trim());
+    formData.append('requiredThickness', requiredThickness.trim());
+    formData.append('sheetDimensions', sheetDimensions.trim());
+    formData.append('purchaseFrequency', purchaseFrequency || purchasingFrequency);
+    formData.append('deliveryLocation', destination.trim());
+    formData.append('requiredDeliveryDate', requestedDate);
+    formData.append('additionalSpecifications', additionalSpecifications.trim());
 
     formData.append('name', name.trim());
     formData.append('buyerProfile', buyerProfile);
@@ -270,6 +351,11 @@ export default function EnquiryFormClient() {
     setPurchasingFrequency('');
     setProcurementReference('');
     setTerritory('');
+    setPackagingApplication('');
+    setRequiredThickness('');
+    setSheetDimensions('');
+    setPurchaseFrequency('');
+    setAdditionalSpecifications('');
     setRequirementDescription('');
     setBrand('');
     setApplicationProduct('');
@@ -401,47 +487,243 @@ export default function EnquiryFormClient() {
               Step 1 — Requirement details
             </legend>
 
-            <div className="form-group">
-              <label htmlFor="enquiry-category" className="form-label">
-                Enquiry category <span className="required-marker" aria-hidden="true">*</span>
-              </label>
-              <span id="category-hint" className="field-hint">
-                Select the option that best matches your commercial requirement.
-              </span>
-              <select
-                id="enquiry-category"
-                name="category"
-                className="form-control"
-                aria-describedby="category-hint"
-                aria-errormessage="category-error"
-                aria-invalid={step1Errors.category ? 'true' : undefined}
-                value={category}
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                  setStep1Errors((prev) => ({ ...prev, category: undefined }));
-                }}
-                required
-              >
-                <option value="">Select an enquiry category…</option>
-                <option value="Manufacturing & recurring supply">
-                  Manufacturing &amp; recurring supply
-                </option>
-                <option value="Project requirement">Project requirement</option>
-                <option value="Institutional & public procurement">
-                  Institutional &amp; public procurement
-                </option>
-                <option value="Product information">Product information</option>
-                <option value="Distribution partnership">Distribution partnership</option>
-                <option value="Supplier introduction">Supplier introduction</option>
-                <option value="Other business enquiry">Other business enquiry</option>
-              </select>
-              <span
-                id="category-error"
-                className={`error-msg ${step1Errors.category ? 'is-visible' : ''}`}
-              >
-                {step1Errors.category || 'Please select an enquiry category.'}
-              </span>
+            <div className="form-row-split">
+              <div className="form-group">
+                <label htmlFor="enquiry-brand" className="form-label">
+                  Brand / product interest
+                </label>
+                <span id="brand-hint" className="field-hint">
+                  Choose a specific NEOM Panels brand or general guidance.
+                </span>
+                <select
+                  id="enquiry-brand"
+                  name="brand"
+                  className="form-control"
+                  aria-describedby="brand-hint"
+                  value={brand}
+                  onChange={(e) => {
+                    const nextBrand = e.target.value;
+                    setBrand(nextBrand);
+                    if (nextBrand === 'NEOM Packing Plywood' && !category) {
+                      setCategory('Industrial Packaging / Packing Plywood');
+                      setStep1Errors((prev) => ({ ...prev, category: undefined }));
+                    }
+                  }}
+                >
+                  <option value="">Select brand or product interest…</option>
+                  <option value="Starwoods">Starwoods</option>
+                  <option value="NEOM Packing Plywood">NEOM Packing Plywood</option>
+                  <option value="General NEOM Panels Enquiry">General NEOM Panels Enquiry</option>
+                  <option value="Help Me Choose">Help Me Choose</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="enquiry-category" className="form-label">
+                  Enquiry category <span className="required-marker" aria-hidden="true">*</span>
+                </label>
+                <span id="category-hint" className="field-hint">
+                  Select the option that best matches your commercial requirement.
+                </span>
+                <select
+                  id="enquiry-category"
+                  name="category"
+                  className="form-control"
+                  aria-describedby="category-hint"
+                  aria-errormessage="category-error"
+                  aria-invalid={step1Errors.category ? 'true' : undefined}
+                  value={category}
+                  onChange={(e) => {
+                    const nextCat = e.target.value;
+                    setCategory(nextCat);
+                    if (nextCat === 'Industrial Packaging / Packing Plywood' && !brand) {
+                      setBrand('NEOM Packing Plywood');
+                    }
+                    setStep1Errors((prev) => ({ ...prev, category: undefined }));
+                  }}
+                  required
+                >
+                  <option value="">Select an enquiry category…</option>
+                  <option value="Industrial Packaging / Packing Plywood">
+                    Industrial Packaging / Packing Plywood
+                  </option>
+                  <option value="Manufacturing & recurring supply">
+                    Manufacturing &amp; recurring supply
+                  </option>
+                  <option value="Project requirement">Project requirement</option>
+                  <option value="Institutional & public procurement">
+                    Institutional &amp; public procurement
+                  </option>
+                  <option value="Product information">Product information</option>
+                  <option value="Distribution partnership">Distribution partnership</option>
+                  <option value="Supplier introduction">Supplier introduction</option>
+                  <option value="Other business enquiry">Other business enquiry</option>
+                </select>
+                <span
+                  id="category-error"
+                  className={`error-msg ${step1Errors.category ? 'is-visible' : ''}`}
+                >
+                  {step1Errors.category || 'Please select an enquiry category.'}
+                </span>
+              </div>
             </div>
+
+            {/* Conditional Block for Industrial Packaging / NEOM Packing Plywood */}
+            {isPackagingFlow ? (
+              <div
+                id="cond-packaging"
+                className="conditional-group"
+                style={{ borderLeftColor: 'var(--color-oak)' }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '0.75rem',
+                    marginBottom: 'var(--space-4)',
+                    paddingBottom: 'var(--space-3)',
+                    borderBottom: '1px solid var(--color-border)'
+                  }}
+                >
+                  <div>
+                    <span className="eyebrow" style={{ marginBottom: '0.15rem' }}>
+                      PACKAGING SPECIFICATION PARAMETERS
+                    </span>
+                    <p style={{ margin: 0, fontWeight: 600, color: 'var(--color-forest)' }}>
+                      NEOM Packing Plywood · Moisture Resistant (MR) Packaging Grade
+                    </p>
+                  </div>
+                  <img
+                    src="/assets/neom-packing-plywood-logo-compact.svg"
+                    alt="NEOM Packing Plywood"
+                    className="packing-logo-img--xs"
+                    width="540"
+                    height="112"
+                  />
+                </div>
+
+                <div className="form-row-split">
+                  <div className="form-group">
+                    <label htmlFor="enquiry-packaging-application" className="form-label">
+                      Packaging application
+                    </label>
+                    <span id="packaging-app-hint" className="field-hint">
+                      What are you fabricating or packing?
+                    </span>
+                    <select
+                      id="enquiry-packaging-application"
+                      name="packagingApplication"
+                      className="form-control"
+                      aria-describedby="packaging-app-hint"
+                      value={packagingApplication}
+                      onChange={(e) => setPackagingApplication(e.target.value)}
+                    >
+                      <option value="">Select packaging application…</option>
+                      <option value="Packing Cases">Packing Cases</option>
+                      <option value="Crates and Enclosures">Crates and Enclosures</option>
+                      <option value="Industrial Packaging Components (Dividers, Liners, Panels)">
+                        Industrial Packaging Components (Dividers, Liners, Panels)
+                      </option>
+                      <option value="Recurring Packaging Supply">Recurring Packaging Supply</option>
+                      <option value="Other Industrial Packaging Application">
+                        Other Industrial Packaging Application
+                      </option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="enquiry-purchase-frequency" className="form-label">
+                      One-time or recurring purchase
+                    </label>
+                    <span id="purchase-freq-hint" className="field-hint">
+                      Indicate whether this is a single order or repeat supply.
+                    </span>
+                    <select
+                      id="enquiry-purchase-frequency"
+                      name="purchaseFrequency"
+                      className="form-control"
+                      aria-describedby="purchase-freq-hint"
+                      value={purchaseFrequency}
+                      onChange={(e) => setPurchaseFrequency(e.target.value)}
+                    >
+                      <option value="">Select purchase schedule…</option>
+                      <option value="One-time purchase">One-time purchase</option>
+                      <option value="Recurring monthly / scheduled supply">
+                        Recurring monthly / scheduled supply
+                      </option>
+                      <option value="Recurring quarterly supply">
+                        Recurring quarterly supply
+                      </option>
+                      <option value="Initial batch with planned repeat supply">
+                        Initial batch with planned repeat supply
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-row-split">
+                  <div className="form-group">
+                    <label htmlFor="enquiry-required-thickness" className="form-label">
+                      Required thickness
+                    </label>
+                    <span id="thickness-hint" className="field-hint">
+                      Nominal thickness(es) in mm.
+                    </span>
+                    <input
+                      type="text"
+                      id="enquiry-required-thickness"
+                      name="requiredThickness"
+                      className="form-control"
+                      aria-describedby="thickness-hint"
+                      placeholder="e.g. 9 mm, 12 mm, 16 mm"
+                      value={requiredThickness}
+                      onChange={(e) => setRequiredThickness(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="enquiry-sheet-dimensions" className="form-label">
+                      Sheet dimensions
+                    </label>
+                    <span id="dimensions-hint" className="field-hint">
+                      Required length × width (ft or mm).
+                    </span>
+                    <input
+                      type="text"
+                      id="enquiry-sheet-dimensions"
+                      name="sheetDimensions"
+                      className="form-control"
+                      aria-describedby="dimensions-hint"
+                      placeholder="e.g. 8 ft × 4 ft (2440 × 1220 mm)"
+                      value={sheetDimensions}
+                      onChange={(e) => setSheetDimensions(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label htmlFor="enquiry-additional-specs" className="form-label">
+                    Additional specifications <span className="optional-marker">(Optional)</span>
+                  </label>
+                  <span id="additional-specs-hint" className="field-hint">
+                    Share expected handling method, storage/transport moisture exposure, or special
+                    packing notes.
+                  </span>
+                  <input
+                    type="text"
+                    id="enquiry-additional-specs"
+                    name="additionalSpecifications"
+                    className="form-control"
+                    aria-describedby="additional-specs-hint"
+                    placeholder="e.g. Forklift handling, covered warehouse storage, domestic dispatch"
+                    value={additionalSpecifications}
+                    onChange={(e) => setAdditionalSpecifications(e.target.value)}
+                  />
+                </div>
+              </div>
+            ) : null}
 
             {category === 'Manufacturing & recurring supply' ? (
               <div id="cond-frequency" className="conditional-group">
@@ -547,8 +829,8 @@ export default function EnquiryFormClient() {
                 Requirement description <span className="required-marker" aria-hidden="true">*</span>
               </label>
               <span id="description-hint" className="field-hint">
-                Describe what the panel will be used for, required thicknesses or dimensions, and any
-                questions you have (minimum 10 characters).
+                Describe what the panel or packing plywood will be used for, required thicknesses or
+                dimensions, and any questions you have (minimum 10 characters).
               </span>
               <textarea
                 id="enquiry-description"
@@ -577,26 +859,7 @@ export default function EnquiryFormClient() {
               </span>
             </div>
 
-            <div className="form-row-split">
-              <div className="form-group">
-                <label htmlFor="enquiry-brand" className="form-label">
-                  Brand <span className="optional-marker">(Optional)</span>
-                </label>
-                <select
-                  id="enquiry-brand"
-                  name="brand"
-                  className="form-control"
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
-                >
-                  <option value="">No preference / Advise based on requirement</option>
-                  <option value="Starwoods">Starwoods</option>
-                  <option value="NEOM Panels (Corporate)">
-                    NEOM Panels (Corporate / Multi-brand)
-                  </option>
-                </select>
-              </div>
-
+            {!isPackagingFlow ? (
               <div className="form-group">
                 <label htmlFor="enquiry-application" className="form-label">
                   Application or product <span className="optional-marker">(Optional)</span>
@@ -606,17 +869,17 @@ export default function EnquiryFormClient() {
                   id="enquiry-application"
                   name="applicationProduct"
                   className="form-control"
-                  placeholder="e.g. Modular wardrobes, office fit-out"
+                  placeholder="e.g. Modular wardrobes, office fit-out, packing cases"
                   value={applicationProduct}
                   onChange={(e) => setApplicationProduct(e.target.value)}
                 />
               </div>
-            </div>
+            ) : null}
 
             <div className="form-row-split">
               <div className="form-group">
                 <label htmlFor="enquiry-quantity" className="form-label">
-                  Approximate quantity <span className="optional-marker">(Optional)</span>
+                  Quantity <span className="optional-marker">(Optional)</span>
                 </label>
                 <input
                   type="text"
@@ -632,7 +895,7 @@ export default function EnquiryFormClient() {
 
               <div className="form-group">
                 <label htmlFor="enquiry-unit" className="form-label">
-                  Unit <span className="optional-marker">(Optional)</span>
+                  Quantity unit <span className="optional-marker">(Optional)</span>
                 </label>
                 <select
                   id="enquiry-unit"
@@ -654,7 +917,7 @@ export default function EnquiryFormClient() {
             <div className="form-row-split">
               <div className="form-group">
                 <label htmlFor="enquiry-destination" className="form-label">
-                  Delivery destination <span className="optional-marker">(Optional)</span>
+                  Delivery location <span className="optional-marker">(Optional)</span>
                 </label>
                 <input
                   type="text"
@@ -669,8 +932,7 @@ export default function EnquiryFormClient() {
 
               <div className="form-group">
                 <label htmlFor="enquiry-date" className="form-label">
-                  Requested delivery or project date{' '}
-                  <span className="optional-marker">(Optional)</span>
+                  Required delivery date <span className="optional-marker">(Optional)</span>
                 </label>
                 <input
                   type="date"
@@ -688,8 +950,8 @@ export default function EnquiryFormClient() {
                 Supporting files <span className="optional-marker">(Optional)</span>
               </label>
               <span id="files-hint" className="field-hint">
-                Attach a specification sheet, bill of quantities (BOQ) or drawing. Accepted formats:
-                PDF, JPG, PNG. Up to 10MB per file, maximum 3 files.
+                Attach a specification sheet, bill of quantities (BOQ), packing drawing or schedule.
+                Accepted formats: PDF, JPG, PNG. Up to 10MB per file, maximum 3 files.
               </span>
               <div className="file-upload-box">
                 <input
@@ -775,8 +1037,8 @@ export default function EnquiryFormClient() {
                 Your role or organisation type
               </label>
               <span id="buyer-profile-hint" className="field-hint">
-                Independent architects, designers and consultants are welcome to enquire directly
-                alongside companies and institutions.
+                Packaging manufacturers, fabricators, companies, institutions and independent
+                consultants are welcome to enquire directly.
               </span>
               <select
                 id="enquiry-buyer-profile"
@@ -787,7 +1049,11 @@ export default function EnquiryFormClient() {
                 onChange={(e) => setBuyerProfile(e.target.value)}
               >
                 <option value="Company or organisation buyer">
-                  Company or organisation buyer (OEM, Manufacturer, Contractor, Distributor)
+                  Company or organisation buyer (OEM, Packaging Fabricator, Manufacturer, Contractor,
+                  Distributor)
+                </option>
+                <option value="Industrial packaging or packing-case manufacturer">
+                  Industrial packaging or packing-case manufacturer
                 </option>
                 <option value="Independent architect or interior designer">
                   Independent architect or interior designer

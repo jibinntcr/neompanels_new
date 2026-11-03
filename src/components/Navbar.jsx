@@ -6,10 +6,14 @@ import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [companySubmenuOpen, setCompanySubmenuOpen] = useState(false);
+  const [brandsSubmenuOpen, setBrandsSubmenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const submenuRef = useRef(null);
-  const triggerRef = useRef(null);
+
+  const companySubmenuRef = useRef(null);
+  const companyTriggerRef = useRef(null);
+  const brandsSubmenuRef = useRef(null);
+  const brandsTriggerRef = useRef(null);
 
   const isCompanyActive =
     pathname === '/about' ||
@@ -17,27 +21,43 @@ export default function Navbar() {
     pathname === '/leadership' ||
     pathname === '/governance';
 
+  const isBrandsActive =
+    pathname === '/brands' || pathname?.startsWith('/brands/');
+
   useEffect(() => {
-    setSubmenuOpen(false);
+    setCompanySubmenuOpen(false);
+    setBrandsSubmenuOpen(false);
     setMobileOpen(false);
   }, [pathname]);
 
   useEffect(() => {
     function handleClickOutside(e) {
       if (
-        submenuRef.current &&
-        !submenuRef.current.contains(e.target) &&
-        triggerRef.current &&
-        !triggerRef.current.contains(e.target)
+        companySubmenuRef.current &&
+        !companySubmenuRef.current.contains(e.target) &&
+        companyTriggerRef.current &&
+        !companyTriggerRef.current.contains(e.target)
       ) {
-        setSubmenuOpen(false);
+        setCompanySubmenuOpen(false);
+      }
+      if (
+        brandsSubmenuRef.current &&
+        !brandsSubmenuRef.current.contains(e.target) &&
+        brandsTriggerRef.current &&
+        !brandsTriggerRef.current.contains(e.target)
+      ) {
+        setBrandsSubmenuOpen(false);
       }
     }
     function handleKeyDown(e) {
       if (e.key === 'Escape') {
-        if (submenuOpen) {
-          setSubmenuOpen(false);
-          triggerRef.current?.focus();
+        if (companySubmenuOpen) {
+          setCompanySubmenuOpen(false);
+          companyTriggerRef.current?.focus();
+        }
+        if (brandsSubmenuOpen) {
+          setBrandsSubmenuOpen(false);
+          brandsTriggerRef.current?.focus();
         }
         if (mobileOpen) {
           setMobileOpen(false);
@@ -50,7 +70,7 @@ export default function Navbar() {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [submenuOpen, mobileOpen]);
+  }, [companySubmenuOpen, brandsSubmenuOpen, mobileOpen]);
 
   return (
     <>
@@ -58,12 +78,20 @@ export default function Navbar() {
         <div className="container utility-bar-inner">
           <span className="utility-tag">
             <span className="utility-dot" aria-hidden="true" />
-            <span>NEOM PANELS · INDIAN WOOD-PANEL MANUFACTURING &amp; CORPORATE HOME OF STARWOODS</span>
+            <span>
+              NEOM PANELS · INDIAN WOOD-PANEL MANUFACTURING · HOME TO STARWOODS &amp; NEOM PACKING
+              PLYWOOD
+            </span>
           </span>
           <ul className="utility-links" role="list">
             <li>
               <Link href="/brands#starwoods" className="utility-link">
-                Starwoods Brand
+                Starwoods
+              </Link>
+            </li>
+            <li>
+              <Link href="/brands/neom-packing-plywood" className="utility-link">
+                NEOM Packing Plywood
               </Link>
             </li>
             <li>
@@ -94,16 +122,20 @@ export default function Navbar() {
 
           <nav className="primary-nav" aria-label="Primary">
             <ul className="nav-list">
+              {/* Company Submenu */}
               <li className="nav-item">
                 <button
-                  ref={triggerRef}
+                  ref={companyTriggerRef}
                   type="button"
                   className="nav-submenu-trigger"
                   id="company-submenu-trigger"
-                  aria-expanded={submenuOpen ? 'true' : 'false'}
+                  aria-expanded={companySubmenuOpen ? 'true' : 'false'}
                   aria-controls="company-submenu"
                   data-active={isCompanyActive ? 'true' : undefined}
-                  onClick={() => setSubmenuOpen((prev) => !prev)}
+                  onClick={() => {
+                    setCompanySubmenuOpen((prev) => !prev);
+                    setBrandsSubmenuOpen(false);
+                  }}
                 >
                   <span>Company</span>
                   <svg className="submenu-caret" aria-hidden="true" viewBox="0 0 12 8">
@@ -118,10 +150,10 @@ export default function Navbar() {
                   </svg>
                 </button>
                 <ul
-                  ref={submenuRef}
+                  ref={companySubmenuRef}
                   className="nav-submenu"
                   id="company-submenu"
-                  hidden={!submenuOpen}
+                  hidden={!companySubmenuOpen}
                 >
                   <li>
                     <Link
@@ -166,15 +198,77 @@ export default function Navbar() {
                 </ul>
               </li>
 
+              {/* Brands Submenu */}
               <li className="nav-item">
-                <Link
-                  href="/brands"
-                  className="nav-link"
-                  aria-current={pathname === '/brands' ? 'page' : undefined}
+                <button
+                  ref={brandsTriggerRef}
+                  type="button"
+                  className="nav-submenu-trigger"
+                  id="brands-submenu-trigger"
+                  aria-expanded={brandsSubmenuOpen ? 'true' : 'false'}
+                  aria-controls="brands-submenu"
+                  data-active={isBrandsActive ? 'true' : undefined}
+                  onClick={() => {
+                    setBrandsSubmenuOpen((prev) => !prev);
+                    setCompanySubmenuOpen(false);
+                  }}
                 >
-                  Brands
-                </Link>
+                  <span>Brands</span>
+                  <svg className="submenu-caret" aria-hidden="true" viewBox="0 0 12 8">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M1 1.5L6 6.5L11 1.5"
+                    />
+                  </svg>
+                </button>
+                <ul
+                  ref={brandsSubmenuRef}
+                  className="nav-submenu"
+                  id="brands-submenu"
+                  hidden={!brandsSubmenuOpen}
+                >
+                  <li>
+                    <Link
+                      href="/brands"
+                      className="nav-submenu-link"
+                      aria-current={pathname === '/brands' ? 'page' : undefined}
+                    >
+                      <span className="nav-submenu-title">Brands Overview</span>
+                      <span className="nav-submenu-desc">
+                        NEOM Panels brand architecture: Starwoods &amp; NEOM Packing Plywood
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/brands#starwoods"
+                      className="nav-submenu-link"
+                    >
+                      <span className="nav-submenu-title">Starwoods</span>
+                      <span className="nav-submenu-desc">
+                        Panels for furniture manufacturing, modular systems and commercial interiors
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/brands/neom-packing-plywood"
+                      className="nav-submenu-link"
+                      aria-current={pathname === '/brands/neom-packing-plywood' ? 'page' : undefined}
+                    >
+                      <span className="nav-submenu-title">NEOM Packing Plywood</span>
+                      <span className="nav-submenu-desc">
+                        Moisture-resistant packaging-grade plywood for cases, crates and components
+                      </span>
+                    </Link>
+                  </li>
+                </ul>
               </li>
+
               <li className="nav-item">
                 <Link
                   href="/industries"
@@ -290,13 +384,40 @@ export default function Navbar() {
               </ul>
             </li>
             <li className="mobile-nav-item">
-              <Link
-                href="/brands"
+              <span
                 className="mobile-nav-link"
-                aria-current={pathname === '/brands' ? 'page' : undefined}
+                style={{ fontWeight: 600, color: 'var(--color-forest)' }}
               >
                 Brands
-              </Link>
+              </span>
+              <ul className="mobile-submenu-list">
+                <li>
+                  <Link
+                    href="/brands"
+                    className="mobile-submenu-link"
+                    aria-current={pathname === '/brands' ? 'page' : undefined}
+                  >
+                    Brands Overview
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/brands#starwoods"
+                    className="mobile-submenu-link"
+                  >
+                    Starwoods
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/brands/neom-packing-plywood"
+                    className="mobile-submenu-link"
+                    aria-current={pathname === '/brands/neom-packing-plywood' ? 'page' : undefined}
+                  >
+                    NEOM Packing Plywood
+                  </Link>
+                </li>
+              </ul>
             </li>
             <li className="mobile-nav-item">
               <Link

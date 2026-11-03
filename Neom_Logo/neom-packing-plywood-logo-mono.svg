@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 168" width="580" height="168" role="img" aria-labelledby="npp-mono-title npp-mono-desc">
+  <title id="npp-mono-title">NEOM Packing Plywood — Single-Colour Stencil &amp; Stamp Version</title>
+  <desc id="npp-mono-desc">Single-colour monochrome industrial wordmark for plywood sheet stamping, crate stencilling, and invoice printing.</desc>
+
+  <g transform="translate(12, 20)" aria-hidden="true">
+    <path d="M0 0 H40 V10 H10 V40 H0 Z" fill="#073B2A" />
+    <path d="M0 128 V88 H10 V118 H40 V128 Z" fill="#073B2A" />
+    <rect x="20" y="20" width="8" height="88" fill="#073B2A" />
+    <rect x="33" y="20" width="6" height="88" fill="#073B2A" />
+    <rect x="44" y="20" width="8" height="88" fill="#073B2A" />
+    <rect x="57" y="20" width="6" height="88" fill="#073B2A" />
+    <rect x="68" y="20" width="8" height="88" fill="#073B2A" />
+    <path d="M62 0 H88 V26 H78 V10 H62 Z" fill="#073B2A" />
+  </g>
+
+  <line x1="120" y1="20" x2="120" y2="148" stroke="#073B2A" stroke-width="2" aria-hidden="true" />
+
+  <g transform="translate(142, 0)">
+    <text
+      x="0"
+      y="70"
+      fill="#073B2A"
+      font-family="'Manrope', 'Helvetica Neue', Arial, sans-serif"
+      font-size="60"
+      font-weight="800"
+      letter-spacing="8"
+    >NEOM</text>
+
+    <rect x="234" y="42" width="188" height="5" fill="#073B2A" aria-hidden="true" />
+    <rect x="234" y="53" width="132" height="3" fill="#073B2A" aria-hidden="true" />
+
+    <text
+      x="2"
+      y="103"
+      fill="#073B2A"
+      font-family="'Manrope', 'Helvetica Neue', Arial, sans-serif"
+      font-size="22"
+      font-weight="700"
+      letter-spacing="6"
+    >PACKING PLYWOOD</text>
+
+    <rect x="1" y="116" width="420" height="24" rx="2" fill="none" stroke="#073B2A" stroke-width="2" aria-hidden="true" />
+    <text
+      x="211"
+      y="132"
+      text-anchor="middle"
+      fill="#073B2A"
+      font-family="'Source Sans 3', 'Helvetica Neue', Arial, sans-serif"
+      font-size="11.5"
+      font-weight="700"
+      letter-spacing="2.4"
+    >PACKAGING GRADE · MOISTURE RESISTANT</text>
+
+    <text
+      x="2"
+      y="157"
+      fill="#073B2A"
+      font-family="'Source Sans 3', 'Helvetica Neue', Arial, sans-serif"
+      font-size="11"
+      font-weight="700"
+      letter-spacing="3.2"
+    >A NEOM PANELS BRAND</text>
+  </g>
+</svg>

@@ -17,21 +17,61 @@ export default function Footer() {
               />
             </Link>
             <p className="secondary-text">
-              NEOM Panels is an Indian panel manufacturing business and the company behind Starwoods.
+              Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood.
             </p>
-            <Link href="/brands#starwoods" className="footer-brand-badge" aria-label="Explore Starwoods — A NEOM Panels Brand">
-              <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-secondary)' }}>
-                Official Product Brand
-              </span>
-              <img
-                src="/assets/starwood-logo.png"
-                alt="Starwood — The Plywood Specialist"
-                className="starwood-logo-img--xs"
-                width="619"
-                height="177"
-                loading="lazy"
-              />
-            </Link>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.625rem' }}>
+              <Link
+                href="/brands#starwoods"
+                className="footer-brand-badge"
+                aria-label="Explore Starwoods — A NEOM Panels Brand"
+              >
+                <span
+                  style={{
+                    fontSize: '0.7rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-secondary)'
+                  }}
+                >
+                  Product Brand · Furniture &amp; Interiors
+                </span>
+                <img
+                  src="/assets/starwood-logo.png"
+                  alt="Starwood — The Plywood Specialist"
+                  className="starwood-logo-img--xs"
+                  width="619"
+                  height="177"
+                  loading="lazy"
+                />
+              </Link>
+
+              <Link
+                href="/brands/neom-packing-plywood"
+                className="footer-brand-badge"
+                aria-label="Explore NEOM Packing Plywood — A NEOM Panels Brand"
+              >
+                <span
+                  style={{
+                    fontSize: '0.7rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-secondary)'
+                  }}
+                >
+                  Product Brand · Industrial Packaging
+                </span>
+                <img
+                  src="/assets/neom-packing-plywood-logo-compact.svg"
+                  alt="NEOM Packing Plywood"
+                  className="packing-logo-img--xs"
+                  width="540"
+                  height="112"
+                  loading="lazy"
+                />
+              </Link>
+            </div>
           </div>
 
           <nav aria-label="Footer Company">
@@ -79,8 +119,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/brands/neom-packing-plywood" className="footer-link">
+                  NEOM Packing Plywood
+                </Link>
+              </li>
+              <li>
                 <Link href="/industries" className="footer-link">
                   Industries &amp; Applications
+                </Link>
+              </li>
+              <li>
+                <Link href="/industries#industrial-packaging" className="footer-link">
+                  Industrial Packaging
                 </Link>
               </li>
               <li>
@@ -97,6 +147,14 @@ export default function Footer() {
               <li>
                 <Link href="/enquiry" className="footer-link">
                   Submit a Business Enquiry
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/enquiry?brand=neom-packing-plywood&category=industrial-packaging"
+                  className="footer-link"
+                >
+                  Industrial Packaging / Packing Plywood
                 </Link>
               </li>
               <li>

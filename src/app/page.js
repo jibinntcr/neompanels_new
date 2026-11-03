@@ -15,9 +15,10 @@ export default function HomePage() {
               Long-term thinking.
             </h1>
             <p className="lead-text">
-              NEOM Panels is an Indian panel manufacturing business and the company behind
-              Starwoods. With our own factory, we are building our business around material
-              quality, lasting partnerships and a considered approach to resources.
+              NEOM Panels is an Indian wood-panel manufacturing business and the company behind
+              Starwoods and NEOM Packing Plywood. With our own factory, we bring together panel
+              solutions for furniture, interior projects and industrial packaging, supported by a
+              focus on material quality and lasting business relationships.
             </p>
             <div className="btn-group" style={{ marginTop: 'var(--space-5)' }}>
               <Link href="/brands" className="btn btn--primary">
@@ -28,7 +29,8 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="hero-supporting-line">
-              Furniture manufacturing · Interior projects · Institutional procurement
+              Furniture manufacturing · Interior projects · Industrial packaging · Institutional
+              procurement
             </p>
           </div>
 
@@ -63,11 +65,11 @@ export default function HomePage() {
                     marginBottom: '0.2rem'
                   }}
                 >
-                  From raw sheet to completed space
+                  From raw sheet to completed space &amp; dispatch
                 </p>
                 <p className="secondary-text" style={{ fontSize: '0.875rem', margin: 0 }}>
-                  Supplying B2B buyers across furniture fabrication, interior contracting and
-                  institutional procurement.
+                  Supplying B2B buyers across furniture fabrication, interior contracting,
+                  industrial packaging and institutional procurement.
                 </p>
               </div>
             </div>
@@ -138,79 +140,165 @@ export default function HomePage() {
       <section className="section section--warm reveal-once">
         <div className="container">
           <p className="eyebrow">BRANDS</p>
-          <h2 className="section-title">Our brands. Your starting point.</h2>
-          <p className="lead-text">
-            Explore the brands within NEOM Panels for product information and business enquiries.
+          <h2 className="section-title">Our brands. Built around your application.</h2>
+          <p className="lead-text" style={{ maxWidth: '76ch' }}>
+            Explore NEOM Panels’ product brands for furniture, interiors and industrial packaging.
+            Start with your application, then connect with our team to discuss the relevant material
+            and supply requirements.
           </p>
 
-          <div className="brand-showcase">
-            <div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                <span className="brand-badge" style={{ marginBottom: 0 }}>NEOM Panels Brand</span>
-              </div>
-              <div className="starwood-logo-plaque">
-                <img
-                  src="/assets/starwood-logo.png"
-                  alt="Starwood — The Plywood Specialist (A NEOM Panels Brand)"
-                  className="starwood-logo-img"
-                  width="619"
-                  height="177"
-                />
-              </div>
-              <h3 className="brand-monograph-title">Starwoods</h3>
-              <p className="lead-text">
-                Starwoods is a NEOM Panels brand. Explore its available range or share your
-                requirement with NEOM to discuss the next step.
-              </p>
+          <div className="brands-dual-grid">
+            {/* Card 1: Starwoods */}
+            <article className="brand-portfolio-card">
+              <div>
+                <div className="brand-card-header">
+                  <span className="brand-category-pill">Furniture &amp; Interiors</span>
+                  <span className="brand-spec-label">A NEOM Panels Brand</span>
+                </div>
 
-              <div className="brand-spec-panel" style={{ marginTop: 'var(--space-5)' }}>
-                <ul className="brand-spec-list" role="list">
-                  <li className="brand-spec-item">
-                    <span className="brand-spec-label">Parent Company</span>
-                    <span className="brand-spec-value">NEOM Panels (India)</span>
-                  </li>
-                  <li className="brand-spec-item">
-                    <span className="brand-spec-label">Commercial Scope</span>
-                    <span className="brand-spec-value">
-                      Furniture manufacturing, modular interiors, commercial fit-outs and regional
-                      distribution
-                    </span>
-                  </li>
-                  <li className="brand-spec-item">
-                    <span className="brand-spec-label">Enquiry &amp; Documentation Route</span>
-                    <span className="brand-spec-value">
-                      Direct specification review with Starwoods preselected
-                    </span>
-                  </li>
-                </ul>
+                <div className="starwood-logo-plaque">
+                  <img
+                    src="/assets/starwood-logo.png"
+                    alt="Starwood — The Plywood Specialist (A NEOM Panels Brand)"
+                    className="starwood-logo-img"
+                    width="619"
+                    height="177"
+                  />
+                </div>
+
+                <h3 className="subsection-title" style={{ fontSize: '1.65rem', marginBottom: '0.5rem' }}>
+                  Panels for furniture, modular systems and commercial interiors.
+                </h3>
+                <p>
+                  Starwoods is a NEOM Panels brand serving furniture manufacturers, modular kitchen
+                  and wardrobe fabricators, interior contractors and regional channel partners.
+                  Explore its available range or share your requirement with our team to discuss the
+                  next step.
+                </p>
+
+                <figure
+                  className="architectural-photo-card"
+                  style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-4)' }}
+                >
+                  <img
+                    src="/assets/starwoods-brand-showcase.jpg"
+                    alt="Curated studio flat-lay of Starwoods natural oak, teak and ash wood-panel swatches with calibrated multi-ply edges and precision brass caliper."
+                    width="1400"
+                    height="933"
+                    loading="lazy"
+                  />
+                  <figcaption className="architectural-photo-meta">
+                    <span>Starwoods — Furniture &amp; Interior Substrates</span>
+                    <span>NEOM Panels Brand</span>
+                  </figcaption>
+                </figure>
+
+                <div className="brand-spec-panel">
+                  <ul className="brand-spec-list" role="list">
+                    <li className="brand-spec-item">
+                      <span className="brand-spec-label">Application Focus</span>
+                      <span className="brand-spec-value">
+                        Furniture manufacturing, modular interiors, commercial fit-outs and regional
+                        distribution
+                      </span>
+                    </li>
+                    <li className="brand-spec-item">
+                      <span className="brand-spec-label">Enquiry &amp; Documentation Route</span>
+                      <span className="brand-spec-value">
+                        Direct specification review with Starwoods preselected
+                      </span>
+                    </li>
+                  </ul>
+                </div>
               </div>
 
-              <div className="btn-group" style={{ marginTop: 'var(--space-5)' }}>
-                <Link href="/enquiry?brand=Starwoods" className="btn btn--primary">
+              <div className="btn-group">
+                <Link href="/brands#starwoods" className="btn btn--primary">
+                  Explore Starwoods
+                </Link>
+                <Link href="/enquiry?brand=Starwoods" className="btn btn--secondary">
                   Enquire About Starwoods
                 </Link>
-                <Link href="/brands#starwoods" className="editorial-link">
-                  <span>Brand Overview</span>
-                  <span className="link-arrow" aria-hidden="true">
-                    →
+              </div>
+            </article>
+
+            {/* Card 2: NEOM Packing Plywood */}
+            <article className="brand-portfolio-card brand-portfolio-card--packing">
+              <div>
+                <div className="brand-card-header">
+                  <span className="brand-category-pill brand-category-pill--oak">
+                    Industrial Packaging
                   </span>
+                  <span className="brand-spec-label">A NEOM Panels Brand</span>
+                </div>
+
+                <div className="packing-logo-plaque">
+                  <img
+                    src="/assets/neom-packing-plywood-logo-horizontal.svg"
+                    alt="NEOM Packing Plywood — Packaging Grade · Moisture Resistant — A NEOM Panels Brand"
+                    className="packing-logo-img"
+                    width="580"
+                    height="168"
+                  />
+                </div>
+
+                <h3 className="subsection-title" style={{ fontSize: '1.65rem', marginBottom: '0.5rem' }}>
+                  Plywood for practical packing requirements.
+                </h3>
+                <p>
+                  Moisture-resistant packaging-grade plywood for buyers sourcing material for
+                  packing cases, crates and industrial packaging components. Share your application,
+                  sheet dimensions and quantity requirements with our team.
+                </p>
+
+                <figure
+                  className="architectural-photo-card"
+                  style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-4)' }}
+                >
+                  <img
+                    src="/assets/packing-plywood-showcase.jpg"
+                    alt="Stacked packaging-grade plywood sheets with visible layered cross-ply edges in the foreground and an assembled timber and plywood packing case in the background."
+                    width="1400"
+                    height="933"
+                    loading="lazy"
+                  />
+                  <figcaption className="architectural-photo-meta">
+                    <span>NEOM Packing Plywood — MR Packaging Grade</span>
+                    <span>NEOM Panels Brand</span>
+                  </figcaption>
+                </figure>
+
+                <div className="brand-spec-panel">
+                  <ul className="brand-spec-list" role="list">
+                    <li className="brand-spec-item">
+                      <span className="brand-spec-label">Product Category &amp; Grade</span>
+                      <span className="brand-spec-value">
+                        Packaging-grade plywood · Moisture Resistant (MR)
+                      </span>
+                    </li>
+                    <li className="brand-spec-item">
+                      <span className="brand-spec-label">Application Focus</span>
+                      <span className="brand-spec-value">
+                        Packing cases, crates, protective enclosures and industrial packaging
+                        components
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="btn-group">
+                <Link href="/brands/neom-packing-plywood" className="btn btn--primary">
+                  Explore NEOM Packing Plywood
+                </Link>
+                <Link
+                  href="/enquiry?brand=neom-packing-plywood&category=industrial-packaging"
+                  className="btn btn--secondary"
+                >
+                  Request a Quote
                 </Link>
               </div>
-            </div>
-
-            <figure className="architectural-photo-card" style={{ margin: 0 }}>
-              <img
-                src="/assets/starwoods-brand-showcase.jpg"
-                alt="Curated studio flat-lay of Starwoods natural oak, teak and ash wood-panel swatches with calibrated multi-ply edges and precision brass caliper."
-                width="1400"
-                height="933"
-                loading="lazy"
-              />
-              <figcaption className="architectural-photo-meta">
-                <span>Starwoods — Material Swatches &amp; Calibrated Core Samples</span>
-                <span>NEOM Panels Brand</span>
-              </figcaption>
-            </figure>
+            </article>
           </div>
         </div>
       </section>
@@ -281,8 +369,27 @@ export default function HomePage() {
               </Link>
             </li>
             <li className="buyer-route-row">
-              <Link href="/enquiry?category=Distribution+partnership" className="buyer-route-link">
+              <Link
+                href="/enquiry?brand=neom-packing-plywood&category=industrial-packaging"
+                className="buyer-route-link"
+              >
                 <span className="route-index">04</span>
+                <h3 className="route-title">Industrial packaging requirement</h3>
+                <p className="route-desc">
+                  Source moisture-resistant packaging-grade plywood for packing cases, crates and
+                  industrial packaging components.
+                </p>
+                <span className="route-action">
+                  Start enquiry{' '}
+                  <span className="link-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </span>
+              </Link>
+            </li>
+            <li className="buyer-route-row">
+              <Link href="/enquiry?category=Distribution+partnership" className="buyer-route-link">
+                <span className="route-index">05</span>
                 <h3 className="route-title">Business partnership</h3>
                 <p className="route-desc">
                   Introduce your distribution, supply or other commercial proposal.

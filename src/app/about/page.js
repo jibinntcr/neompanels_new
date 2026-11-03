@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'About NEOM — Indian Panel Manufacturing Business',
+  title: 'About NEOM — Indian Wood-Panel Manufacturing Business',
   description:
-    'NEOM Panels is an Indian panel manufacturing business with its own factory and product brands, including Starwoods. Learn about our purpose, vision, mission and values.'
+    'Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood. Learn about NEOM Panels’ purpose, vision, mission and operating principles.'
 };
 
 export default function AboutPage() {
@@ -17,9 +17,10 @@ export default function AboutPage() {
               A manufacturing business with a longer view.
             </h1>
             <p className="lead-text">
-              NEOM Panels is an Indian panel manufacturing business with its own factory and
-              product brands, including Starwoods. We are developing a company that connects
-              material supply with a clear commercial identity and a long-term approach to growth.
+              NEOM Panels is an Indian wood-panel manufacturing business and the company behind
+              Starwoods and NEOM Packing Plywood. With our own factory, we bring together panel
+              solutions for furniture, interior projects and industrial packaging, supported by a
+              focus on material quality and lasting business relationships.
             </p>
           </div>
 
@@ -47,39 +48,56 @@ export default function AboutPage() {
           <div className="editorial-statement-body">
             <p className="lead-text">
               Manufacturers turn panels into furniture. Contractors and designers use materials to
-              shape interiors. Institutions make purchasing decisions for the spaces people use
-              every day. NEOM’s role is to develop the manufacturing business and information
-              behind those material choices.
+              shape interiors. Packaging fabricators and industrial buyers rely on plywood for
+              packing cases and crates. Institutions make purchasing decisions for the spaces
+              people use every day. NEOM’s role is to develop the manufacturing business and
+              information behind those material choices.
             </p>
             <p>
               By operating our own manufacturing facility in India and organising our commercial
-              range under defined product brands such as Starwoods, we focus on building consistent
-              operating discipline, clear technical communication and dependable B2B relationships.
+              range under defined product brands—Starwoods and NEOM Packing Plywood—we focus on
+              building consistent operating discipline, clear technical communication and
+              dependable B2B relationships.
             </p>
-            <div className="brand-architecture-row" style={{ marginTop: 'var(--space-5)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-                <img
-                  src="/assets/starwood-logo.png"
-                  alt="Starwood — The Plywood Specialist"
-                  className="starwood-logo-img--sm"
-                  width="619"
-                  height="177"
-                />
-                <div>
-                  <span className="brand-spec-label" style={{ display: 'block' }}>
-                    Official Product Brand
+            <div className="brand-architecture-tree" style={{ marginTop: 'var(--space-5)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <span className="brand-spec-label">Official Product Brands of NEOM Panels</span>
+                <Link href="/brands" className="editorial-link">
+                  <span>Explore Brands</span>
+                  <span className="link-arrow" aria-hidden="true">
+                    →
                   </span>
-                  <span style={{ fontWeight: 600, color: 'var(--color-forest)', fontSize: '0.95rem' }}>
-                    Starwoods · A NEOM Panels Brand
-                  </span>
-                </div>
+                </Link>
               </div>
-              <Link href="/brands#starwoods" className="editorial-link">
-                <span>Explore Brand</span>
-                <span className="link-arrow" aria-hidden="true">
-                  →
-                </span>
-              </Link>
+              <div className="brand-architecture-children">
+                <Link href="/brands#starwoods" className="brand-architecture-child-node">
+                  <span className="brand-spec-label">Furniture &amp; Interiors</span>
+                  <img
+                    src="/assets/starwood-logo.png"
+                    alt="Starwood — The Plywood Specialist"
+                    className="starwood-logo-img--xs"
+                    width="619"
+                    height="177"
+                  />
+                  <span style={{ fontWeight: 600, color: 'var(--color-forest)', fontSize: '0.9rem' }}>
+                    Starwoods
+                  </span>
+                </Link>
+
+                <Link href="/brands/neom-packing-plywood" className="brand-architecture-child-node">
+                  <span className="brand-spec-label">Industrial Packaging</span>
+                  <img
+                    src="/assets/neom-packing-plywood-logo-compact.svg"
+                    alt="NEOM Packing Plywood"
+                    className="packing-logo-img--xs"
+                    width="540"
+                    height="112"
+                  />
+                  <span style={{ fontWeight: 600, color: 'var(--color-forest)', fontSize: '0.9rem' }}>
+                    NEOM Packing Plywood
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

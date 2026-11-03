@@ -59,7 +59,19 @@ export default function EnquiryPage() {
                         height="177"
                       />
                     </div>
-                    <strong>Product / Starwoods Enquiry:</strong> Range availability, thicknesses, and surface options.
+                    <strong>Starwoods (Furniture &amp; Interiors):</strong> Range availability, thicknesses, and surface options.
+                  </li>
+                  <li>
+                    <div style={{ marginBottom: '6px' }}>
+                      <img
+                        src="/assets/neom-packing-plywood-logo-compact.svg"
+                        alt="NEOM Packing Plywood"
+                        className="packing-logo-img--xs"
+                        width="540"
+                        height="112"
+                      />
+                    </div>
+                    <strong>NEOM Packing Plywood (Industrial Packaging):</strong> MR packaging-grade plywood for packing cases, crates, and packaging components.
                   </li>
                   <li>
                     <strong>Bulk / OEM Supply:</strong> Production schedules, pallet sizing, and repeat supply planning.

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 260" width="520" height="260" role="img" aria-labelledby="npp-stacked-title npp-stacked-desc">
+  <title id="npp-stacked-title">NEOM Packing Plywood — Stacked Brand Lockup</title>
+  <desc id="npp-stacked-desc">NEOM Packing Plywood — Packaging Grade, Moisture Resistant. A NEOM Panels Brand.</desc>
+
+  <!-- Outer Industrial Packing Corner Brackets -->
+  <path d="M18 18 H54 V26 H26 V54 H18 Z" fill="#073B2A" aria-hidden="true" />
+  <path d="M502 18 H466 V26 H494 V54 H502 Z" fill="#073B2A" aria-hidden="true" />
+  <path d="M18 242 H54 V234 H26 V206 H18 Z" fill="#073B2A" aria-hidden="true" />
+  <path d="M502 242 H466 V234 H494 V206 H502 Z" fill="#073B2A" aria-hidden="true" />
+
+  <!-- Top Layered Plywood Cross-Section Bar -->
+  <g transform="translate(160, 30)" aria-hidden="true">
+    <rect x="0" y="0" width="200" height="5" fill="#073B2A" />
+    <rect x="0" y="9" width="200" height="4" fill="#C7AF89" />
+    <rect x="0" y="17" width="200" height="5" fill="#073B2A" />
+  </g>
+
+  <!-- Dominant Element: NEOM -->
+  <text
+    x="260"
+    y="116"
+    text-anchor="middle"
+    fill="#073B2A"
+    font-family="'Manrope', 'Helvetica Neue', Arial, sans-serif"
+    font-size="68"
+    font-weight="800"
+    letter-spacing="12"
+  >NEOM</text>
+
+  <!-- Sub-Wordmark: PACKING PLYWOOD -->
+  <text
+    x="260"
+    y="154"
+    text-anchor="middle"
+    fill="#073B2A"
+    font-family="'Manrope', 'Helvetica Neue', Arial, sans-serif"
+    font-size="23"
+    font-weight="700"
+    letter-spacing="7.5"
+  >PACKING PLYWOOD</text>
+
+  <!-- Supporting Descriptor Bar: PACKAGING GRADE · MOISTURE RESISTANT -->
+  <rect x="64" y="172" width="392" height="28" rx="2" fill="#073B2A" aria-hidden="true" />
+  <text
+    x="260"
+    y="190"
+    text-anchor="middle"
+    fill="#FFFFFF"
+    font-family="'Source Sans 3', 'Helvetica Neue', Arial, sans-serif"
+    font-size="12"
+    font-weight="600"
+    letter-spacing="2.8"
+  >PACKAGING GRADE · MOISTURE RESISTANT</text>
+
+  <!-- Endorsement: A NEOM PANELS BRAND -->
+  <text
+    x="260"
+    y="224"
+    text-anchor="middle"
+    fill="#526159"
+    font-family="'Source Sans 3', 'Helvetica Neue', Arial, sans-serif"
+    font-size="11.5"
+    font-weight="600"
+    letter-spacing="3.6"
+  >A NEOM PANELS BRAND</text>
+</svg>

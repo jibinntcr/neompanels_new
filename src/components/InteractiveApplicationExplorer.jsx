@@ -63,6 +63,25 @@ const ENVIRONMENTS = [
     ctaLabel: 'Share a Project Requirement',
     ctaHref:
       '/enquiry?category=Project+requirement&application=Projects+%26+Commercial+Interiors'
+  },
+  {
+    id: 'packaging',
+    tabLabel: '04 · Industrial Packaging & Crates',
+    eyebrow: 'NEOM PACKING PLYWOOD · MR GRADE',
+    title: 'Moisture-resistant packaging-grade plywood for cases and crates.',
+    description:
+      'Packaging manufacturers, case fabricators and industrial dispatch teams source plywood around packing designs, sheet dimensions, thicknesses and repeat shipment schedules.',
+    checklist: [
+      'Specify intended packaging application (packing case, crate panel, divider or liner)',
+      'Share required sheet dimensions, nominal thicknesses and expected handling conditions',
+      'Indicate quantity, unit and whether the requirement is one-time or recurring'
+    ],
+    image: '/assets/packing-plywood-showcase.jpg',
+    imageAlt:
+      'Stacked packaging-grade plywood sheets with visible layered cross-ply edges in the foreground and an assembled timber and plywood packing case in the background.',
+    caption: 'Application Context // 04 — Industrial Packing Cases & Crate Fabrication',
+    ctaLabel: 'Discuss Packaging Supply',
+    ctaHref: '/enquiry?brand=neom-packing-plywood&category=industrial-packaging'
   }
 ];
 
@@ -114,7 +133,7 @@ export default function InteractiveApplicationExplorer() {
               {current.ctaLabel}
             </Link>
             <Link href="/industries" className="editorial-link">
-              <span>All 6 Industry Segments</span>
+              <span>All 7 Industry Segments</span>
               <span className="link-arrow" aria-hidden="true">
                 →
               </span>

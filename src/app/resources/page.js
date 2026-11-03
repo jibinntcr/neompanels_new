@@ -5,7 +5,7 @@ import DocumentRequestButton from '@/components/DocumentRequestButton';
 export const metadata = {
   title: 'Resources & Buyer Guidance — NEOM Panels',
   description:
-    'Company literature, Starwoods brand documents, technical data sheets, sustainability updates, and practical B2B buyer guidance from NEOM Panels.'
+    'Company literature, Starwoods and NEOM Packing Plywood brand documents, technical data sheets, sustainability updates, and practical B2B buyer guidance from NEOM Panels.'
 };
 
 export default function ResourcesPage() {
@@ -82,13 +82,20 @@ export default function ResourcesPage() {
                   <span className="gov-card__status">{cat.availability}</span>
                 </div>
                 {cat.code === 'DOC-BRAND' ? (
-                  <div style={{ marginBottom: '12px' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem', marginBottom: '12px' }}>
                     <img
                       src="/assets/starwood-logo.png"
                       alt="Starwood — The Plywood Specialist"
-                      className="starwood-logo-img--sm"
+                      className="starwood-logo-img--xs"
                       width="619"
                       height="177"
+                    />
+                    <img
+                      src="/assets/neom-packing-plywood-logo-compact.svg"
+                      alt="NEOM Packing Plywood"
+                      className="packing-logo-img--xs"
+                      width="540"
+                      height="112"
                     />
                   </div>
                 ) : null}

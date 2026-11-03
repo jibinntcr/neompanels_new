@@ -147,7 +147,7 @@ export function getSiteContent() {
         },
         {
           label: 'Official Brand Relationships',
-          value: 'Starwoods (NEOM Panels product brand)'
+          value: 'Starwoods and NEOM Packing Plywood (NEOM Panels product brands)'
         },
         {
           label: 'Commercial & Grievance Communication',
@@ -222,7 +222,7 @@ export function getSiteContent() {
         title: 'Brand literature',
         availability: 'Available on Request',
         description:
-          'Starwoods catalogues and brand documents when available, matched to your commercial or regional requirement.'
+          'Starwoods and NEOM Packing Plywood brand documents and catalogues when available, matched to your commercial or regional requirement.'
       },
       {
         code: 'DOC-TECH',

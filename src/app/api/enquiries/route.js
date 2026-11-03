@@ -16,7 +16,25 @@ import {
   NOTIFICATIONS_LOG_PATH
 } from '@/lib/storage';
 
+const CATEGORY_ALIASES = {
+  'industrial-packaging': 'Industrial Packaging / Packing Plywood',
+  'Industrial Packaging / Packing Plywood': 'Industrial Packaging / Packing Plywood'
+};
+
+const BRAND_ALIASES = {
+  'neom-packing-plywood': 'NEOM Packing Plywood',
+  'NEOM Packing Plywood': 'NEOM Packing Plywood',
+  starwoods: 'Starwoods',
+  Starwoods: 'Starwoods',
+  'general-neom-panels-enquiry': 'General NEOM Panels Enquiry',
+  'General NEOM Panels Enquiry': 'General NEOM Panels Enquiry',
+  'NEOM Panels (Corporate)': 'General NEOM Panels Enquiry',
+  'help-me-choose': 'Help Me Choose',
+  'Help Me Choose': 'Help Me Choose'
+};
+
 const ALLOWED_CATEGORIES = new Set([
+  'Industrial Packaging / Packing Plywood',
   'Manufacturing & recurring supply',
   'Project requirement',
   'Institutional & public procurement',
@@ -27,6 +45,11 @@ const ALLOWED_CATEGORIES = new Set([
 ]);
 
 const LEAD_ROUTING_MAP = {
+  'Industrial Packaging / Packing Plywood': {
+    queueId: 'industrial-packaging-desk',
+    deskName: 'NEOM Packing Plywood & Industrial Packaging Desk',
+    priority: 'packaging-supply'
+  },
   'Manufacturing & recurring supply': {
     queueId: 'oem-manufacturing-desk',
     deskName: 'OEM & Manufacturing Supply Desk',
@@ -105,16 +128,33 @@ export async function POST(request) {
     }
 
     const errors = [];
-    const category = String(fields.category || '').trim();
+    const rawCategory = String(fields.category || '').trim();
+    const category = CATEGORY_ALIASES[rawCategory] || rawCategory;
     const requirementDescription = String(fields.requirementDescription || '').trim();
-    const brand = String(fields.brand || '').trim();
+    const rawBrand = String(fields.brand || '').trim();
+    const brand = BRAND_ALIASES[rawBrand] || rawBrand;
     const applicationProduct = String(fields.applicationProduct || '').trim();
     const quantity = String(fields.quantity || '').trim();
     const quantityUnit = String(fields.quantityUnit || '').trim();
-    const destination = String(fields.destination || '').trim();
-    const requestedDate = String(fields.requestedDate || '').trim();
+    const destination = String(fields.destination || fields.deliveryLocation || '').trim();
+    const requestedDate = String(fields.requestedDate || fields.requiredDeliveryDate || '').trim();
 
-    const purchasingFrequency = String(fields.purchasingFrequency || '').trim();
+    // Packaging-specific conditional fields
+    const packagingApplication = String(fields.packagingApplication || '').trim();
+    const requiredThickness = String(fields.requiredThickness || '').trim();
+    const sheetDimensions = String(fields.sheetDimensions || '').trim();
+    const purchaseFrequency = String(
+      fields.purchaseFrequency || fields.purchasingFrequency || ''
+    ).trim();
+    const deliveryLocation = String(fields.deliveryLocation || fields.destination || '').trim();
+    const requiredDeliveryDate = String(
+      fields.requiredDeliveryDate || fields.requestedDate || ''
+    ).trim();
+    const additionalSpecifications = String(fields.additionalSpecifications || '').trim();
+
+    const purchasingFrequency = String(
+      fields.purchasingFrequency || fields.purchaseFrequency || ''
+    ).trim();
     const procurementReference = String(fields.procurementReference || '').trim();
     const territory = String(fields.territory || '').trim();
 
@@ -232,6 +272,9 @@ export async function POST(request) {
     const routingInfo = LEAD_ROUTING_MAP[category] || LEAD_ROUTING_MAP['Other business enquiry'];
     const createdAt = new Date().toISOString();
 
+    const isPackagingEnquiry =
+      category === 'Industrial Packaging / Packing Plywood' || brand === 'NEOM Packing Plywood';
+
     const enquiryRecord = {
       reference,
       createdAt,
@@ -244,7 +287,7 @@ export async function POST(request) {
         category,
         description: requirementDescription,
         brand: brand || null,
-        applicationProduct: applicationProduct || null,
+        applicationProduct: applicationProduct || packagingApplication || null,
         quantity: quantity || null,
         quantityUnit: quantity ? quantityUnit || 'Sheets' : null,
         destination: destination || null,
@@ -252,7 +295,20 @@ export async function POST(request) {
         conditionalDetails: {
           purchasingFrequency: purchasingFrequency || null,
           procurementReference: procurementReference || null,
-          territory: territory || null
+          territory: territory || null,
+          ...(isPackagingEnquiry
+            ? {
+                packagingApplication: packagingApplication || null,
+                requiredThickness: requiredThickness || null,
+                sheetDimensions: sheetDimensions || null,
+                quantity: quantity || null,
+                quantityUnit: quantityUnit || 'Sheets',
+                purchaseFrequency: purchaseFrequency || null,
+                deliveryLocation: deliveryLocation || null,
+                requiredDeliveryDate: requiredDeliveryDate || null,
+                additionalSpecifications: additionalSpecifications || null
+              }
+            : {})
         }
       },
       contact: {

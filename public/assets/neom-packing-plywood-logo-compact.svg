@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 112" width="540" height="112" role="img" aria-labelledby="npp-compact-title">
+  <title id="npp-compact-title">NEOM Packing Plywood</title>
+
+  <!-- Industrial Packing Corner Bracket & Layered Plywood Edge Detail -->
+  <g transform="translate(12, 12)" aria-hidden="true">
+    <path d="M0 0 H32 V8 H8 V32 H0 Z" fill="#073B2A" />
+    <path d="M0 88 V56 H8 V80 H32 V88 Z" fill="#073B2A" />
+    <rect x="16" y="16" width="7" height="56" fill="#073B2A" />
+    <rect x="27" y="16" width="5" height="56" fill="#C7AF89" />
+    <rect x="36" y="16" width="7" height="56" fill="#073B2A" />
+    <rect x="47" y="16" width="5" height="56" fill="#8C6B3F" />
+    <rect x="56" y="16" width="7" height="56" fill="#073B2A" />
+    <path d="M50 0 H72 V22 H64 V8 H50 Z" fill="#C7AF89" />
+  </g>
+
+  <line x1="102" y1="14" x2="102" y2="98" stroke="#D7DFD7" stroke-width="2" aria-hidden="true" />
+
+  <g transform="translate(122, 0)">
+    <text
+      x="0"
+      y="62"
+      fill="#073B2A"
+      font-family="'Manrope', 'Helvetica Neue', Arial, sans-serif"
+      font-size="54"
+      font-weight="800"
+      letter-spacing="8"
+    >NEOM</text>
+    <rect x="218" y="36" width="184" height="4" fill="#C7AF89" aria-hidden="true" />
+    <rect x="218" y="46" width="124" height="2" fill="#073B2A" aria-hidden="true" />
+    <text
+      x="2"
+      y="94"
+      fill="#073B2A"
+      font-family="'Manrope', 'Helvetica Neue', Arial, sans-serif"
+      font-size="20"
+      font-weight="700"
+      letter-spacing="6"
+    >PACKING PLYWOOD</text>
+  </g>
+</svg>

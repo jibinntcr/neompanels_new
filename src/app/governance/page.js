@@ -102,13 +102,20 @@ export default function GovernancePage() {
                     <td style={{ fontWeight: 600, color: 'var(--color-forest)' }}>{row.label}</td>
                     <td>
                       {row.label === 'Official Brand Relationships' ? (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.125rem', flexWrap: 'wrap' }}>
                           <img
                             src="/assets/starwood-logo.png"
                             alt="Starwood — The Plywood Specialist"
                             className="starwood-logo-img--xs"
                             width="619"
                             height="177"
+                          />
+                          <img
+                            src="/assets/neom-packing-plywood-logo-compact.svg"
+                            alt="NEOM Packing Plywood"
+                            className="packing-logo-img--xs"
+                            width="540"
+                            height="112"
                           />
                           <span>{row.value}</span>
                         </div>

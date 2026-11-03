@@ -4,7 +4,7 @@
   "company": {
     "legalAndCorporateName": "NEOM Panels",
     "tagline": "ENGINEERED EXCELLENCE, DESIGNED FOR SPACES",
-    "summary": "NEOM Panels is an Indian panel manufacturing business and the company behind Starwoods.",
+    "summary": "Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood.",
     "country": "India",
     "manufacturing": {
       "hasOwnFactory": true,
@@ -73,6 +73,20 @@
       "publicationStatus": "published",
       "reviewDate": "2026-11-03",
       "scopeNote": "Specific product grades, thicknesses and technical data sheets are shared against requirement scope until verified public catalogue files are uploaded."
+    },
+    {
+      "id": "neom-packing-plywood",
+      "name": "NEOM Packing Plywood",
+      "parentCompany": "NEOM Panels",
+      "relationship": "Product brand of NEOM Panels",
+      "description": "Moisture-resistant packaging-grade plywood for business buyers sourcing material for packing cases, crates and related industrial packaging applications.",
+      "verifiedWebsiteUrl": "/brands/neom-packing-plywood",
+      "fallbackActionLabel": "Enquire About NEOM Packing Plywood",
+      "fallbackActionHref": "/enquiry?brand=neom-packing-plywood&category=industrial-packaging",
+      "verifiedProductCategories": ["Packaging-grade plywood (Moisture Resistant — MR)"],
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03",
+      "scopeNote": "Request current sizes, thicknesses, availability and technical details from our team."
     }
   ],
   "leadershipProfiles": {
