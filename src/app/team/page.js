@@ -89,8 +89,8 @@ export default function TeamPage() {
                 src="/assets/starwood-logo.png"
                 alt="Starwood — The Plywood Specialist"
                 className="starwood-logo-img--xs"
-                width="615"
-                height="149"
+                width="619"
+                height="177"
               />
             </div>
           </div>

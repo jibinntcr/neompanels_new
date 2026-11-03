@@ -27,8 +27,8 @@ export default function Footer() {
                 src="/assets/starwood-logo.png"
                 alt="Starwood — The Plywood Specialist"
                 className="starwood-logo-img--xs"
-                width="615"
-                height="149"
+                width="619"
+                height="177"
                 loading="lazy"
               />
             </Link>

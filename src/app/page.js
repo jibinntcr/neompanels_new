@@ -153,8 +153,8 @@ export default function HomePage() {
                   src="/assets/starwood-logo.png"
                   alt="Starwood — The Plywood Specialist (A NEOM Panels Brand)"
                   className="starwood-logo-img"
-                  width="615"
-                  height="149"
+                  width="619"
+                  height="177"
                 />
               </div>
               <h3 className="brand-monograph-title">Starwoods</h3>

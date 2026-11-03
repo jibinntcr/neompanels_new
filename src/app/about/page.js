@@ -62,8 +62,8 @@ export default function AboutPage() {
                   src="/assets/starwood-logo.png"
                   alt="Starwood — The Plywood Specialist"
                   className="starwood-logo-img--sm"
-                  width="615"
-                  height="149"
+                  width="619"
+                  height="177"
                 />
                 <div>
                   <span className="brand-spec-label" style={{ display: 'block' }}>

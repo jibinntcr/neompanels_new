@@ -1924,7 +1924,7 @@ dialog.corporate-dialog::backdrop {
 }
 
 .starwood-logo-img {
-  height: 3.125rem;
+  height: 3.625rem;
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -1933,12 +1933,12 @@ dialog.corporate-dialog::backdrop {
 
 @media (min-width: 768px) {
   .starwood-logo-img {
-    height: 3.75rem;
+    height: 4.375rem;
   }
 }
 
 .starwood-logo-img--sm {
-  height: 2.375rem;
+  height: 2.75rem;
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -1946,7 +1946,7 @@ dialog.corporate-dialog::backdrop {
 }
 
 .starwood-logo-img--xs {
-  height: 1.75rem;
+  height: 2.125rem;
   width: auto;
   max-width: 100%;
   object-fit: contain;

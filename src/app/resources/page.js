@@ -87,8 +87,8 @@ export default function ResourcesPage() {
                       src="/assets/starwood-logo.png"
                       alt="Starwood — The Plywood Specialist"
                       className="starwood-logo-img--sm"
-                      width="615"
-                      height="149"
+                      width="619"
+                      height="177"
                     />
                   </div>
                 ) : null}

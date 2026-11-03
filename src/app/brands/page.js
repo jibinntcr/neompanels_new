@@ -59,8 +59,8 @@ export default function BrandsPage() {
                   src="/assets/starwood-logo.png"
                   alt="Starwood — The Plywood Specialist"
                   className="starwood-logo-img--sm"
-                  width="615"
-                  height="149"
+                  width="619"
+                  height="177"
                 />
               </div>
             </div>
@@ -83,8 +83,8 @@ export default function BrandsPage() {
                   src="/assets/starwood-logo.png"
                   alt="Starwood — The Plywood Specialist"
                   className="starwood-logo-img"
-                  width="615"
-                  height="149"
+                  width="619"
+                  height="177"
                 />
               </div>
               <h3 className="brand-monograph-title">Starwoods</h3>
@@ -115,8 +115,8 @@ export default function BrandsPage() {
                         src="/assets/starwood-logo.png"
                         alt="Starwood — The Plywood Specialist"
                         className="starwood-logo-img--xs"
-                        width="615"
-                        height="149"
+                        width="619"
+                        height="177"
                       />
                       <span>Starwoods (The Plywood Specialist)</span>
                     </span>
