@@ -179,7 +179,10 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="btn-group">
-            <Link href="/brands" className="btn btn--primary">
+            <Link href="/team" className="btn btn--primary">
+              Meet Our Leadership
+            </Link>
+            <Link href="/brands" className="btn btn--secondary">
               Explore Our Brands
             </Link>
             <Link href="/governance" className="btn btn--secondary">

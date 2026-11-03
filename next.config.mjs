@@ -17,7 +17,9 @@ const nextConfig = {
       { source: '/resources.html', destination: '/resources' },
       { source: '/enquiry.html', destination: '/enquiry' },
       { source: '/privacy.html', destination: '/privacy' },
-      { source: '/terms.html', destination: '/terms' }
+      { source: '/terms.html', destination: '/terms' },
+      { source: '/team.html', destination: '/team' },
+      { source: '/leadership.html', destination: '/team' }
     ];
   }
 };

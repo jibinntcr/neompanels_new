@@ -11,7 +11,11 @@ export default function Navbar() {
   const submenuRef = useRef(null);
   const triggerRef = useRef(null);
 
-  const isCompanyActive = pathname === '/about' || pathname === '/governance';
+  const isCompanyActive =
+    pathname === '/about' ||
+    pathname === '/team' ||
+    pathname === '/leadership' ||
+    pathname === '/governance';
 
   useEffect(() => {
     setSubmenuOpen(false);
@@ -133,6 +137,20 @@ export default function Navbar() {
                   </li>
                   <li>
                     <Link
+                      href="/team"
+                      className="nav-submenu-link"
+                      aria-current={
+                        pathname === '/team' || pathname === '/leadership' ? 'page' : undefined
+                      }
+                    >
+                      <span className="nav-submenu-title">Leadership</span>
+                      <span className="nav-submenu-desc">
+                        The executive team behind NEOM Panels
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       href="/governance"
                       className="nav-submenu-link"
                       aria-current={pathname === '/governance' ? 'page' : undefined}
@@ -247,6 +265,17 @@ export default function Navbar() {
                     aria-current={pathname === '/about' ? 'page' : undefined}
                   >
                     About NEOM
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/team"
+                    className="mobile-submenu-link"
+                    aria-current={
+                      pathname === '/team' || pathname === '/leadership' ? 'page' : undefined
+                    }
+                  >
+                    Leadership
                   </Link>
                 </li>
                 <li>

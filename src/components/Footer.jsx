@@ -43,6 +43,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/team" className="footer-link">
+                  Our Leadership
+                </Link>
+              </li>
+              <li>
                 <Link href="/governance" className="footer-link">
                   Governance &amp; Corporate Information
                 </Link>
