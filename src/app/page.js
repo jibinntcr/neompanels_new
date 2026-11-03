@@ -145,7 +145,18 @@ export default function HomePage() {
 
           <div className="brand-showcase">
             <div>
-              <span className="brand-badge">NEOM Panels Brand</span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                <span className="brand-badge" style={{ marginBottom: 0 }}>NEOM Panels Brand</span>
+              </div>
+              <div className="starwood-logo-plaque">
+                <img
+                  src="/assets/starwood-logo.png"
+                  alt="Starwood — The Plywood Specialist (A NEOM Panels Brand)"
+                  className="starwood-logo-img"
+                  width="615"
+                  height="149"
+                />
+              </div>
               <h3 className="brand-monograph-title">Starwoods</h3>
               <p className="lead-text">
                 Starwoods is a NEOM Panels brand. Explore its available range or share your

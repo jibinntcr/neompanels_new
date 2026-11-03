@@ -50,6 +50,15 @@ export default function EnquiryPage() {
                 </p>
                 <ul className="spec-list" style={{ fontSize: '0.9rem' }}>
                   <li>
+                    <div style={{ marginBottom: '6px' }}>
+                      <img
+                        src="/assets/starwood-logo.png"
+                        alt="Starwood — The Plywood Specialist"
+                        className="starwood-logo-img--xs"
+                        width="615"
+                        height="149"
+                      />
+                    </div>
                     <strong>Product / Starwoods Enquiry:</strong> Range availability, thicknesses, and surface options.
                   </li>
                   <li>

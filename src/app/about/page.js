@@ -56,6 +56,31 @@ export default function AboutPage() {
               range under defined product brands such as Starwoods, we focus on building consistent
               operating discipline, clear technical communication and dependable B2B relationships.
             </p>
+            <div className="brand-architecture-row" style={{ marginTop: 'var(--space-5)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                <img
+                  src="/assets/starwood-logo.png"
+                  alt="Starwood — The Plywood Specialist"
+                  className="starwood-logo-img--sm"
+                  width="615"
+                  height="149"
+                />
+                <div>
+                  <span className="brand-spec-label" style={{ display: 'block' }}>
+                    Official Product Brand
+                  </span>
+                  <span style={{ fontWeight: 600, color: 'var(--color-forest)', fontSize: '0.95rem' }}>
+                    Starwoods · A NEOM Panels Brand
+                  </span>
+                </div>
+              </div>
+              <Link href="/brands#starwoods" className="editorial-link">
+                <span>Explore Brand</span>
+                <span className="link-arrow" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

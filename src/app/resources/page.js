@@ -81,6 +81,17 @@ export default function ResourcesPage() {
                   <span className="gov-card__code">{cat.code}</span>
                   <span className="gov-card__status">{cat.availability}</span>
                 </div>
+                {cat.code === 'DOC-BRAND' ? (
+                  <div style={{ marginBottom: '12px' }}>
+                    <img
+                      src="/assets/starwood-logo.png"
+                      alt="Starwood — The Plywood Specialist"
+                      className="starwood-logo-img--sm"
+                      width="615"
+                      height="149"
+                    />
+                  </div>
+                ) : null}
                 <h3 className="h-card" style={{ marginBottom: '10px' }}>
                   {cat.title}
                 </h3>

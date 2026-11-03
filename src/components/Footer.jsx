@@ -19,6 +19,19 @@ export default function Footer() {
             <p className="secondary-text">
               NEOM Panels is an Indian panel manufacturing business and the company behind Starwoods.
             </p>
+            <Link href="/brands#starwoods" className="footer-brand-badge" aria-label="Explore Starwoods — A NEOM Panels Brand">
+              <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-secondary)' }}>
+                Official Product Brand
+              </span>
+              <img
+                src="/assets/starwood-logo.png"
+                alt="Starwood — The Plywood Specialist"
+                className="starwood-logo-img--xs"
+                width="615"
+                height="149"
+                loading="lazy"
+              />
+            </Link>
           </div>
 
           <nav aria-label="Footer Company">

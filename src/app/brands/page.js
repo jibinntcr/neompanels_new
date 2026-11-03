@@ -10,16 +10,61 @@ export default function BrandsPage() {
   return (
     <>
       <section className="page-header section--architectural-grid">
-        <div className="container hero-animate">
-          <p className="eyebrow">BRANDS</p>
-          <h1 id="main-heading" tabIndex={-1} className="page-title">
-            Distinct brands. One company behind them.
-          </h1>
-          <p className="lead-text">
-            NEOM Panels provides the corporate identity behind its product brands. Each brand is a
-            route to relevant product information; NEOM is the place to understand the company and
-            discuss a broader business requirement.
-          </p>
+        <div className="container hero-split">
+          <div className="hero-animate">
+            <p className="eyebrow">BRANDS</p>
+            <h1 id="main-heading" tabIndex={-1} className="page-title">
+              Distinct brands. One company behind them.
+            </h1>
+            <p className="lead-text">
+              NEOM Panels provides the corporate identity behind its product brands. Each brand is a
+              route to relevant product information; NEOM is the place to understand the company and
+              discuss a broader business requirement.
+            </p>
+          </div>
+
+          <div className="brand-architecture-card hero-animate--delay">
+            <div>
+              <p className="eyebrow" style={{ marginBottom: '0.25rem' }}>
+                BRAND ARCHITECTURE
+              </p>
+              <h2 className="subsection-title" style={{ marginBottom: '0.25rem' }}>
+                Corporate parent &amp; product brand
+              </h2>
+              <p className="secondary-text" style={{ fontSize: '0.9rem', marginBottom: 0 }}>
+                Manufacturing, quality specification, and corporate governance under NEOM Panels.
+              </p>
+            </div>
+            <div className="brand-architecture-row">
+              <div>
+                <span className="brand-spec-label" style={{ display: 'block', marginBottom: '0.35rem' }}>
+                  Manufacturing Parent
+                </span>
+                <img
+                  src="/assets/logo-horizontal.png"
+                  alt="NEOM Panels"
+                  style={{ height: '2.5rem', width: 'auto', objectFit: 'contain' }}
+                  width="540"
+                  height="180"
+                />
+              </div>
+              <div style={{ color: 'var(--color-secondary)', fontWeight: 600, fontSize: '1.25rem' }} aria-hidden="true">
+                →
+              </div>
+              <div>
+                <span className="brand-spec-label" style={{ display: 'block', marginBottom: '0.35rem' }}>
+                  Product Brand
+                </span>
+                <img
+                  src="/assets/starwood-logo.png"
+                  alt="Starwood — The Plywood Specialist"
+                  className="starwood-logo-img--sm"
+                  width="615"
+                  height="149"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -30,7 +75,18 @@ export default function BrandsPage() {
 
           <div className="brand-showcase">
             <div>
-              <span className="brand-badge">Official Brand of NEOM Panels</span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                <span className="brand-badge" style={{ marginBottom: 0 }}>Official Brand of NEOM Panels</span>
+              </div>
+              <div className="starwood-logo-plaque">
+                <img
+                  src="/assets/starwood-logo.png"
+                  alt="Starwood — The Plywood Specialist"
+                  className="starwood-logo-img"
+                  width="615"
+                  height="149"
+                />
+              </div>
               <h3 className="brand-monograph-title">Starwoods</h3>
               <p className="lead-text">
                 Starwoods is a NEOM Panels brand. Explore its available range or share your
@@ -51,7 +107,19 @@ export default function BrandsPage() {
                 <ul className="brand-spec-list" role="list">
                   <li className="brand-spec-item">
                     <span className="brand-spec-label">Brand Identity</span>
-                    <span className="brand-spec-value">Starwoods</span>
+                    <span
+                      className="brand-spec-value"
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap', marginTop: '0.2rem' }}
+                    >
+                      <img
+                        src="/assets/starwood-logo.png"
+                        alt="Starwood — The Plywood Specialist"
+                        className="starwood-logo-img--xs"
+                        width="615"
+                        height="149"
+                      />
+                      <span>Starwoods (The Plywood Specialist)</span>
+                    </span>
                   </li>
                   <li className="brand-spec-item">
                     <span className="brand-spec-label">Manufacturing &amp; Corporate Parent</span>

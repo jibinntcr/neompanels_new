@@ -100,7 +100,22 @@ export default function GovernancePage() {
                 {governance.companyInfo.map((row) => (
                   <tr key={row.label}>
                     <td style={{ fontWeight: 600, color: 'var(--color-forest)' }}>{row.label}</td>
-                    <td>{row.value}</td>
+                    <td>
+                      {row.label === 'Official Brand Relationships' ? (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', flexWrap: 'wrap' }}>
+                          <img
+                            src="/assets/starwood-logo.png"
+                            alt="Starwood — The Plywood Specialist"
+                            className="starwood-logo-img--xs"
+                            width="615"
+                            height="149"
+                          />
+                          <span>{row.value}</span>
+                        </div>
+                      ) : (
+                        row.value
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
