@@ -371,17 +371,147 @@ p:last-child {
   text-decoration: none;
   padding-block: 0.25rem;
   flex-shrink: 0;
+  perspective: 680px;
+}
+
+.brand-logo-3d-stage {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  transform-style: preserve-3d;
+}
+
+@media (min-width: 1024px) {
+  .brand-logo-3d-stage {
+    gap: 0.8rem;
+  }
+}
+
+@keyframes neomEmblem3DFloat {
+  0%,
+  100% {
+    transform: perspective(640px) rotateY(-7deg) rotateX(3deg) translateY(0px) translateZ(0px);
+    filter:
+      drop-shadow(-1px 2px 0px rgba(7, 59, 42, 0.28))
+      drop-shadow(-3px 5px 8px rgba(7, 59, 42, 0.18));
+  }
+  50% {
+    transform: perspective(640px) rotateY(8deg) rotateX(-3deg) translateY(-1.5px) translateZ(4px);
+    filter:
+      drop-shadow(2px 2px 0px rgba(7, 59, 42, 0.28))
+      drop-shadow(3px 6px 10px rgba(139, 105, 65, 0.22));
+  }
+}
+
+@keyframes neomSheenSweep {
+  0%,
+  72%,
+  100% {
+    transform: translateX(-140%) skewX(-22deg);
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.55;
+  }
+  92% {
+    transform: translateX(160%) skewX(-22deg);
+    opacity: 0;
+  }
+}
+
+.brand-logo-3d-emblem {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+  animation: neomEmblem3DFloat 5.6s ease-in-out infinite;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), filter 320ms ease;
+  overflow: hidden;
+  border-radius: 2px;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    filter:
+      drop-shadow(0 2px 0px rgba(7, 59, 42, 0.24))
+      drop-shadow(0 4px 8px rgba(7, 59, 42, 0.16));
+  }
+}
+
+.brand-logo-3d-emblem::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.65) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  animation: neomSheenSweep 6.5s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}
+
+.brand-logo-icon-img {
+  height: 2.75rem; /* 44px mobile */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .brand-logo-icon-img {
+    height: 3.15rem; /* ~50.4px desktop */
+  }
+}
+
+.brand-logo-wordmark-wrap {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), filter 320ms ease;
+  filter: drop-shadow(0 1px 2px rgba(7, 59, 42, 0.08));
+}
+
+.brand-logo-wordmark-img {
+  height: 2.05rem; /* 32.8px mobile — tagline removed so NEOM PANELS is much larger & clearer */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .brand-logo-wordmark-img {
+    height: 2.38rem; /* 38px desktop — bold, high-contrast NEOM PANELS */
+  }
+}
+
+.brand-logo-link:hover .brand-logo-3d-emblem,
+.brand-logo-link:focus-visible .brand-logo-3d-emblem {
+  animation-play-state: paused;
+  transform: perspective(640px) rotateY(-12deg) rotateX(5deg) scale(1.06) translateZ(6px);
+  filter:
+    drop-shadow(2px 3px 0px rgba(7, 59, 42, 0.34))
+    drop-shadow(4px 8px 14px rgba(7, 59, 42, 0.24));
+}
+
+.brand-logo-link:hover .brand-logo-wordmark-wrap,
+.brand-logo-link:focus-visible .brand-logo-wordmark-wrap {
+  transform: translateX(2px);
+  filter: drop-shadow(0 2px 5px rgba(7, 59, 42, 0.14));
 }
 
 .brand-logo-horiz {
-  height: 3.125rem; /* 50px mobile */
+  height: 3.125rem;
   width: auto;
   object-fit: contain;
 }
 
 @media (min-width: 1024px) {
   .brand-logo-horiz {
-    height: 3.5rem; /* 56px desktop — crisp horizontal lockup */
+    height: 3.5rem;
   }
 }
 

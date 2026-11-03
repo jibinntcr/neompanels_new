@@ -105,13 +105,26 @@ export default function Navbar() {
       <header className="site-header">
         <div className="container header-inner">
           <Link href="/" className="brand-logo-link" aria-label="NEOM Panels — Home">
-            <img
-              src="/assets/logo-horizontal.png"
-              alt="NEOM Panels — Engineered Excellence, Designed for Spaces"
-              className="brand-logo-horiz"
-              width="540"
-              height="180"
-            />
+            <span className="brand-logo-3d-stage" aria-hidden="true">
+              <span className="brand-logo-3d-emblem">
+                <img
+                  src="/assets/neom-icon-3d.png"
+                  alt=""
+                  className="brand-logo-icon-img"
+                  width="246"
+                  height="308"
+                />
+              </span>
+              <span className="brand-logo-wordmark-wrap">
+                <img
+                  src="/assets/neom-wordmark-clean.png"
+                  alt="NEOM Panels"
+                  className="brand-logo-wordmark-img"
+                  width="692"
+                  height="206"
+                />
+              </span>
+            </span>
           </Link>
 
           <nav ref={navRef} className="primary-nav" aria-label="Primary">
