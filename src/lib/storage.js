@@ -2,7 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-export const STORAGE_DIR = path.join(process.cwd(), 'storage');
+export const STORAGE_DIR = process.env.VERCEL
+  ? path.join('/tmp', 'neom-storage')
+  : path.join(process.cwd(), 'storage');
 export const PRIVATE_ATTACHMENTS_DIR = path.join(STORAGE_DIR, 'private-attachments');
 export const ENQUIRIES_JSON_PATH = path.join(STORAGE_DIR, 'enquiries.json');
 export const ENQUIRIES_JSONL_PATH = path.join(STORAGE_DIR, 'enquiries.jsonl');
