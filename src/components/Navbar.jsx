@@ -108,9 +108,30 @@ export default function Navbar() {
             <span className="brand-logo-3d-stage" aria-hidden="true">
               <span className="brand-logo-3d-emblem">
                 <img
-                  src="/assets/neom-icon-3d.png"
+                  src="/assets/neom-n-layer-1.png"
                   alt=""
-                  className="brand-logo-icon-img"
+                  className="brand-logo-n-layer brand-logo-n-layer--1"
+                  width="246"
+                  height="308"
+                />
+                <img
+                  src="/assets/neom-n-layer-2.png"
+                  alt=""
+                  className="brand-logo-n-layer brand-logo-n-layer--2"
+                  width="246"
+                  height="308"
+                />
+                <img
+                  src="/assets/neom-n-layer-3.png"
+                  alt=""
+                  className="brand-logo-n-layer brand-logo-n-layer--3"
+                  width="246"
+                  height="308"
+                />
+                <img
+                  src="/assets/neom-n-layer-4.png"
+                  alt=""
+                  className="brand-logo-n-layer brand-logo-n-layer--4"
                   width="246"
                   height="308"
                 />
@@ -121,7 +142,7 @@ export default function Navbar() {
                   alt="NEOM Panels"
                   className="brand-logo-wordmark-img"
                   width="692"
-                  height="206"
+                  height="246"
                 />
               </span>
             </span>
