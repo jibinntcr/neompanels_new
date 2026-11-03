@@ -2,6 +2,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollRevealObserver from '@/components/ScrollRevealObserver';
+import PageReloadLoader from '@/components/PageReloadLoader';
 
 export const metadata = {
   title: {
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
+        <PageReloadLoader />
         <a href="#main-content" className="skip-link visually-hidden">
           Skip to main content
         </a>

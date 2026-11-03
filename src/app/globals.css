@@ -2789,3 +2789,250 @@ dialog.corporate-dialog::backdrop {
   border-color: var(--color-forest);
   box-shadow: 0 3px 10px rgba(7, 59, 42, 0.06);
 }
+
+/* ==========================================================================
+   Full-Screen 3D 'N' Architectural Reload / Intro Loader
+   ========================================================================== */
+@keyframes neomLoaderAutoDismissFallback {
+  0%,
+  80% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@keyframes neomLoaderStageRotate3D {
+  0% {
+    transform: perspective(900px) rotateY(-26deg) rotateX(12deg) scale(0.9);
+  }
+  55% {
+    transform: perspective(900px) rotateY(10deg) rotateX(-4deg) scale(1.03);
+  }
+  100% {
+    transform: perspective(900px) rotateY(0deg) rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes neomLoaderPiece1 {
+  0% {
+    opacity: 0;
+    transform: translate3d(-26px, 34px, -50px) rotateY(-25deg);
+  }
+  55%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 8px) rotateY(0deg);
+  }
+}
+
+@keyframes neomLoaderPiece2 {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translate3d(-22px, -24px, 45px) scale(0.92);
+  }
+  65%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 18px) scale(1);
+  }
+}
+
+@keyframes neomLoaderPiece3 {
+  0%,
+  22% {
+    opacity: 0;
+    transform: translate3d(22px, 24px, 35px) scale(0.92);
+  }
+  75%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 14px) scale(1);
+  }
+}
+
+@keyframes neomLoaderPiece4 {
+  0%,
+  30% {
+    opacity: 0;
+    transform: translate3d(28px, -34px, -40px) rotateY(25deg);
+  }
+  85%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 10px) rotateY(0deg);
+  }
+}
+
+@keyframes neomLoaderWordmarkReveal {
+  0%,
+  32% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  85%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neomLoaderProgressSweep {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes neomLoaderRingPulse {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+}
+
+.neom-page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 42%, #FFFFFF 0%, #F7F5F0 65%, #EFECE4 100%);
+  transition:
+    opacity 460ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 460ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 460ms;
+  /* Pure-CSS safety fallback so even if JS is blocked the overlay dismisses after 2.1s */
+  animation: neomLoaderAutoDismissFallback 2.1s ease forwards;
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}
+
+.neom-page-loader.is-exiting {
+  opacity: 0;
+  transform: scale(1.025);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.neom-loader-backdrop-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(7, 59, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7, 59, 42, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+.neom-loader-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  padding: 2rem;
+}
+
+.neom-loader-3d-ring {
+  position: relative;
+  width: 7.75rem;
+  height: 7.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229, 238, 226, 0.65) 0%, rgba(255, 255, 255, 0) 72%);
+}
+
+.neom-loader-3d-ring::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(7, 59, 42, 0.14);
+  animation: neomLoaderRingPulse 1.2s ease-in-out infinite;
+}
+
+.neom-loader-n-stage {
+  position: relative;
+  width: 4.5rem;
+  aspect-ratio: 246 / 308;
+  transform-style: preserve-3d;
+  animation: neomLoaderStageRotate3D 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.neom-loader-n-piece {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  will-change: transform, opacity;
+}
+
+.neom-loader-n-piece--1 {
+  filter: drop-shadow(-2px 5px 8px rgba(7, 59, 42, 0.28));
+  animation: neomLoaderPiece1 920ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.neom-loader-n-piece--2 {
+  filter: drop-shadow(0px 6px 10px rgba(47, 107, 60, 0.3));
+  animation: neomLoaderPiece2 920ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.neom-loader-n-piece--3 {
+  filter: drop-shadow(0px 5px 9px rgba(7, 59, 42, 0.28));
+  animation: neomLoaderPiece3 920ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.neom-loader-n-piece--4 {
+  filter: drop-shadow(3px 6px 10px rgba(139, 105, 65, 0.32));
+  animation: neomLoaderPiece4 920ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.neom-loader-wordmark {
+  animation: neomLoaderWordmarkReveal 960ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.neom-loader-wordmark-img {
+  height: 2.35rem;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(7, 59, 42, 0.08));
+}
+
+.neom-loader-progress-track {
+  width: 9.5rem;
+  height: 2.5px;
+  background-color: rgba(7, 59, 42, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.neom-loader-progress-bar {
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--color-forest) 0%, var(--color-leaf) 55%, var(--color-oak) 100%);
+  animation: neomLoaderProgressSweep 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
