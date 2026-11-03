@@ -1,0 +1,324 @@
+{
+  "schemaVersion": "1.0.0",
+  "lastReviewed": "2026-11-03",
+  "company": {
+    "legalAndCorporateName": "NEOM Panels",
+    "tagline": "ENGINEERED EXCELLENCE, DESIGNED FOR SPACES",
+    "summary": "NEOM Panels is an Indian panel manufacturing business and the company behind Starwoods.",
+    "country": "India",
+    "manufacturing": {
+      "hasOwnFactory": true,
+      "country": "India",
+      "verifiedLocation": null,
+      "verifiedCapacity": null,
+      "verifiedCertifications": [],
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03",
+      "editorialNote": "Add verified factory location, actual manufacturing scope, approved process information and real photographs only when formally approved."
+    },
+    "verifiedContactDetails": {
+      "enquiryRouteUrl": "enquiry.html",
+      "verifiedEmail": null,
+      "verifiedPhone": null,
+      "verifiedRegisteredAddress": null,
+      "verifiedSocialLinks": [],
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03",
+      "dependencyNote": "Direct email, telephone and registered office address fields are withheld from public display until verified corporate contact records are supplied in configuration."
+    }
+  },
+  "navigation": {
+    "companySubmenu": [
+      {
+        "id": "about",
+        "label": "About NEOM",
+        "href": "about.html",
+        "publicationStatus": "published",
+        "reviewDate": "2026-11-03"
+      },
+      {
+        "id": "leadership",
+        "label": "Leadership",
+        "href": "leadership.html",
+        "publicationStatus": "pending_verification",
+        "reviewDate": "2026-11-03",
+        "suppressionReason": "Withheld until approved leadership profiles and biographical records are supplied."
+      },
+      {
+        "id": "governance",
+        "label": "Governance & Corporate Information",
+        "href": "governance.html",
+        "publicationStatus": "published",
+        "reviewDate": "2026-11-03"
+      }
+    ],
+    "optionalModules": {
+      "leadership": { "publicationStatus": "pending_verification", "reviewDate": "2026-11-03" },
+      "gallery": { "publicationStatus": "pending_verification", "reviewDate": "2026-11-03" },
+      "news": { "publicationStatus": "pending_verification", "reviewDate": "2026-11-03" },
+      "directDownloads": { "publicationStatus": "pending_verification", "reviewDate": "2026-11-03" }
+    }
+  },
+  "brands": [
+    {
+      "id": "starwoods",
+      "name": "Starwoods",
+      "parentCompany": "NEOM Panels",
+      "relationship": "Product brand of NEOM Panels",
+      "description": "Starwoods is a NEOM Panels brand. Explore its available range or share your requirement with NEOM to discuss the next step.",
+      "verifiedWebsiteUrl": null,
+      "fallbackActionLabel": "Enquire About Starwoods",
+      "fallbackActionHref": "enquiry.html?brand=Starwoods",
+      "verifiedProductCategories": [],
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03",
+      "scopeNote": "Specific product grades, thicknesses and technical data sheets are shared against requirement scope until verified public catalogue files are uploaded."
+    }
+  ],
+  "leadershipProfiles": {
+    "publicationStatus": "pending_verification",
+    "reviewDate": "2026-11-03",
+    "editorialRule": "Publish only when approved executive and board profiles are verified. Do not display placeholder profiles.",
+    "profiles": []
+  },
+  "governance": {
+    "verifiedCompanyInformation": {
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03",
+      "records": [
+        {
+          "label": "Corporate Identity",
+          "value": "NEOM Panels",
+          "status": "verified",
+          "reviewDate": "2026-11-03"
+        },
+        {
+          "label": "Core Business Activity",
+          "value": "Wood-panel manufacturing in India and corporate parent of product brands",
+          "status": "verified",
+          "reviewDate": "2026-11-03"
+        },
+        {
+          "label": "Operating Asset",
+          "value": "Company-owned panel manufacturing facility in India",
+          "status": "verified",
+          "reviewDate": "2026-11-03"
+        },
+        {
+          "label": "Product Brand Portfolio",
+          "value": "Starwoods",
+          "status": "verified",
+          "reviewDate": "2026-11-03"
+        },
+        {
+          "label": "Commercial Focus",
+          "value": "B2B supply for furniture manufacturing, modular interiors, commercial fit-outs, institutional procurement and channel distribution",
+          "status": "verified",
+          "reviewDate": "2026-11-03"
+        }
+      ],
+      "pendingStatutoryFields": [
+        "Corporate Identification Number (CIN)",
+        "Goods and Services Tax Identification Number (GSTIN)",
+        "Registered Office & Factory Postal Addresses"
+      ]
+    },
+    "adoptedPolicies": {
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03",
+      "items": [
+        {
+          "id": "policy-product-info",
+          "title": "Product Specification & Document Scope Standard",
+          "summary": "Requires product dimensions, construction details and performance references to be read together with the current technical document for the exact product and grade.",
+          "publicationStatus": "published",
+          "reviewDate": "2026-11-03",
+          "linkHref": "manufacturing.html#specification-discipline"
+        },
+        {
+          "id": "policy-sustainability-reporting",
+          "title": "Sustainability & Resource Reporting Principle",
+          "summary": "Distinguishes between operational priorities, approved initiatives and reported results, identifying the exact period and scope whenever figures are published.",
+          "publicationStatus": "published",
+          "reviewDate": "2026-11-03",
+          "linkHref": "sustainability.html#progress-statement"
+        },
+        {
+          "id": "policy-privacy",
+          "title": "Privacy Notice & Business Enquiry Data Governance",
+          "summary": "Governs how B2B contact details, project specifications and supporting attachments submitted to NEOM Panels are stored, routed and protected.",
+          "publicationStatus": "published",
+          "reviewDate": "2026-11-03",
+          "linkHref": "privacy.html"
+        },
+        {
+          "id": "policy-terms",
+          "title": "Website Terms of Use",
+          "summary": "Defines conditions for using NEOM Panels digital resources, brand references and technical enquiry channels.",
+          "publicationStatus": "published",
+          "reviewDate": "2026-11-03",
+          "linkHref": "terms.html"
+        }
+      ]
+    },
+    "futureInvestorDocumentArchitecture": {
+      "publicationStatus": "internal_architecture_only",
+      "reviewDate": "2026-11-03",
+      "publicVisibility": false,
+      "editorialRule": "Maintained internally to support long-term corporate governance readiness without exposing an unverified investor-relations section on the public website.",
+      "plannedCategories": [
+        { "id": "statutory-filings", "title": "Statutory & Annual Filings", "publicationStatus": "internal_architecture_only", "items": [] },
+        { "id": "board-committees", "title": "Board Composition & Committee Charters", "publicationStatus": "internal_architecture_only", "items": [] },
+        { "id": "financial-disclosures", "title": "Audited Financial Statements", "publicationStatus": "internal_architecture_only", "items": [] },
+        { "id": "shareholder-governance", "title": "Corporate Governance Codes & Disclosures", "publicationStatus": "internal_architecture_only", "items": [] }
+      ]
+    }
+  },
+  "documents": [
+    {
+      "id": "doc-company-overview",
+      "category": "Company information",
+      "title": "NEOM Panels — Corporate & Manufacturing Introduction",
+      "scope": "Corporate identity, manufacturing perspective and B2B buyer engagement routes",
+      "version": "v1.0",
+      "publicationStatus": "request_only",
+      "fileUrl": null,
+      "reviewDate": "2026-11-03",
+      "availabilityNote": "Available on request for commercial introductions and vendor registration."
+    },
+    {
+      "id": "doc-starwoods-intro",
+      "category": "Brand literature",
+      "title": "Starwoods — Brand Overview & Enquiry Guide",
+      "scope": "Starwoods brand introduction and specification checklist for B2B buyers",
+      "version": "v1.0",
+      "publicationStatus": "request_only",
+      "fileUrl": null,
+      "reviewDate": "2026-11-03",
+      "availabilityNote": "Issued based on application category and territory."
+    },
+    {
+      "id": "doc-product-datasheet",
+      "category": "Product documents",
+      "title": "Grade-Specific Technical Data Sheets & Specification Documents",
+      "scope": "Product-specific dimensions, tolerances and application parameters",
+      "version": "Issued per grade",
+      "publicationStatus": "request_only",
+      "fileUrl": null,
+      "reviewDate": "2026-11-03",
+      "availabilityNote": "Shared against specific product, grade and intended interior or manufacturing application."
+    },
+    {
+      "id": "doc-sustainability-direction",
+      "category": "Sustainability updates",
+      "title": "NEOM Panels — Sustainability Priorities & SDG Alignment Note",
+      "scope": "Material sourcing, resource efficiency, workplace safety and SDG 12, 9 and 15 focus areas",
+      "version": "v1.0",
+      "publicationStatus": "request_only",
+      "fileUrl": null,
+      "reviewDate": "2026-11-03",
+      "availabilityNote": "Outlines current operational priorities; period-scoped metrics will be added as formal measurement records mature."
+    }
+  ],
+  "articles": [
+    {
+      "id": "guide-before-quotation",
+      "title": "Before You Request a Panel Quotation",
+      "summary": "How defining application conditions, thickness tolerances, sheet dimensions, batch quantities and delivery schedules leads to faster, more accurate commercial quotations.",
+      "keyQuestions": [
+        "What furniture component or interior zone will the panel serve?",
+        "What sheet dimensions, thicknesses and surface expectations apply?",
+        "Is the requirement a single project schedule or a recurring production call-off?",
+        "Where is the delivery destination and what unloading constraints exist?"
+      ],
+      "publicationStatus": "upcoming_guide",
+      "reviewDate": "2026-11-03"
+    },
+    {
+      "id": "guide-reading-datasheet",
+      "title": "Reading a Product Data Sheet",
+      "summary": "Why dimensions, construction parameters and performance figures should always be checked against the specific brand, grade, document version and test method scope.",
+      "keyQuestions": [
+        "Does the data sheet match the exact brand and grade under consideration?",
+        "Are tolerances stated for thickness, length, width and squareness?",
+        "Which test standard and conditioning environment apply to the listed values?",
+        "Is the document version current for the production schedule being planned?"
+      ],
+      "publicationStatus": "upcoming_guide",
+      "reviewDate": "2026-11-03"
+    },
+    {
+      "id": "guide-repeat-requirements",
+      "title": "Planning Repeat Panel Requirements",
+      "summary": "Practical considerations for OEMs and modular furniture manufacturers coordinating recurring batch supply, buffer inventory and specification continuity.",
+      "keyQuestions": [
+        "What is the monthly or quarterly consumption pattern by thickness?",
+        "How much lead time is required between purchase order release and dispatch?",
+        "How are incoming quality checks aligned with the agreed specification sheet?",
+        "What packaging and palletisation format suits the factory floor?"
+      ],
+      "publicationStatus": "upcoming_guide",
+      "reviewDate": "2026-11-03"
+    },
+    {
+      "id": "guide-test-report-scope",
+      "title": "Understanding the Scope of a Test Report",
+      "summary": "How institutional buyers, project consultants and quality teams can verify that a laboratory or factory test report corresponds to the actual material grade and period.",
+      "keyQuestions": [
+        "Does the report identify the specific product grade and nominal thickness tested?",
+        "What sample scope and testing date are recorded on the document?",
+        "Are individual property results distinguished from general product category claims?",
+        "Does the project specification require additional application-specific verification?"
+      ],
+      "publicationStatus": "upcoming_guide",
+      "reviewDate": "2026-11-03"
+    }
+  ],
+  "sustainabilityUpdates": [
+    {
+      "id": "sust-material-sourcing",
+      "area": "Material sourcing",
+      "stage": "Priority",
+      "statement": "Our priority is to strengthen our understanding of material origins and the information available from suppliers.",
+      "scopePeriod": "Current operational direction",
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03"
+    },
+    {
+      "id": "sust-material-use-waste",
+      "area": "Material use & waste",
+      "stage": "Priority",
+      "statement": "We intend to identify avoidable material losses and assess practical opportunities to improve yield, handle residual materials responsibly and reduce unnecessary packaging.",
+      "scopePeriod": "Current operational direction",
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03"
+    },
+    {
+      "id": "sust-energy-water",
+      "area": "Energy & water",
+      "stage": "Priority",
+      "statement": "Measurement is the starting point. Our approach is to establish a clearer view of consumption and evaluate improvements suited to our operations.",
+      "scopePeriod": "Current operational direction",
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03"
+    },
+    {
+      "id": "sust-people-safety",
+      "area": "People & workplace safety",
+      "stage": "Priority",
+      "statement": "Workplace safety, relevant skills and clear responsibilities are priorities for the company we are building.",
+      "scopePeriod": "Current operational direction",
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03"
+    },
+    {
+      "id": "sust-product-information",
+      "area": "Product information",
+      "stage": "Priority",
+      "statement": "We aim to connect product and environmental information to the relevant material, document and scope.",
+      "scopePeriod": "Current operational direction",
+      "publicationStatus": "published",
+      "reviewDate": "2026-11-03"
+    }
+  ]
+}

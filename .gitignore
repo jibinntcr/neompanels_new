@@ -1,0 +1,16 @@
+# Dependencies
+node_modules
+node_modules.nosync
+
+# Next.js build output
+.next
+.next.nosync
+out
+
+# Runtime enquiry & private attachment storage
+storage/
+
+# macOS & environment
+.DS_Store
+*.pem
+.env*.local
