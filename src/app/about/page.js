@@ -29,8 +29,8 @@ export default function AboutPage() {
 
           <figure className="architectural-photo-card hero-animate--delay" style={{ margin: 0 }}>
             <img
-              src="/assets/hero-architectural-panels.jpg"
-              alt="Architectural wood-panel cladding and calibrated panel substrates in a contemporary interior."
+              src="/assets/hero-neom-flagship.jpg"
+              alt="Calibrated multi-ply wood-panel substrates and warm oak architectural joinery in a contemporary studio."
               width="1400"
               height="933"
             />
