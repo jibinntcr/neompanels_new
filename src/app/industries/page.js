@@ -8,6 +8,32 @@ export const metadata = buildPageMetadata({
   path: '/industries',
   ogImage: '/assets/industry-furniture-oem.jpg',
   ogImageAlt: 'NEOM Panels — B2B Wood-Panel Applications for Furniture OEMs, Modular Interiors and Packaging',
+  ogImages: [
+    {
+      url: '/assets/industry-furniture-oem.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Furniture & OEM Manufacturing Calibrated Wood Panels'
+    },
+    {
+      url: '/assets/industry-modular-interiors.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Modular Kitchen & Wardrobe Interior Panel Systems'
+    },
+    {
+      url: '/assets/industry-commercial-projects.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Commercial Interiors & Architectural Fit-Out Panels'
+    },
+    {
+      url: '/assets/packing-plywood-crates.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Industrial Packaging Cases, Crates & Dividers'
+    }
+  ],
   keywords: [
     'furniture OEM plywood supplier India',
     'modular kitchen carcass plywood India',

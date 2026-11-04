@@ -9,6 +9,26 @@ export const metadata = buildPageMetadata({
   path: '/sustainability',
   ogImage: '/assets/sustainability-materials-studio.jpg',
   ogImageAlt: 'NEOM Panels — Responsible Wood-Panel Sourcing and Material Efficiency',
+  ogImages: [
+    {
+      url: '/assets/sustainability-materials-studio.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels — Responsible Wood-Panel Sourcing and Material Efficiency'
+    },
+    {
+      url: '/assets/illustration-sustainability.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Sustainable Agro-Forestry Sourcing and Durable Wood-Panel Lifecycle'
+    },
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels Architectural Wood-Panel Substrates'
+    }
+  ],
   keywords: [
     'sustainable wood panels India',
     'responsible timber and veneer sourcing India',

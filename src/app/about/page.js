@@ -8,6 +8,32 @@ export const metadata = buildPageMetadata({
   path: '/about',
   ogImage: '/assets/hero-neom-flagship.jpg',
   ogImageAlt: 'About NEOM Panels — Indian Wood-Panel Manufacturing Company',
+  ogImages: [
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'About NEOM Panels — Indian Wood-Panel Manufacturing Company'
+    },
+    {
+      url: '/assets/starwoods-brand-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Starwoods — Furniture & Interior Applications by NEOM Panels'
+    },
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood — Moisture-Resistant Industrial Packaging Plywood'
+    },
+    {
+      url: '/assets/team/jibin-n.png',
+      width: 800,
+      height: 800,
+      alt: 'Jibin N — Managing Director, NEOM Panels'
+    }
+  ],
   keywords: [
     'about NEOM Panels',
     'Indian wood panel manufacturing company',

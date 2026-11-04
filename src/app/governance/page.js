@@ -10,6 +10,20 @@ export const metadata = buildPageMetadata({
   path: '/governance',
   ogImage: '/assets/hero-neom-flagship.jpg',
   ogImageAlt: 'NEOM Panels Corporate Governance and Adopted Policies',
+  ogImages: [
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels Corporate Governance and Adopted Policies'
+    },
+    {
+      url: '/assets/logo-full.png',
+      width: 970,
+      height: 316,
+      alt: 'NEOM Panels Official Corporate Mark'
+    }
+  ],
   keywords: [
     'NEOM Panels corporate governance',
     'NEOM Panels vendor onboarding information',

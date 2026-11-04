@@ -114,7 +114,13 @@ export default function sitemap() {
     {
       path: '/leadership',
       changeFrequency: 'monthly',
-      priority: 0.7
+      priority: 0.7,
+      images: [
+        `${SITE_URL}/assets/team/jibin-n.png`,
+        `${SITE_URL}/assets/team/muneer-k-h.png`,
+        `${SITE_URL}/assets/team/muhamad-raneef.jpeg`,
+        `${SITE_URL}/assets/team/muhammed-jabir.png`
+      ]
     },
     {
       path: '/site-map',

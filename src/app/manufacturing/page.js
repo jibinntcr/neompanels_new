@@ -9,6 +9,26 @@ export const metadata = buildPageMetadata({
   path: '/manufacturing',
   ogImage: '/assets/illustration-manufacturing.png',
   ogImageAlt: 'NEOM Panels Wood-Panel Manufacturing Process and Panel Inspection in India',
+  ogImages: [
+    {
+      url: '/assets/illustration-manufacturing.png',
+      width: 1536,
+      height: 1024,
+      alt: 'NEOM Panels Wood-Panel Manufacturing Process and 4-Stage Quality Inspection'
+    },
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Calibrated Multi-Ply Wood-Panel Substrates Manufactured by NEOM Panels'
+    },
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Industrial Packaging Plywood Sheets and Palletised Dispatch'
+    }
+  ],
   keywords: [
     'wood panel manufacturing facility India',
     'calibrated plywood factory India',

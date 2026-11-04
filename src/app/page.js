@@ -7,6 +7,40 @@ export const metadata = buildPageMetadata({
   description:
     'NEOM Panels manufactures wood-panel products in India for furniture OEMs, modular kitchens, commercial interior projects and industrial packaging. Home to Starwoods and NEOM Packing Plywood.',
   path: '/',
+  ogImage: '/assets/hero-neom-flagship.jpg',
+  ogImageAlt: 'NEOM Panels — Indian Wood-Panel Manufacturing for Furniture, Interiors and Industrial Packaging',
+  ogImages: [
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels Flagship Wood-Panel Manufacturing Studio'
+    },
+    {
+      url: '/assets/starwoods-brand-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Starwoods — Calibrated Plywood for Furniture and Modular Interiors'
+    },
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood — Moisture-Resistant Industrial Packaging Plywood'
+    },
+    {
+      url: '/assets/industry-furniture-oem.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'OEM Furniture Manufacturing & Calibrated Plywood Stacks'
+    },
+    {
+      url: '/assets/industry-modular-interiors.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Modular Kitchen & Wardrobe Wood-Panel Substrates'
+    }
+  ],
   keywords: [
     'NEOM Panels',
     'wood panel manufacturer India',

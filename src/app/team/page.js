@@ -6,8 +6,40 @@ export const metadata = buildPageMetadata({
   description:
     'NEOM Panels brings together executive experience in wood-panel manufacturing, business operations, technology and people development. Meet Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.',
   path: '/team',
-  ogImage: '/assets/hero-neom-flagship.jpg',
-  ogImageAlt: 'NEOM Panels Executive Leadership Team',
+  ogImage: '/assets/team/jibin-n.png',
+  ogImageAlt: 'Jibin N (Managing Director) and NEOM Panels Executive Leadership Team',
+  ogImages: [
+    {
+      url: '/assets/team/jibin-n.png',
+      width: 800,
+      height: 800,
+      alt: 'Jibin N — Managing Director, NEOM Panels'
+    },
+    {
+      url: '/assets/team/muneer-k-h.png',
+      width: 800,
+      height: 800,
+      alt: 'Muneer K H — Chief Executive Officer, NEOM Panels'
+    },
+    {
+      url: '/assets/team/muhamad-raneef.jpeg',
+      width: 800,
+      height: 800,
+      alt: 'Muhamad Raneef T A — Chief Financial Officer, NEOM Panels'
+    },
+    {
+      url: '/assets/team/muhammed-jabir.png',
+      width: 800,
+      height: 800,
+      alt: 'Muhammed Jabir — Chief Technology Officer, NEOM Panels'
+    },
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels — Indian Wood-Panel Manufacturing Company'
+    }
+  ],
   keywords: [
     'NEOM Panels leadership team',
     'Jibin N Managing Director NEOM Panels',
@@ -69,12 +101,41 @@ export default function TeamPage() {
         { name: 'Home', path: '/' },
         { name: 'Our Leadership', path: '/team' }
       ]),
+      {
+        '@type': 'ProfilePage',
+        '@id': `${SITE_URL}/team#webpage`,
+        name: 'Our Leadership — The People Behind NEOM Panels',
+        url: `${SITE_URL}/team`,
+        description:
+          'Meet the executive leadership team behind NEOM Panels: Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.',
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}/assets/team/jibin-n.png`,
+          width: 800,
+          height: 800,
+          caption: 'Jibin N — Managing Director, NEOM Panels'
+        },
+        image: LEADERSHIP_TEAM.map((member) => ({
+          '@type': 'ImageObject',
+          url: `${SITE_URL}${member.photo}`,
+          width: 800,
+          height: 800,
+          caption: `${member.name} — ${member.role}, NEOM Panels`
+        }))
+      },
       ...LEADERSHIP_TEAM.map((member) => ({
         '@type': 'Person',
+        '@id': `${SITE_URL}/team#${member.id}`,
         name: member.name,
         jobTitle: member.role,
         description: member.bio,
-        image: `${SITE_URL}${member.photo}`,
+        image: {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}${member.photo}`,
+          width: 800,
+          height: 800,
+          caption: `${member.name} — ${member.role}, NEOM Panels`
+        },
         worksFor: {
           '@type': 'Organization',
           name: 'NEOM Panels',
@@ -116,13 +177,85 @@ export default function TeamPage() {
                 MANAGEMENT STEWARDSHIP
               </p>
               <h2 className="subsection-title" style={{ marginBottom: '0.35rem' }}>
-                Building the company alongside our product brands
+                Executive team guiding NEOM Panels
               </h2>
               <p className="secondary-text" style={{ fontSize: '0.92rem', marginBottom: 0 }}>
                 Executive leadership across NEOM Panels and its product brands—Starwoods and NEOM
                 Packing Plywood—focuses on operational discipline, specification clarity and
                 long-term B2B relationships.
               </p>
+            </div>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                gap: '0.65rem',
+                marginTop: '0.75rem',
+                paddingTop: '0.75rem',
+                borderTop: '1px solid var(--color-border)'
+              }}
+              aria-label="Executive team quick directory"
+            >
+              {LEADERSHIP_TEAM.map((member) => (
+                <a
+                  key={member.id}
+                  href={`#${member.id}`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    padding: '0.45rem 0.55rem',
+                    borderRadius: '8px',
+                    border: '1px solid #E5DFD5',
+                    backgroundColor: '#FAF8F4',
+                    textDecoration: 'none',
+                    color: 'inherit'
+                  }}
+                >
+                  <img
+                    src={member.photo}
+                    alt={`${member.name} — ${member.role}`}
+                    width="44"
+                    height="44"
+                    style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '50%',
+                      objectFit: 'cover',
+                      objectPosition: 'center top',
+                      border: '2px solid var(--color-forest)',
+                      flexShrink: 0
+                    }}
+                  />
+                  <div style={{ minWidth: 0 }}>
+                    <div
+                      style={{
+                        fontSize: '0.84rem',
+                        fontWeight: 700,
+                        color: 'var(--color-forest)',
+                        lineHeight: 1.2,
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                      }}
+                    >
+                      {member.name}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '0.72rem',
+                        color: 'var(--color-text-muted)',
+                        lineHeight: 1.25,
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                      }}
+                    >
+                      {member.role}
+                    </div>
+                  </div>
+                </a>
+              ))}
             </div>
             <div className="brand-architecture-row">
               <img

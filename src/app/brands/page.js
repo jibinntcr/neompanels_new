@@ -8,6 +8,38 @@ export const metadata = buildPageMetadata({
   path: '/brands',
   ogImage: '/assets/starwoods-brand-showcase.jpg',
   ogImageAlt: 'NEOM Panels Product Brands — Starwoods and NEOM Packing Plywood',
+  ogImages: [
+    {
+      url: '/assets/starwoods-brand-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Starwoods — Calibrated Plywood & Wood Panels for Furniture and Interior Applications'
+    },
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood — Moisture-Resistant (MR) Industrial Packaging Plywood'
+    },
+    {
+      url: '/assets/packing-plywood-crates.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood — Industrial Packing Cases and Crates'
+    },
+    {
+      url: '/assets/starwood-logo.png',
+      width: 619,
+      height: 177,
+      alt: 'Starwoods — The Plywood Specialist Brand Mark'
+    },
+    {
+      url: '/assets/neom-packing-plywood-logo-horizontal.png',
+      width: 580,
+      height: 168,
+      alt: 'NEOM Packing Plywood Brand Mark'
+    }
+  ],
   keywords: [
     'NEOM Panels brands',
     'Starwoods plywood',

@@ -11,6 +11,26 @@ export const metadata = buildPageMetadata({
   path: '/enquiry',
   ogImage: '/assets/illustration-enquiry.jpg',
   ogImageAlt: 'NEOM Panels — Submit a B2B Wood-Panel Quotation or Technical Document Request',
+  ogImages: [
+    {
+      url: '/assets/illustration-enquiry.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels — Submit a B2B Wood-Panel Quotation or Technical Document Request'
+    },
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels Wood-Panel Manufacturing & Direct Factory Supply'
+    },
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood Quotation & Bulk Order Desk'
+    }
+  ],
   keywords: [
     'request plywood quotation India',
     'NEOM Panels business enquiry',

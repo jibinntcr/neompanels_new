@@ -12,6 +12,26 @@ export const metadata = buildPageMetadata({
   path: '/blog',
   ogImage: '/assets/hero-neom-flagship.jpg',
   ogImageAlt: 'NEOM Panels — Insights, Technical Articles and Company News',
+  ogImages: [
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels — Insights, Technical Articles and Company News'
+    },
+    {
+      url: '/assets/starwoods-brand-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Starwoods Calibrated Plywood & Interior Panel Guides'
+    },
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood Industrial Crating & Packaging Guides'
+    }
+  ],
   keywords: [
     'NEOM Panels blog and news',
     'calibrated plywood buyer guide India',

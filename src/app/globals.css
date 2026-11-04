@@ -5981,3 +5981,111 @@ dialog.corporate-dialog::backdrop {
   border-color: var(--color-forest);
   box-shadow: var(--shadow-elevated);
 }
+
+
+/* ==========================================================================
+   BILINGUAL LANGUAGE SWITCHER (ENGLISH / हिन्दी) & DEVANAGARI TYPOGRAPHY
+   ========================================================================== */
+html[data-lang="hi"] body {
+  font-family: 'Noto Sans Devanagari', var(--font-body), sans-serif;
+  line-height: 1.68;
+}
+
+html[data-lang="hi"] h1,
+html[data-lang="hi"] h2,
+html[data-lang="hi"] h3,
+html[data-lang="hi"] h4,
+html[data-lang="hi"] .page-title,
+html[data-lang="hi"] .hero-title,
+html[data-lang="hi"] .section-title,
+html[data-lang="hi"] .subsection-title {
+  font-family: 'Noto Sans Devanagari', var(--font-heading), sans-serif;
+  line-height: 1.28;
+  letter-spacing: -0.005em;
+}
+
+.nav-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+.primary-nav .nav-list {
+  gap: 1.15rem;
+}
+
+.mobile-header-controls {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+  .mobile-header-controls {
+    display: inline-flex;
+  }
+}
+
+.lang-toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background-color: #F4EFE6;
+  border: 1.5px solid #D5C7B2;
+  box-shadow: 0 1px 2px rgba(7, 59, 42, 0.06);
+}
+
+.lang-toggle-pill--utility {
+  background-color: #FFFFFF;
+  border-color: #CBD9D1;
+  padding: 2px 3px;
+}
+
+.lang-region-chip {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-forest);
+  padding: 0.15rem 0.5rem;
+  border-right: 1px solid #E2DDD4;
+  white-space: nowrap;
+}
+
+.lang-toggle-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #364B43;
+  font-family: 'Noto Sans Devanagari', var(--font-heading), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.42rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+  white-space: nowrap;
+}
+
+.lang-toggle-pill--utility .lang-toggle-btn {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.lang-toggle-pill--mobile .lang-toggle-btn {
+  font-size: 0.78rem;
+  padding: 0.38rem 0.62rem;
+}
+
+.lang-toggle-btn:hover {
+  color: var(--color-forest);
+  background-color: rgba(7, 59, 42, 0.08);
+}
+
+.lang-toggle-btn.is-active {
+  background-color: var(--color-forest);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(7, 59, 42, 0.22);
+}

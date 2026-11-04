@@ -108,6 +108,15 @@ export const SITE_NAVIGATION_ITEMS = [
   }
 ];
 
+export function toAbsoluteAssetUrl(urlOrPath) {
+  if (!urlOrPath) return `${SITE_URL}${DEFAULT_OG_IMAGE}`;
+  if (urlOrPath.startsWith('http://') || urlOrPath.startsWith('https://')) {
+    return urlOrPath;
+  }
+  const normalizedPath = urlOrPath.startsWith('/') ? urlOrPath : `/${urlOrPath}`;
+  return `${SITE_URL}${normalizedPath}`;
+}
+
 export function buildPageMetadata({
   title,
   absoluteTitle,
@@ -116,6 +125,7 @@ export function buildPageMetadata({
   keywords = [],
   ogImage = DEFAULT_OG_IMAGE,
   ogImageAlt = 'NEOM Panels — Indian Wood-Panel Manufacturing for Furniture, Interiors and Industrial Packaging',
+  ogImages = [],
   type = 'website'
 }) {
   const canonicalPath = path.startsWith('/') ? path : `/${path}`;
@@ -123,7 +133,39 @@ export function buildPageMetadata({
   const mergedKeywords = Array.from(new Set([...keywords, ...CORE_SEO_KEYWORDS]));
   const socialTitle = absoluteTitle || `${title} | ${SITE_NAME}`;
 
+  const rawImageEntries =
+    Array.isArray(ogImages) && ogImages.length > 0
+      ? ogImages
+      : [
+          {
+            url: ogImage,
+            width: 1400,
+            height: 933,
+            alt: ogImageAlt
+          }
+        ];
+
+  const resolvedOgImages = rawImageEntries.map((item) => {
+    if (typeof item === 'string') {
+      return {
+        url: toAbsoluteAssetUrl(item),
+        width: 1400,
+        height: 933,
+        alt: ogImageAlt
+      };
+    }
+    return {
+      url: toAbsoluteAssetUrl(item.url || ogImage),
+      width: item.width || 1400,
+      height: item.height || 933,
+      alt: item.alt || ogImageAlt
+    };
+  });
+
+  const primaryImageUrl = resolvedOgImages[0]?.url || toAbsoluteAssetUrl(ogImage);
+
   return {
+    metadataBase: new URL(SITE_URL),
     title: absoluteTitle ? { absolute: absoluteTitle } : title,
     description,
     keywords: mergedKeywords,
@@ -159,20 +201,18 @@ export function buildPageMetadata({
       siteName: SITE_NAME,
       locale: 'en_IN',
       type,
-      images: [
-        {
-          url: ogImage,
-          width: 1400,
-          height: 933,
-          alt: ogImageAlt
-        }
-      ]
+      images: resolvedOgImages
     },
     twitter: {
       card: 'summary_large_image',
       title: socialTitle,
       description,
-      images: [ogImage]
+      images: resolvedOgImages.map((img) => img.url)
+    },
+    other: {
+      image: primaryImageUrl,
+      thumbnail: primaryImageUrl,
+      'og:image:secure_url': primaryImageUrl
     }
   };
 }
@@ -189,11 +229,19 @@ export function getOrganizationJsonLd(contact = {}) {
         url: SITE_URL,
         logo: {
           '@type': 'ImageObject',
-          url: `${SITE_URL}/assets/logo-header.png`,
+          url: `${SITE_URL}/assets/logo-horizontal.png`,
           width: 970,
           height: 316
         },
-        image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
+        image: [
+          `${SITE_URL}${DEFAULT_OG_IMAGE}`,
+          `${SITE_URL}/assets/starwoods-brand-showcase.jpg`,
+          `${SITE_URL}/assets/packing-plywood-showcase.jpg`,
+          `${SITE_URL}/assets/packing-plywood-crates.jpg`,
+          `${SITE_URL}/assets/industry-furniture-oem.jpg`,
+          `${SITE_URL}/assets/industry-modular-interiors.jpg`,
+          `${SITE_URL}/assets/industry-commercial-projects.jpg`
+        ],
         slogan: 'ENGINEERED EXCELLENCE, DESIGNED FOR SPACES',
         description:
           'NEOM Panels is an Indian wood-panel manufacturing company producing calibrated furniture panels, modular interior substrates, architectural joinery panels and moisture-resistant industrial packaging plywood. Home to Starwoods and NEOM Packing Plywood.',
@@ -240,6 +288,7 @@ export function getOrganizationJsonLd(contact = {}) {
             name: 'Starwoods',
             url: `${SITE_URL}/brands#starwoods`,
             logo: `${SITE_URL}/assets/starwood-logo.png`,
+            image: `${SITE_URL}/assets/starwoods-brand-showcase.jpg`,
             description:
               'NEOM Panels product brand for calibrated furniture manufacturing, modular kitchen and wardrobe interiors, and commercial fit-out applications.'
           },
@@ -248,7 +297,11 @@ export function getOrganizationJsonLd(contact = {}) {
             '@id': `${SITE_URL}/brands/neom-packing-plywood#brand`,
             name: 'NEOM Packing Plywood',
             url: `${SITE_URL}/brands/neom-packing-plywood`,
-            logo: `${SITE_URL}/assets/neom-packing-plywood-logo.svg`,
+            logo: `${SITE_URL}/assets/neom-packing-plywood-logo-horizontal.png`,
+            image: [
+              `${SITE_URL}/assets/packing-plywood-showcase.jpg`,
+              `${SITE_URL}/assets/packing-plywood-crates.jpg`
+            ],
             description:
               'Moisture-resistant (MR) packaging-grade plywood for industrial packing cases, heavy-duty crates, pallet collars, dividers and protective enclosures.'
           }

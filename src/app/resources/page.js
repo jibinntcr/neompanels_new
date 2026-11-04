@@ -8,8 +8,28 @@ export const metadata = buildPageMetadata({
   description:
     'Request NEOM Panels corporate profiles, Starwoods and NEOM Packing Plywood brand literature, technical specification sheets, and practical B2B wood-panel buyer checklists.',
   path: '/resources',
-  ogImage: '/assets/illustration-home-materials.jpg',
+  ogImage: '/assets/starwoods-brand-showcase.jpg',
   ogImageAlt: 'NEOM Panels — Wood-Panel Specification Literature and B2B Buyer Checklists',
+  ogImages: [
+    {
+      url: '/assets/starwoods-brand-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels — Wood-Panel Specification Literature and Swatches'
+    },
+    {
+      url: '/assets/illustration-home-materials.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels Technical Specification Sheets and Buyer Checklists'
+    },
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood Technical Documentation'
+    }
+  ],
   keywords: [
     'plywood technical specification sheets India',
     'wood panel B2B buyer checklist',
