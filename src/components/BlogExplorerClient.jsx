@@ -171,8 +171,8 @@ export default function BlogExplorerClient({ initialPosts = [] }) {
           Showing <strong>{filteredPosts.length}</strong> of <strong>{posts.length}</strong>{' '}
           published articles &amp; company updates
         </span>
-        <Link href="/admin" className="editorial-link" style={{ fontSize: '0.875rem' }}>
-          <span>Publish or Edit Articles in Backend Portal</span>
+        <Link href="/enquiry" className="editorial-link" style={{ fontSize: '0.875rem' }}>
+          <span>Request Technical Specification or Quotation</span>
           <span className="link-arrow" aria-hidden="true">
             →
           </span>

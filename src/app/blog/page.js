@@ -86,8 +86,8 @@ export default async function BlogIndexPage() {
               </p>
             </div>
             <div className="section-header-actions">
-              <Link href="/admin" className="btn btn--secondary">
-                Manage Articles in Portal →
+              <Link href="/enquiry" className="btn btn--primary">
+                Discuss Your Requirement →
               </Link>
             </div>
           </div>

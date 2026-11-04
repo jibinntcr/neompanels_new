@@ -191,11 +191,6 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/admin" className="footer-link" style={{ fontWeight: 600, color: 'var(--color-forest)' }}>
-                Backend Portal
-              </Link>
-            </li>
-            <li>
               <Link href="/site-map" className="footer-link">
                 Site Map
               </Link>

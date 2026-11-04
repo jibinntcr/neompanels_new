@@ -1,6 +1,7 @@
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import PublicLayoutChrome from '@/components/PublicLayoutChrome';
 import ScrollRevealObserver from '@/components/ScrollRevealObserver';
 import PageReloadLoader from '@/components/PageReloadLoader';
 import { getVerifiedContactDetails } from '@/lib/storage';
@@ -103,9 +104,13 @@ export default function RootLayout({ children }) {
         <a href="#main-heading" className="skip-link visually-hidden">
           Skip to main content
         </a>
-        <Navbar />
+        <PublicLayoutChrome>
+          <Navbar />
+        </PublicLayoutChrome>
         {children}
-        <Footer />
+        <PublicLayoutChrome>
+          <Footer />
+        </PublicLayoutChrome>
         <ScrollRevealObserver />
       </body>
     </html>

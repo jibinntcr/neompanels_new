@@ -56,6 +56,10 @@ export default function Navbar() {
     };
   }, [openMenu, mobileOpen]);
 
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   const handleMouseEnter = (menuName) => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -101,11 +105,6 @@ export default function Navbar() {
             <li>
               <Link href="/team" className="utility-link">
                 Leadership
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin" className="utility-link" style={{ fontWeight: 600 }}>
-                Backend Portal
               </Link>
             </li>
           </ul>
@@ -530,15 +529,6 @@ export default function Navbar() {
                 }
               >
                 Insights &amp; News
-              </Link>
-            </li>
-            <li className="mobile-nav-item">
-              <Link
-                href="/admin"
-                className="mobile-nav-link"
-                aria-current={pathname === '/admin' ? 'page' : undefined}
-              >
-                Backend Admin Portal
               </Link>
             </li>
           </ul>
