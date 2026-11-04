@@ -4750,54 +4750,70 @@ dialog.corporate-dialog::backdrop {
 .security-captcha-row {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 0.65rem;
-  align-items: center;
+  gap: 0.75rem;
+  align-items: stretch;
   margin-top: 0.5rem;
 }
 
-@media (min-width: 540px) {
-  .security-captcha-row {
-    grid-template-columns: auto auto 1fr;
-    gap: 0.75rem;
-  }
-}
-
 .security-captcha-plate {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0.5rem 1.15rem;
-  font-family: var(--font-heading);
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--color-forest);
+  min-height: 58px;
+  padding: 0.6rem 1.35rem;
   background: repeating-linear-gradient(
     -45deg,
-    #F3EFE6,
-    #F3EFE6 8px,
-    #EAE3D3 8px,
-    #EAE3D3 16px
+    #EFF4EE,
+    #EFF4EE 9px,
+    #E2ECE0 9px,
+    #E2ECE0 18px
   );
-  border: 1.5px solid var(--color-forest);
+  border: 2px solid var(--color-forest);
   border-radius: var(--radius-sm);
+  box-shadow: inset 0 1px 4px rgba(7, 59, 42, 0.08);
   user-select: none;
   white-space: nowrap;
+}
+
+.security-captcha-chars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.security-captcha-char {
+  display: inline-block;
+  font-family: var(--font-heading), monospace;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: var(--color-forest);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.security-captcha-char--even {
+  transform: rotate(-5deg) translateY(-1px);
+  color: #073B2A;
+}
+
+.security-captcha-char--odd {
+  transform: rotate(5deg) translateY(2px);
+  color: #6B4C28;
 }
 
 .security-captcha-refresh {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0.5rem 0.9rem;
+  min-height: 58px;
+  padding: 0.5rem 1.15rem;
   font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.9375rem;
+  font-weight: 700;
   color: var(--color-forest);
   background-color: var(--color-white);
-  border: 1px solid var(--color-border-strong);
+  border: 1.5px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
   cursor: pointer;
   white-space: nowrap;
@@ -4809,14 +4825,27 @@ dialog.corporate-dialog::backdrop {
   border-color: var(--color-forest);
 }
 
-.security-captcha-input {
+.security-captcha-input-wrap {
   grid-column: 1 / -1;
+  width: 100%;
 }
 
-@media (min-width: 540px) {
-  .security-captcha-input {
-    grid-column: auto;
-  }
+.security-captcha-input {
+  width: 100%;
+  min-height: 54px !important;
+  font-family: var(--font-heading);
+  font-size: 1.125rem !important;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.security-captcha-input::placeholder {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 /* ==========================================================================

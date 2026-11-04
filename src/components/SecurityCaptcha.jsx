@@ -26,7 +26,6 @@ export default function SecurityCaptcha({
   }, [onVerifyChange]);
 
   useEffect(() => {
-    // Pick a random code on client mount or when resetSignal changes
     const randomPick = CODE_POOL[Math.floor(Math.random() * CODE_POOL.length)] || 'NP74K';
     setExpectedCode(randomPick);
     setUserInput('');
@@ -52,80 +51,57 @@ export default function SecurityCaptcha({
   return (
     <div className="security-captcha-box" role="group" aria-labelledby={`${idPrefix}-label`}>
       <div className="security-captcha-header">
-        <label id={`${idPrefix}-label`} htmlFor={`${idPrefix}-input`} className="form-label" style={{ marginBottom: 0 }}>
-          Security Verification (Anti-Spam CAPTCHA) <span className="required-mark">*</span>
+        <label
+          id={`${idPrefix}-label`}
+          htmlFor={`${idPrefix}-input`}
+          className="form-label"
+          style={{ marginBottom: 0 }}
+        >
+          Security Verification (CAPTCHA) <span className="required-marker">*</span>
         </label>
-        <span className={`captcha-status-pill ${isVerified ? 'is-verified' : ''}`}>
-          {isVerified ? '✓ Verified' : 'Required'}
+        <span className={`captcha-status-pill ${isVerified ? 'captcha-status-pill--ok' : ''}`}>
+          {isVerified ? '✓ Code Verified' : 'Required'}
         </span>
       </div>
 
-      <p className="form-hint" style={{ marginTop: '0.2rem', marginBottom: '0.65rem' }}>
-        Please type the 5-character security code shown below to verify you are a human visitor.
+      <p className="field-hint" style={{ marginTop: '0.25rem', marginBottom: '0.75rem' }}>
+        Type the 5-character security code shown below to verify you are a human visitor.
       </p>
 
       <div className="security-captcha-row">
-        <div className="security-captcha-plate" aria-label={`Security code: ${expectedCode.split('').join(' ')}`}>
-          <svg
-            viewBox="0 0 180 48"
-            width="180"
-            height="48"
-            className="security-captcha-svg"
-            aria-hidden="true"
-          >
-            <rect width="180" height="48" rx="4" fill="#EFF4EE" />
-            <path
-              d="M8 36 Q 55 12, 98 34 T 172 18"
-              stroke="rgba(7, 59, 42, 0.22)"
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <path
-              d="M12 14 Q 65 38, 118 16 T 170 36"
-              stroke="rgba(162, 123, 76, 0.28)"
-              strokeWidth="1.5"
-              fill="none"
-            />
-            {expectedCode.split('').map((ch, idx) => {
-              const x = 26 + idx * 31;
-              const y = idx % 2 === 0 ? 31 : 34;
-              const rot = idx % 2 === 0 ? -6 : 5;
-              return (
-                <text
-                  key={idx}
-                  x={x}
-                  y={y}
-                  transform={`rotate(${rot} ${x} ${y})`}
-                  fill={idx % 2 === 0 ? '#073B2A' : '#5E4323'}
-                  fontFamily="Manrope, monospace, sans-serif"
-                  fontSize="22"
-                  fontWeight="700"
-                  letterSpacing="2"
-                >
-                  {ch}
-                </text>
-              );
-            })}
-          </svg>
-
-          <button
-            type="button"
-            className="security-captcha-refresh"
-            onClick={generateNewCode}
-            title="Generate a new security code"
-            aria-label="Generate a new security code"
-          >
-            ↻ New Code
-          </button>
+        <div
+          className="security-captcha-plate"
+          aria-label={`Security code: ${expectedCode.split('').join(' ')}`}
+        >
+          <span className="security-captcha-chars" aria-hidden="true">
+            {expectedCode.split('').map((ch, idx) => (
+              <span
+                key={idx}
+                className={`security-captcha-char security-captcha-char--${idx % 2 === 0 ? 'even' : 'odd'}`}
+              >
+                {ch}
+              </span>
+            ))}
+          </span>
         </div>
+
+        <button
+          type="button"
+          className="security-captcha-refresh"
+          onClick={generateNewCode}
+          title="Generate a new security code"
+          aria-label="Generate a new security code"
+        >
+          ↻ New Code
+        </button>
 
         <div className="security-captcha-input-wrap">
           <input
             id={`${idPrefix}-input`}
             type="text"
             name="captchaAnswer"
-            className="form-input security-captcha-input"
-            placeholder="Enter 5-character code"
+            className="form-control security-captcha-input"
+            placeholder="Type 5-character code here"
             value={userInput}
             onChange={handleInputChange}
             maxLength={8}
