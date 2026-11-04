@@ -25,41 +25,18 @@ export default function Footer() {
             </Link>
             <p className="secondary-text" style={{ marginBottom: '0.875rem' }}>
               NEOM Panels manufactures wood-panel products for furniture, interior projects and
-              industrial packaging. Home to Starwoods and NEOM Packing Plywood.
+              industrial packaging from its dedicated facility in India.
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.625rem' }}>
-              <Link
-                href="/brands#starwoods"
-                className="footer-brand-badge"
-                aria-label="Explore Starwoods — A NEOM Panels Brand"
-              >
-                <span className="footer-badge-label">Furniture &amp; Interiors</span>
-                <img
-                  src="/assets/starwood-logo.png"
-                  alt="Starwoods — The Plywood Specialist"
-                  className="starwood-logo-img--xs"
-                  width="619"
-                  height="177"
-                  loading="lazy"
-                />
+            <p className="caption" style={{ margin: 0, color: 'var(--color-secondary)' }}>
+              <strong>Product Brands:</strong>{' '}
+              <Link href="/brands#starwoods" className="footer-contact-link">
+                Starwoods
+              </Link>{' '}
+              ·{' '}
+              <Link href="/brands/neom-packing-plywood" className="footer-contact-link">
+                NEOM Packing Plywood
               </Link>
-
-              <Link
-                href="/brands/neom-packing-plywood"
-                className="footer-brand-badge"
-                aria-label="Explore NEOM Packing Plywood — A NEOM Panels Brand"
-              >
-                <span className="footer-badge-label">Industrial Packaging</span>
-                <img
-                  src="/assets/neom-packing-plywood-logo-compact.svg"
-                  alt="NEOM Packing Plywood"
-                  className="packing-logo-img--xs"
-                  width="540"
-                  height="112"
-                  loading="lazy"
-                />
-              </Link>
-            </div>
+            </p>
           </div>
 
           <nav aria-label="Footer Company">

@@ -5,73 +5,64 @@ import Link from 'next/link';
 
 const HERO_SLIDES = [
   {
-    id: 'starwoods-interiors',
-    tabLabel: 'Starwoods · Furniture & Interiors',
-    badge: 'STARWOODS · FURNITURE & INTERIORS',
+    id: 'architectural-substrates',
+    tabLabel: 'Calibrated Panel Substrates',
+    badge: 'NEOM PANELS · ENGINEERED SUBSTRATES',
     badgeTone: 'forest',
-    title: 'Calibrated wood panels for furniture OEMs and interior fit-outs',
+    title: 'Precision-calibrated wood panels built for dimensional stability',
     subtitle:
-      'Consistent core construction, thickness calibration and surface flatness for modular kitchens, wardrobes, office systems and commercial joinery.',
+      'Multi-ply hardwood cores, controlled hot-press bonding and uniform thickness calibration for demanding furniture and interior applications.',
     image: '/assets/hero-neom-flagship.jpg',
     imageAlt:
-      'Precision-calibrated multi-ply hardwood panels and warm oak architectural joinery in a sunlit studio.',
-    caption: 'Furniture and Interior Applications',
-    logo: '/assets/starwood-logo.png',
-    logoAlt: 'Starwoods — The Plywood Specialist',
-    logoClass: 'starwood-logo-img--xs',
-    specs: [
-      { label: 'Core Applications', value: 'OEM Furniture · Modular Systems · Fit-Outs' },
-      { label: 'Supply Format', value: 'Project BOQ Batches & Recurring Schedules' }
-    ],
-    ctaLabel: 'Explore Starwoods',
-    ctaHref: '/brands#starwoods',
-    quoteHref: '/enquiry?brand=starwoods&category=manufacturing'
-  },
-  {
-    id: 'packing-plywood',
-    tabLabel: 'NEOM Packing Plywood · MR Grade',
-    badge: 'NEOM PACKING PLYWOOD · INDUSTRIAL PACKAGING',
-    badgeTone: 'oak',
-    title: 'Moisture-resistant plywood for packing cases, crates and enclosures',
-    subtitle:
-      'MR packaging-grade multi-ply sheets built for export cases, machinery crating, internal dividers and scheduled industrial packaging supply.',
-    image: '/assets/packing-plywood-showcase.jpg',
-    imageAlt:
-      'Stacked moisture-resistant packaging-grade plywood sheets and assembled industrial packing crates.',
-    caption: 'Packaging-Grade Plywood',
-    logo: '/assets/neom-packing-plywood-logo-compact.svg',
-    logoAlt: 'NEOM Packing Plywood',
-    logoClass: 'packing-logo-img--xs',
-    specs: [
-      { label: 'Grade & Core', value: 'Moisture Resistant (MR) · Multi-Ply Veneer' },
-      { label: 'Applications', value: 'Packing Cases · Crates · Dividers & Liners' }
-    ],
-    ctaLabel: 'Explore Packing Plywood',
-    ctaHref: '/brands/neom-packing-plywood',
-    quoteHref: '/enquiry?brand=neom-packing-plywood&category=industrial-packaging'
-  },
-  {
-    id: 'factory-manufacturing',
-    tabLabel: 'Manufacturing & Quality Checks',
-    badge: 'IN-HOUSE MANUFACTURING · INDIA',
-    badgeTone: 'forest',
-    title: 'Controlled pressing, calibration and pre-dispatch inspection',
-    subtitle:
-      'Every production batch follows structured veneer grading, hot-press bonding, thickness verification and moisture-protected palletised dispatch.',
-    image: '/assets/industry-furniture-oem.jpg',
-    imageAlt:
-      'Calibrated wood-panel stacks and precision-machined timber components prepared for B2B dispatch.',
+      'Precision-calibrated multi-ply hardwood panels and vernier calliper on an oak display table in an architectural studio.',
     caption: 'Panel Inspection',
-    logo: null,
-    logoAlt: '',
-    logoClass: '',
     specs: [
-      { label: 'Quality Checkpoints', value: 'Thickness · Squareness · Core Bonding' },
-      { label: 'Dispatch Coverage', value: 'Direct Factory Supply Across India' }
+      { label: 'Core Construction', value: 'Multi-Ply Cross-Laminated Veneer' },
+      { label: 'Key Checkpoints', value: 'Thickness · Flatness · Squareness' }
     ],
-    ctaLabel: 'View Manufacturing Process',
+    ctaLabel: 'Explore Manufacturing Process',
     ctaHref: '/manufacturing',
     quoteHref: '/enquiry?category=manufacturing'
+  },
+  {
+    id: 'interior-architecture',
+    tabLabel: 'Furniture & Interior Projects',
+    badge: 'NEOM PANELS · ARCHITECTURAL & OEM SUPPLY',
+    badgeTone: 'forest',
+    title: 'Engineered panels for serial furniture lines and commercial fit-outs',
+    subtitle:
+      'Consistent machining behaviour, screw-holding strength and surface flatness for modular kitchens, wardrobes, corporate workspaces and hospitality joinery.',
+    image: '/assets/industry-commercial-projects.jpg',
+    imageAlt:
+      'Contemporary commercial boardroom featuring slatted oak wall panelling and custom architectural joinery.',
+    caption: 'Furniture and Interior Applications',
+    specs: [
+      { label: 'Primary Sectors', value: 'Furniture OEMs · Modular Systems · Fit-Outs' },
+      { label: 'Supply Format', value: 'Project BOQ Phasing & Repeat Schedules' }
+    ],
+    ctaLabel: 'Explore Industry Applications',
+    ctaHref: '/industries',
+    quoteHref: '/enquiry?category=project-requirement'
+  },
+  {
+    id: 'industrial-packaging-grade',
+    tabLabel: 'Industrial Crating & Packaging',
+    badge: 'NEOM PANELS · INDUSTRIAL PACKAGING SOLUTIONS',
+    badgeTone: 'oak',
+    title: 'Moisture-resistant plywood for heavy-duty packing cases and crates',
+    subtitle:
+      'Dependable MR packaging-grade multi-ply sheets engineered for export machinery boxes, protective enclosures, pallet decks and internal dividers.',
+    image: '/assets/packing-plywood-crates.jpg',
+    imageAlt:
+      'Industrial packing-case fabrication workbench showing slotted plywood crate dividers and stacked multi-ply panels.',
+    caption: 'Packing Cases and Crates',
+    specs: [
+      { label: 'Material Grade', value: 'Moisture Resistant (MR) Packaging Grade' },
+      { label: 'Procurement Options', value: 'Batch Orders & Scheduled Repeat Supply' }
+    ],
+    ctaLabel: 'View Packaging Specifications',
+    ctaHref: '/brands/neom-packing-plywood',
+    quoteHref: '/enquiry?category=industrial-packaging'
   }
 ];
 
@@ -86,7 +77,7 @@ export default function HeroInteractiveShowcase() {
 
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 5400);
+    }, 5200);
 
     return () => clearInterval(timer);
   }, [paused]);
@@ -100,7 +91,11 @@ export default function HeroInteractiveShowcase() {
       onMouseLeave={() => setPaused(false)}
     >
       {/* Top Interactive Slide Switcher Tabs */}
-      <div className="hero-showcase-tabs" role="tablist" aria-label="Product and manufacturing showcase">
+      <div
+        className="hero-showcase-tabs"
+        role="tablist"
+        aria-label="NEOM Panels capabilities showcase"
+      >
         {HERO_SLIDES.map((slide, idx) => {
           const isSelected = idx === activeIndex;
           return (
@@ -156,17 +151,6 @@ export default function HeroInteractiveShowcase() {
               <h2 className="hero-showcase-title">{activeSlide.title}</h2>
               <p className="hero-showcase-subtitle">{activeSlide.subtitle}</p>
             </div>
-            {activeSlide.logo ? (
-              <div className="hero-showcase-logo-box">
-                <img
-                  src={activeSlide.logo}
-                  alt={activeSlide.logoAlt}
-                  className={activeSlide.logoClass}
-                  width="540"
-                  height="140"
-                />
-              </div>
-            ) : null}
           </div>
 
           <div className="hero-showcase-specs">
@@ -186,7 +170,7 @@ export default function HeroInteractiveShowcase() {
               </span>
             </Link>
             <Link href={activeSlide.quoteHref} className="hero-showcase-quote-link">
-              Request Quote / Specs →
+              Discuss Specification →
             </Link>
           </div>
         </div>
