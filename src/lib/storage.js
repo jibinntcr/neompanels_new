@@ -366,14 +366,20 @@ export function ensureStorageInitialized() {
 export function appendRecordDurably(jsonFilePath, jsonlFilePath, record) {
   ensureStorageInitialized();
   let existing = [];
-  try {
-    const raw = fs.readFileSync(jsonFilePath, 'utf8');
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) existing = parsed;
-  } catch (_) {
-    existing = [];
+  if (jsonFilePath === ENQUIRIES_JSON_PATH) {
+    existing = readEnquiriesFromDisk();
+  } else if (jsonFilePath === DOC_REQUESTS_JSON_PATH) {
+    existing = readDocRequestsFromDisk();
+  } else {
+    try {
+      const raw = fs.readFileSync(jsonFilePath, 'utf8');
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) existing = parsed;
+    } catch (_) {
+      existing = [];
+    }
   }
-  existing.push(record);
+  existing.unshift(record);
   const tempPath = `${jsonFilePath}.${process.pid}.${Date.now()}.tmp`;
   fs.writeFileSync(tempPath, JSON.stringify(existing, null, 2), { mode: 0o600 });
   fs.renameSync(tempPath, jsonFilePath);
@@ -454,4 +460,232 @@ export function verifyAttachmentFile(filename, buffer) {
     valid: false,
     reason: `Attachment "${filename}" must be a valid PDF, JPG, or PNG file.`
   };
+}
+
+export const INITIAL_SEED_ENQUIRIES = [
+  {
+    reference: 'NEOM-20261101-A84F21',
+    createdAt: '2026-11-01T10:15:00.000Z',
+    status: 'in-review',
+    adminNotes: 'Verified 18mm & 12mm calibrated specification; preparing batch quotation.',
+    requirement: {
+      category: 'Manufacturing & Custom / OEM Supply',
+      description:
+        'Monthly recurring supply of 18mm and 12mm calibrated plywood sheets (8 x 4 ft) for modular kitchen carcasses and wardrobe shutters.',
+      brand: 'Starwoods',
+      applicationProduct: 'Modular kitchen carcasses & wardrobe systems',
+      quantity: '1400',
+      quantityUnit: 'Sheets',
+      destination: 'Bengaluru, Karnataka',
+      requestedDate: '2026-11-20',
+      conditionalDetails: {
+        purchasingFrequency: 'Recurring monthly / quarterly schedule',
+        procurementReference: 'OEM-BLR-2026-Q4',
+        territory: null
+      }
+    },
+    contact: {
+      name: 'Rajesh Menon',
+      buyerProfile: 'Furniture / modular interior manufacturer (OEM)',
+      organisation: 'Crestline Modular Systems Pvt. Ltd.',
+      preferredContactMethod: 'Email',
+      email: 'procurement@crestlinemodular.in',
+      phone: '+91 98450 11234',
+      marketingConsent: true
+    },
+    attachments: []
+  },
+  {
+    reference: 'NEOM-20261102-C91E04',
+    createdAt: '2026-11-02T14:40:00.000Z',
+    status: 'quoted',
+    adminNotes: 'Quotation sent for 9mm & 12mm MR packaging-grade plywood sheets.',
+    requirement: {
+      category: 'Industrial Packaging / Packing Plywood',
+      description:
+        'Application: Packing cases · Thickness: 9mm, 12mm · Dimensions: 2440 x 1220 mm (8 x 4 ft) · Quantity: 950 Sheets · Schedule: Recurring monthly / quarterly supply · Delivery: Pune, Maharashtra',
+      brand: 'NEOM Packing Plywood',
+      applicationProduct: 'Packing cases',
+      quantity: '950',
+      quantityUnit: 'Sheets',
+      destination: 'Chakan Industrial Area, Pune, Maharashtra',
+      requestedDate: '2026-11-18',
+      conditionalDetails: {
+        purchasingFrequency: 'Recurring monthly / quarterly supply',
+        packagingApplication: 'Packing cases',
+        requiredThickness: '9mm, 12mm',
+        sheetDimensions: '2440 x 1220 mm (8 x 4 ft)',
+        quantity: '950',
+        quantityUnit: 'Sheets',
+        purchaseFrequency: 'Recurring monthly / quarterly supply',
+        deliveryLocation: 'Chakan Industrial Area, Pune, Maharashtra',
+        requiredDeliveryDate: '2026-11-18',
+        additionalRequirements:
+          'Used for heavy automotive component export packing cases and internal dividers.'
+      }
+    },
+    contact: {
+      name: 'Vikram Deshmukh',
+      buyerProfile: 'Industrial packaging / crating fabricator',
+      organisation: 'Sahyadri Industrial Crating & Logistics',
+      preferredContactMethod: 'Phone',
+      email: 'vikram@sahyadricrating.com',
+      phone: '+91 98220 44890',
+      marketingConsent: false
+    },
+    attachments: []
+  },
+  {
+    reference: 'NEOM-20261103-D47B19',
+    createdAt: '2026-11-03T11:25:00.000Z',
+    status: 'received',
+    adminNotes: '',
+    requirement: {
+      category: 'Project Requirement',
+      description:
+        'Commercial office fit-out BOQ requiring 16mm and 18mm interior-grade panels for acoustic wall panelling, workstations and custom joinery across 3 floors.',
+      brand: 'Starwoods',
+      applicationProduct: 'Commercial wall panelling & custom joinery',
+      quantity: '620',
+      quantityUnit: 'Sheets',
+      destination: 'Kochi, Kerala',
+      requestedDate: '2026-11-25',
+      conditionalDetails: {
+        purchasingFrequency: 'Phased project delivery',
+        procurementReference: 'BOQ-KOCHI-ITPARK-09',
+        territory: null
+      }
+    },
+    contact: {
+      name: 'Arunima Nair',
+      buyerProfile: 'Interior contractor / project specifier',
+      organisation: 'Vanguard Turnkey Interiors',
+      preferredContactMethod: 'Email',
+      email: 'tenders@vanguardinteriors.in',
+      phone: '+91 94470 77812',
+      marketingConsent: true
+    },
+    attachments: []
+  },
+  {
+    reference: 'NEOM-20261104-F12A88',
+    createdAt: '2026-11-04T08:50:00.000Z',
+    status: 'received',
+    adminNotes: '',
+    requirement: {
+      category: 'Distribution / Channel Partnership',
+      description:
+        'Interested in regional distribution partnership for Starwoods furniture panels and NEOM Packing Plywood across Coimbatore and Tiruppur industrial belt.',
+      brand: 'Both Brands',
+      applicationProduct: 'Full range dealer stock (Starwoods & NEOM Packing Plywood)',
+      quantity: '1',
+      quantityUnit: 'Truckload',
+      destination: 'Coimbatore, Tamil Nadu',
+      requestedDate: '2026-11-30',
+      conditionalDetails: {
+        purchasingFrequency: 'Recurring monthly / quarterly schedule',
+        procurementReference: null,
+        territory: 'Coimbatore, Tiruppur & Erode Districts (Tamil Nadu)'
+      }
+    },
+    contact: {
+      name: 'Karthik Sundaram',
+      buyerProfile: 'Distributor / channel partner',
+      organisation: 'Kongu Timber & Panel Agencies',
+      preferredContactMethod: 'Phone',
+      email: 'karthik@kongupanels.com',
+      phone: '+91 98422 55310',
+      marketingConsent: true
+    },
+    attachments: []
+  }
+];
+
+export const INITIAL_SEED_DOC_REQUESTS = [
+  {
+    reference: 'NEOM-DOC-20261102-88C12A',
+    createdAt: '2026-11-02T15:10:00.000Z',
+    status: 'sent',
+    documentTitle: 'Starwoods & NEOM Packing Plywood brand briefs',
+    documentCategory: 'Brand Information',
+    applicationScope: '12mm & 18mm MR packaging-grade plywood for machinery crates',
+    contact: {
+      name: 'Sandeep Kulkarni',
+      organisation: 'Apex Heavy Packaging Solutions',
+      email: 'sandeep@apexpackaging.in'
+    },
+    routedDesk: 'Product & Brand Information Desk'
+  },
+  {
+    reference: 'NEOM-DOC-20261103-41B90E',
+    createdAt: '2026-11-03T16:45:00.000Z',
+    status: 'pending',
+    documentTitle: 'Company & vendor registration pack',
+    documentCategory: 'Corporate Information',
+    applicationScope: 'Vendor registration for institutional furniture & joinery tender in Hyderabad',
+    contact: {
+      name: 'Priya Reddy',
+      organisation: 'Deccan Infrastructure & Interiors Ltd.',
+      email: 'procurement@deccaninfra.co.in'
+    },
+    routedDesk: 'Product & Brand Information Desk'
+  },
+  {
+    reference: 'NEOM-DOC-20261104-19D77F',
+    createdAt: '2026-11-04T09:20:00.000Z',
+    status: 'pending',
+    documentTitle: 'Grade-specific technical specifications & handling notes',
+    documentCategory: 'Technical Documents',
+    applicationScope: 'Calibrated 16mm & 18mm Starwoods substrates for modular kitchen factory line',
+    contact: {
+      name: 'Nitin Sharma',
+      organisation: 'Nordic Living Modular Kitchens',
+      email: 'nitin@nordicliving.in'
+    },
+    routedDesk: 'Product & Brand Information Desk'
+  }
+];
+
+export function readEnquiriesFromDisk() {
+  ensureStorageInitialized();
+  try {
+    const raw = fs.readFileSync(ENQUIRIES_JSON_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
+  } catch (_) {
+    // Fallback
+  }
+  fs.writeFileSync(ENQUIRIES_JSON_PATH, JSON.stringify(INITIAL_SEED_ENQUIRIES, null, 2), {
+    mode: 0o600
+  });
+  return INITIAL_SEED_ENQUIRIES;
+}
+
+export function writeEnquiriesToDisk(records) {
+  ensureStorageInitialized();
+  fs.writeFileSync(ENQUIRIES_JSON_PATH, JSON.stringify(records, null, 2), { mode: 0o600 });
+}
+
+export function readDocRequestsFromDisk() {
+  ensureStorageInitialized();
+  try {
+    const raw = fs.readFileSync(DOC_REQUESTS_JSON_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
+  } catch (_) {
+    // Fallback
+  }
+  fs.writeFileSync(DOC_REQUESTS_JSON_PATH, JSON.stringify(INITIAL_SEED_DOC_REQUESTS, null, 2), {
+    mode: 0o600
+  });
+  return INITIAL_SEED_DOC_REQUESTS;
+}
+
+export function writeDocRequestsToDisk(records) {
+  ensureStorageInitialized();
+  fs.writeFileSync(DOC_REQUESTS_JSON_PATH, JSON.stringify(records, null, 2), { mode: 0o600 });
 }

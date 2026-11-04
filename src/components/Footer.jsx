@@ -98,6 +98,11 @@ export default function Footer() {
                   Resources &amp; Documents
                 </Link>
               </li>
+              <li>
+                <Link href="/blog" className="footer-link">
+                  SEO Blog &amp; Company News
+                </Link>
+              </li>
             </ul>
           </nav>
 
@@ -180,6 +185,16 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>© 2026 NEOM Panels. All rights reserved.</p>
           <ul className="footer-legal-links" role="list">
+            <li>
+              <Link href="/blog" className="footer-link">
+                Insights &amp; News
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin" className="footer-link" style={{ fontWeight: 600, color: 'var(--color-forest)' }}>
+                Backend Portal
+              </Link>
+            </li>
             <li>
               <Link href="/site-map" className="footer-link">
                 Site Map

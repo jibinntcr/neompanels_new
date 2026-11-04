@@ -220,6 +220,16 @@ export default function SiteMapPage() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/blog">
+                    SEO Blog, Specification Articles &amp; Company News (/blog)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin">
+                    Backend Admin &amp; CMS Portal (/admin)
+                  </Link>
+                </li>
+                <li>
                   <a href="/sitemap.xml">XML Sitemap for Search Crawlers (/sitemap.xml)</a>
                 </li>
                 <li>

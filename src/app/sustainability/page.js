@@ -139,14 +139,18 @@ export default function SustainabilityPage() {
           </p>
 
           <ol className="ledger-list" role="list">
-            {currentPractices.map((item) => (
-              <li key={item.id} className="ledger-row">
-                <span className="route-index">{item.number}</span>
+            {currentPractices.map((item, idx) => (
+              <li key={item.id || item.title || idx} className="ledger-row">
+                <span className="route-index">
+                  {item.number || String(idx + 1).padStart(2, '0')}
+                </span>
                 <div>
                   <h3 className="route-title">{item.title}</h3>
-                  <span className="brand-spec-label">{item.focusArea}</span>
+                  {item.focusArea ? (
+                    <span className="brand-spec-label">{item.focusArea}</span>
+                  ) : null}
                 </div>
-                <p style={{ margin: 0 }}>{item.body}</p>
+                <p style={{ margin: 0 }}>{item.body || item.description}</p>
               </li>
             ))}
           </ol>

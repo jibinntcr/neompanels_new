@@ -65,6 +65,12 @@ export const SITE_NAVIGATION_ITEMS = [
       'Corporate profiles, Starwoods and NEOM Packing Plywood literature, technical specification sheets and B2B buyer checklists.'
   },
   {
+    name: 'Insights, SEO Articles & Company News',
+    path: '/blog',
+    description:
+      'Technical B2B wood-panel specification guides, calibrated plywood buying checklists, MR packaging plywood articles and NEOM Panels company news.'
+  },
+  {
     name: 'Sustainability — Responsible Wood-Panel Operations',
     path: '/sustainability',
     description:

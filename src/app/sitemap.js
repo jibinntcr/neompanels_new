@@ -1,7 +1,8 @@
 import { SITE_URL } from '@/lib/seo';
+import { INITIAL_SEO_POSTS } from '@/lib/posts-store';
 
 export default function sitemap() {
-  const lastModified = new Date('2026-11-04T12:15:00Z');
+  const lastModified = new Date('2026-11-04T15:30:00Z');
 
   const routes = [
     {
@@ -16,6 +17,21 @@ export default function sitemap() {
         `${SITE_URL}/assets/packing-plywood-showcase.jpg`
       ]
     },
+    {
+      path: '/blog',
+      changeFrequency: 'daily',
+      priority: 0.92,
+      images: [
+        `${SITE_URL}/assets/hero-neom-flagship.jpg`,
+        `${SITE_URL}/assets/packing-plywood-showcase.jpg`
+      ]
+    },
+    ...INITIAL_SEO_POSTS.map((post) => ({
+      path: `/blog/${post.slug}`,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+      images: post.coverImage ? [`${SITE_URL}${post.coverImage}`] : undefined
+    })),
     {
       path: '/brands',
       changeFrequency: 'weekly',

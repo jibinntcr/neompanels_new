@@ -84,6 +84,11 @@ export default function Navbar() {
           </span>
           <ul className="utility-links" role="list">
             <li>
+              <Link href="/blog" className="utility-link">
+                Insights &amp; News
+              </Link>
+            </li>
+            <li>
               <Link href="/governance" className="utility-link">
                 Corporate Governance
               </Link>
@@ -96,6 +101,11 @@ export default function Navbar() {
             <li>
               <Link href="/team" className="utility-link">
                 Leadership
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin" className="utility-link" style={{ fontWeight: 600 }}>
+                Backend Portal
               </Link>
             </li>
           </ul>
@@ -353,6 +363,17 @@ export default function Navbar() {
                   Resources
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  href="/blog"
+                  className="nav-link"
+                  aria-current={
+                    pathname === '/blog' || pathname?.startsWith('/blog/') ? 'page' : undefined
+                  }
+                >
+                  Insights &amp; News
+                </Link>
+              </li>
             </ul>
 
             <Link
@@ -498,6 +519,26 @@ export default function Navbar() {
                 aria-current={pathname === '/resources' ? 'page' : undefined}
               >
                 Resources
+              </Link>
+            </li>
+            <li className="mobile-nav-item">
+              <Link
+                href="/blog"
+                className="mobile-nav-link"
+                aria-current={
+                  pathname === '/blog' || pathname?.startsWith('/blog/') ? 'page' : undefined
+                }
+              >
+                Insights &amp; News
+              </Link>
+            </li>
+            <li className="mobile-nav-item">
+              <Link
+                href="/admin"
+                className="mobile-nav-link"
+                aria-current={pathname === '/admin' ? 'page' : undefined}
+              >
+                Backend Admin Portal
               </Link>
             </li>
           </ul>

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Link from 'next/link';
+import SecurityCaptcha from '@/components/SecurityCaptcha';
 
 export default function DocumentRequestButton({
   docTitle,
@@ -21,6 +22,8 @@ export default function DocumentRequestButton({
   const [organisation, setOrganisation] = useState('');
   const [email, setEmail] = useState('');
   const [applicationScope, setApplicationScope] = useState('');
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [captchaData, setCaptchaData] = useState({ expected: 'NP74K', answer: '' });
   const [submitting, setSubmitting] = useState(false);
   const [reference, setReference] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
@@ -43,6 +46,10 @@ export default function DocumentRequestButton({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
+    if (!captchaVerified) {
+      setErrorMsg('Please enter the 5-character security verification code shown below.');
+      return;
+    }
     setSubmitting(true);
 
     try {
@@ -55,7 +62,9 @@ export default function DocumentRequestButton({
           name,
           organisation,
           email,
-          applicationScope
+          applicationScope,
+          captchaExpected: captchaData.expected,
+          captchaAnswer: captchaData.answer
         })
       });
       const data = await res.json();
@@ -211,6 +220,17 @@ export default function DocumentRequestButton({
                   value={applicationScope}
                   onChange={(e) => setApplicationScope(e.target.value)}
                   required
+                />
+              </div>
+
+              <div style={{ marginTop: '0.85rem' }}>
+                <SecurityCaptcha
+                  idPrefix={`${dialogId}-captcha`}
+                  onVerifyChange={(valid, data) => {
+                    setCaptchaVerified(valid);
+                    setCaptchaData(data);
+                    if (valid) setErrorMsg('');
+                  }}
                 />
               </div>
 
