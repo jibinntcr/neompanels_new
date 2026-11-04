@@ -4271,3 +4271,367 @@ dialog.corporate-dialog::backdrop {
   color: var(--color-forest);
   text-decoration: underline;
 }
+
+/* ==========================================================================
+   Customer-First Simplified Hero, 3-Path Selector & 3-Step Ordering Guide
+   ========================================================================== */
+.hero-split--clean {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-split--clean {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.hero-simple-trust-list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-4) 0 0 0;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.hero-simple-trust-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.96875rem;
+  color: var(--color-body);
+}
+
+.hero-trust-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  background-color: var(--color-sage);
+  color: var(--color-forest);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.hero-simple-trust-list strong {
+  color: var(--color-forest);
+}
+
+.hero-clean-visual-card {
+  margin: 0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  border-top: 4px solid var(--color-forest);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
+}
+
+.hero-clean-visual-img-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10.5;
+  overflow: hidden;
+  background-color: #102A20;
+}
+
+.hero-clean-visual-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-clean-badge {
+  position: absolute;
+  top: 0.875rem;
+  left: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  background-color: rgba(7, 59, 42, 0.92);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-oak);
+}
+
+.hero-clean-visual-caption {
+  padding: 1.25rem 1.5rem;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .hero-clean-visual-caption {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+}
+
+.hero-clean-visual-caption strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-forest);
+  margin-bottom: 0.25rem;
+}
+
+.hero-clean-visual-caption p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.48;
+  color: var(--color-secondary);
+}
+
+.hero-clean-visual-caption .editorial-link {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* 3-Path Customer Selector ("Choose what you need panels for") */
+.customer-section-intro {
+  max-width: 68ch;
+  margin-block-end: var(--space-5);
+}
+
+.customer-paths-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 860px) {
+  .customer-paths-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+.customer-path-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-forest);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-subtle);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.customer-path-card--oak {
+  border-top-color: var(--color-oak);
+  background-color: #FCF9F4;
+}
+
+.customer-path-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.customer-path-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-block-end: 0.75rem;
+}
+
+.customer-path-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  background-color: var(--color-sage);
+  color: var(--color-forest);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+}
+
+.customer-path-card--oak .customer-path-tag {
+  background-color: var(--color-oak-subtle);
+}
+
+.customer-path-num {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-oak);
+}
+
+.customer-path-footer {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.customer-path-note {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+/* Why Choose NEOM & 3-Step Ordering Card */
+.why-neom-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .why-neom-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3rem;
+  }
+}
+
+.why-neom-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-block-start: var(--space-4);
+}
+
+.why-neom-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.95rem 1.05rem;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-left: 3.5px solid var(--color-forest);
+  border-radius: var(--radius-sm);
+}
+
+.why-neom-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.85rem;
+  height: 1.85rem;
+  background-color: var(--color-sage);
+  color: var(--color-forest);
+  font-family: var(--font-heading);
+  font-size: 0.78125rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.why-neom-item strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.96875rem;
+  color: var(--color-forest);
+  margin-bottom: 0.15rem;
+}
+
+.why-neom-item p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.48;
+  color: var(--color-secondary);
+}
+
+.how-to-order-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  border-top: 4px solid var(--color-oak);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-elevated);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+@media (max-width: 480px) {
+  .how-to-order-card,
+  .customer-path-card {
+    padding: var(--space-5);
+  }
+}
+
+.how-to-order-header {
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.how-to-order-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.how-to-order-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.95rem;
+  padding: 0.95rem 1.05rem;
+  background-color: #FCF9F4;
+  border: 1px solid #DFD2BE;
+  border-radius: var(--radius-sm);
+}
+
+.how-to-order-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.65rem;
+  background-color: var(--color-forest);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.how-to-order-steps strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.96875rem;
+  color: var(--color-forest);
+  margin-bottom: 0.2rem;
+}
+
+.how-to-order-steps p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.48;
+  color: var(--color-secondary);
+}
+
+.how-to-order-footer {
+  padding-top: var(--space-2);
+}
