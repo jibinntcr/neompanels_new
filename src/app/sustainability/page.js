@@ -4,190 +4,206 @@ import { getSiteContent } from '@/lib/storage';
 export const metadata = {
   title: 'Sustainability — NEOM Panels',
   description:
-    'In a wood-panel business, sustainability is shaped by practical choices across material sourcing, material efficiency, energy, workplace safety, and accurate product documentation.'
+    'In a wood-panel business, sustainability is shaped by practical choices across material sourcing, material efficiency, energy, workplace safety, and accurate product documentation.',
+  alternates: {
+    canonical: '/sustainability'
+  }
 };
 
 export default function SustainabilityPage() {
   const siteData = getSiteContent();
-  const priorities = siteData.sustainabilityPriorities || [];
+  const currentPractices =
+    siteData.sustainabilityCurrentPractices || siteData.sustainabilityPriorities || [];
+  const futureAmbitions = siteData.sustainabilityFutureAmbitions || [];
   const sdgGoals = siteData.sdgAlignment || [];
 
   return (
     <main id="main-content">
-      {/* INNER HERO */}
-      <section className="inner-hero bg-warm" aria-labelledby="sustainability-heading">
-        <div className="container">
-          <div className="inner-hero__grid">
-            <div className="reveal">
-              <div className="eyebrow">SUSTAINABILITY · PRACTICAL STEWARDSHIP</div>
-              <h1 id="sustainability-heading" className="h-inner">
-                A practical approach to responsible growth.
-              </h1>
-              <p className="body-lead">
-                In a wood-panel business, sustainability is shaped by practical choices: where raw materials come from, how efficiently panels are produced, how offcuts and process waste are managed, how energy and water are used, how safely people work, and how long finished products stay in service.
-              </p>
-              <div className="btn-row">
-                <a href="#operational-priorities" className="btn btn--primary">
-                  View Operational Priorities
-                </a>
-                <Link href="/resources" className="btn btn--secondary">
-                  Product &amp; Corporate Documentation
-                </Link>
-              </div>
-            </div>
-
-            <div className="reveal">
-              <figure className="editorial-art">
-                <img
-                  src="/assets/illustration-sustainability.jpg"
-                  alt="Restrained editorial illustration of wood-panel samples, material offcuts, a small sapling, and resource-use study elements"
-                  width="800"
-                  height="600"
-                />
-                <figcaption className="editorial-art__caption">
-                  <span>Illustration · Material samples, offcuts &amp; resource stewardship</span>
-                  <span>Practical Manufacturing Decisions</span>
-                </figcaption>
-              </figure>
+      {/* PAGE HEADER */}
+      <section
+        className="page-header section--architectural-grid"
+        aria-labelledby="main-heading"
+      >
+        <div className="container hero-split">
+          <div className="hero-animate">
+            <p className="eyebrow">SUSTAINABILITY</p>
+            <h1 id="main-heading" tabIndex={-1} className="page-title">
+              A practical approach to responsible growth.
+            </h1>
+            <p className="lead-text">
+              In a wood-panel business, sustainability is shaped by practical choices: where raw
+              materials come from, how efficiently panels are produced, how offcuts and process
+              waste are managed, how energy and water are used, how safely people work, and how
+              long finished products stay in service.
+            </p>
+            <div className="btn-group">
+              <a href="#current-practices" className="btn btn--primary">
+                Current Operational Practices
+              </a>
+              <Link href="/resources" className="btn btn--secondary">
+                Request Technical Documents
+              </Link>
             </div>
           </div>
+
+          <figure className="architectural-photo-card hero-animate--delay" style={{ margin: 0 }}>
+            <img
+              src="/assets/illustration-sustainability.jpg"
+              alt="Illustration of wood-panel samples, material offcuts, and timber stewardship."
+              width="800"
+              height="600"
+            />
+          </figure>
         </div>
       </section>
 
       {/* STUDIO VISUAL & OPERATIONAL CONTEXT */}
-      <section className="section bg-white" aria-labelledby="studio-context-heading">
-        <div className="container">
-          <div className="split-editorial reveal">
-            <div>
-              <figure className="arch-visual">
-                <img
-                  src="/assets/sustainability-materials-studio.jpg"
-                  alt="Raw wood veneers, timber fibres, and finished engineered wood-panel swatches arranged in a sunlit materials studio"
-                  width="760"
-                  height="520"
-                  loading="lazy"
-                />
-                <figcaption className="arch-visual__caption">
-                  <span>Material longevity · Selecting the right substrate for the intended environment</span>
-                  <span>Specification &amp; Service Life</span>
-                </figcaption>
-              </figure>
-            </div>
+      <section className="section reveal-once" aria-labelledby="studio-context-heading">
+        <div className="container split-editorial">
+          <figure className="architectural-photo-card" style={{ margin: 0 }}>
+            <img
+              src="/assets/sustainability-materials-studio.jpg"
+              alt="Raw wood veneers, timber fibres, and engineered wood-panel swatches in a materials studio."
+              width="760"
+              height="520"
+              loading="lazy"
+            />
+            <figcaption className="architectural-photo-meta">
+              <span>Material Selection</span>
+            </figcaption>
+          </figure>
 
-            <div>
-              <div className="eyebrow">OPERATIONAL DISCIPLINE</div>
-              <h2 id="studio-context-heading" className="h-section">
-                Why everyday material decisions matter more than slogans.
-              </h2>
-              <p>
-                For furniture manufacturers, fit-out contractors, and institutional specifiers, the environmental footprint of an interior project is closely tied to whether panels are specified accurately the first time, cut with minimal waste, and fabricated to last in their intended operating environment.
-              </p>
-              <p>
-                At NEOM Panels, our work focuses on five operational areas across sourcing, factory floor resource management, workplace safety, and accurate product documentation.
-              </p>
-            </div>
+          <div>
+            <p className="eyebrow">OPERATIONAL DISCIPLINE</p>
+            <h2 id="studio-context-heading" className="section-title">
+              Why everyday material decisions matter.
+            </h2>
+            <p className="lead-text">
+              For furniture manufacturers, fit-out contractors, and industrial packaging buyers,
+              material stewardship begins with specifying the right panel grade the first time,
+              cutting sheets with minimal waste, and matching substrate properties to the operating
+              environment.
+            </p>
+            <p>
+              We separate our current operational practices on the factory floor from the longer-term
+              documentation and efficiency improvements we are working toward as the company grows.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* FIVE OPERATIONAL PRIORITIES */}
+      {/* CURRENT OPERATIONAL PRACTICES */}
       <section
-        id="operational-priorities"
-        className="section bg-sage"
-        aria-labelledby="priorities-heading"
+        id="current-practices"
+        className="section section--warm reveal-once"
+        aria-labelledby="current-practices-heading"
       >
         <div className="container">
-          <div className="section-header reveal">
-            <div>
-              <div className="eyebrow">OPERATIONAL PRIORITIES</div>
-              <h2 id="priorities-heading" className="h-section">
-                Five areas where manufacturing choices count.
-              </h2>
-            </div>
-            <p className="body-lead" style={{ marginBottom: 0 }}>
-              Each area reflects practical operational discipline inside our factory and in our commercial conversations with buyers.
-            </p>
-          </div>
+          <p className="eyebrow">CURRENT OPERATIONAL PRACTICES</p>
+          <h2 id="current-practices-heading" className="section-title">
+            What we do today in sourcing, production and documentation.
+          </h2>
+          <p className="lead-text">
+            Five day-to-day practices across our manufacturing operations and commercial desk.
+          </p>
 
-          <div className="audience-list reveal">
-            {priorities.map((item) => (
-              <article key={item.id} className="audience-row" style={{ gridTemplateColumns: '84px 1fr 1.3fr' }}>
-                <div className="audience-row__num">{item.number}</div>
+          <ol className="ledger-list" role="list">
+            {currentPractices.map((item) => (
+              <li key={item.id} className="ledger-row">
+                <span className="route-index">{item.number}</span>
                 <div>
-                  <h3 className="audience-row__title">{item.title}</h3>
-                  <div className="eyebrow" style={{ marginBottom: 0 }}>
-                    {item.focusArea}
-                  </div>
+                  <h3 className="route-title">{item.title}</h3>
+                  <span className="brand-spec-label">{item.focusArea}</span>
                 </div>
-                <p className="audience-row__desc">{item.body}</p>
+                <p style={{ margin: 0 }}>{item.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* FUTURE AMBITIONS & PLANNED IMPROVEMENTS */}
+      <section
+        id="future-ambitions"
+        className="section section--sage-subtle reveal-once"
+        aria-labelledby="future-ambitions-heading"
+      >
+        <div className="container">
+          <p className="eyebrow">FUTURE AMBITIONS</p>
+          <h2 id="future-ambitions-heading" className="section-title">
+            Planned operational and documentation improvements.
+          </h2>
+          <p className="lead-text">
+            As NEOM Panels expands its manufacturing and brand operations, we are working toward
+            the following improvements rather than making broad environmental claims prematurely.
+          </p>
+
+          <div className="pillars-grid">
+            {futureAmbitions.map((ambition) => (
+              <article key={ambition.id} className="pillar-cell">
+                <h3 className="subsection-title">{ambition.title}</h3>
+                <p style={{ margin: 0 }}>{ambition.body}</p>
               </article>
             ))}
-          </div>
-
-          {/* PROGRESS STATEMENT */}
-          <div
-            className="callout-box reveal"
-            style={{
-              marginTop: '36px',
-              background: 'var(--color-white)',
-              padding: '28px 32px'
-            }}
-          >
-            <div className="callout-box__label">Progress Statement</div>
-            <p
-              style={{
-                marginBottom: 0,
-                fontSize: '1.08rem',
-                color: 'var(--color-forest)',
-                fontWeight: 500
-              }}
-            >
-              As NEOM grows, we intend to publish clearer operational and product documentation rather than broad environmental claims.
-            </p>
           </div>
         </div>
       </section>
 
       {/* GLOBAL CONTEXT — UN SUSTAINABLE DEVELOPMENT GOALS */}
-      <section className="section bg-white" aria-labelledby="global-context-heading">
+      <section
+        className="section section--no-border reveal-once"
+        aria-labelledby="global-context-heading"
+      >
         <div className="container">
-          <div className="section-header reveal">
-            <div>
-              <div className="eyebrow">GLOBAL CONTEXT</div>
-              <h2 id="global-context-heading" className="h-section">
-                Alignment with Sustainable Development Goals.
-              </h2>
-            </div>
-            <p className="body-lead" style={{ marginBottom: 0 }}>
-              Our operational priorities align with three United Nations Sustainable Development Goals relevant to materials manufacturing and resource efficiency.
-            </p>
-          </div>
+          <p className="eyebrow">SUSTAINABLE DEVELOPMENT GOALS</p>
+          <h2 id="global-context-heading" className="section-title">
+            Operational activities linked to UN SDGs.
+          </h2>
+          <p className="lead-text">
+            Our factory and commercial practices connect to three United Nations Sustainable
+            Development Goals relevant to wood-panel manufacturing.
+          </p>
 
-          <div className="sdg-grid reveal">
+          <div className="pillars-grid">
             {sdgGoals.map((goal) => (
               <article
                 key={goal.goal}
-                className={`sdg-card ${goal.isPrimary ? 'sdg-card--primary' : ''}`}
+                className={`pillar-cell ${goal.isPrimary ? 'pillar-cell--highlight' : ''}`}
               >
-                <div className="sdg-card__badge">
-                  {goal.goal} · {goal.role}
+                <div style={{ marginBottom: 'var(--space-3)' }}>
+                  <span className={goal.isPrimary ? 'sdg-primary-badge' : 'status-pill'}>
+                    {goal.goal} · {goal.role}
+                  </span>
                 </div>
-                <h3 className="h-card" style={{ marginBottom: '10px' }}>
-                  {goal.title}
-                </h3>
-                <p style={{ fontSize: '0.96rem', marginBottom: '20px', flex: 1 }}>
-                  {goal.description}
-                </p>
-                <div>
-                  <a
-                    href={goal.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-arrow"
-                  >
-                    Read {goal.goal} on UN.org
-                  </a>
-                </div>
+                <h3 className="subsection-title">{goal.title}</h3>
+                <p>{goal.description}</p>
+                {Array.isArray(goal.operationalActivities) &&
+                goal.operationalActivities.length > 0 ? (
+                  <div style={{ marginTop: 'var(--space-4)' }}>
+                    <p
+                      className="brand-spec-label"
+                      style={{ marginBottom: '0.5rem', color: 'var(--color-forest)' }}
+                    >
+                      Linked operational activities
+                    </p>
+                    <ul className="checklist-items" style={{ marginBottom: 'var(--space-4)' }}>
+                      {goal.operationalActivities.map((act) => (
+                        <li key={act}>{act}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+                <a
+                  href={goal.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="editorial-link"
+                >
+                  <span>Read {goal.goal} on UN.org</span>
+                  <span className="link-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </a>
               </article>
             ))}
           </div>

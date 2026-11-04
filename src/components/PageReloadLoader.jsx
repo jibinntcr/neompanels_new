@@ -8,11 +8,11 @@ export default function PageReloadLoader() {
   useEffect(() => {
     const exitTimer = setTimeout(() => {
       setPhase('exiting');
-    }, 1150);
+    }, 520);
 
     const removeTimer = setTimeout(() => {
       setPhase('done');
-    }, 1650);
+    }, 880);
 
     return () => {
       clearTimeout(exitTimer);
@@ -27,14 +27,12 @@ export default function PageReloadLoader() {
   return (
     <div
       className={`neom-page-loader ${phase === 'exiting' ? 'is-exiting' : ''}`}
-      role="status"
-      aria-live="polite"
-      aria-label="Loading NEOM Panels"
+      aria-hidden="true"
     >
-      <div className="neom-loader-backdrop-grid" aria-hidden="true" />
+      <div className="neom-loader-backdrop-grid" />
 
       <div className="neom-loader-center">
-        <div className="neom-loader-3d-ring" aria-hidden="true">
+        <div className="neom-loader-3d-ring">
           <div className="neom-loader-n-stage">
             <img
               src="/assets/neom-n-layer-1.png"
@@ -67,7 +65,7 @@ export default function PageReloadLoader() {
           </div>
         </div>
 
-        <div className="neom-loader-wordmark" aria-hidden="true">
+        <div className="neom-loader-wordmark">
           <img
             src="/assets/neom-wordmark-clean.png"
             alt=""
@@ -77,7 +75,7 @@ export default function PageReloadLoader() {
           />
         </div>
 
-        <div className="neom-loader-progress-track" aria-hidden="true">
+        <div className="neom-loader-progress-track">
           <div className="neom-loader-progress-bar" />
         </div>
       </div>

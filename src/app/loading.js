@@ -2,9 +2,7 @@ export default function Loading() {
   return (
     <div
       className="neom-page-loader"
-      role="status"
-      aria-live="polite"
-      aria-label="Loading NEOM Panels"
+      aria-hidden="true"
     >
       <div className="neom-loader-backdrop-grid" aria-hidden="true" />
 

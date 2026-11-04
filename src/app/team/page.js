@@ -3,7 +3,10 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Our Leadership — The People Behind NEOM Panels',
   description:
-    'NEOM Panels brings together experience in business, technology, wood panel solutions and people development. Meet our leadership team.'
+    'NEOM Panels brings together experience in business, technology, wood panel solutions and people development. Meet our leadership team.',
+  alternates: {
+    canonical: '/team'
+  }
 };
 
 const LEADERSHIP_TEAM = [
@@ -53,15 +56,21 @@ export default function TeamPage() {
   return (
     <main id="main-content">
       {/* PAGE HEADER */}
-      <section className="page-header section--architectural-grid" aria-labelledby="leadership-heading">
+      <section
+        className="page-header section--architectural-grid"
+        aria-labelledby="main-heading"
+      >
         <div className="container hero-split">
           <div className="hero-animate">
-            <p className="eyebrow">OUR LEADERSHIP · EXECUTIVE TEAM</p>
-            <h1 id="leadership-heading" tabIndex={-1} className="page-title">
+            <p className="eyebrow">OUR LEADERSHIP</p>
+            <h1 id="main-heading" tabIndex={-1} className="page-title">
               The People Behind NEOM Panels
             </h1>
             <p className="lead-text" style={{ marginBottom: 0 }}>
-              NEOM Panels brings together experience in business, technology, wood panel solutions and people development. Our leadership team shares a commitment to building a dependable Indian brand through quality products, responsible growth and lasting customer relationships.
+              NEOM Panels brings together experience in business, technology, wood-panel solutions
+              and people development. Our leadership team shares a commitment to building a
+              dependable Indian manufacturing company through quality products, responsible growth
+              and lasting customer relationships.
             </p>
           </div>
 
@@ -71,26 +80,28 @@ export default function TeamPage() {
                 MANAGEMENT STEWARDSHIP
               </p>
               <h2 className="subsection-title" style={{ marginBottom: '0.35rem' }}>
-                Building the company alongside the brand
+                Building the company alongside our product brands
               </h2>
               <p className="secondary-text" style={{ fontSize: '0.92rem', marginBottom: 0 }}>
-                Executive leadership across NEOM Panels and its product brands, including Starwoods, focuses on operational discipline, specification clarity, and long-term B2B relationships.
+                Executive leadership across NEOM Panels and its product brands—Starwoods and NEOM
+                Packing Plywood—focuses on operational discipline, specification clarity and
+                long-term B2B relationships.
               </p>
             </div>
             <div className="brand-architecture-row">
               <img
-                src="/assets/logo-horizontal.png"
-                alt="NEOM Panels"
-                style={{ height: '2.4rem', width: 'auto', objectFit: 'contain' }}
-                width="540"
-                height="180"
-              />
-              <img
                 src="/assets/starwood-logo.png"
-                alt="Starwood — The Plywood Specialist"
+                alt="Starwoods — The Plywood Specialist"
                 className="starwood-logo-img--xs"
                 width="619"
                 height="177"
+              />
+              <img
+                src="/assets/neom-packing-plywood-logo-compact.svg"
+                alt="NEOM Packing Plywood"
+                className="packing-logo-img--xs"
+                width="540"
+                height="112"
               />
             </div>
           </div>
@@ -114,7 +125,10 @@ export default function TeamPage() {
                         height="800"
                       />
                     ) : (
-                      <div className="leader-monogram" aria-label={`${member.name} executive monogram`}>
+                      <div
+                        className="leader-monogram"
+                        aria-label={`${member.name} executive monogram`}
+                      >
                         <span className="leader-monogram-initials">{member.initials}</span>
                         <span className="leader-monogram-sub">NEOM Panels</span>
                       </div>
@@ -167,7 +181,8 @@ export default function TeamPage() {
             <p className="eyebrow">CORPORATE STEWARDSHIP</p>
             <h2 className="section-title">Accountable management and direct communication.</h2>
             <p className="lead-text">
-              Explore our corporate governance framework, learn more about our manufacturing perspective, or begin a business conversation with our team.
+              Explore our corporate governance framework, learn more about our manufacturing
+              operations, or begin a business conversation with our team.
             </p>
           </div>
           <div className="btn-group">

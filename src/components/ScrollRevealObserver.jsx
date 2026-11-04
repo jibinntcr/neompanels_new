@@ -32,12 +32,19 @@ export default function ScrollRevealObserver() {
           }
         });
       },
-      { rootMargin: '0px 0px -6% 0px', threshold: 0.08 }
+      { rootMargin: '0px 0px -4% 0px', threshold: 0.04 }
     );
 
     revealElements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    const fallbackTimer = setTimeout(() => {
+      revealElements.forEach((el) => el.classList.add('is-revealed'));
+    }, 1200);
+
+    return () => {
+      clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
   }, [pathname]);
 
   // Accessible validation synchronization (:user-invalid <-> aria-invalid)

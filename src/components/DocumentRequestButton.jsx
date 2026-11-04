@@ -10,9 +10,11 @@ export default function DocumentRequestButton({
   documentTitle,
   label
 }) {
-  const resolvedTitle = documentTitle || docTitle || 'Corporate Document';
-  const resolvedCategory = documentCode || docCategory || 'Corporate';
-  const dialogId = `dialog-title-${String(resolvedCategory).replace(/\s+/g, '-')}`;
+  const resolvedTitle = documentTitle || docTitle || 'Technical & Corporate Documentation';
+  const resolvedCategory = docCategory || documentCode || 'Documentation Review';
+  const dialogId = `dialog-title-${String(resolvedTitle)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')}`;
 
   const dialogRef = useRef(null);
   const [name, setName] = useState('');
@@ -48,14 +50,11 @@ export default function DocumentRequestButton({
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          documentCode: resolvedCategory,
           documentTitle: resolvedTitle,
           documentCategory: resolvedCategory,
           name,
-          company: organisation,
           organisation,
           email,
-          notes: applicationScope,
           applicationScope
         })
       });
@@ -80,45 +79,51 @@ export default function DocumentRequestButton({
   return (
     <>
       <button type="button" className="btn btn--secondary" onClick={openModal}>
-        {label || 'Request a Document'}
+        {label || 'Request Technical Documents'}
       </button>
 
       <dialog
         ref={dialogRef}
-        className="doc-modal"
+        className="corporate-dialog doc-modal"
         aria-labelledby={dialogId}
         onClick={(e) => {
           if (e.target === dialogRef.current) closeModal();
         }}
       >
-        <div className="doc-modal__header">
+        <div className="dialog-header">
           <div>
             <p className="eyebrow" style={{ marginBottom: '0.25rem' }}>
-              DOCUMENT REQUEST · {resolvedCategory}
+              TECHNICAL &amp; CORPORATE DOCUMENTATION
             </p>
-            <h2 id={dialogId} className="h-card" style={{ marginBottom: 0 }}>
+            <h2 id={dialogId} className="subsection-title" style={{ marginBottom: 0 }}>
               {resolvedTitle}
             </h2>
           </div>
-          <button type="button" onClick={closeModal} className="doc-modal__close" aria-label="Close modal">
+          <button
+            type="button"
+            onClick={closeModal}
+            className="doc-modal__close"
+            aria-label="Close dialog"
+          >
             ✕
           </button>
         </div>
 
         <div className="doc-modal__body">
           {errorMsg ? (
-            <div className="form-alert form-alert--error" role="alert">
+            <div className="status-banner status-banner--error" role="alert">
               {errorMsg}
             </div>
           ) : null}
 
           {reference ? (
-            <div className="form-alert form-alert--success" role="status">
-              <h3 className="h-card" style={{ marginBottom: '8px' }}>
+            <div className="status-banner status-banner--success" role="status">
+              <h3 className="subsection-title" style={{ marginBottom: '0.5rem' }}>
                 Your document request has been recorded.
               </h3>
-              <p style={{ marginBottom: '14px' }}>
-                Your reference is <strong>{reference}</strong>. Our Product &amp; Corporate Desk will review the requested scope and respond to your business email.
+              <p style={{ marginBottom: '1rem' }}>
+                Reference ID: <strong>{reference}</strong>. Our team will review your requested
+                scope and respond to your business email.
               </p>
               <button type="button" className="btn btn--primary" onClick={closeModal}>
                 Done
@@ -126,47 +131,60 @@ export default function DocumentRequestButton({
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <div className="form-field" style={{ marginBottom: '14px' }}>
-                <label className="form-label">Requested document</label>
-                <input type="text" className="form-input" value={resolvedTitle} readOnly />
-              </div>
-
-              <div className="form-field" style={{ marginBottom: '14px' }}>
-                <label className="form-label">
-                  Full name <span className="req">*</span>
+              <div className="form-group">
+                <label className="form-label" htmlFor={`${dialogId}-doc`}>
+                  Requested document
                 </label>
                 <input
+                  id={`${dialogId}-doc`}
                   type="text"
-                  className="form-input"
-                  autoComplete="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
+                  className="form-control"
+                  value={resolvedTitle}
+                  readOnly
                 />
               </div>
 
-              <div className="form-field" style={{ marginBottom: '14px' }}>
-                <label className="form-label">
-                  Company, organisation or practice <span className="req">*</span>
-                </label>
-                <input
-                  type="text"
-                  className="form-input"
-                  autoComplete="organization"
-                  value={organisation}
-                  onChange={(e) => setOrganisation(e.target.value)}
-                  required
-                />
+              <div className="form-row-split">
+                <div className="form-group">
+                  <label className="form-label" htmlFor={`${dialogId}-name`}>
+                    Full name <span className="required-marker" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id={`${dialogId}-name`}
+                    type="text"
+                    className="form-control"
+                    autoComplete="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor={`${dialogId}-org`}>
+                    Company or organisation <span className="required-marker" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id={`${dialogId}-org`}
+                    type="text"
+                    className="form-control"
+                    autoComplete="organization"
+                    value={organisation}
+                    onChange={(e) => setOrganisation(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
 
-              <div className="form-field" style={{ marginBottom: '14px' }}>
-                <label className="form-label">
-                  Business email <span className="req">*</span>
+              <div className="form-group">
+                <label className="form-label" htmlFor={`${dialogId}-email`}>
+                  Business email <span className="required-marker" aria-hidden="true">*</span>
                 </label>
-                <span className="form-hint">Format: name@company.com</span>
+                <span className="field-hint">Format: name@company.com</span>
                 <input
+                  id={`${dialogId}-email`}
                   type="email"
-                  className="form-input"
+                  className="form-control"
                   autoComplete="email"
                   autoCorrect="off"
                   autoCapitalize="off"
@@ -177,33 +195,40 @@ export default function DocumentRequestButton({
                 />
               </div>
 
-              <div className="form-field" style={{ marginBottom: '18px' }}>
-                <label className="form-label">
-                  Intended application or product scope <span className="req">*</span>
+              <div className="form-group">
+                <label className="form-label" htmlFor={`${dialogId}-scope`}>
+                  Intended application or product scope{' '}
+                  <span className="required-marker" aria-hidden="true">*</span>
                 </label>
-                <span className="form-hint">
-                  Helps us confirm the exact document version and scope for your requirement.
+                <span className="field-hint">
+                  State the brand (Starwoods or NEOM Packing Plywood), thickness or application so
+                  we can prepare the relevant specification details.
                 </span>
                 <textarea
-                  className="form-textarea"
-                  style={{ minHeight: '90px' }}
+                  id={`${dialogId}-scope`}
+                  className="form-control"
+                  style={{ minHeight: '5.5rem' }}
                   value={applicationScope}
                   onChange={(e) => setApplicationScope(e.target.value)}
                   required
                 />
               </div>
 
-              <div className="btn-row" style={{ marginTop: '12px' }}>
+              <div className="btn-group" style={{ marginTop: '1rem' }}>
                 <button type="submit" className="btn btn--primary" disabled={submitting}>
-                  {submitting ? 'Recording request…' : 'Submit Document Request'}
+                  {submitting ? 'Submitting…' : 'Request Technical Documents'}
                 </button>
                 <Link
                   href={`/enquiry?category=product-info&document=${encodeURIComponent(
                     resolvedTitle
                   )}`}
-                  className="link-arrow"
+                  className="editorial-link"
+                  onClick={closeModal}
                 >
-                  Open Full Enquiry Form
+                  <span>Open Full Enquiry Form</span>
+                  <span className="link-arrow" aria-hidden="true">
+                    →
+                  </span>
                 </Link>
               </div>
             </form>

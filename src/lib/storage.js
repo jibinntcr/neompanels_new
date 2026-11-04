@@ -12,6 +12,32 @@ export const DOC_REQUESTS_JSON_PATH = path.join(STORAGE_DIR, 'document-requests.
 export const NOTIFICATIONS_LOG_PATH = path.join(STORAGE_DIR, 'notifications.jsonl');
 export const CONTENT_JSON_PATH = path.join(process.cwd(), 'data', 'content.json');
 
+export function getVerifiedContactDetails() {
+  let rawContent = {};
+  try {
+    rawContent = JSON.parse(fs.readFileSync(CONTENT_JSON_PATH, 'utf8'));
+  } catch (_) {
+    rawContent = {};
+  }
+  const c = rawContent?.company?.verifiedContactDetails || {};
+  const phone = process.env.NEXT_PUBLIC_CONTACT_PHONE || c.verifiedPhone || null;
+  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || c.verifiedEmail || null;
+  const whatsapp = process.env.NEXT_PUBLIC_CONTACT_WHATSAPP || c.verifiedWhatsapp || null;
+  const address =
+    process.env.NEXT_PUBLIC_CONTACT_ADDRESS || c.verifiedRegisteredAddress || null;
+  const factoryLocation =
+    c.verifiedFactoryLocation || 'India (Company-owned wood-panel manufacturing facility)';
+
+  return {
+    phone,
+    email,
+    whatsapp,
+    address,
+    factoryLocation,
+    enquiryRouteUrl: '/enquiry'
+  };
+}
+
 export function getSiteContent() {
   let rawContent = {};
   try {
@@ -22,83 +48,88 @@ export function getSiteContent() {
 
   return {
     ...rawContent,
+    verifiedContacts: getVerifiedContactDetails(),
     manufacturingParameters: [
       {
-        code: 'SPEC-01',
-        parameter: 'Intended Application & Interior Zone',
+        parameter: 'Intended Application & Operating Environment',
         buyerInput:
-          'Specify whether the panel is for dry residential furniture, modular kitchens/wardrobes, commercial worktops, or institutional joinery.',
+          'Specify whether the panel is for dry furniture carcasses, modular kitchens or wardrobes, commercial fit-outs, or industrial packing cases and crates.',
         manufacturingRelevance:
-          'Aligns substrate grade selection and adhesive system with environmental humidity and mechanical load.'
+          'Aligns brand selection (Starwoods or NEOM Packing Plywood), substrate grade and adhesive system with humidity exposure and mechanical load.'
       },
       {
-        code: 'SPEC-02',
         parameter: 'Panel Thickness & Sheet Dimensions',
         buyerInput:
-          'Confirm nominal thickness (in mm), standard sheet dimensions, and acceptable dimensional tolerances.',
+          'State required nominal thickness in mm, sheet length and width (mm or ft), and any critical dimensional tolerances.',
         manufacturingRelevance:
-          'Ensures pressing, calibration, and trimming schedules match CNC nesting and hardware boring setups.'
+          'Matches pressing, calibration, sanding and edge-trimming settings to your fabrication or packing layout.'
       },
       {
-        code: 'SPEC-03',
         parameter: 'Surface & Finishing Method',
         buyerInput:
-          'Share whether panels will receive HPL lamination, veneer pressing, membrane routing, direct painting, or pre-finished surfaces.',
+          'Indicate whether panels will receive laminate pressing, veneer overlay, routing, painting, or remain unfinished for industrial packaging.',
         manufacturingRelevance:
-          'Determines surface smoothness, sanding grit sequence, and core density profile requirements.'
+          'Determines face veneer selection, sanding sequence and surface flatness requirements.'
       },
       {
-        code: 'SPEC-04',
-        parameter: 'Machining & Edge Treatment',
+        parameter: 'Machining, Fastening & Handling',
         buyerInput:
-          'Indicate edge-banding thickness (PVC/ABS), grooving, mitre-folding, or heavy screw-holding zones.',
+          'Share CNC machining, edge-banding, nailing/screwing for crate assembly, or forklift and stacking conditions.',
         manufacturingRelevance:
-          'Supports clean edge machining, consistent core integrity, and reliable fastener retention.'
+          'Supports core integrity, fastener retention and edge stability during fabrication and transit.'
       },
       {
-        code: 'SPEC-05',
-        parameter: 'Batch Volume & Delivery Schedule',
+        parameter: 'Order Quantity & Delivery Schedule',
         buyerInput:
-          'Provide order quantities by thickness, single-drop vs. phased call-off schedule, and destination unloading constraints.',
+          'Provide sheet quantities by thickness, one-time or recurring schedule, and delivery destination.',
         manufacturingRelevance:
-          'Allows production batching, pallet protection, and dispatch planning aligned to your factory floor.'
+          'Allows production batching, pallet protection and dispatch scheduling aligned to your site or factory.'
       }
     ],
-    sustainabilityPriorities: [
+    sustainabilityCurrentPractices: [
       {
         id: 'material-sourcing',
-        number: '01',
-        title: 'Material sourcing',
-        focusArea: 'ORIGINS & SUPPLIER TRACEABILITY',
-        body: 'Our priority is to strengthen our understanding of material origins and the information available from suppliers.'
+        title: 'Material sourcing & supplier documentation',
+        category: 'Sourcing & Origins',
+        body: 'We review supplier documentation for incoming timber, veneer and resin inputs and maintain batch records linking raw materials to production runs.'
       },
       {
         id: 'material-use-waste',
-        number: '02',
-        title: 'Material use & waste',
-        focusArea: 'YIELD, OFFCUTS & PACKAGING',
-        body: 'We intend to identify avoidable material losses and assess practical opportunities to improve yield, handle residual materials responsibly and reduce unnecessary packaging.'
-      },
-      {
-        id: 'energy-water',
-        number: '03',
-        title: 'Energy & water',
-        focusArea: 'MEASUREMENT & PROCESS EFFICIENCY',
-        body: 'Measurement is the starting point. Our approach is to establish a clearer view of consumption and evaluate improvements suited to our operations.'
+        title: 'Yield discipline & process residue handling',
+        category: 'Factory Material Efficiency',
+        body: 'We match panel specifications to the intended application before production to reduce downstream rejection, and we segregate edge-trim offcuts and sanding residues on the factory floor.'
       },
       {
         id: 'people-safety',
-        number: '04',
-        title: 'People & workplace safety',
-        focusArea: 'FACTORY FLOOR SAFETY & SKILLS',
-        body: 'Workplace safety, relevant skills and clear responsibilities are priorities for the company we are building.'
+        title: 'Workplace health, machine guarding & training',
+        category: 'Factory Floor Safety',
+        body: 'Our factory operations enforce machine guarding, dust-management routines, personal protective equipment (PPE) use and defined supervisor responsibilities across pressing, trimming and handling.'
       },
       {
         id: 'product-information',
-        number: '05',
-        title: 'Product information',
-        focusArea: 'DOCUMENTED MATERIAL SCOPE',
-        body: 'We aim to connect product and environmental information to the relevant material, document and scope.'
+        title: 'Grade-specific product & moisture guidance',
+        category: 'Accurate Documentation',
+        body: 'We tie dimensional, grade and moisture-resistance descriptions to the exact product being supplied—such as clearly distinguishing MR packaging-grade plywood from waterproof grades.'
+      }
+    ],
+    sustainabilityFutureAmbitions: [
+      {
+        id: 'energy-water-monitoring',
+        title: 'Structured energy and water tracking',
+        timeframe: 'Planned operational improvement',
+        body: 'Establish consistent per-batch monitoring of thermal press energy, electrical load and facility water consumption to guide future equipment and process upgrades.'
+      },
+      {
+        id: 'packaging-waste-reduction',
+        title: 'Secondary waste & pallet protection optimisation',
+        timeframe: 'Planned operational improvement',
+        body: 'Evaluate reusable dunnage and optimised pallet wrapping formats that protect finished sheets during domestic transit while reducing disposable packaging waste.'
+      },
+      {
+        id: 'period-scoped-reporting',
+        title: 'Period-scoped operational disclosures',
+        timeframe: 'Long-term reporting goal',
+        body: 'Publish dated, period-scoped resource and safety summaries once multi-quarter factory measurement baselines are formally verified.'
       }
     ],
     sdgAlignment: [
@@ -107,8 +138,11 @@ export function getSiteContent() {
         role: 'Primary Focus',
         isPrimary: true,
         title: 'Responsible Consumption and Production',
-        description:
-          'Focused on material efficiency, responsible sourcing visibility, yield discipline, and accurate product documentation across panel manufacturing.',
+        activities: [
+          'Matching panel grade and thickness to the exact furniture, interior or packaging application before fabrication to avoid material waste.',
+          'Segregating panel trim offcuts and process residues during sheet sizing and calibration.',
+          'Providing clear MR grade and storage guidance so panels are not misapplied in unsuitable wet environments.'
+        ],
         url: 'https://sdgs.un.org/goals/goal12'
       },
       {
@@ -116,8 +150,10 @@ export function getSiteContent() {
         role: 'Supporting Focus',
         isPrimary: false,
         title: 'Industry, Innovation and Infrastructure',
-        description:
-          'Focused on developing reliable domestic manufacturing capability, process discipline, and durable materials for built spaces.',
+        activities: [
+          'Operating a company-owned wood-panel manufacturing facility in India serving domestic furniture makers, interior contractors and industrial packaging fabricators.',
+          'Maintaining structured dimensional and surface checks across pressing, calibration and dispatch.'
+        ],
         url: 'https://sdgs.un.org/goals/goal9'
       },
       {
@@ -125,8 +161,10 @@ export function getSiteContent() {
         role: 'Supporting Focus',
         isPrimary: false,
         title: 'Life on Land',
-        description:
-          'Focused on strengthening awareness of raw-material origins and responsible timber/fibre stewardship in the wood-panel value chain.',
+        activities: [
+          'Reviewing supplier origin declarations and lawful sourcing documentation for timber and veneer inputs entering the factory.',
+          'Promoting durable panel specification and proper storage to extend the service life of wood-based products.'
+        ],
         url: 'https://sdgs.un.org/goals/goal15'
       }
     ],
@@ -143,153 +181,167 @@ export function getSiteContent() {
         {
           label: 'Principal Business Activity',
           value:
-            'Indian wood-panel manufacturing business with its own factory; corporate parent of product brands.'
+            'Indian wood-panel manufacturing business with its own factory; corporate parent of Starwoods and NEOM Packing Plywood.'
         },
         {
-          label: 'Official Brand Relationships',
-          value: 'Starwoods and NEOM Packing Plywood (NEOM Panels product brands)'
+          label: 'Product Brands',
+          value: 'Starwoods (Furniture & Interiors) and NEOM Packing Plywood (Industrial Packaging)'
         },
         {
-          label: 'Commercial & Grievance Communication',
+          label: 'Manufacturing Footprint',
+          value: 'Company-owned wood-panel manufacturing facility in India'
+        },
+        {
+          label: 'Business Enquiries & Document Requests',
           value:
-            'Routed through the official NEOM Panels Business Enquiry desk with tracked reference numbers.'
+            'Recorded with a reference number through the NEOM Panels Business Enquiry page for review by our team.'
         }
       ],
       policies: [
         {
-          code: 'GOV-01',
+          id: 'code-of-conduct',
           title: 'Code of Business Conduct',
-          status: 'Approved Principle',
+          status: 'Adopted Operating Principle',
           summary:
-            'Standards for ethical commercial dealing, transparent contracting, and anti-bribery compliance across customer and supplier relationships.'
+            'Standards for ethical commercial dealing, transparent contracting and anti-bribery compliance across customer and supplier relationships.'
         },
         {
-          code: 'GOV-02',
-          title: 'Quality and Product Information Principles',
-          status: 'Approved Principle',
+          id: 'quality-product-info',
+          title: 'Quality and Product Information Standard',
+          status: 'Adopted Operating Principle',
           summary:
-            'Requires product dimensions, tolerances, and performance references to be tied to the specific brand, grade, and current technical document.'
+            'Requires product dimensions, tolerances and grade references to be tied to the specific brand, grade and current technical document.',
+          href: '/manufacturing#specification-parameters',
+          linkLabel: 'View Specification Parameters'
         },
         {
-          code: 'GOV-03',
+          id: 'health-safety',
           title: 'Workplace Health and Safety Policy',
-          status: 'Approved Principle',
+          status: 'Adopted Operating Principle',
           summary:
-            'Establishes machine guarding, dust and material handling protocols, protective equipment standards, and clear floor responsibilities.'
+            'Establishes machine guarding, dust and material handling protocols, protective equipment standards and clear floor responsibilities.'
         },
         {
-          code: 'GOV-04',
+          id: 'supplier-sourcing',
           title: 'Supplier and Sourcing Expectations',
-          status: 'Approved Principle',
+          status: 'Adopted Operating Principle',
           summary:
-            'Sets expectations for raw-material documentation, lawful timber/fibre origin declarations, and batch consistency from supply partners.'
+            'Sets expectations for raw-material documentation, lawful timber/veneer origin declarations and batch consistency from supply partners.'
         },
         {
-          code: 'GOV-05',
+          id: 'environmental-resource',
           title: 'Environmental and Resource-Use Policy',
-          status: 'Approved Principle',
+          status: 'Adopted Operating Principle',
           summary:
-            'Guides practical measurement of energy and water use, offcut and waste handling, and packaging reduction in factory operations.'
+            'Guides raw-material yield discipline, offcut handling, and energy and water monitoring in factory operations.',
+          href: '/sustainability',
+          linkLabel: 'View Sustainability Practices'
         },
         {
-          code: 'GOV-06',
+          id: 'privacy-notice',
           title: 'Privacy Notice',
           status: 'Published Online',
           summary:
-            'Explains how B2B contact details, specification briefs, and uploaded BOQ attachments are collected, stored, and safeguarded.',
-          href: '/privacy'
+            'Explains how B2B contact details, specification briefs and uploaded attachments are collected, stored and safeguarded.',
+          href: '/privacy',
+          linkLabel: 'Read Privacy Notice'
         },
         {
-          code: 'GOV-07',
+          id: 'website-terms',
           title: 'Website Terms',
           status: 'Published Online',
           summary:
-            'Governs use of the NEOM Panels website, brand references, and non-binding commercial information.',
-          href: '/terms'
+            'Governs use of the NEOM Panels website, brand references and non-binding commercial information.',
+          href: '/terms',
+          linkLabel: 'Read Website Terms'
         }
       ]
     },
     resourceCategories: [
       {
-        code: 'DOC-CORP',
-        title: 'Company information',
-        availability: 'Available on Request',
+        id: 'company-information',
+        title: 'Company & vendor registration pack',
+        categoryLabel: 'Corporate Information',
+        reviewType: 'Individual Review',
         description:
-          'Corporate overview, business enquiry information and published policies for vendor registration and institutional onboarding.'
+          'Corporate introduction, manufacturing overview and governance summary for vendor registration and institutional onboarding.'
       },
       {
-        code: 'DOC-BRAND',
-        title: 'Brand literature',
-        availability: 'Available on Request',
+        id: 'brand-literature',
+        title: 'Starwoods & NEOM Packing Plywood brand briefs',
+        categoryLabel: 'Brand Information',
+        reviewType: 'Individual Review',
         description:
-          'Starwoods and NEOM Packing Plywood brand documents and catalogues when available, matched to your commercial or regional requirement.'
+          'Application overviews and specification checklists for Starwoods (furniture and interiors) and NEOM Packing Plywood (MR industrial packaging).'
       },
       {
-        code: 'DOC-TECH',
-        title: 'Product documents',
-        availability: 'Issued per Grade',
+        id: 'product-documents',
+        title: 'Grade-specific technical specifications & handling notes',
+        categoryLabel: 'Technical Documents',
+        reviewType: 'Issued per Requirement',
         description:
-          'Technical data sheets, storage and handling notes, and test documents where applicable to the product being discussed.'
+          'Dimensional parameters, grade details, storage and handling guidance prepared against your specific product, thickness and application scope.'
       },
       {
-        code: 'DOC-SUST',
-        title: 'Sustainability updates',
-        availability: 'Published & Request',
+        id: 'corporate-policies',
+        title: 'Governance & sustainability policy copies',
+        categoryLabel: 'Corporate Policies',
+        reviewType: 'Published Online & Request',
         description:
-          'Policies and operational disclosures as they are published, covering sourcing, resource efficiency, and SDG alignment.'
+          'Operating principles for business conduct, workplace safety, supplier sourcing and resource stewardship.'
       }
     ],
     buyerGuidance: [
       {
         id: 'before-you-request-quotation',
         title: 'Before You Request a Panel Quotation',
-        readTime: 'BUYER BRIEFING 01',
+        topicLabel: 'Quotation Preparation',
         summary:
-          'Defining application conditions, thickness tolerances, sheet dimensions, batch quantities, and delivery schedules before requesting a quote.',
+          'Defining application conditions, thickness tolerances, sheet dimensions, batch quantities and delivery schedules before requesting a quote.',
         points: [
-          'Identify the exact interior zone or furniture component (dry-zone carcass, shutter, worktop, or wall panelling).',
-          'State nominal thickness (mm), sheet size, and whether special calibration or sanding tolerances are needed for your machinery.',
-          'Clarify whether the requirement is a one-time project BOQ or a recurring monthly OEM production schedule.',
-          'Include delivery city/state and site or factory unloading requirements so logistics can be planned accurately.'
+          'Identify the exact furniture component, interior zone or industrial packaging application (packing case, crate panel, divider or liner).',
+          'State required nominal thickness in mm, sheet dimensions (mm or ft), and any machining or calibration expectations.',
+          'Clarify whether the requirement is a one-time purchase or a recurring monthly/quarterly production schedule.',
+          'Include delivery city/state and site or factory unloading requirements so dispatch can be planned accurately.'
         ]
       },
       {
         id: 'reading-a-product-data-sheet',
         title: 'Reading a Product Data Sheet',
-        readTime: 'BUYER BRIEFING 02',
+        topicLabel: 'Technical Specification Review',
         summary:
-          'Why dimensions, construction parameters, and performance figures must be checked against the specific brand, grade, and test method scope.',
+          'Why dimensions, construction parameters and grade descriptions must be checked against the specific brand, grade and intended exposure.',
         points: [
-          'Confirm that the data sheet corresponds to the exact brand (e.g., Starwoods) and product grade under review.',
-          'Review dimensional tolerances (thickness, length, width, squareness, and edge straightness) alongside mechanical properties.',
-          'Check the referenced test standard and conditioning environment rather than relying on generic industry shorthand.',
-          'Verify that storage and acclimatisation notes are followed on site prior to fabrication.'
+          'Confirm that the specification corresponds to the exact brand (Starwoods or NEOM Packing Plywood) and product grade under review.',
+          'Review dimensional tolerances (thickness, length, width, squareness and edge straightness) alongside core construction.',
+          'Remember that Moisture Resistant (MR) plywood is designed for interior or covered packaging humidity resistance and is not waterproof.',
+          'Follow recommended flat, dry storage and acclimatisation practices on site prior to fabrication.'
         ]
       },
       {
         id: 'planning-repeat-panel-requirements',
         title: 'Planning Repeat Panel Requirements',
-        readTime: 'BUYER BRIEFING 03',
+        topicLabel: 'OEM & Packaging Supply Planning',
         summary:
-          'Practical considerations for OEMs and modular furniture manufacturers coordinating recurring batch supply and specification continuity.',
+          'Practical considerations for furniture OEMs, modular fabricators and packaging manufacturers coordinating recurring batch supply.',
         points: [
-          'Share rolling monthly or quarterly consumption estimates by thickness to align factory pressing schedules.',
-          'Establish agreed incoming quality inspection checkpoints tied to the purchase specification.',
-          'Align pallet stacking heights, corner protection, and moisture-wrap requirements with your warehouse handling.',
-          'Maintain a single specification reference sheet across repeat orders to avoid grade drift.'
+          'Share indicative monthly or quarterly volume estimates by thickness to align production planning.',
+          'Establish agreed incoming inspection checkpoints tied to the purchase specification.',
+          'Align pallet stacking heights, corner protection and moisture-wrap formats with your warehouse handling.',
+          'Maintain a consistent specification reference across repeat purchase orders.'
         ]
       },
       {
         id: 'understanding-scope-of-test-report',
         title: 'Understanding the Scope of a Test Report',
-        readTime: 'BUYER BRIEFING 04',
+        topicLabel: 'Institutional & Quality Verification',
         summary:
-          'How institutional buyers, project consultants, and quality teams can verify that a test report corresponds to the actual material grade and period.',
+          'How institutional buyers, project consultants and quality teams can verify that technical documentation corresponds to the actual material grade.',
         points: [
-          'Check that the report identifies the specific product name, grade, and nominal thickness tested.',
-          'Note the sample test date and whether the report covers a type test or batch-specific inspection.',
-          'Distinguish tested physical/mechanical parameters from broader commercial descriptions.',
-          'Request grade-specific clarification through the NEOM Panels technical desk when preparing institutional submittals.'
+          'Check that the document identifies the specific product name, grade and nominal thickness.',
+          'Note the document date and whether figures represent a specific batch inspection or grade reference.',
+          'Distinguish verified physical parameters from general product category descriptions.',
+          'Request grade-specific technical documents from NEOM Panels when preparing institutional submittals.'
         ]
       }
     ]

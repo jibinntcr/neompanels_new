@@ -9,7 +9,10 @@ import {
 
 export async function POST(request) {
   try {
+    const isTestHeader = request.headers.get('x-neom-test-mode') === 'true';
     const payload = await request.json();
+    const isTestMode =
+      isTestHeader || payload.testMode === 'true' || payload.testMode === true;
     const documentTitle = String(payload.documentTitle || '').trim();
     const documentCategory = String(payload.documentCategory || '').trim();
     const name = String(payload.name || '').trim();
@@ -30,7 +33,7 @@ export async function POST(request) {
       return NextResponse.json({ ok: false, errors }, { status: 422 });
     }
 
-    const reference = generateReferenceId('NEOM-DOC');
+    const reference = generateReferenceId(isTestMode ? 'NEOM-DOC-TEST' : 'NEOM-DOC');
     const createdAt = new Date().toISOString();
     const record = {
       reference,
@@ -42,11 +45,14 @@ export async function POST(request) {
       routedDesk: 'Product & Brand Information Desk'
     };
 
-    appendRecordDurably(DOC_REQUESTS_JSON_PATH, NOTIFICATIONS_LOG_PATH, record);
+    if (!isTestMode) {
+      appendRecordDurably(DOC_REQUESTS_JSON_PATH, NOTIFICATIONS_LOG_PATH, record);
+    }
 
     return NextResponse.json(
       {
         ok: true,
+        testMode: isTestMode,
         reference,
         createdAt,
         routedDesk: record.routedDesk

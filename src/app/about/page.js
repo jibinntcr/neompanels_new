@@ -3,12 +3,15 @@ import Link from 'next/link';
 export const metadata = {
   title: 'About NEOM — Indian Wood-Panel Manufacturing Business',
   description:
-    'Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood. Learn about NEOM Panels’ purpose, vision, mission and operating principles.'
+    'Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood. Learn about NEOM Panels’ purpose, vision, mission and operating principles.',
+  alternates: {
+    canonical: '/about'
+  }
 };
 
 export default function AboutPage() {
   return (
-    <>
+    <main id="main-content">
       <section className="page-header section--architectural-grid">
         <div className="container hero-split">
           <div className="hero-animate">
@@ -32,8 +35,7 @@ export default function AboutPage() {
               height="933"
             />
             <figcaption className="architectural-photo-meta">
-              <span>NEOM Panels — Corporate &amp; Manufacturing Identity</span>
-              <span>ENGINEERED EXCELLENCE, DESIGNED FOR SPACES</span>
+              <span>Furniture and Interior Applications</span>
             </figcaption>
           </figure>
         </div>
@@ -60,7 +62,15 @@ export default function AboutPage() {
               dependable B2B relationships.
             </p>
             <div className="brand-architecture-tree" style={{ marginTop: 'var(--space-5)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '0.75rem'
+                }}
+              >
                 <span className="brand-spec-label">Official Product Brands of NEOM Panels</span>
                 <Link href="/brands" className="editorial-link">
                   <span>Explore Brands</span>
@@ -74,17 +84,26 @@ export default function AboutPage() {
                   <span className="brand-spec-label">Furniture &amp; Interiors</span>
                   <img
                     src="/assets/starwood-logo.png"
-                    alt="Starwood — The Plywood Specialist"
+                    alt="Starwoods — The Plywood Specialist"
                     className="starwood-logo-img--xs"
                     width="619"
                     height="177"
                   />
-                  <span style={{ fontWeight: 600, color: 'var(--color-forest)', fontSize: '0.9rem' }}>
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      color: 'var(--color-forest)',
+                      fontSize: '0.9rem'
+                    }}
+                  >
                     Starwoods
                   </span>
                 </Link>
 
-                <Link href="/brands/neom-packing-plywood" className="brand-architecture-child-node">
+                <Link
+                  href="/brands/neom-packing-plywood"
+                  className="brand-architecture-child-node"
+                >
                   <span className="brand-spec-label">Industrial Packaging</span>
                   <img
                     src="/assets/neom-packing-plywood-logo-compact.svg"
@@ -93,7 +112,13 @@ export default function AboutPage() {
                     width="540"
                     height="112"
                   />
-                  <span style={{ fontWeight: 600, color: 'var(--color-forest)', fontSize: '0.9rem' }}>
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      color: 'var(--color-forest)',
+                      fontSize: '0.9rem'
+                    }}
+                  >
                     NEOM Packing Plywood
                   </span>
                 </Link>
@@ -113,8 +138,8 @@ export default function AboutPage() {
               <p className="eyebrow">PURPOSE</p>
               <h3 className="subsection-title">Why we operate</h3>
               <p>
-                To supply panels for useful, well-considered spaces and build lasting value through
-                the business behind them.
+                To supply panels for useful, well-considered spaces and industrial applications,
+                and build lasting value through the business behind them.
               </p>
             </div>
 
@@ -192,7 +217,7 @@ export default function AboutPage() {
             <p className="eyebrow">EXPLORE FURTHER</p>
             <h2 className="section-title">See how the business is organised.</h2>
             <p className="lead-text">
-              Review our brands, manufacturing perspective, governance structure or begin a
+              Review our brands, manufacturing operations, governance structure or begin a
               conversation about your next requirement.
             </p>
           </div>
@@ -215,6 +240,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

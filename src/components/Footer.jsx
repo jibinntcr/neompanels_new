@@ -1,6 +1,13 @@
 import Link from 'next/link';
+import { getVerifiedContactDetails } from '@/lib/storage';
 
 export default function Footer() {
+  const contact = getVerifiedContactDetails();
+  const cleanPhoneHref = contact.phone ? `tel:${contact.phone.replace(/[^\d+]/g, '')}` : null;
+  const cleanWhatsappHref = contact.whatsapp
+    ? `https://wa.me/${contact.whatsapp.replace(/\D/g, '')}`
+    : null;
+
   return (
     <footer className="site-footer">
       <div className="container">
@@ -9,15 +16,16 @@ export default function Footer() {
             <Link href="/" aria-label="NEOM Panels — Home">
               <img
                 src="/assets/logo-full.png"
-                alt="NEOM Panels — Engineered Excellence, Designed for Spaces"
+                alt="NEOM Panels"
                 className="footer-logo-img"
                 width="356"
-                height="391"
+                height="366"
                 loading="lazy"
               />
             </Link>
-            <p className="secondary-text">
-              Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood.
+            <p className="secondary-text" style={{ marginBottom: '0.875rem' }}>
+              NEOM Panels manufactures wood-panel products for furniture, interior projects and
+              industrial packaging. Home to Starwoods and NEOM Packing Plywood.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.625rem' }}>
               <Link
@@ -25,20 +33,10 @@ export default function Footer() {
                 className="footer-brand-badge"
                 aria-label="Explore Starwoods — A NEOM Panels Brand"
               >
-                <span
-                  style={{
-                    fontSize: '0.7rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-secondary)'
-                  }}
-                >
-                  Product Brand · Furniture &amp; Interiors
-                </span>
+                <span className="footer-badge-label">Furniture &amp; Interiors</span>
                 <img
                   src="/assets/starwood-logo.png"
-                  alt="Starwood — The Plywood Specialist"
+                  alt="Starwoods — The Plywood Specialist"
                   className="starwood-logo-img--xs"
                   width="619"
                   height="177"
@@ -51,17 +49,7 @@ export default function Footer() {
                 className="footer-brand-badge"
                 aria-label="Explore NEOM Packing Plywood — A NEOM Panels Brand"
               >
-                <span
-                  style={{
-                    fontSize: '0.7rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-secondary)'
-                  }}
-                >
-                  Product Brand · Industrial Packaging
-                </span>
+                <span className="footer-badge-label">Industrial Packaging</span>
                 <img
                   src="/assets/neom-packing-plywood-logo-compact.svg"
                   alt="NEOM Packing Plywood"
@@ -129,24 +117,19 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/industries#industrial-packaging" className="footer-link">
-                  Industrial Packaging
-                </Link>
-              </li>
-              <li>
                 <Link href="/resources" className="footer-link">
-                  Resources &amp; Literature
+                  Resources &amp; Documents
                 </Link>
               </li>
             </ul>
           </nav>
 
-          <nav aria-label="Footer Business Enquiries">
-            <h2 className="footer-heading">Business Enquiries</h2>
+          <div>
+            <h2 className="footer-heading">Enquiries &amp; Contact</h2>
             <ul className="footer-links" role="list">
               <li>
-                <Link href="/enquiry" className="footer-link">
-                  Submit a Business Enquiry
+                <Link href="/enquiry" className="footer-link" style={{ fontWeight: 600, color: 'var(--color-forest)' }}>
+                  Submit a Business Enquiry →
                 </Link>
               </li>
               <li>
@@ -154,37 +137,67 @@ export default function Footer() {
                   href="/enquiry?brand=neom-packing-plywood&category=industrial-packaging"
                   className="footer-link"
                 >
-                  Industrial Packaging / Packing Plywood
+                  Packing Plywood Quotation
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/enquiry?category=Manufacturing+%26+recurring+supply"
-                  className="footer-link"
-                >
+                <Link href="/enquiry?category=manufacturing" className="footer-link">
                   Manufacturing &amp; Recurring Supply
                 </Link>
               </li>
               <li>
-                <Link href="/enquiry?category=Project+requirement" className="footer-link">
+                <Link href="/enquiry?category=project-requirement" className="footer-link">
                   Project Requirements
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/enquiry?category=Institutional+%26+public+procurement"
-                  className="footer-link"
-                >
+                <Link href="/enquiry?category=institutional-procurement" className="footer-link">
                   Institutional Procurement
                 </Link>
               </li>
               <li>
-                <Link href="/enquiry?category=Distribution+partnership" className="footer-link">
+                <Link href="/enquiry?category=distribution-partnership" className="footer-link">
                   Distribution Partnerships
                 </Link>
               </li>
             </ul>
-          </nav>
+
+            <div className="footer-contact-meta">
+              <p className="footer-contact-line">
+                <strong>Manufacturing &amp; Operations:</strong>{' '}
+                {contact.address || contact.factoryLocation}
+              </p>
+              {contact.phone && cleanPhoneHref ? (
+                <p className="footer-contact-line">
+                  <strong>Phone:</strong>{' '}
+                  <a href={cleanPhoneHref} className="footer-contact-link">
+                    {contact.phone}
+                  </a>
+                </p>
+              ) : null}
+              {contact.email ? (
+                <p className="footer-contact-line">
+                  <strong>Email:</strong>{' '}
+                  <a href={`mailto:${contact.email}`} className="footer-contact-link">
+                    {contact.email}
+                  </a>
+                </p>
+              ) : null}
+              {contact.whatsapp && cleanWhatsappHref ? (
+                <p className="footer-contact-line">
+                  <strong>WhatsApp:</strong>{' '}
+                  <a
+                    href={cleanWhatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-contact-link"
+                  >
+                    Chat on WhatsApp
+                  </a>
+                </p>
+              ) : null}
+            </div>
+          </div>
         </div>
 
         <div className="footer-bottom">

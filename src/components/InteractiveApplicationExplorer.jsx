@@ -6,81 +6,81 @@ import Link from 'next/link';
 const ENVIRONMENTS = [
   {
     id: 'oem',
-    tabLabel: '01 · Furniture & OEM Fabrication',
-    eyebrow: 'SERIAL PRODUCTION & OEM SUPPLY',
-    title: 'Panels for repeatable furniture manufacturing.',
+    tabLabel: 'Furniture & OEM Fabrication',
+    eyebrow: 'Furniture Manufacturing',
+    title: 'Panels for repeatable furniture production.',
     description:
-      'Furniture manufacturers and OEMs depend on predictable sheet calibration, clean CNC machining behaviour and scheduled batch supply across core thicknesses.',
+      'Furniture manufacturers and OEMs rely on consistent sheet thickness, clean machining behaviour and scheduled batch supply across core thicknesses.',
     checklist: [
-      'Specify furniture component type (carcass, tabletop, shelving or structural framing)',
-      'Share nominal thickness range, sheet dimensions and calibration expectations',
-      'Indicate monthly or quarterly call-off schedule and factory unloading format'
+      'Furniture component type (carcass, tabletop, shelving or framing)',
+      'Required nominal thickness in mm and sheet dimensions',
+      'One-time batch or recurring monthly/quarterly schedule'
     ],
     image: '/assets/industry-furniture-oem.jpg',
     imageAlt:
-      'Precision CNC-machined natural oak furniture components and calibrated wood-panel stacks in a modern fabrication studio.',
-    caption: 'Application Context // 01 — Serial Furniture & Component Fabrication',
-    ctaLabel: 'Discuss OEM Supply',
+      'CNC-machined natural oak furniture components and calibrated wood-panel stacks in a fabrication studio.',
+    caption: 'Furniture and Interior Applications',
+    ctaLabel: 'Discuss Manufacturing Supply',
     ctaHref:
-      '/enquiry?category=Manufacturing+%26+recurring+supply&application=Furniture+%26+OEM+Manufacturing'
+      '/enquiry?brand=Starwoods&category=manufacturing&application=Furniture+%26+OEM+Manufacturing'
   },
   {
     id: 'modular',
-    tabLabel: '02 · Modular Kitchens & Wardrobes',
-    eyebrow: 'MODULAR INTERIOR SYSTEMS',
-    title: 'Consistent substrates for kitchen and wardrobe systems.',
+    tabLabel: 'Modular Kitchens & Wardrobes',
+    eyebrow: 'Modular Interior Systems',
+    title: 'Substrates for kitchen and wardrobe systems.',
     description:
-      'Modular furniture makers balance dry-zone wardrobe carcasses with moisture-prone kitchen cabinetry, requiring clear specification alignment by interior zone.',
+      'Modular furniture makers balance dry-zone wardrobe carcasses with moisture-prone kitchen cabinetry, aligning panel selection with each interior zone.',
     checklist: [
-      'Identify carcass, shutter, partition or backing element and interior moisture exposure',
-      'Select preferred brand (such as Starwoods) and surface laminating or edge workflow',
-      'Outline thickness-wise batch quantities and replenishment cadence'
+      'Carcass, shutter, partition or backing component and interior zone',
+      'Starwoods panel preference and surface laminating or edge workflow',
+      'Thickness-wise quantities and replenishment schedule'
     ],
     image: '/assets/industry-modular-interiors.jpg',
     imageAlt:
       'Contemporary modular kitchen and open wardrobe cabinetry built from natural oak and matte sage-green panels.',
-    caption: 'Application Context // 02 — Modular Wardrobe & Kitchen Cabinetry',
+    caption: 'Furniture and Interior Applications',
     ctaLabel: 'Discuss Modular Requirements',
     ctaHref:
-      '/enquiry?category=Manufacturing+%26+recurring+supply&application=Modular+Furniture+%26+Interior+Systems'
+      '/enquiry?brand=Starwoods&category=manufacturing&application=Modular+Furniture+%26+Interior+Systems'
   },
   {
     id: 'commercial',
-    tabLabel: '03 · Commercial & Institutional Spaces',
-    eyebrow: 'PROJECTS, FIT-OUTS & INSTITUTIONS',
+    tabLabel: 'Commercial & Institutional Projects',
+    eyebrow: 'Projects & Fit-Outs',
     title: 'Specification-led supply for interior fit-outs and public projects.',
     description:
-      'Interior contractors, project consultants and institutional buyers work against bills of quantities (BOQs), specification clauses and phased site delivery milestones.',
+      'Interior contractors, project consultants and institutional buyers source panels against bills of quantities (BOQs), specification clauses and phased site deliveries.',
     checklist: [
-      'Share project BOQ line items or architectural specification clauses',
-      'Confirm required product data sheets and grade-specific test report scope',
-      'Coordinate phased site delivery schedules and regional destination details'
+      'Project BOQ line items or architectural specification clauses',
+      'Required technical specification documents',
+      'Phased site delivery schedule and destination'
     ],
     image: '/assets/industry-commercial-projects.jpg',
     imageAlt:
-      'Executive commercial boardroom and atrium featuring acoustic and decorative natural oak wall panels and custom joinery.',
-    caption: 'Application Context // 03 — Commercial Fit-Out & Institutional Joinery',
+      'Commercial boardroom interior featuring natural oak wall panels and custom joinery.',
+    caption: 'Furniture and Interior Applications',
     ctaLabel: 'Share a Project Requirement',
     ctaHref:
-      '/enquiry?category=Project+requirement&application=Projects+%26+Commercial+Interiors'
+      '/enquiry?category=project-requirement&application=Projects+%26+Commercial+Interiors'
   },
   {
     id: 'packaging',
-    tabLabel: '04 · Industrial Packaging & Crates',
-    eyebrow: 'NEOM PACKING PLYWOOD · MR GRADE',
-    title: 'Moisture-resistant packaging-grade plywood for cases and crates.',
+    tabLabel: 'Industrial Packaging & Crates',
+    eyebrow: 'NEOM Packing Plywood',
+    title: 'Moisture-resistant plywood for packing cases and crates.',
     description:
-      'Packaging manufacturers, case fabricators and industrial dispatch teams source plywood around packing designs, sheet dimensions, thicknesses and repeat shipment schedules.',
+      'Packaging manufacturers, case fabricators and industrial dispatch teams source MR packaging-grade plywood around crate designs, sheet dimensions and repeat shipment schedules.',
     checklist: [
-      'Specify intended packaging application (packing case, crate panel, divider or liner)',
-      'Share required sheet dimensions, nominal thicknesses and expected handling conditions',
-      'Indicate quantity, unit and whether the requirement is one-time or recurring'
+      'Packaging application (packing cases, crates, dividers or liners)',
+      'Required thickness in mm, sheet dimensions and handling conditions',
+      'Quantity, unit and one-time or recurring purchase schedule'
     ],
     image: '/assets/packing-plywood-showcase.jpg',
     imageAlt:
-      'Stacked packaging-grade plywood sheets with visible layered cross-ply edges in the foreground and an assembled timber and plywood packing case in the background.',
-    caption: 'Application Context // 04 — Industrial Packing Cases & Crate Fabrication',
-    ctaLabel: 'Discuss Packaging Supply',
+      'Stacked packaging-grade plywood sheets with visible cross-ply edges beside an assembled timber and plywood packing case.',
+    caption: 'Packing Cases and Crates',
+    ctaLabel: 'Request a Packaging Quote',
     ctaHref: '/enquiry?brand=neom-packing-plywood&category=industrial-packaging'
   }
 ];
@@ -91,7 +91,7 @@ export default function InteractiveApplicationExplorer() {
 
   return (
     <div className="application-explorer">
-      <div className="explorer-tabs" role="tablist" aria-label="Application environments">
+      <div className="explorer-tabs" role="tablist" aria-label="Application categories">
         {ENVIRONMENTS.map((env) => {
           const isSelected = env.id === current.id;
           return (
@@ -119,11 +119,11 @@ export default function InteractiveApplicationExplorer() {
       >
         <div>
           <p className="eyebrow">{current.eyebrow}</p>
-          <h3 className="section-title" style={{ fontSize: '1.85rem' }}>
+          <h3 className="section-title" style={{ fontSize: '1.75rem' }}>
             {current.title}
           </h3>
           <p className="lead-text">{current.description}</p>
-          <ul className="checklist-items" style={{ marginTop: '1.25rem' }}>
+          <ul className="checklist-items" style={{ marginTop: '1.125rem' }}>
             {current.checklist.map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}
@@ -133,7 +133,7 @@ export default function InteractiveApplicationExplorer() {
               {current.ctaLabel}
             </Link>
             <Link href="/industries" className="editorial-link">
-              <span>All 7 Industry Segments</span>
+              <span>View All Industry Applications</span>
               <span className="link-arrow" aria-hidden="true">
                 →
               </span>
@@ -151,7 +151,6 @@ export default function InteractiveApplicationExplorer() {
           />
           <figcaption className="architectural-photo-meta">
             <span>{current.caption}</span>
-            <span>NEOM Panels · Application Guide</span>
           </figcaption>
         </figure>
       </div>

@@ -5,12 +5,16 @@ import ScrollRevealObserver from '@/components/ScrollRevealObserver';
 import PageReloadLoader from '@/components/PageReloadLoader';
 
 export const metadata = {
+  metadataBase: new URL('https://neompanels-new.vercel.app'),
   title: {
     default: 'NEOM Panels | Indian Wood-Panel Manufacturing — Starwoods & NEOM Packing Plywood',
     template: '%s | NEOM Panels'
   },
   description:
-    'Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood. With our own factory, we bring together panel solutions for furniture, interior projects and industrial packaging.'
+    'NEOM Panels manufactures wood-panel products for furniture, interior projects and industrial packaging. Our brands, Starwoods and NEOM Packing Plywood, serve manufacturers, contractors, procurement teams and trade partners.',
+  alternates: {
+    canonical: '/'
+  }
 };
 
 export default function RootLayout({ children }) {
@@ -18,9 +22,10 @@ export default function RootLayout({ children }) {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'NEOM Panels',
+    url: 'https://neompanels-new.vercel.app',
     slogan: 'ENGINEERED EXCELLENCE, DESIGNED FOR SPACES',
     description:
-      'Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood.',
+      'NEOM Panels manufactures wood-panel products for furniture, interior projects and industrial packaging. Home to Starwoods and NEOM Packing Plywood.',
     brand: [
       {
         '@type': 'Brand',
@@ -32,7 +37,7 @@ export default function RootLayout({ children }) {
         '@type': 'Brand',
         name: 'NEOM Packing Plywood',
         description:
-          'Moisture-resistant packaging-grade plywood for business buyers sourcing material for packing cases, crates and related industrial packaging applications.'
+          'Moisture-resistant packaging-grade plywood for packing cases, crates, dividers and protective enclosures.'
       }
     ]
   };
@@ -53,7 +58,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
         <PageReloadLoader />
-        <a href="#main-content" className="skip-link visually-hidden">
+        <a href="#main-heading" className="skip-link visually-hidden">
           Skip to main content
         </a>
         <Navbar />

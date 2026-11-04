@@ -3,9 +3,12 @@ import { getSiteContent } from '@/lib/storage';
 import DocumentRequestButton from '@/components/DocumentRequestButton';
 
 export const metadata = {
-  title: 'Resources & Buyer Guidance — NEOM Panels',
+  title: 'Resources & Technical Documents — NEOM Panels',
   description:
-    'Company literature, Starwoods and NEOM Packing Plywood brand documents, technical data sheets, sustainability updates, and practical B2B buyer guidance from NEOM Panels.'
+    'Request corporate profiles, Starwoods and NEOM Packing Plywood brand literature, technical specification sheets, and practical B2B buyer guidance from NEOM Panels.',
+  alternates: {
+    canonical: '/resources'
+  }
 };
 
 export default function ResourcesPage() {
@@ -15,115 +18,129 @@ export default function ResourcesPage() {
 
   return (
     <main id="main-content">
-      {/* INNER HERO */}
-      <section className="inner-hero bg-warm" aria-labelledby="resources-heading">
-        <div className="container">
-          <div className="inner-hero__grid">
-            <div className="reveal">
-              <div className="eyebrow">RESOURCES · TECHNICAL &amp; COMMERCIAL REFERENCE</div>
-              <h1 id="resources-heading" className="h-inner">
-                Information for a more useful material discussion.
-              </h1>
-              <p className="body-lead">
-                Use this section for company literature, brand documents and practical buyer guidance as they are published.
-              </p>
-              <div className="btn-row">
-                <a href="#document-categories" className="btn btn--primary">
-                  Document Categories
-                </a>
-                <a href="#buyer-guidance" className="btn btn--secondary">
-                  Buyer Guidance Briefings
-                </a>
-              </div>
-            </div>
-
-            <div className="reveal">
-              <figure className="arch-visual">
-                <img
-                  src="/assets/starwoods-brand-showcase.jpg"
-                  alt="Engineered wood-panel samples, grain swatches, and specification notes in a lighting studio"
-                  width="760"
-                  height="520"
-                />
-                <figcaption className="arch-visual__caption">
-                  <span>Documentation &amp; Swatches · Request specific product data for your tender or factory run</span>
-                  <span>B2B Reference Desk</span>
-                </figcaption>
-              </figure>
+      {/* PAGE HEADER */}
+      <section
+        className="page-header section--architectural-grid"
+        aria-labelledby="main-heading"
+      >
+        <div className="container hero-split">
+          <div className="hero-animate">
+            <p className="eyebrow">RESOURCES &amp; TECHNICAL DOCUMENTS</p>
+            <h1 id="main-heading" tabIndex={-1} className="page-title">
+              Product literature and buyer checklists.
+            </h1>
+            <p className="lead-text">
+              Request corporate profiles, Starwoods and NEOM Packing Plywood brand documents, and
+              grade-specific technical specifications, or review our practical checklists before
+              submitting an enquiry.
+            </p>
+            <div className="btn-group">
+              <a href="#document-categories" className="btn btn--primary">
+                Request Technical Documents
+              </a>
+              <a href="#buyer-guidance" className="btn btn--secondary">
+                Buyer Checklists
+              </a>
             </div>
           </div>
+
+          <figure className="architectural-photo-card hero-animate--delay" style={{ margin: 0 }}>
+            <img
+              src="/assets/starwoods-brand-showcase.jpg"
+              alt="Engineered wood-panel samples, grain swatches, and specification notes in a lighting studio."
+              width="760"
+              height="520"
+            />
+            <figcaption className="architectural-photo-meta">
+              <span>Furniture and Interior Applications</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
       {/* SECTION 1 — DOCUMENT CATEGORIES */}
       <section
         id="document-categories"
-        className="section bg-white"
+        className="section reveal-once"
         aria-labelledby="doc-cat-heading"
       >
         <div className="container">
-          <div className="section-header reveal">
-            <div>
-              <div className="eyebrow">DOCUMENT CATEGORIES</div>
-              <h2 id="doc-cat-heading" className="h-section">
-                Corporate, brand, and product literature.
-              </h2>
-            </div>
-            <p className="body-lead" style={{ marginBottom: 0 }}>
-              Where a document applies to a specific product grade, batch, or commercial requirement, use the request option to receive the relevant pack from our team.
-            </p>
-          </div>
+          <p className="eyebrow">DOCUMENT CATEGORIES</p>
+          <h2 id="doc-cat-heading" className="section-title">
+            Corporate, brand and technical documents.
+          </h2>
+          <p className="lead-text">
+            Technical documents and batch specifications are issued against your target brand,
+            grade and thickness so your procurement or project team reviews accurate parameters.
+          </p>
 
-          <div className="gov-grid reveal">
+          <div className="applications-cards-grid" style={{ marginTop: 'var(--space-6)' }}>
             {docCategories.map((cat) => (
-              <article key={cat.code} className="gov-card">
-                <div className="gov-card__meta">
-                  <span className="gov-card__code">{cat.code}</span>
-                  <span className="gov-card__status">{cat.availability}</span>
+              <article key={cat.id || cat.title} className="application-feature-card">
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '0.75rem',
+                    flexWrap: 'wrap'
+                  }}
+                >
+                  <span className="status-pill">{cat.reviewType || cat.availability || 'Individual Review'}</span>
+                  {cat.id === 'brand-literature' || cat.code === 'DOC-BRAND' ? (
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
+                        gap: '0.75rem'
+                      }}
+                    >
+                      <img
+                        src="/assets/starwood-logo.png"
+                        alt="Starwoods — The Plywood Specialist"
+                        className="starwood-logo-img--xs"
+                        width="619"
+                        height="177"
+                      />
+                      <img
+                        src="/assets/neom-packing-plywood-logo-compact.svg"
+                        alt="NEOM Packing Plywood"
+                        className="packing-logo-img--xs"
+                        width="540"
+                        height="112"
+                      />
+                    </div>
+                  ) : null}
                 </div>
-                {cat.code === 'DOC-BRAND' ? (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem', marginBottom: '12px' }}>
-                    <img
-                      src="/assets/starwood-logo.png"
-                      alt="Starwood — The Plywood Specialist"
-                      className="starwood-logo-img--xs"
-                      width="619"
-                      height="177"
-                    />
-                    <img
-                      src="/assets/neom-packing-plywood-logo-compact.svg"
-                      alt="NEOM Packing Plywood"
-                      className="packing-logo-img--xs"
-                      width="540"
-                      height="112"
-                    />
-                  </div>
-                ) : null}
-                <h3 className="h-card" style={{ marginBottom: '10px' }}>
+
+                <h3 className="subsection-title" style={{ marginBottom: 0 }}>
                   {cat.title}
                 </h3>
-                <p style={{ fontSize: '0.96rem', marginBottom: '20px', flex: 1 }}>
-                  {cat.description}
-                </p>
+                <p style={{ margin: 0, flex: 1 }}>{cat.description}</p>
+
                 <div
                   style={{
                     marginTop: 'auto',
-                    paddingTop: '16px',
+                    paddingTop: 'var(--space-4)',
                     borderTop: '1px solid var(--color-border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '12px',
+                    gap: 'var(--space-3)',
                     flexWrap: 'wrap'
                   }}
                 >
                   <DocumentRequestButton
-                    documentCode={cat.code}
+                    docCategory={cat.categoryLabel || 'Technical Documentation'}
                     documentTitle={cat.title}
-                    label="Request This Document"
+                    label="Request Technical Documents"
                   />
-                  <Link href="/enquiry" className="link-arrow" style={{ fontSize: '0.88rem' }}>
-                    Full Enquiry
+                  <Link href="/enquiry?category=product-info" className="editorial-link">
+                    <span>Submit Enquiry</span>
+                    <span className="link-arrow" aria-hidden="true">
+                      →
+                    </span>
                   </Link>
                 </div>
               </article>
@@ -135,23 +152,20 @@ export default function ResourcesPage() {
       {/* SECTION 2 — BUYER GUIDANCE TOPICS */}
       <section
         id="buyer-guidance"
-        className="section bg-sage"
+        className="section section--sage-subtle section--no-border reveal-once"
         aria-labelledby="guidance-heading"
       >
         <div className="container">
-          <div className="section-header reveal">
-            <div>
-              <div className="eyebrow">BUYER GUIDANCE TOPICS</div>
-              <h2 id="guidance-heading" className="h-section">
-                Practical briefings for procurement and specification teams.
-              </h2>
-            </div>
-            <p className="body-lead" style={{ marginBottom: 0 }}>
-              Structured checklists to help furniture manufacturers, interior contractors, and institutional buyers frame clear material specifications.
-            </p>
-          </div>
+          <p className="eyebrow">BUYER GUIDANCE</p>
+          <h2 id="guidance-heading" className="section-title">
+            Practical checklists for procurement and specification teams.
+          </h2>
+          <p className="lead-text" style={{ marginBottom: 'var(--space-6)' }}>
+            Use these checklists to prepare clear material specifications for furniture
+            manufacturing, interior projects, institutional tenders or industrial packaging orders.
+          </p>
 
-          <div className="reveal">
+          <div>
             {guides.map((guide, index) => (
               <details
                 key={guide.id}
@@ -161,32 +175,27 @@ export default function ResourcesPage() {
               >
                 <summary>
                   <div>
-                    <div className="eyebrow" style={{ marginBottom: '4px' }}>
-                      {guide.readTime}
-                    </div>
-                    <h3 className="h-card" style={{ marginBottom: '4px' }}>
+                    <h3 className="subsection-title" style={{ marginBottom: '0.25rem' }}>
                       {guide.title}
                     </h3>
-                    <p style={{ marginBottom: 0, fontSize: '0.94rem' }}>{guide.summary}</p>
+                    <p className="secondary-text" style={{ marginBottom: 0 }}>
+                      {guide.summary}
+                    </p>
                   </div>
-                  <span
-                    className="btn btn--secondary"
-                    style={{ minHeight: '38px', padding: '6px 14px', fontSize: '0.82rem' }}
-                  >
-                    Read Briefing
-                  </span>
+                  <span className="guidance-accordion__action">View Checklist</span>
                 </summary>
                 <div className="guidance-accordion__body">
-                  <ul className="spec-list">
+                  <ul className="checklist-items" style={{ marginBottom: 'var(--space-4)' }}>
                     {guide.points.map((pt) => (
                       <li key={pt}>{pt}</li>
                     ))}
                   </ul>
-                  <div style={{ marginTop: '20px' }}>
-                    <Link href="/enquiry" className="link-arrow">
-                      Discuss this topic with our team
-                    </Link>
-                  </div>
+                  <Link href="/enquiry" className="editorial-link">
+                    <span>Discuss this requirement with our team</span>
+                    <span className="link-arrow" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
                 </div>
               </details>
             ))}

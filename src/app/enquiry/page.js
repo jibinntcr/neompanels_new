@@ -1,68 +1,89 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import EnquiryFormClient from '@/components/EnquiryFormClient';
+import { getVerifiedContactDetails } from '@/lib/storage';
 
 export const metadata = {
   title: 'Business Enquiry — NEOM Panels',
   description:
-    'Share details about your company and wood-panel requirement so the NEOM Panels commercial and technical team can direct your enquiry appropriately.'
+    'Share details about your company and wood-panel requirement for Starwoods or NEOM Packing Plywood to request technical documents or a quotation.',
+  alternates: {
+    canonical: '/enquiry'
+  }
 };
 
 export default function EnquiryPage() {
+  const contactDetails = getVerifiedContactDetails();
+
   return (
     <main id="main-content">
-      {/* INNER HERO */}
-      <section className="inner-hero bg-warm" aria-labelledby="enquiry-heading" style={{ paddingBottom: '48px' }}>
-        <div className="container">
-          <div style={{ maxWidth: '760px' }} className="reveal">
-            <div className="eyebrow">COMMERCIAL DESK · DIRECT REQUIREMENT BRIEF</div>
-            <h1 id="enquiry-heading" className="h-inner">
-              Tell us what you need.
-            </h1>
-            <p className="body-lead" style={{ marginBottom: 0 }}>
-              Share a few details about your company and requirement so our team can direct your enquiry appropriately.
-            </p>
-          </div>
+      {/* PAGE HEADER */}
+      <section
+        className="page-header section--architectural-grid"
+        aria-labelledby="main-heading"
+      >
+        <div className="container hero-animate">
+          <p className="eyebrow">BUSINESS ENQUIRY</p>
+          <h1 id="main-heading" tabIndex={-1} className="page-title">
+            Tell us what you need.
+          </h1>
+          <p className="lead-text" style={{ marginBottom: 0 }}>
+            Share your requirement, target specification and contact details to request product
+            information, technical documents or a quotation.
+          </p>
         </div>
       </section>
 
       {/* ENQUIRY WORKSPACE */}
-      <section className="section bg-white" aria-label="Business enquiry form and guidance">
+      <section className="section section--no-border" aria-label="Business enquiry form and guidance">
         <div className="container">
           <div className="enquiry-layout">
-            {/* LEFT SIDEBAR: ILLUSTRATION & ROUTING */}
-            <aside className="enquiry-sidebar reveal" aria-label="Enquiry guidance">
+            {/* MAIN INTERACTIVE FORM */}
+            <div className="reveal-once">
+              <Suspense
+                fallback={
+                  <div className="enquiry-form-container">
+                    <p>Loading business enquiry form…</p>
+                  </div>
+                }
+              >
+                <EnquiryFormClient />
+              </Suspense>
+            </div>
+
+            {/* SIDEBAR: PRACTICAL GUIDANCE & VERIFIED CONTACT */}
+            <aside className="enquiry-sidebar reveal-once" aria-label="Enquiry guidance">
               <div className="enquiry-sidebar__card">
-                <figure className="editorial-art" style={{ marginBottom: '22px' }}>
+                <figure className="architectural-photo-card" style={{ marginBottom: 'var(--space-4)' }}>
                   <img
                     src="/assets/illustration-enquiry.jpg"
-                    alt="Editorial illustration of a project specification sheet, architectural drawing, and wood-panel sample"
+                    alt="Illustration of a project specification sheet, architectural drawing, and wood-panel sample."
                     width="640"
                     height="480"
                   />
                 </figure>
-                <div className="eyebrow">HOW WE ROUTE YOUR BRIEF</div>
-                <h2 className="h-card" style={{ marginBottom: '12px' }}>
-                  Structured review for B2B enquiries
-                </h2>
-                <p style={{ fontSize: '0.94rem', marginBottom: '16px' }}>
-                  Every enquiry submitted through this desk receives a reference ID and is directed to the relevant commercial or technical contact based on your requirement category:
+                <p className="eyebrow">WHAT TO INCLUDE</p>
+                <h2 className="subsection-title">Information for an accurate response</h2>
+                <p className="secondary-text" style={{ fontSize: '0.96rem' }}>
+                  Every submitted enquiry is recorded with a reference ID for our commercial and
+                  technical team:
                 </p>
-                <ul className="spec-list" style={{ fontSize: '0.9rem' }}>
+                <ul className="checklist-items" style={{ fontSize: '0.95rem', marginBottom: 0 }}>
                   <li>
-                    <div style={{ marginBottom: '6px' }}>
+                    <div style={{ marginBottom: '0.35rem' }}>
                       <img
                         src="/assets/starwood-logo.png"
-                        alt="Starwood — The Plywood Specialist"
+                        alt="Starwoods — The Plywood Specialist"
                         className="starwood-logo-img--xs"
                         width="619"
                         height="177"
                       />
                     </div>
-                    <strong>Starwoods (Furniture &amp; Interiors):</strong> Range availability, thicknesses, and surface options.
+                    <strong>Starwoods (Furniture &amp; Interiors):</strong> Application, grade,
+                    thickness, sheet dimensions and project or factory schedule.
                   </li>
                   <li>
-                    <div style={{ marginBottom: '6px' }}>
+                    <div style={{ marginBottom: '0.35rem' }}>
                       <img
                         src="/assets/neom-packing-plywood-logo-compact.svg"
                         alt="NEOM Packing Plywood"
@@ -71,46 +92,74 @@ export default function EnquiryPage() {
                         height="112"
                       />
                     </div>
-                    <strong>NEOM Packing Plywood (Industrial Packaging):</strong> MR packaging-grade plywood for packing cases, crates, and packaging components.
+                    <strong>NEOM Packing Plywood (Industrial Packaging):</strong> Packing cases,
+                    crates or dividers, required thickness, sheet dimensions, quantity and delivery
+                    location.
                   </li>
                   <li>
-                    <strong>Bulk / OEM Supply:</strong> Production schedules, pallet sizing, and repeat supply planning.
+                    <strong>Manufacturing &amp; Recurring Supply:</strong> Monthly or scheduled
+                    call-off volumes and delivery destination.
                   </li>
                   <li>
-                    <strong>Project / Institutional:</strong> BOQ specification matching, test documents, and tender credentials.
-                  </li>
-                  <li>
-                    <strong>Distributor / Channel:</strong> Regional representation and stocking discussions.
+                    <strong>Institutional &amp; Channel Enquiries:</strong> Tender specification
+                    clauses, required technical documents or regional distribution profile.
                   </li>
                 </ul>
               </div>
 
-              <div className="enquiry-sidebar__card" style={{ background: 'var(--color-sage)' }}>
-                <div className="eyebrow">PREPARING YOUR SPECIFICATION</div>
-                <h3 className="h-card" style={{ fontSize: '1.1rem', marginBottom: '8px' }}>
-                  Need guidance before submitting a BOQ?
+              <div className="enquiry-sidebar__card enquiry-sidebar__card--sage">
+                <p className="eyebrow">CONTACT &amp; LOCATION</p>
+                <h3 className="subsection-title" style={{ marginBottom: '0.5rem' }}>
+                  Manufacturing &amp; commercial desk
                 </h3>
-                <p style={{ fontSize: '0.92rem', marginBottom: '14px' }}>
-                  Review our buyer checklist on what to include in a wood-panel quotation request.
+                <p style={{ fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+                  <strong>Facility:</strong> {contactDetails.factoryLocation}
                 </p>
-                <Link href="/resources#before-you-request-quotation" className="link-arrow">
-                  Read Quotation Checklist
+                {contactDetails.officeAddress ? (
+                  <p style={{ fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+                    <strong>Office:</strong> {contactDetails.officeAddress}
+                  </p>
+                ) : null}
+                {contactDetails.email ? (
+                  <p style={{ fontSize: '0.95rem', marginBottom: '0.5rem' }}>
+                    <strong>Email:</strong>{' '}
+                    <a href={`mailto:${contactDetails.email}`} className="footer-contact-link">
+                      {contactDetails.email}
+                    </a>
+                  </p>
+                ) : null}
+                {contactDetails.phone ? (
+                  <p style={{ fontSize: '0.95rem', marginBottom: '0.5rem' }}>
+                    <strong>Phone:</strong>{' '}
+                    <a
+                      href={`tel:${String(contactDetails.phone).replace(/\s+/g, '')}`}
+                      className="footer-contact-link"
+                    >
+                      {contactDetails.phone}
+                    </a>
+                  </p>
+                ) : null}
+                {contactDetails.whatsapp ? (
+                  <p style={{ fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+                    <strong>WhatsApp:</strong>{' '}
+                    <a
+                      href={`https://wa.me/${String(contactDetails.whatsapp).replace(/[^0-9]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-contact-link"
+                    >
+                      Message Commercial Team
+                    </a>
+                  </p>
+                ) : null}
+                <Link href="/resources#before-you-request-quotation" className="editorial-link">
+                  <span>Read Quotation Checklist</span>
+                  <span className="link-arrow" aria-hidden="true">
+                    →
+                  </span>
                 </Link>
               </div>
             </aside>
-
-            {/* RIGHT MAIN: INTERACTIVE FORM */}
-            <div className="reveal">
-              <Suspense
-                fallback={
-                  <div className="enquiry-form-card">
-                    <p>Loading business enquiry form…</p>
-                  </div>
-                }
-              >
-                <EnquiryFormClient />
-              </Suspense>
-            </div>
           </div>
         </div>
       </section>

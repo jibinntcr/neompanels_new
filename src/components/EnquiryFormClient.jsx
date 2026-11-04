@@ -3,66 +3,96 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-
-const normalizeBrandParam = (raw) => {
-  if (!raw) return '';
-  const lower = raw.trim().toLowerCase();
-  if (lower === 'neom-packing-plywood' || lower === 'neom packing plywood' || lower === 'packing-plywood') {
-    return 'NEOM Packing Plywood';
-  }
-  if (lower === 'starwoods' || lower === 'starwood') {
-    return 'Starwoods';
-  }
-  if (
-    lower === 'general' ||
-    lower === 'general-neom-panels-enquiry' ||
-    lower === 'general neom panels enquiry' ||
-    lower === 'neom panels (corporate)'
-  ) {
-    return 'General NEOM Panels Enquiry';
-  }
-  if (lower === 'help-me-choose' || lower === 'help me choose') {
-    return 'Help Me Choose';
-  }
-  return raw;
-};
-
-const normalizeCategoryParam = (raw) => {
-  if (!raw) return '';
-  const lower = raw.trim().toLowerCase();
-  if (
-    lower === 'industrial-packaging' ||
-    lower === 'packing-plywood' ||
-    lower === 'industrial packaging / packing plywood'
-  ) {
-    return 'Industrial Packaging / Packing Plywood';
-  }
-  return raw;
-};
+import {
+  ENQUIRY_BRANDS,
+  ENQUIRY_CATEGORIES,
+  PACKAGING_APPLICATIONS,
+  PURCHASE_SCHEDULES,
+  normalizeBrandParam,
+  normalizeCategoryParam,
+  sanitizeQueryText,
+  normalizePurchaseScheduleParam
+} from '@/lib/enquiry-config';
 
 export default function EnquiryFormClient() {
   const searchParams = useSearchParams();
+
+  const resolveInitialParams = () => {
+    const getParam = (key) => {
+      const fromHook = searchParams?.get(key);
+      if (fromHook !== null && fromHook !== undefined) return fromHook;
+      if (typeof window !== 'undefined') {
+        const sp = new URLSearchParams(window.location.search);
+        return sp.get(key);
+      }
+      return null;
+    };
+
+    const paramBrand = getParam('brand');
+    const paramCat = getParam('category');
+    const paramApp = getParam('application');
+    const paramDoc = getParam('document');
+    const paramFreq = getParam('frequency');
+
+    const resolvedBrand = normalizeBrandParam(paramBrand);
+    const resolvedCat = normalizeCategoryParam(paramCat);
+    const safeApp = sanitizeQueryText(paramApp, 100);
+    const safeDoc = sanitizeQueryText(paramDoc, 140);
+    const resolvedFreq = normalizePurchaseScheduleParam(paramFreq);
+
+    const finalBrand =
+      resolvedBrand ||
+      (resolvedCat === 'Industrial Packaging / Packing Plywood' ? 'NEOM Packing Plywood' : '');
+    const finalCat =
+      resolvedCat ||
+      (resolvedBrand === 'NEOM Packing Plywood'
+        ? 'Industrial Packaging / Packing Plywood'
+        : '');
+
+    const matchingPackApp = safeApp
+      ? PACKAGING_APPLICATIONS.find((opt) => opt.toLowerCase() === safeApp.toLowerCase()) || ''
+      : '';
+
+    return {
+      brand: finalBrand,
+      category: finalCat,
+      applicationProduct: safeApp,
+      packagingApplication: matchingPackApp,
+      purchaseFrequency: resolvedFreq,
+      purchasingFrequency: resolvedFreq
+        ? resolvedFreq === 'One-time purchase'
+          ? 'Single production batch'
+          : 'Monthly recurring supply'
+        : '',
+      requirementDescription: safeDoc
+        ? `Requesting technical document: ${safeDoc}. Intended application: `
+        : ''
+    };
+  };
+
+  const initial = resolveInitialParams();
 
   const [step, setStep] = useState(1);
   const [backendLive, setBackendLive] = useState(true);
 
   // Step 1 fields
-  const [brand, setBrand] = useState('');
-  const [category, setCategory] = useState('');
-  const [purchasingFrequency, setPurchasingFrequency] = useState('');
+  const [brand, setBrand] = useState(initial.brand);
+  const [category, setCategory] = useState(initial.category);
+  const [purchasingFrequency, setPurchasingFrequency] = useState(initial.purchasingFrequency);
   const [procurementReference, setProcurementReference] = useState('');
   const [territory, setTerritory] = useState('');
 
-  // Packaging-specific conditional fields
-  const [packagingApplication, setPackagingApplication] = useState('');
+  // Packaging-specific fields
+  const [packagingApplication, setPackagingApplication] = useState(initial.packagingApplication);
   const [requiredThickness, setRequiredThickness] = useState('');
   const [sheetDimensions, setSheetDimensions] = useState('');
-  const [purchaseFrequency, setPurchaseFrequency] = useState('');
-  const [additionalSpecifications, setAdditionalSpecifications] = useState('');
+  const [purchaseFrequency, setPurchaseFrequency] = useState(initial.purchaseFrequency);
 
   // Shared Step 1 fields
-  const [requirementDescription, setRequirementDescription] = useState('');
-  const [applicationProduct, setApplicationProduct] = useState('');
+  const [requirementDescription, setRequirementDescription] = useState(
+    initial.requirementDescription
+  );
+  const [applicationProduct, setApplicationProduct] = useState(initial.applicationProduct);
   const [quantity, setQuantity] = useState('');
   const [quantityUnit, setQuantityUnit] = useState('Sheets');
   const [destination, setDestination] = useState('');
@@ -108,36 +138,56 @@ export default function EnquiryFormClient() {
     const paramBrand = searchParams.get('brand');
     const paramApp = searchParams.get('application');
     const paramDoc = searchParams.get('document');
+    const paramFreq = searchParams.get('frequency');
 
     const resolvedBrand = normalizeBrandParam(paramBrand);
     const resolvedCat = normalizeCategoryParam(paramCat);
+    const safeApp = sanitizeQueryText(paramApp, 100);
+    const safeDoc = sanitizeQueryText(paramDoc, 140);
+    const resolvedFreq = normalizePurchaseScheduleParam(paramFreq);
 
     if (resolvedBrand) {
       setBrand(resolvedBrand);
       if (resolvedBrand === 'NEOM Packing Plywood' && !resolvedCat) {
         setCategory('Industrial Packaging / Packing Plywood');
       }
+    } else if (paramBrand !== null) {
+      setBrand('');
     }
+
     if (resolvedCat) {
       setCategory(resolvedCat);
       if (resolvedCat === 'Industrial Packaging / Packing Plywood' && !resolvedBrand) {
         setBrand('NEOM Packing Plywood');
       }
+    } else if (paramCat !== null) {
+      setCategory('');
     }
-    if (paramApp) {
-      setApplicationProduct(paramApp);
-      if (
-        resolvedBrand === 'NEOM Packing Plywood' ||
-        resolvedCat === 'Industrial Packaging / Packing Plywood'
-      ) {
-        setPackagingApplication(paramApp);
+
+    if (resolvedFreq) {
+      setPurchaseFrequency(resolvedFreq);
+      setPurchasingFrequency(
+        resolvedFreq === 'One-time purchase'
+          ? 'Single production batch'
+          : 'Monthly recurring supply'
+      );
+    }
+
+    if (safeApp) {
+      setApplicationProduct(safeApp);
+      const matchingPackApp = PACKAGING_APPLICATIONS.find(
+        (opt) => opt.toLowerCase() === safeApp.toLowerCase()
+      );
+      if (matchingPackApp) {
+        setPackagingApplication(matchingPackApp);
       }
     }
-    if (paramDoc) {
+
+    if (safeDoc) {
       setRequirementDescription((prev) =>
         prev
           ? prev
-          : `Requesting document: ${paramDoc}.\nIntended application and product scope: `
+          : `Requesting technical document: ${safeDoc}. Intended application: `
       );
     }
   }, [searchParams]);
@@ -178,21 +228,36 @@ export default function EnquiryFormClient() {
     setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const buildEffectiveDescription = () => {
+    const trimmed = requirementDescription.trim();
+    if (trimmed.length >= 10) return trimmed;
+    if (isPackagingFlow) {
+      const parts = [];
+      if (packagingApplication) parts.push(`Application: ${packagingApplication}`);
+      if (requiredThickness.trim()) parts.push(`Thickness: ${requiredThickness.trim()}`);
+      if (sheetDimensions.trim()) parts.push(`Dimensions: ${sheetDimensions.trim()}`);
+      if (quantity.trim()) parts.push(`Quantity: ${quantity.trim()} ${quantityUnit}`);
+      if (purchaseFrequency) parts.push(`Purchase: ${purchaseFrequency}`);
+      if (destination.trim()) parts.push(`Delivery: ${destination.trim()}`);
+      if (trimmed) parts.push(`Notes: ${trimmed}`);
+      return parts.join(' · ');
+    }
+    return trimmed;
+  };
+
   const validateStep1 = () => {
     const errs = {};
     if (!category) {
       errs.category = 'Please select an enquiry category.';
     }
-    if (category === 'Manufacturing & recurring supply' && !purchasingFrequency) {
-      errs.purchasingFrequency = 'Please select an indicative purchasing frequency.';
+
+    const effectiveDesc = buildEffectiveDescription();
+    if (!effectiveDesc || effectiveDesc.length < 10) {
+      errs.requirementDescription = isPackagingFlow
+        ? 'Please select a packaging application or enter your requirement notes (at least 10 characters).'
+        : 'Please enter a brief description of your requirement (at least 10 characters).';
     }
-    if (category === 'Distribution partnership' && !territory.trim()) {
-      errs.territory = 'Please enter the territory or region for your distribution proposal.';
-    }
-    if (!requirementDescription.trim() || requirementDescription.trim().length < 10) {
-      errs.requirementDescription =
-        'Please enter a description of your requirement (at least 10 characters).';
-    }
+
     setStep1Errors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -278,13 +343,14 @@ export default function EnquiryFormClient() {
     }
 
     setSubmitting(true);
+    const effectiveDesc = buildEffectiveDescription();
     const formData = new FormData();
     formData.append('category', category);
-    formData.append('requirementDescription', requirementDescription.trim());
+    formData.append('requirementDescription', effectiveDesc);
     formData.append('brand', brand);
     formData.append(
       'applicationProduct',
-      (applicationProduct || packagingApplication).trim()
+      (isPackagingFlow ? packagingApplication : applicationProduct).trim()
     );
     formData.append('quantity', quantity.trim());
     formData.append('quantityUnit', quantityUnit);
@@ -296,14 +362,13 @@ export default function EnquiryFormClient() {
     formData.append('procurementReference', procurementReference.trim());
     formData.append('territory', territory.trim());
 
-    // Packaging-specific conditional payload fields
     formData.append('packagingApplication', packagingApplication.trim());
     formData.append('requiredThickness', requiredThickness.trim());
     formData.append('sheetDimensions', sheetDimensions.trim());
     formData.append('purchaseFrequency', purchaseFrequency || purchasingFrequency);
     formData.append('deliveryLocation', destination.trim());
     formData.append('requiredDeliveryDate', requestedDate);
-    formData.append('additionalSpecifications', additionalSpecifications.trim());
+    formData.append('additionalRequirements', requirementDescription.trim());
 
     formData.append('name', name.trim());
     formData.append('buyerProfile', buyerProfile);
@@ -355,7 +420,6 @@ export default function EnquiryFormClient() {
     setRequiredThickness('');
     setSheetDimensions('');
     setPurchaseFrequency('');
-    setAdditionalSpecifications('');
     setRequirementDescription('');
     setBrand('');
     setApplicationProduct('');
@@ -375,9 +439,9 @@ export default function EnquiryFormClient() {
     <div className="enquiry-form-container">
       {!backendLive ? (
         <div className="status-banner status-banner--warning" role="status">
-          <strong>Non-live preview mode:</strong> The backend persistence service is not connected.
-          Form validation and step transitions can be previewed, but submissions will never be
-          simulated as successful without an active server connection.
+          <strong>Offline mode:</strong> The backend persistence service is currently unreachable.
+          Form validation and step navigation can be previewed, and your entries are preserved until
+          the connection is restored.
         </div>
       ) : null}
 
@@ -390,8 +454,8 @@ export default function EnquiryFormClient() {
           tabIndex={-1}
         >
           <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
-            Your enquiry could not be submitted. Your entries are still here. Please try again or
-            use our contact details.
+            Your enquiry could not be submitted. Your entries are still here. Please review the
+            highlighted details below and try again.
           </p>
           {serverErrors.length > 0 ? (
             <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
@@ -404,7 +468,11 @@ export default function EnquiryFormClient() {
       ) : null}
 
       {successData ? (
-        <div id="enquiry-success-panel" className="status-banner status-banner--success" role="status">
+        <div
+          id="enquiry-success-panel"
+          className="status-banner status-banner--success"
+          role="status"
+        >
           <h2
             ref={successHeadingRef}
             id="enquiry-success-heading"
@@ -414,20 +482,21 @@ export default function EnquiryFormClient() {
           >
             Your enquiry has been received.
           </h2>
-          <p className="lead-text" style={{ marginBottom: '1rem' }}>
-            Your reference is <strong id="generated-reference-code">{successData.reference}</strong>.
+          <p className="lead-text" style={{ marginBottom: '0.75rem' }}>
+            Reference ID: <strong id="generated-reference-code">{successData.reference}</strong>
           </p>
           <p>
-            Your requirement has been saved and routed to our{' '}
-            <strong>{successData.routedDesk || 'Corporate Business Enquiries'}</strong> team. Please
-            retain your reference number for follow-up correspondence.
+            Your requirement has been recorded under{' '}
+            <strong>{successData.category || category}</strong>
+            {successData.brand || brand ? ` (${successData.brand || brand})` : ''} for review by the
+            NEOM Panels team. Please retain your reference ID for follow-up correspondence.
           </p>
           <div className="btn-group" style={{ marginTop: 'var(--space-5)' }}>
             <button type="button" onClick={resetForm} className="btn btn--secondary">
               Submit Another Enquiry
             </button>
             <Link href="/resources" className="editorial-link">
-              <span>Browse Resources &amp; Literature</span>
+              <span>Browse Resources &amp; Buyer Guidance</span>
               <span className="link-arrow" aria-hidden="true">
                 →
               </span>
@@ -482,18 +551,22 @@ export default function EnquiryFormClient() {
               id="step-1-heading"
               tabIndex={-1}
               className="subsection-title"
-              style={{ marginBottom: 'var(--space-5)' }}
+              style={{ marginBottom: '0.5rem' }}
             >
               Step 1 — Requirement details
             </legend>
+            <p className="secondary-text" style={{ fontSize: '0.9375rem', marginBottom: 'var(--space-5)' }}>
+              Share the specifications you have available. Technical fields are optional if your
+              dimensions or quantities are not yet finalised.
+            </p>
 
             <div className="form-row-split">
               <div className="form-group">
                 <label htmlFor="enquiry-brand" className="form-label">
-                  Brand / product interest
+                  Brand / product interest <span className="optional-marker">(Optional)</span>
                 </label>
                 <span id="brand-hint" className="field-hint">
-                  Choose a specific NEOM Panels brand or general guidance.
+                  Choose a NEOM Panels brand or general guidance.
                 </span>
                 <select
                   id="enquiry-brand"
@@ -511,10 +584,11 @@ export default function EnquiryFormClient() {
                   }}
                 >
                   <option value="">Select brand or product interest…</option>
-                  <option value="Starwoods">Starwoods</option>
-                  <option value="NEOM Packing Plywood">NEOM Packing Plywood</option>
-                  <option value="General NEOM Panels Enquiry">General NEOM Panels Enquiry</option>
-                  <option value="Help Me Choose">Help Me Choose</option>
+                  {ENQUIRY_BRANDS.map((b) => (
+                    <option key={b} value={b}>
+                      {b}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -523,7 +597,7 @@ export default function EnquiryFormClient() {
                   Enquiry category <span className="required-marker" aria-hidden="true">*</span>
                 </label>
                 <span id="category-hint" className="field-hint">
-                  Select the option that best matches your commercial requirement.
+                  Select the option that best matches your requirement.
                 </span>
                 <select
                   id="enquiry-category"
@@ -544,20 +618,11 @@ export default function EnquiryFormClient() {
                   required
                 >
                   <option value="">Select an enquiry category…</option>
-                  <option value="Industrial Packaging / Packing Plywood">
-                    Industrial Packaging / Packing Plywood
-                  </option>
-                  <option value="Manufacturing & recurring supply">
-                    Manufacturing &amp; recurring supply
-                  </option>
-                  <option value="Project requirement">Project requirement</option>
-                  <option value="Institutional & public procurement">
-                    Institutional &amp; public procurement
-                  </option>
-                  <option value="Product information">Product information</option>
-                  <option value="Distribution partnership">Distribution partnership</option>
-                  <option value="Supplier introduction">Supplier introduction</option>
-                  <option value="Other business enquiry">Other business enquiry</option>
+                  {ENQUIRY_CATEGORIES.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
                 </select>
                 <span
                   id="category-error"
@@ -568,7 +633,7 @@ export default function EnquiryFormClient() {
               </div>
             </div>
 
-            {/* Conditional Block for Industrial Packaging / NEOM Packing Plywood */}
+            {/* PACKING PLYWOOD SPECIFICATION FIELDS */}
             {isPackagingFlow ? (
               <div
                 id="cond-packaging"
@@ -588,11 +653,18 @@ export default function EnquiryFormClient() {
                   }}
                 >
                   <div>
-                    <span className="eyebrow" style={{ marginBottom: '0.15rem' }}>
-                      PACKAGING SPECIFICATION PARAMETERS
-                    </span>
-                    <p style={{ margin: 0, fontWeight: 600, color: 'var(--color-forest)' }}>
-                      NEOM Packing Plywood · Moisture Resistant (MR) Packaging Grade
+                    <p
+                      style={{
+                        margin: 0,
+                        fontWeight: 600,
+                        color: 'var(--color-forest)',
+                        fontSize: '1rem'
+                      }}
+                    >
+                      NEOM Packing Plywood — Specification Details
+                    </p>
+                    <p className="secondary-text" style={{ margin: 0, fontSize: '0.875rem' }}>
+                      Moisture-resistant (MR) packaging-grade plywood
                     </p>
                   </div>
                   <img
@@ -607,10 +679,10 @@ export default function EnquiryFormClient() {
                 <div className="form-row-split">
                   <div className="form-group">
                     <label htmlFor="enquiry-packaging-application" className="form-label">
-                      Packaging application
+                      Application <span className="optional-marker">(Optional)</span>
                     </label>
                     <span id="packaging-app-hint" className="field-hint">
-                      What are you fabricating or packing?
+                      Select the primary packaging application.
                     </span>
                     <select
                       id="enquiry-packaging-application"
@@ -618,27 +690,32 @@ export default function EnquiryFormClient() {
                       className="form-control"
                       aria-describedby="packaging-app-hint"
                       value={packagingApplication}
-                      onChange={(e) => setPackagingApplication(e.target.value)}
+                      onChange={(e) => {
+                        setPackagingApplication(e.target.value);
+                        if (e.target.value) {
+                          setStep1Errors((prev) => ({
+                            ...prev,
+                            requirementDescription: undefined
+                          }));
+                        }
+                      }}
                     >
                       <option value="">Select packaging application…</option>
-                      <option value="Packing Cases">Packing Cases</option>
-                      <option value="Crates and Enclosures">Crates and Enclosures</option>
-                      <option value="Industrial Packaging Components (Dividers, Liners, Panels)">
-                        Industrial Packaging Components (Dividers, Liners, Panels)
-                      </option>
-                      <option value="Recurring Packaging Supply">Recurring Packaging Supply</option>
-                      <option value="Other Industrial Packaging Application">
-                        Other Industrial Packaging Application
-                      </option>
+                      {PACKAGING_APPLICATIONS.map((app) => (
+                        <option key={app} value={app}>
+                          {app}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="enquiry-purchase-frequency" className="form-label">
-                      One-time or recurring purchase
+                      One-time or recurring purchase{' '}
+                      <span className="optional-marker">(Optional)</span>
                     </label>
                     <span id="purchase-freq-hint" className="field-hint">
-                      Indicate whether this is a single order or repeat supply.
+                      Single order or scheduled repeat supply.
                     </span>
                     <select
                       id="enquiry-purchase-frequency"
@@ -649,27 +726,22 @@ export default function EnquiryFormClient() {
                       onChange={(e) => setPurchaseFrequency(e.target.value)}
                     >
                       <option value="">Select purchase schedule…</option>
-                      <option value="One-time purchase">One-time purchase</option>
-                      <option value="Recurring monthly / scheduled supply">
-                        Recurring monthly / scheduled supply
-                      </option>
-                      <option value="Recurring quarterly supply">
-                        Recurring quarterly supply
-                      </option>
-                      <option value="Initial batch with planned repeat supply">
-                        Initial batch with planned repeat supply
-                      </option>
+                      {PURCHASE_SCHEDULES.map((sched) => (
+                        <option key={sched} value={sched}>
+                          {sched}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
 
                 <div className="form-row-split">
-                  <div className="form-group">
+                  <div className="form-group" style={{ marginBottom: 0 }}>
                     <label htmlFor="enquiry-required-thickness" className="form-label">
-                      Required thickness
+                      Required thickness <span className="optional-marker">(Optional)</span>
                     </label>
                     <span id="thickness-hint" className="field-hint">
-                      Nominal thickness(es) in mm.
+                      Nominal thickness(es) in mm, if known.
                     </span>
                     <input
                       type="text"
@@ -683,12 +755,12 @@ export default function EnquiryFormClient() {
                     />
                   </div>
 
-                  <div className="form-group">
+                  <div className="form-group" style={{ marginBottom: 0 }}>
                     <label htmlFor="enquiry-sheet-dimensions" className="form-label">
-                      Sheet dimensions
+                      Sheet dimensions <span className="optional-marker">(Optional)</span>
                     </label>
                     <span id="dimensions-hint" className="field-hint">
-                      Required length × width (ft or mm).
+                      Required length × width (mm or ft), if known.
                     </span>
                     <input
                       type="text"
@@ -696,197 +768,123 @@ export default function EnquiryFormClient() {
                       name="sheetDimensions"
                       className="form-control"
                       aria-describedby="dimensions-hint"
-                      placeholder="e.g. 8 ft × 4 ft (2440 × 1220 mm)"
+                      placeholder="e.g. 2440 × 1220 mm (8 ft × 4 ft)"
                       value={sheetDimensions}
                       onChange={(e) => setSheetDimensions(e.target.value)}
                     />
                   </div>
                 </div>
-
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label htmlFor="enquiry-additional-specs" className="form-label">
-                    Additional specifications <span className="optional-marker">(Optional)</span>
+              </div>
+            ) : (
+              <div className="form-row-split">
+                <div className="form-group">
+                  <label htmlFor="enquiry-application" className="form-label">
+                    Application or product <span className="optional-marker">(Optional)</span>
                   </label>
-                  <span id="additional-specs-hint" className="field-hint">
-                    Share expected handling method, storage/transport moisture exposure, or special
-                    packing notes.
+                  <span id="app-product-hint" className="field-hint">
+                    Furniture type, interior zone or panel use.
                   </span>
                   <input
                     type="text"
-                    id="enquiry-additional-specs"
-                    name="additionalSpecifications"
+                    id="enquiry-application"
+                    name="applicationProduct"
                     className="form-control"
-                    aria-describedby="additional-specs-hint"
-                    placeholder="e.g. Forklift handling, covered warehouse storage, domestic dispatch"
-                    value={additionalSpecifications}
-                    onChange={(e) => setAdditionalSpecifications(e.target.value)}
+                    aria-describedby="app-product-hint"
+                    placeholder="e.g. Modular wardrobes, kitchen cabinetry, commercial joinery"
+                    value={applicationProduct}
+                    onChange={(e) => setApplicationProduct(e.target.value)}
                   />
                 </div>
+
+                {category === 'Manufacturing & recurring supply' ? (
+                  <div className="form-group">
+                    <label htmlFor="enquiry-frequency" className="form-label">
+                      Purchasing frequency <span className="optional-marker">(Optional)</span>
+                    </label>
+                    <span id="frequency-hint" className="field-hint">
+                      Indicative production call-off cadence.
+                    </span>
+                    <select
+                      id="enquiry-frequency"
+                      name="purchasingFrequency"
+                      className="form-control"
+                      aria-describedby="frequency-hint"
+                      value={purchasingFrequency}
+                      onChange={(e) => setPurchasingFrequency(e.target.value)}
+                    >
+                      <option value="">Select purchasing frequency…</option>
+                      <option value="Monthly recurring supply">Monthly recurring supply</option>
+                      <option value="Quarterly / scheduled call-off">
+                        Quarterly / scheduled call-off
+                      </option>
+                      <option value="Single production batch">Single production batch</option>
+                      <option value="Annual rate contract discussion">
+                        Annual rate contract discussion
+                      </option>
+                    </select>
+                  </div>
+                ) : category === 'Distribution partnership' ? (
+                  <div className="form-group">
+                    <label htmlFor="enquiry-territory" className="form-label">
+                      Proposed territory or region{' '}
+                      <span className="optional-marker">(Optional)</span>
+                    </label>
+                    <span id="territory-hint" className="field-hint">
+                      City, district or state coverage.
+                    </span>
+                    <input
+                      type="text"
+                      id="enquiry-territory"
+                      name="territory"
+                      className="form-control"
+                      aria-describedby="territory-hint"
+                      placeholder="e.g. Kochi, Kerala"
+                      value={territory}
+                      onChange={(e) => setTerritory(e.target.value)}
+                    />
+                  </div>
+                ) : category === 'Institutional & public procurement' ? (
+                  <div className="form-group">
+                    <label htmlFor="enquiry-procurement-ref" className="form-label">
+                      Procurement or tender reference{' '}
+                      <span className="optional-marker">(Optional)</span>
+                    </label>
+                    <span id="procurement-hint" className="field-hint">
+                      Department name or tender reference, if applicable.
+                    </span>
+                    <input
+                      type="text"
+                      id="enquiry-procurement-ref"
+                      name="procurementReference"
+                      className="form-control"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck="false"
+                      aria-describedby="procurement-hint"
+                      value={procurementReference}
+                      onChange={(e) => setProcurementReference(e.target.value)}
+                    />
+                  </div>
+                ) : null}
               </div>
-            ) : null}
+            )}
 
-            {category === 'Manufacturing & recurring supply' ? (
-              <div id="cond-frequency" className="conditional-group">
-                <label htmlFor="enquiry-frequency" className="form-label">
-                  Purchasing frequency <span className="required-marker" aria-hidden="true">*</span>
-                </label>
-                <span id="frequency-hint" className="field-hint">
-                  Helps us understand your production call-off cadence.
-                </span>
-                <select
-                  id="enquiry-frequency"
-                  name="purchasingFrequency"
-                  className="form-control"
-                  aria-describedby="frequency-hint"
-                  aria-errormessage="frequency-error"
-                  aria-invalid={step1Errors.purchasingFrequency ? 'true' : undefined}
-                  value={purchasingFrequency}
-                  onChange={(e) => {
-                    setPurchasingFrequency(e.target.value);
-                    setStep1Errors((prev) => ({ ...prev, purchasingFrequency: undefined }));
-                  }}
-                  required
-                >
-                  <option value="">Select purchasing frequency…</option>
-                  <option value="Monthly recurring supply">Monthly recurring supply</option>
-                  <option value="Quarterly / scheduled call-off">
-                    Quarterly / scheduled call-off
-                  </option>
-                  <option value="Single production batch">Single production batch</option>
-                  <option value="Annual rate contract discussion">
-                    Annual rate contract discussion
-                  </option>
-                </select>
-                <span
-                  id="frequency-error"
-                  className={`error-msg ${step1Errors.purchasingFrequency ? 'is-visible' : ''}`}
-                >
-                  {step1Errors.purchasingFrequency ||
-                    'Please select an indicative purchasing frequency.'}
-                </span>
-              </div>
-            ) : null}
-
-            {category === 'Institutional & public procurement' ? (
-              <div id="cond-procurement" className="conditional-group">
-                <label htmlFor="enquiry-procurement-ref" className="form-label">
-                  Procurement or tender reference <span className="optional-marker">(Optional)</span>
-                </label>
-                <span id="procurement-hint" className="field-hint">
-                  Include the department name, tender reference or specification clause if available.
-                </span>
-                <input
-                  type="text"
-                  id="enquiry-procurement-ref"
-                  name="procurementReference"
-                  className="form-control"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                  spellCheck="false"
-                  aria-describedby="procurement-hint"
-                  value={procurementReference}
-                  onChange={(e) => setProcurementReference(e.target.value)}
-                />
-              </div>
-            ) : null}
-
-            {category === 'Distribution partnership' ? (
-              <div id="cond-territory" className="conditional-group">
-                <label htmlFor="enquiry-territory" className="form-label">
-                  Proposed territory or region{' '}
-                  <span className="required-marker" aria-hidden="true">*</span>
-                </label>
-                <span id="territory-hint" className="field-hint">
-                  Specify the city, district or state where your distribution network operates.
-                </span>
-                <input
-                  type="text"
-                  id="enquiry-territory"
-                  name="territory"
-                  className="form-control"
-                  aria-describedby="territory-hint"
-                  aria-errormessage="territory-error"
-                  aria-invalid={step1Errors.territory ? 'true' : undefined}
-                  value={territory}
-                  onChange={(e) => {
-                    setTerritory(e.target.value);
-                    setStep1Errors((prev) => ({ ...prev, territory: undefined }));
-                  }}
-                  required
-                />
-                <span
-                  id="territory-error"
-                  className={`error-msg ${step1Errors.territory ? 'is-visible' : ''}`}
-                >
-                  {step1Errors.territory ||
-                    'Please enter the territory or region for your distribution proposal.'}
-                </span>
-              </div>
-            ) : null}
-
-            <div className="form-group">
-              <label htmlFor="enquiry-description" className="form-label">
-                Requirement description <span className="required-marker" aria-hidden="true">*</span>
-              </label>
-              <span id="description-hint" className="field-hint">
-                Describe what the panel or packing plywood will be used for, required thicknesses or
-                dimensions, and any questions you have (minimum 10 characters).
-              </span>
-              <textarea
-                id="enquiry-description"
-                name="requirementDescription"
-                className="form-control"
-                minLength={10}
-                maxLength={5000}
-                aria-describedby="description-hint"
-                aria-errormessage="description-error"
-                aria-invalid={step1Errors.requirementDescription ? 'true' : undefined}
-                value={requirementDescription}
-                onChange={(e) => {
-                  setRequirementDescription(e.target.value);
-                  if (e.target.value.trim().length >= 10) {
-                    setStep1Errors((prev) => ({ ...prev, requirementDescription: undefined }));
-                  }
-                }}
-                required
-              />
-              <span
-                id="description-error"
-                className={`error-msg ${step1Errors.requirementDescription ? 'is-visible' : ''}`}
-              >
-                {step1Errors.requirementDescription ||
-                  'Please enter a description of your requirement (at least 10 characters).'}
-              </span>
-            </div>
-
-            {!isPackagingFlow ? (
-              <div className="form-group">
-                <label htmlFor="enquiry-application" className="form-label">
-                  Application or product <span className="optional-marker">(Optional)</span>
-                </label>
-                <input
-                  type="text"
-                  id="enquiry-application"
-                  name="applicationProduct"
-                  className="form-control"
-                  placeholder="e.g. Modular wardrobes, office fit-out, packing cases"
-                  value={applicationProduct}
-                  onChange={(e) => setApplicationProduct(e.target.value)}
-                />
-              </div>
-            ) : null}
-
+            {/* QUANTITY & UNIT */}
             <div className="form-row-split">
               <div className="form-group">
                 <label htmlFor="enquiry-quantity" className="form-label">
                   Quantity <span className="optional-marker">(Optional)</span>
                 </label>
+                <span id="quantity-hint" className="field-hint">
+                  Estimated order volume, if known.
+                </span>
                 <input
                   type="text"
                   id="enquiry-quantity"
                   name="quantity"
                   className="form-control"
                   inputMode="numeric"
+                  aria-describedby="quantity-hint"
                   placeholder="e.g. 500"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
@@ -897,10 +895,14 @@ export default function EnquiryFormClient() {
                 <label htmlFor="enquiry-unit" className="form-label">
                   Quantity unit <span className="optional-marker">(Optional)</span>
                 </label>
+                <span id="unit-hint" className="field-hint">
+                  Unit of measure for your estimate.
+                </span>
                 <select
                   id="enquiry-unit"
                   name="quantityUnit"
                   className="form-control"
+                  aria-describedby="unit-hint"
                   value={quantityUnit}
                   onChange={(e) => setQuantityUnit(e.target.value)}
                 >
@@ -914,16 +916,21 @@ export default function EnquiryFormClient() {
               </div>
             </div>
 
+            {/* DELIVERY LOCATION & DATE */}
             <div className="form-row-split">
               <div className="form-group">
                 <label htmlFor="enquiry-destination" className="form-label">
                   Delivery location <span className="optional-marker">(Optional)</span>
                 </label>
+                <span id="destination-hint" className="field-hint">
+                  City and state for dispatch planning.
+                </span>
                 <input
                   type="text"
                   id="enquiry-destination"
                   name="destination"
                   className="form-control"
+                  aria-describedby="destination-hint"
                   placeholder="City and State"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
@@ -934,24 +941,82 @@ export default function EnquiryFormClient() {
                 <label htmlFor="enquiry-date" className="form-label">
                   Required delivery date <span className="optional-marker">(Optional)</span>
                 </label>
+                <span id="date-hint" className="field-hint">
+                  Target dispatch or site delivery date.
+                </span>
                 <input
                   type="date"
                   id="enquiry-date"
                   name="requestedDate"
                   className="form-control"
+                  aria-describedby="date-hint"
                   value={requestedDate}
                   onChange={(e) => setRequestedDate(e.target.value)}
                 />
               </div>
             </div>
 
+            {/* ADDITIONAL REQUIREMENTS / REQUIREMENT DESCRIPTION (SINGLE TEXTAREA, NO DUPLICATE PROMPTS) */}
+            <div className="form-group">
+              <label htmlFor="enquiry-description" className="form-label">
+                {isPackagingFlow ? (
+                  <>
+                    Additional requirements{' '}
+                    {packagingApplication ? (
+                      <span className="optional-marker">(Optional)</span>
+                    ) : (
+                      <span className="required-marker" aria-hidden="true">
+                        *
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    Requirement details{' '}
+                    <span className="required-marker" aria-hidden="true">
+                      *
+                    </span>
+                  </>
+                )}
+              </label>
+              <span id="description-hint" className="field-hint">
+                {isPackagingFlow
+                  ? 'Share what is being packed, expected handling or storage conditions, or any questions for our team.'
+                  : 'Briefly describe your requirement, thickness or dimension preferences, and any questions for our team (minimum 10 characters).'}
+              </span>
+              <textarea
+                id="enquiry-description"
+                name="requirementDescription"
+                className="form-control"
+                maxLength={5000}
+                aria-describedby="description-hint"
+                aria-errormessage="description-error"
+                aria-invalid={step1Errors.requirementDescription ? 'true' : undefined}
+                value={requirementDescription}
+                onChange={(e) => {
+                  setRequirementDescription(e.target.value);
+                  if (e.target.value.trim().length >= 10 || packagingApplication) {
+                    setStep1Errors((prev) => ({ ...prev, requirementDescription: undefined }));
+                  }
+                }}
+              />
+              <span
+                id="description-error"
+                className={`error-msg ${step1Errors.requirementDescription ? 'is-visible' : ''}`}
+              >
+                {step1Errors.requirementDescription ||
+                  'Please enter a brief description of your requirement (at least 10 characters).'}
+              </span>
+            </div>
+
+            {/* SUPPORTING FILES */}
             <div className="form-group">
               <label htmlFor="enquiry-files" className="form-label">
                 Supporting files <span className="optional-marker">(Optional)</span>
               </label>
               <span id="files-hint" className="field-hint">
                 Attach a specification sheet, bill of quantities (BOQ), packing drawing or schedule.
-                Accepted formats: PDF, JPG, PNG. Up to 10MB per file, maximum 3 files.
+                Accepted formats: PDF, JPG, PNG. Maximum 10 MB per file, up to 3 files.
               </span>
               <div className="file-upload-box">
                 <input
@@ -963,23 +1028,25 @@ export default function EnquiryFormClient() {
                   aria-describedby="files-hint"
                   onChange={handleFileChange}
                 />
-                <ul className="file-list" aria-live="polite">
-                  {selectedFiles.map((f, idx) => (
-                    <li key={idx} className="file-list-item">
-                      <span>
-                        {f.name} ({(f.size / 1024).toFixed(1)} KB)
-                      </span>
-                      <button
-                        type="button"
-                        className="file-remove-btn"
-                        aria-label={`Remove attachment ${f.name}`}
-                        onClick={() => removeFile(idx)}
-                      >
-                        Remove
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                {selectedFiles.length > 0 ? (
+                  <ul className="file-list" aria-live="polite">
+                    {selectedFiles.map((f, idx) => (
+                      <li key={idx} className="file-list-item">
+                        <span>
+                          {f.name} ({(f.size / 1024).toFixed(1)} KB)
+                        </span>
+                        <button
+                          type="button"
+                          className="file-remove-btn"
+                          aria-label={`Remove attachment ${f.name}`}
+                          onClick={() => removeFile(idx)}
+                        >
+                          Remove
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
               {fileError ? (
                 <span className="error-msg is-visible" role="alert">
@@ -1012,45 +1079,62 @@ export default function EnquiryFormClient() {
               Step 2 — Contact &amp; organisation details
             </legend>
 
-            <div className="form-group">
-              <label htmlFor="enquiry-name" className="form-label">
-                Full name <span className="required-marker" aria-hidden="true">*</span>
-              </label>
-              <input
-                type="text"
-                id="enquiry-name"
-                name="name"
-                className="form-control"
-                autoComplete="name"
-                aria-errormessage="name-error"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-              <span id="name-error" className="error-msg">
-                Please enter your full name.
-              </span>
+            <div className="form-row-split">
+              <div className="form-group">
+                <label htmlFor="enquiry-name" className="form-label">
+                  Full name <span className="required-marker" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="enquiry-name"
+                  name="name"
+                  className="form-control"
+                  autoComplete="name"
+                  aria-errormessage="name-error"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+                <span id="name-error" className="error-msg">
+                  Please enter your full name.
+                </span>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="enquiry-organisation" className="form-label">
+                  Company, organisation or practice{' '}
+                  <span className="required-marker" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="enquiry-organisation"
+                  name="organisation"
+                  className="form-control"
+                  autoComplete="organization"
+                  aria-errormessage="organisation-error"
+                  value={organisation}
+                  onChange={(e) => setOrganisation(e.target.value)}
+                  required
+                />
+                <span id="organisation-error" className="error-msg">
+                  Please enter your company, organisation or practice name.
+                </span>
+              </div>
             </div>
 
             <div className="form-group">
               <label htmlFor="enquiry-buyer-profile" className="form-label">
-                Your role or organisation type
+                Your role or organisation type <span className="optional-marker">(Optional)</span>
               </label>
-              <span id="buyer-profile-hint" className="field-hint">
-                Packaging manufacturers, fabricators, companies, institutions and independent
-                consultants are welcome to enquire directly.
-              </span>
               <select
                 id="enquiry-buyer-profile"
                 name="buyerProfile"
                 className="form-control"
-                aria-describedby="buyer-profile-hint"
                 value={buyerProfile}
                 onChange={(e) => setBuyerProfile(e.target.value)}
               >
                 <option value="Company or organisation buyer">
-                  Company or organisation buyer (OEM, Packaging Fabricator, Manufacturer, Contractor,
-                  Distributor)
+                  Company or organisation buyer (Manufacturer, Contractor, Procurement, Distributor)
                 </option>
                 <option value="Industrial packaging or packing-case manufacturer">
                   Industrial packaging or packing-case manufacturer
@@ -1066,33 +1150,6 @@ export default function EnquiryFormClient() {
                 </option>
                 <option value="Material or service supplier">Material or service supplier</option>
               </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="enquiry-organisation" className="form-label">
-                Company, organisation or practice{' '}
-                <span className="required-marker" aria-hidden="true">*</span>
-              </label>
-              <span id="organisation-hint" className="field-hint">
-                {buyerProfile.includes('Independent')
-                  ? 'Enter your studio or practice name, or write "Independent Practice" if inquiring individually.'
-                  : 'Registered company name, institution, or independent practice name.'}
-              </span>
-              <input
-                type="text"
-                id="enquiry-organisation"
-                name="organisation"
-                className="form-control"
-                autoComplete="organization"
-                aria-describedby="organisation-hint"
-                aria-errormessage="organisation-error"
-                value={organisation}
-                onChange={(e) => setOrganisation(e.target.value)}
-                required
-              />
-              <span id="organisation-error" className="error-msg">
-                Please enter your company, organisation or practice name.
-              </span>
             </div>
 
             <fieldset className="radio-fieldset">
@@ -1121,7 +1178,7 @@ export default function EnquiryFormClient() {
             <div className="form-row-split">
               <div className="form-group">
                 <label htmlFor="enquiry-email" className="form-label">
-                  Email address
+                  Business email
                 </label>
                 <span id="email-hint" className="field-hint">
                   Format: name@company.com
@@ -1196,8 +1253,7 @@ export default function EnquiryFormClient() {
                 />
                 <span>
                   <strong>Optional updates:</strong> I would like to receive occasional product
-                  documentation updates and corporate announcements from NEOM Panels. (Optional — you
-                  can submit your enquiry without selecting this.)
+                  documentation updates from NEOM Panels. (Optional)
                 </span>
               </label>
             </div>
