@@ -2,10 +2,121 @@ import Link from 'next/link';
 import InteractiveApplicationExplorer from '@/components/InteractiveApplicationExplorer';
 import DocumentRequestButton from '@/components/DocumentRequestButton';
 import HeroInteractiveShowcase from '@/components/HeroInteractiveShowcase';
+import { buildPageMetadata, SITE_URL } from '@/lib/seo';
+
+export const metadata = buildPageMetadata({
+  absoluteTitle:
+    'NEOM Panels | Indian Wood-Panel Manufacturer — Calibrated Furniture, Interior & Industrial Packaging Plywood',
+  description:
+    'NEOM Panels manufactures wood-panel products in India for furniture OEMs, modular kitchens, commercial interior projects and industrial packaging. Home to Starwoods and NEOM Packing Plywood.',
+  path: '/',
+  keywords: [
+    'NEOM Panels',
+    'wood panel manufacturer India',
+    'plywood manufacturer in India',
+    'calibrated plywood manufacturer India',
+    'OEM furniture plywood supplier',
+    'modular kitchen plywood India',
+    'wardrobe grade plywood substrates',
+    'architectural joinery wood panels',
+    'commercial interior plywood BOQ supplier',
+    'industrial packaging plywood manufacturer India',
+    'MR grade packing plywood sheets',
+    'moisture resistant packaging plywood',
+    'plywood for packing cases and crates',
+    'Starwoods plywood India',
+    'NEOM Packing Plywood',
+    'bulk plywood wholesale factory India'
+  ]
+});
+
+const HOME_FAQS = [
+  {
+    question: 'What wood-panel products does NEOM Panels manufacture in India?',
+    answer:
+      'NEOM Panels manufactures calibrated multi-ply wood-panel substrates for serial furniture and OEM production, modular kitchen and wardrobe systems, commercial and institutional interior joinery, and moisture-resistant (MR) packaging-grade plywood for industrial packing cases, crates and protective enclosures.'
+  },
+  {
+    question: 'How do Starwoods and NEOM Packing Plywood fit within NEOM Panels?',
+    answer:
+      'NEOM Panels is the parent wood-panel manufacturing company operating its own production facility in India. Starwoods is NEOM Panels’ brand dedicated to furniture manufacturing, modular cabinetry and interior applications, while NEOM Packing Plywood is our brand dedicated to moisture-resistant (MR) industrial packaging plywood for crates, boxes and logistics components.'
+  },
+  {
+    question: 'What specifications should B2B buyers share when requesting a wood-panel quotation?',
+    answer:
+      'To receive an accurate technical recommendation and commercial quotation, share your end application (furniture carcass, modular shutter, commercial panelling or industrial packing crate), required nominal thickness in mm, sheet dimensions (for example 8 × 4 ft / 2440 × 1220 mm), grade requirement (Interior or MR packaging grade), order quantity (one-time project BOQ or recurring monthly schedule) and delivery destination in India.'
+  },
+  {
+    question: 'Does NEOM Panels support OEM recurring supply and institutional project BOQs?',
+    answer:
+      'Yes. NEOM Panels works directly with furniture OEMs, modular kitchen factories, turnkey interior contractors, industrial packaging fabricators, institutional procurement teams and regional channel partners across India for both scheduled batch supply and phased project deliveries.'
+  }
+];
 
 export default function HomePage() {
+  const homeJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/#manufactured-products`,
+        name: 'NEOM Panels Manufactured Wood-Panel Solutions',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Calibrated Furniture & OEM Panels',
+            description:
+              'Uniform thickness and dense multi-ply core construction engineered for CNC routing, clean edge-banding and serial furniture production.',
+            url: `${SITE_URL}/industries#furniture-oem`
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Modular Kitchen & Wardrobe Substrates',
+            description:
+              'Dimensionally stable wood-panel substrates suited for laminate, veneer or acrylic pressing across wardrobe carcasses and kitchen cabinetry.',
+            url: `${SITE_URL}/industries#modular-furniture`
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Architectural Joinery & Commercial Project Panels',
+            description:
+              'Project-grade wood panels aligned with consultant specifications, tender schedules and commercial fit-out bills of quantities (BOQs).',
+            url: `${SITE_URL}/industries#projects-interiors`
+          },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'Moisture-Resistant (MR) Industrial Packaging Plywood',
+            description:
+              'MR packaging-grade multi-ply plywood engineered for packing cases, export crates, pallet collars, dividers and protective liners.',
+            url: `${SITE_URL}/brands/neom-packing-plywood`
+          }
+        ]
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${SITE_URL}/#faq`,
+        mainEntity: HOME_FAQS.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer
+          }
+        }))
+      }
+    ]
+  };
+
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
+      />
       {/* 1. PARENT COMPANY FLAGSHIP HERO — NEOM PANELS */}
       <section className="hero-section hero-section--dynamic section--architectural-grid">
         <div className="container">
@@ -553,8 +664,135 @@ export default function HomePage() {
               </div>
             </article>
           </div>
+        </div>
+      </section>
 
-          {/* 6. HIGH-CONTRAST PARENT COMPANY B2B COMMAND BANNER */}
+      {/* 6. B2B WOOD-PANEL SPECIFICATION FAQ & SEARCHABLE APPLICATION DIRECTORY */}
+      <section
+        className="section section--warm-white section--no-border reveal-once"
+        aria-labelledby="seo-faq-heading"
+      >
+        <div className="container">
+          <div className="section-header-split">
+            <div>
+              <p className="eyebrow">B2B PROCUREMENT &amp; SPECIFICATION GUIDE</p>
+              <h2 id="seo-faq-heading" className="section-title">
+                Frequently asked questions about sourcing wood panels from NEOM Panels.
+              </h2>
+              <p className="lead-text" style={{ marginBottom: 0 }}>
+                Key technical and commercial answers for furniture OEMs, modular interior
+                fabricators, project contractors, industrial packaging buyers and trade distributors
+                across India.
+              </p>
+            </div>
+            <div className="section-header-actions">
+              <Link href="/resources" className="btn btn--secondary">
+                View All Buyer Checklists →
+              </Link>
+            </div>
+          </div>
+
+          <div style={{ marginTop: 'var(--space-5)' }}>
+            {HOME_FAQS.map((faq, idx) => (
+              <details key={idx} className="guidance-accordion" open={idx === 0}>
+                <summary>
+                  <div>
+                    <span className="spec-label">0{idx + 1} · B2B SOURCING FAQ</span>
+                    <h3 className="subsection-title" style={{ marginBottom: 0 }}>
+                      {faq.question}
+                    </h3>
+                  </div>
+                  <span className="guidance-accordion__action">Read Answer</span>
+                </summary>
+                <div className="guidance-accordion__body">
+                  <p style={{ marginBottom: 0 }}>{faq.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+
+          {/* Semantic B2B Keyword & Specification Directory for Search Indexing & Quick Navigation */}
+          <div className="seo-keyword-directory" aria-label="B2B Wood-Panel Specification Index">
+            <div className="seo-keyword-col">
+              <h3 className="seo-keyword-heading">Furniture &amp; Modular Interior Substrates</h3>
+              <ul className="seo-keyword-list" role="list">
+                <li>
+                  <Link href="/industries#furniture-oem">
+                    Calibrated Plywood for Serial Furniture &amp; OEM Manufacturing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/industries#modular-furniture">
+                    Modular Kitchen Carcass &amp; Wardrobe Plywood Substrates
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/brands#starwoods">
+                    Starwoods Interior &amp; Furniture-Grade Wood Panels
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/manufacturing">
+                    Multi-Ply Hardwood Core &amp; Precision Thickness Calibration
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="seo-keyword-col">
+              <h3 className="seo-keyword-heading">Commercial Projects &amp; Institutional Supply</h3>
+              <ul className="seo-keyword-list" role="list">
+                <li>
+                  <Link href="/industries#projects-interiors">
+                    Architectural Joinery &amp; Commercial Fit-Out Panel Supply
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/industries#institutions-procurement">
+                    Institutional &amp; Public-Sector Wood-Panel Procurement (BOQs)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/industries#distributors-channel">
+                    Regional Plywood Distributor &amp; Trade Channel Partnerships
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/governance">
+                    Corporate Governance, Quality Policy &amp; Vendor Compliance
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="seo-keyword-col">
+              <h3 className="seo-keyword-heading">Industrial Packaging &amp; Crating Plywood</h3>
+              <ul className="seo-keyword-list" role="list">
+                <li>
+                  <Link href="/brands/neom-packing-plywood">
+                    NEOM Packing Plywood — Moisture-Resistant (MR) Grade
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/brands/neom-packing-plywood#applications">
+                    Plywood for Industrial Packing Cases, Crates &amp; Enclosures
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/brands/neom-packing-plywood#specifications">
+                    Packaging Plywood Thickness, Sheet Dimensions &amp; Bulk Supply
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/enquiry?brand=neom-packing-plywood&category=industrial-packaging">
+                    Request an Industrial Packing Plywood Quotation in India
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* 7. HIGH-CONTRAST PARENT COMPANY B2B COMMAND BANNER */}
           <div className="home-cta-command-banner">
             <div className="home-cta-command-copy">
               <p className="home-cta-command-eyebrow">NEOM PANELS · COMMERCIAL &amp; TECHNICAL DESK</p>

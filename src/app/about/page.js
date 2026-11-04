@@ -1,17 +1,48 @@
 import Link from 'next/link';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
-  title: 'About NEOM — Indian Wood-Panel Manufacturing Business',
+export const metadata = buildPageMetadata({
+  title: 'About NEOM Panels — Indian Wood-Panel Manufacturing Company',
   description:
-    'Indian wood-panel manufacturing. Home to Starwoods and NEOM Packing Plywood. Learn about NEOM Panels’ purpose, vision, mission and operating principles.',
-  alternates: {
-    canonical: '/about'
-  }
-};
+    'NEOM Panels is an Indian wood-panel manufacturing business and the company behind Starwoods and NEOM Packing Plywood. Learn about our factory, purpose, vision, mission and operating principles.',
+  path: '/about',
+  ogImage: '/assets/hero-neom-flagship.jpg',
+  ogImageAlt: 'About NEOM Panels — Indian Wood-Panel Manufacturing Company',
+  keywords: [
+    'about NEOM Panels',
+    'Indian wood panel manufacturing company',
+    'plywood manufacturer corporate profile India',
+    'Starwoods parent company NEOM Panels',
+    'NEOM Packing Plywood manufacturer',
+    'direct factory wood panel company India'
+  ]
+});
 
 export default function AboutPage() {
+  const aboutJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'About NEOM', path: '/about' }
+      ]),
+      {
+        '@type': 'AboutPage',
+        '@id': `${SITE_URL}/about#webpage`,
+        name: 'About NEOM Panels — Indian Wood-Panel Manufacturing Business',
+        url: `${SITE_URL}/about`,
+        description:
+          'NEOM Panels is an Indian wood-panel manufacturing business and the company behind Starwoods and NEOM Packing Plywood.'
+      }
+    ]
+  };
+
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
+      />
       <section className="page-header section--architectural-grid">
         <div className="container hero-split">
           <div className="hero-animate">

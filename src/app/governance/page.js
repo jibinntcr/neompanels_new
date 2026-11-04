@@ -1,22 +1,51 @@
 import Link from 'next/link';
 import { getSiteContent } from '@/lib/storage';
 import DocumentRequestButton from '@/components/DocumentRequestButton';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Governance & Corporate Information — NEOM Panels',
   description:
-    'Corporate structure, official company information, and adopted policies for customers, suppliers, institutional buyers, and stakeholders of NEOM Panels.',
-  alternates: {
-    canonical: '/governance'
-  }
-};
+    'Corporate structure, official company information, vendor onboarding details and adopted governance policies for customers, suppliers, institutional buyers and stakeholders of NEOM Panels.',
+  path: '/governance',
+  ogImage: '/assets/hero-neom-flagship.jpg',
+  ogImageAlt: 'NEOM Panels Corporate Governance and Adopted Policies',
+  keywords: [
+    'NEOM Panels corporate governance',
+    'NEOM Panels vendor onboarding information',
+    'wood panel manufacturer quality policy India',
+    'institutional supplier compliance wood panels',
+    'corporate policies NEOM Panels'
+  ]
+});
 
 export default function GovernancePage() {
   const siteData = getSiteContent();
   const governance = siteData.governance || { companyInfo: [], policies: [] };
+  const governanceJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Governance & Corporate Information', path: '/governance' }
+      ]),
+      {
+        '@type': 'WebPage',
+        '@id': `${SITE_URL}/governance#webpage`,
+        name: 'Governance & Corporate Information — NEOM Panels',
+        url: `${SITE_URL}/governance`,
+        description:
+          'Corporate structure, official company information and adopted policies for customers, suppliers and institutional buyers of NEOM Panels.'
+      }
+    ]
+  };
 
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(governanceJsonLd) }}
+      />
       {/* PAGE HEADER */}
       <section
         className="page-header section--architectural-grid"

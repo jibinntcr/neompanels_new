@@ -1,17 +1,68 @@
 import Link from 'next/link';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Brands — Starwoods & NEOM Packing Plywood',
   description:
-    'Explore NEOM Panels’ product brands: Starwoods for furniture and interior applications, and NEOM Packing Plywood for moisture-resistant industrial packaging.',
-  alternates: {
-    canonical: '/brands'
-  }
-};
+    'Explore NEOM Panels’ product brands: Starwoods for furniture, modular interiors and commercial fit-outs, and NEOM Packing Plywood for moisture-resistant (MR) industrial packaging.',
+  path: '/brands',
+  ogImage: '/assets/starwoods-brand-showcase.jpg',
+  ogImageAlt: 'NEOM Panels Product Brands — Starwoods and NEOM Packing Plywood',
+  keywords: [
+    'NEOM Panels brands',
+    'Starwoods plywood',
+    'Starwoods furniture and interior panels',
+    'NEOM Packing Plywood',
+    'moisture resistant industrial packaging plywood',
+    'plywood brands in India',
+    'furniture grade plywood brand India',
+    'packing plywood brand India'
+  ]
+});
 
 export default function BrandsPage() {
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Brands', path: '/brands' }
+  ]);
+
+  const brandsCollectionJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${SITE_URL}/brands#webpage`,
+    name: 'NEOM Panels Brands — Starwoods & NEOM Packing Plywood',
+    url: `${SITE_URL}/brands`,
+    description:
+      'Explore NEOM Panels’ product brands: Starwoods for furniture and interior applications, and NEOM Packing Plywood for moisture-resistant industrial packaging.',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Starwoods — Furniture & Interior Applications',
+          url: `${SITE_URL}/brands#starwoods`
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'NEOM Packing Plywood — Moisture-Resistant Industrial Packaging',
+          url: `${SITE_URL}/brands/neom-packing-plywood`
+        }
+      ]
+    }
+  };
+
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(brandsCollectionJsonLd) }}
+      />
       <section className="page-header section--architectural-grid">
         <div className="container hero-split">
           <div className="hero-animate">

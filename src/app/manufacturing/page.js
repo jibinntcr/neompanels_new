@@ -1,14 +1,25 @@
 import Link from 'next/link';
 import { getSiteContent } from '@/lib/storage';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Manufacturing — Wood-Panel Production & Quality Checks',
+export const metadata = buildPageMetadata({
+  title: 'Manufacturing — Wood-Panel Production, Calibration & Quality Checks',
   description:
-    'NEOM Panels operates its own wood-panel manufacturing facility in India, covering material selection, panel pressing and calibration, dimensional and surface checks, and palletised dispatch.',
-  alternates: {
-    canonical: '/manufacturing'
-  }
-};
+    'NEOM Panels operates its own wood-panel manufacturing facility in India, covering timber and veneer selection, hot-press bonding, thickness calibration, 4-stage quality inspection and palletised B2B dispatch.',
+  path: '/manufacturing',
+  ogImage: '/assets/illustration-manufacturing.png',
+  ogImageAlt: 'NEOM Panels Wood-Panel Manufacturing Process and Panel Inspection in India',
+  keywords: [
+    'wood panel manufacturing facility India',
+    'calibrated plywood factory India',
+    'multi-ply core hot press bonding',
+    'plywood thickness calibration process',
+    '4-stage plywood quality inspection',
+    'veneer grading and moisture conditioning',
+    'direct factory plywood supply India',
+    'NEOM Panels manufacturing plant'
+  ]
+});
 
 const MANUFACTURING_STAGES = [
   {
@@ -40,9 +51,30 @@ const MANUFACTURING_STAGES = [
 export default function ManufacturingPage() {
   const siteData = getSiteContent();
   const params = siteData.manufacturingParameters || [];
+  const manufacturingJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Manufacturing', path: '/manufacturing' }
+      ]),
+      {
+        '@type': 'WebPage',
+        '@id': `${SITE_URL}/manufacturing#webpage`,
+        name: 'Wood-Panel Manufacturing & Quality Control — NEOM Panels',
+        url: `${SITE_URL}/manufacturing`,
+        description:
+          'Material selection, multi-ply layup and hot-pressing, dimensional and surface inspection, and palletised dispatch at NEOM Panels in India.'
+      }
+    ]
+  };
 
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(manufacturingJsonLd) }}
+      />
       {/* Page Header */}
       <section className="page-header section--architectural-grid">
         <div className="container hero-split">

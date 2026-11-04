@@ -1,23 +1,54 @@
 import Link from 'next/link';
 import { getSiteContent } from '@/lib/storage';
 import DocumentRequestButton from '@/components/DocumentRequestButton';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Resources & Technical Documents — NEOM Panels',
+export const metadata = buildPageMetadata({
+  title: 'Resources, Technical Documents & Buyer Checklists',
   description:
-    'Request corporate profiles, Starwoods and NEOM Packing Plywood brand literature, technical specification sheets, and practical B2B buyer guidance from NEOM Panels.',
-  alternates: {
-    canonical: '/resources'
-  }
-};
+    'Request NEOM Panels corporate profiles, Starwoods and NEOM Packing Plywood brand literature, technical specification sheets, and practical B2B wood-panel buyer checklists.',
+  path: '/resources',
+  ogImage: '/assets/illustration-home-materials.jpg',
+  ogImageAlt: 'NEOM Panels — Wood-Panel Specification Literature and B2B Buyer Checklists',
+  keywords: [
+    'plywood technical specification sheets India',
+    'wood panel B2B buyer checklist',
+    'Starwoods product catalogue download',
+    'NEOM Packing Plywood technical datasheet',
+    'MR grade vs waterproof plywood specification guide',
+    'furniture and interior plywood BOQ checklist',
+    'industrial packaging plywood handling guide'
+  ]
+});
 
 export default function ResourcesPage() {
   const siteData = getSiteContent();
   const docCategories = siteData.resourceCategories || [];
   const guides = siteData.buyerGuidance || [];
+  const resourcesJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Resources & Technical Documents', path: '/resources' }
+      ]),
+      {
+        '@type': 'CollectionPage',
+        '@id': `${SITE_URL}/resources#webpage`,
+        name: 'Resources, Technical Documents & Buyer Checklists — NEOM Panels',
+        url: `${SITE_URL}/resources`,
+        description:
+          'Request corporate profiles, Starwoods and NEOM Packing Plywood literature, technical specification sheets and B2B buyer checklists.'
+      }
+    ]
+  };
 
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(resourcesJsonLd) }}
+      />
       {/* PAGE HEADER */}
       <section
         className="page-header section--architectural-grid"

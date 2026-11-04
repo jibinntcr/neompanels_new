@@ -2,21 +2,52 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import EnquiryFormClient from '@/components/EnquiryFormClient';
 import { getVerifiedContactDetails } from '@/lib/storage';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Business Enquiry — NEOM Panels',
+export const metadata = buildPageMetadata({
+  title: 'Business Enquiry & Wood-Panel Quotation Request',
   description:
-    'Share details about your company and wood-panel requirement for Starwoods or NEOM Packing Plywood to request technical documents or a quotation.',
-  alternates: {
-    canonical: '/enquiry'
-  }
-};
+    'Submit a B2B enquiry to NEOM Panels. Share your required panel thickness, sheet dimensions, application and volume for Starwoods, NEOM Packing Plywood, OEM manufacturing or project supply in India.',
+  path: '/enquiry',
+  ogImage: '/assets/illustration-enquiry.jpg',
+  ogImageAlt: 'NEOM Panels — Submit a B2B Wood-Panel Quotation or Technical Document Request',
+  keywords: [
+    'request plywood quotation India',
+    'NEOM Panels business enquiry',
+    'bulk plywood wholesale enquiry India',
+    'Starwoods plywood dealer enquiry',
+    'NEOM Packing Plywood quotation request',
+    'OEM furniture plywood quote India',
+    'commercial project plywood BOQ enquiry'
+  ]
+});
 
 export default function EnquiryPage() {
   const contactDetails = getVerifiedContactDetails();
+  const enquiryJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Business Enquiry', path: '/enquiry' }
+      ]),
+      {
+        '@type': 'ContactPage',
+        '@id': `${SITE_URL}/enquiry#webpage`,
+        name: 'Business Enquiry & Quotation Request — NEOM Panels',
+        url: `${SITE_URL}/enquiry`,
+        description:
+          'Submit a business enquiry to NEOM Panels for wood-panel product information, technical documents or B2B quotations across India.'
+      }
+    ]
+  };
 
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(enquiryJsonLd) }}
+      />
       {/* PAGE HEADER */}
       <section
         className="page-header section--architectural-grid"

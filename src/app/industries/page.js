@@ -1,14 +1,50 @@
 import Link from 'next/link';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Industries & Applications — B2B Wood-Panel Requirements',
+export const metadata = buildPageMetadata({
+  title: 'Industries & Applications — B2B Wood-Panel Specifications',
   description:
-    'Start with the application. Share your panel specification and purchasing requirements for furniture manufacturing, modular systems, commercial interiors, industrial packaging, institutional procurement or distribution.'
-};
+    'Start with the application. Explore NEOM Panels’ B2B wood-panel solutions for furniture OEMs, modular kitchens and wardrobes, commercial interiors, institutional procurement, industrial packaging and regional distribution in India.',
+  path: '/industries',
+  ogImage: '/assets/industry-furniture-oem.jpg',
+  ogImageAlt: 'NEOM Panels — B2B Wood-Panel Applications for Furniture OEMs, Modular Interiors and Packaging',
+  keywords: [
+    'furniture OEM plywood supplier India',
+    'modular kitchen carcass plywood India',
+    'wardrobe shutter calibrated plywood',
+    'commercial interior fit-out wood panels',
+    'institutional plywood procurement India',
+    'industrial packaging and crating plywood',
+    'plywood distributor and dealer network India',
+    'custom wood panel OEM manufacturing India'
+  ]
+});
 
 export default function IndustriesPage() {
+  const industriesJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Industries & Applications', path: '/industries' }
+      ]),
+      {
+        '@type': 'CollectionPage',
+        '@id': `${SITE_URL}/industries#webpage`,
+        name: 'Industries & Wood-Panel Applications — NEOM Panels',
+        url: `${SITE_URL}/industries`,
+        description:
+          'Application-first B2B wood-panel guidance for furniture OEMs, modular systems, commercial projects, institutions, industrial packaging and distributors.'
+      }
+    ]
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(industriesJsonLd) }}
+      />
       <section className="page-header section--architectural-grid">
         <div className="container hero-animate">
           <p className="eyebrow">INDUSTRIES &amp; BUYER CONTEXTS</p>

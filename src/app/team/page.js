@@ -1,13 +1,22 @@
 import Link from 'next/link';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Our Leadership — The People Behind NEOM Panels',
   description:
-    'NEOM Panels brings together experience in business, technology, wood panel solutions and people development. Meet our leadership team.',
-  alternates: {
-    canonical: '/team'
-  }
-};
+    'NEOM Panels brings together executive experience in wood-panel manufacturing, business operations, technology and people development. Meet Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.',
+  path: '/team',
+  ogImage: '/assets/hero-neom-flagship.jpg',
+  ogImageAlt: 'NEOM Panels Executive Leadership Team',
+  keywords: [
+    'NEOM Panels leadership team',
+    'Jibin N Managing Director NEOM Panels',
+    'Muneer K H CEO NEOM Panels',
+    'Muhamad Raneef T A CFO NEOM Panels',
+    'Muhammed Jabir CTO NEOM Panels',
+    'wood panel manufacturing leadership India'
+  ]
+});
 
 const LEADERSHIP_TEAM = [
   {
@@ -53,8 +62,35 @@ const LEADERSHIP_TEAM = [
 ];
 
 export default function TeamPage() {
+  const teamJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Our Leadership', path: '/team' }
+      ]),
+      ...LEADERSHIP_TEAM.map((member) => ({
+        '@type': 'Person',
+        name: member.name,
+        jobTitle: member.role,
+        description: member.bio,
+        image: `${SITE_URL}${member.photo}`,
+        worksFor: {
+          '@type': 'Organization',
+          name: 'NEOM Panels',
+          url: SITE_URL
+        },
+        ...(member.linkedin ? { sameAs: [member.linkedin] } : {})
+      }))
+    ]
+  };
+
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(teamJsonLd) }}
+      />
       {/* PAGE HEADER */}
       <section
         className="page-header section--architectural-grid"
