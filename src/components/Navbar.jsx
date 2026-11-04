@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useLanguage } from '@/components/LanguageProvider';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { lang, setLang, detectedRegion } = useLanguage();
   const [openMenu, setOpenMenu] = useState(null); // 'company' | 'brands' | null
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -108,35 +106,6 @@ export default function Navbar() {
               <Link href="/team" className="utility-link">
                 Leadership
               </Link>
-            </li>
-            <li data-no-translate="true" className="utility-lang-item">
-              <div
-                className="lang-toggle-pill lang-toggle-pill--utility"
-                role="group"
-                aria-label="Select website language / भाषा चुनें"
-              >
-                {detectedRegion ? (
-                  <span className="lang-region-chip" title={`Region detected: ${detectedRegion}`}>
-                    📍 {detectedRegion}
-                  </span>
-                ) : null}
-                <button
-                  type="button"
-                  onClick={() => setLang('en')}
-                  className={`lang-toggle-btn ${lang === 'en' ? 'is-active' : ''}`}
-                  aria-pressed={lang === 'en'}
-                >
-                  EN
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLang('hi')}
-                  className={`lang-toggle-btn ${lang === 'hi' ? 'is-active' : ''}`}
-                  aria-pressed={lang === 'hi'}
-                >
-                  हिन्दी
-                </button>
-              </div>
             </li>
           </ul>
         </div>
@@ -406,88 +375,34 @@ export default function Navbar() {
               </li>
             </ul>
 
-            <div className="nav-header-actions">
-              <div
-                className="lang-toggle-pill"
-                data-no-translate="true"
-                role="group"
-                aria-label="Language toggle: English or Hindi"
-              >
-                <button
-                  type="button"
-                  onClick={() => setLang('en')}
-                  className={`lang-toggle-btn ${lang === 'en' ? 'is-active' : ''}`}
-                  aria-pressed={lang === 'en'}
-                  title="Switch to English"
-                >
-                  EN
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLang('hi')}
-                  className={`lang-toggle-btn ${lang === 'hi' ? 'is-active' : ''}`}
-                  aria-pressed={lang === 'hi'}
-                  title="हिन्दी में देखें (Switch to Hindi)"
-                >
-                  हिन्दी
-                </button>
-              </div>
-
-              <Link
-                href="/enquiry"
-                className="btn btn--primary nav-cta-btn"
-                aria-current={pathname === '/enquiry' ? 'page' : undefined}
-              >
-                Business Enquiry
-              </Link>
-            </div>
+            <Link
+              href="/enquiry"
+              className="btn btn--primary nav-cta-btn"
+              aria-current={pathname === '/enquiry' ? 'page' : undefined}
+            >
+              Business Enquiry
+            </Link>
           </nav>
 
-          <div className="mobile-header-controls">
-            <div
-              className="lang-toggle-pill lang-toggle-pill--mobile"
-              data-no-translate="true"
-              role="group"
-              aria-label="Language toggle"
-            >
-              <button
-                type="button"
-                onClick={() => setLang('en')}
-                className={`lang-toggle-btn ${lang === 'en' ? 'is-active' : ''}`}
-                aria-pressed={lang === 'en'}
-              >
-                EN
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang('hi')}
-                className={`lang-toggle-btn ${lang === 'hi' ? 'is-active' : ''}`}
-                aria-pressed={lang === 'hi'}
-              >
-                हिन्दी
-              </button>
-            </div>
-
-            <button
-              type="button"
-              className="mobile-menu-toggle"
-              id="mobile-menu-toggle"
-              aria-expanded={mobileOpen ? 'true' : 'false'}
-              aria-controls="mobile-nav-panel"
-              onClick={() => setMobileOpen((prev) => !prev)}
-            >
-              <span className="mobile-menu-label">{mobileOpen ? 'Close' : 'Menu'}</span>
-              <svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14">
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  d="M1 1h16M1 7h16M1 13h16"
-                />
-              </svg>
-            </button>
-          </div>
+          <button
+            type="button"
+            className="mobile-menu-toggle"
+            id="mobile-menu-toggle"
+            aria-expanded={mobileOpen ? 'true' : 'false'}
+            aria-controls="mobile-nav-panel"
+            onClick={() => setMobileOpen((prev) => !prev)}
+          >
+            <span className="mobile-menu-label">{mobileOpen ? 'Close' : 'Menu'}</span>
+            <svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14">
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                d="M1 1h16M1 7h16M1 13h16"
+              />
+            </svg>
+          </button>
         </div>
 
         <nav

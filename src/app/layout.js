@@ -2,7 +2,6 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PublicLayoutChrome from '@/components/PublicLayoutChrome';
-import { LanguageProvider } from '@/components/LanguageProvider';
 import ScrollRevealObserver from '@/components/ScrollRevealObserver';
 import PageReloadLoader from '@/components/PageReloadLoader';
 import { getVerifiedContactDetails } from '@/lib/storage';
@@ -93,7 +92,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap"
         />
       </head>
       <body>
@@ -101,20 +100,18 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
-        <LanguageProvider>
-          <PageReloadLoader />
-          <a href="#main-heading" className="skip-link visually-hidden">
-            Skip to main content
-          </a>
-          <PublicLayoutChrome>
-            <Navbar />
-          </PublicLayoutChrome>
-          {children}
-          <PublicLayoutChrome>
-            <Footer />
-          </PublicLayoutChrome>
-          <ScrollRevealObserver />
-        </LanguageProvider>
+        <PageReloadLoader />
+        <a href="#main-heading" className="skip-link visually-hidden">
+          Skip to main content
+        </a>
+        <PublicLayoutChrome>
+          <Navbar />
+        </PublicLayoutChrome>
+        {children}
+        <PublicLayoutChrome>
+          <Footer />
+        </PublicLayoutChrome>
+        <ScrollRevealObserver />
       </body>
     </html>
   );
