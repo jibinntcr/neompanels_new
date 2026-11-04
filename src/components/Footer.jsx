@@ -181,6 +181,16 @@ export default function Footer() {
           <p>© 2026 NEOM Panels. All rights reserved.</p>
           <ul className="footer-legal-links" role="list">
             <li>
+              <Link href="/site-map" className="footer-link">
+                Site Map
+              </Link>
+            </li>
+            <li>
+              <a href="/sitemap.xml" className="footer-link">
+                XML Sitemap
+              </a>
+            </li>
+            <li>
               <Link href="/privacy" className="footer-link">
                 Privacy Notice
               </Link>

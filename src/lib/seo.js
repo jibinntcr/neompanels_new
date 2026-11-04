@@ -22,7 +22,84 @@ export const CORE_SEO_KEYWORDS = [
   'multi-ply hardwood core panels',
   'direct factory plywood supply India',
   'institutional plywood procurement India',
-  'bulk plywood wholesale supplier India'
+  'bulk plywood wholesale supplier India',
+  'plywood manufacturer Kerala India',
+  'commercial grade MR plywood wholesale'
+];
+
+export const SITE_NAVIGATION_ITEMS = [
+  {
+    name: 'Home — NEOM Panels Wood-Panel Manufacturing',
+    path: '/',
+    description:
+      'Parent company overview, core manufactured panel substrates, material architecture and B2B specification desk.'
+  },
+  {
+    name: 'Brands — Starwoods & NEOM Packing Plywood',
+    path: '/brands',
+    description:
+      'Brand architecture showing NEOM Panels as parent company behind Starwoods and NEOM Packing Plywood.'
+  },
+  {
+    name: 'NEOM Packing Plywood — Moisture-Resistant Industrial Packaging',
+    path: '/brands/neom-packing-plywood',
+    description:
+      'MR packaging-grade plywood for packing cases, export crates, pallet collars, dividers and protective enclosures.'
+  },
+  {
+    name: 'Manufacturing — Production, Calibration & 4-Stage Quality Checks',
+    path: '/manufacturing',
+    description:
+      'In-house wood-panel production in India covering material selection, pressing, calibration, inspection and palletised dispatch.'
+  },
+  {
+    name: 'Industries & Applications — B2B Buyer Contexts',
+    path: '/industries',
+    description:
+      'Specification guidance for furniture OEMs, modular kitchens, commercial interiors, institutional procurement, industrial packaging and distributors.'
+  },
+  {
+    name: 'Resources & Technical Documents',
+    path: '/resources',
+    description:
+      'Corporate profiles, Starwoods and NEOM Packing Plywood literature, technical specification sheets and B2B buyer checklists.'
+  },
+  {
+    name: 'Sustainability — Responsible Wood-Panel Operations',
+    path: '/sustainability',
+    description:
+      'Practical sustainability across timber and agro-forestry veneer sourcing, material efficiency, workplace safety and durable panels.'
+  },
+  {
+    name: 'About NEOM Panels',
+    path: '/about',
+    description:
+      'Company background, purpose, vision, mission and operating principles of NEOM Panels.'
+  },
+  {
+    name: 'Our Leadership Team',
+    path: '/team',
+    description:
+      'Executive leadership team guiding NEOM Panels: Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.'
+  },
+  {
+    name: 'Governance & Corporate Information',
+    path: '/governance',
+    description:
+      'Official company facts, vendor onboarding details and adopted corporate governance policies.'
+  },
+  {
+    name: 'Business Enquiry & Quotation Request',
+    path: '/enquiry',
+    description:
+      'Direct B2B enquiry form for Starwoods, NEOM Packing Plywood, OEM manufacturing, project BOQs and distribution partnerships.'
+  },
+  {
+    name: 'HTML Site Map & Crawler Index',
+    path: '/site-map',
+    description:
+      'Complete structural site plan of all pages, product categories, industry applications and specification anchors.'
+  }
 ];
 
 export function buildPageMetadata({
@@ -49,7 +126,12 @@ export function buildPageMetadata({
     publisher: 'NEOM Panels',
     category: 'Wood-Panel Manufacturing & Industrial B2B Supply',
     alternates: {
-      canonical: canonicalPath
+      canonical: canonicalPath,
+      languages: {
+        'en-IN': canonicalPath,
+        en: canonicalPath,
+        'x-default': canonicalPath
+      }
     },
     robots: {
       index: true,
@@ -99,22 +181,42 @@ export function getOrganizationJsonLd(contact = {}) {
         name: 'NEOM Panels',
         legalName: 'NEOM Panels',
         url: SITE_URL,
-        logo: `${SITE_URL}/assets/logo-header.png`,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}/assets/logo-header.png`,
+          width: 970,
+          height: 316
+        },
         image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
         slogan: 'ENGINEERED EXCELLENCE, DESIGNED FOR SPACES',
         description:
           'NEOM Panels is an Indian wood-panel manufacturing company producing calibrated furniture panels, modular interior substrates, architectural joinery panels and moisture-resistant industrial packaging plywood. Home to Starwoods and NEOM Packing Plywood.',
-        areaServed: {
-          '@type': 'Country',
-          name: 'India'
-        },
+        areaServed: [
+          { '@type': 'Country', name: 'India' },
+          { '@type': 'AdministrativeArea', name: 'Kerala' },
+          { '@type': 'AdministrativeArea', name: 'Karnataka' },
+          { '@type': 'AdministrativeArea', name: 'Tamil Nadu' },
+          { '@type': 'AdministrativeArea', name: 'Maharashtra' },
+          { '@type': 'AdministrativeArea', name: 'Telangana' },
+          { '@type': 'AdministrativeArea', name: 'Gujarat' },
+          { '@type': 'AdministrativeArea', name: 'Delhi NCR' }
+        ],
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'IN',
           addressRegion: contact.address || contact.factoryLocation || 'India'
         },
-        ...(contact.email ? { email: contact.email } : {}),
-        ...(contact.phone ? { telephone: contact.phone } : {}),
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            contactType: 'sales',
+            areaServed: 'IN',
+            availableLanguage: ['English', 'Hindi', 'Malayalam'],
+            url: `${SITE_URL}/enquiry`,
+            ...(contact.email ? { email: contact.email } : {}),
+            ...(contact.phone ? { telephone: contact.phone } : {})
+          }
+        ],
         knowsAbout: [
           'Wood-Panel Manufacturing',
           'Calibrated Plywood Substrates',
@@ -131,6 +233,7 @@ export function getOrganizationJsonLd(contact = {}) {
             '@id': `${SITE_URL}/brands#starwoods`,
             name: 'Starwoods',
             url: `${SITE_URL}/brands#starwoods`,
+            logo: `${SITE_URL}/assets/starwood-logo.png`,
             description:
               'NEOM Panels product brand for calibrated furniture manufacturing, modular kitchen and wardrobe interiors, and commercial fit-out applications.'
           },
@@ -139,6 +242,7 @@ export function getOrganizationJsonLd(contact = {}) {
             '@id': `${SITE_URL}/brands/neom-packing-plywood#brand`,
             name: 'NEOM Packing Plywood',
             url: `${SITE_URL}/brands/neom-packing-plywood`,
+            logo: `${SITE_URL}/assets/neom-packing-plywood-logo.svg`,
             description:
               'Moisture-resistant (MR) packaging-grade plywood for industrial packing cases, heavy-duty crates, pallet collars, dividers and protective enclosures.'
           }
@@ -183,6 +287,18 @@ export function getOrganizationJsonLd(contact = {}) {
           '@id': `${SITE_URL}/#organization`
         },
         inLanguage: 'en-IN'
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/#sitenavigation`,
+        name: 'NEOM Panels Primary Site Navigation',
+        itemListElement: SITE_NAVIGATION_ITEMS.map((nav, index) => ({
+          '@type': 'SiteNavigationElement',
+          position: index + 1,
+          name: nav.name,
+          description: nav.description,
+          url: nav.path === '/' ? SITE_URL : `${SITE_URL}${nav.path}`
+        }))
       }
     ]
   };
