@@ -25,41 +25,18 @@ export default function Footer() {
             </Link>
             <p className="secondary-text" style={{ marginBottom: '0.875rem' }}>
               NEOM Panels manufactures wood-panel products for furniture, interior projects and
-              industrial packaging. Home to Starwoods and NEOM Packing Plywood.
+              industrial packaging from its dedicated facility in India.
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.625rem' }}>
-              <Link
-                href="/brands#starwoods"
-                className="footer-brand-badge"
-                aria-label="Explore Starwoods — A NEOM Panels Brand"
-              >
-                <span className="footer-badge-label">Furniture &amp; Interiors</span>
-                <img
-                  src="/assets/starwood-logo.png"
-                  alt="Starwoods — The Plywood Specialist"
-                  className="starwood-logo-img--xs"
-                  width="619"
-                  height="177"
-                  loading="lazy"
-                />
+            <p className="caption" style={{ margin: 0, color: 'var(--color-secondary)' }}>
+              <strong>Product Brands:</strong>{' '}
+              <Link href="/brands#starwoods" className="footer-contact-link">
+                Starwoods
+              </Link>{' '}
+              ·{' '}
+              <Link href="/brands/neom-packing-plywood" className="footer-contact-link">
+                NEOM Packing Plywood
               </Link>
-
-              <Link
-                href="/brands/neom-packing-plywood"
-                className="footer-brand-badge"
-                aria-label="Explore NEOM Packing Plywood — A NEOM Panels Brand"
-              >
-                <span className="footer-badge-label">Industrial Packaging</span>
-                <img
-                  src="/assets/neom-packing-plywood-logo-compact.svg"
-                  alt="NEOM Packing Plywood"
-                  className="packing-logo-img--xs"
-                  width="540"
-                  height="112"
-                  loading="lazy"
-                />
-              </Link>
-            </div>
+            </p>
           </div>
 
           <nav aria-label="Footer Company">
@@ -119,6 +96,11 @@ export default function Footer() {
               <li>
                 <Link href="/resources" className="footer-link">
                   Resources &amp; Documents
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="footer-link">
+                  SEO Blog &amp; Company News
                 </Link>
               </li>
             </ul>
@@ -203,6 +185,21 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>© 2026 NEOM Panels. All rights reserved.</p>
           <ul className="footer-legal-links" role="list">
+            <li>
+              <Link href="/blog" className="footer-link">
+                Insights &amp; News
+              </Link>
+            </li>
+            <li>
+              <Link href="/site-map" className="footer-link">
+                Site Map
+              </Link>
+            </li>
+            <li>
+              <a href="/sitemap.xml" className="footer-link">
+                XML Sitemap
+              </a>
+            </li>
             <li>
               <Link href="/privacy" className="footer-link">
                 Privacy Notice

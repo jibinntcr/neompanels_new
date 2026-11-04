@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import SecurityCaptcha from '@/components/SecurityCaptcha';
 import {
   ENQUIRY_BRANDS,
   ENQUIRY_CATEGORIES,
@@ -113,6 +114,8 @@ export default function EnquiryFormClient() {
   // Validation & Submission state
   const [step1Errors, setStep1Errors] = useState({});
   const [contactError, setContactError] = useState('');
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [captchaData, setCaptchaData] = useState({ expected: 'NP74K', answer: '' });
   const [submitting, setSubmitting] = useState(false);
   const [serverErrors, setServerErrors] = useState([]);
   const [submissionFailed, setSubmissionFailed] = useState(false);
@@ -321,6 +324,10 @@ export default function EnquiryFormClient() {
       );
       return false;
     }
+    if (!captchaVerified) {
+      setContactError('Please enter the 5-character security verification code shown below.');
+      return false;
+    }
     return true;
   };
 
@@ -377,6 +384,8 @@ export default function EnquiryFormClient() {
     formData.append('email', email.trim());
     formData.append('phone', phone.trim());
     formData.append('marketingConsent', marketingConsent ? 'true' : 'false');
+    formData.append('captchaExpected', captchaData.expected);
+    formData.append('captchaAnswer', captchaData.answer);
 
     for (const file of selectedFiles) {
       formData.append('attachments', file, file.name);
@@ -1256,6 +1265,17 @@ export default function EnquiryFormClient() {
                   documentation updates from NEOM Panels. (Optional)
                 </span>
               </label>
+            </div>
+
+            <div style={{ marginTop: 'var(--space-4)' }}>
+              <SecurityCaptcha
+                idPrefix="enquiry-captcha"
+                onVerifyChange={(valid, data) => {
+                  setCaptchaVerified(valid);
+                  setCaptchaData(data);
+                  if (valid) setContactError('');
+                }}
+              />
             </div>
 
             <div className="btn-group" style={{ marginTop: 'var(--space-5)' }}>

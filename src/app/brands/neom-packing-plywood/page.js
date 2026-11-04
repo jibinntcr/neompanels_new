@@ -1,16 +1,54 @@
 import Link from 'next/link';
 import DocumentRequestButton from '@/components/DocumentRequestButton';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
-  title: {
-    absolute: 'NEOM Packing Plywood | Moisture-Resistant Industrial Packaging Plywood | NEOM Panels'
-  },
+export const metadata = buildPageMetadata({
+  absoluteTitle:
+    'NEOM Packing Plywood | Moisture-Resistant Industrial Packaging Plywood | NEOM Panels',
   description:
     'MR packaging-grade plywood for packing cases, crates, dividers and protective enclosures. Share your required thickness, sheet dimensions, quantity and delivery location to request product information and a quotation.',
-  alternates: {
-    canonical: '/brands/neom-packing-plywood'
-  }
-};
+  path: '/brands/neom-packing-plywood',
+  ogImage: '/assets/packing-plywood-showcase.jpg',
+  ogImageAlt: 'NEOM Packing Plywood — Moisture-Resistant (MR) Packaging-Grade Plywood Sheets and Crates',
+  ogImages: [
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood — Moisture-Resistant (MR) Packaging-Grade Plywood Sheets and Crates'
+    },
+    {
+      url: '/assets/packing-plywood-crates.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood — Industrial Packing Cases, Crates and Slotted Plywood Dividers'
+    },
+    {
+      url: '/assets/neom-packing-plywood-logo-stacked.png',
+      width: 520,
+      height: 260,
+      alt: 'NEOM Packing Plywood — Official Stacked Brand Mark'
+    },
+    {
+      url: '/assets/neom-packing-plywood-logo-horizontal.png',
+      width: 580,
+      height: 168,
+      alt: 'NEOM Packing Plywood — Packaging Grade · Moisture Resistant'
+    }
+  ],
+  keywords: [
+    'NEOM Packing Plywood',
+    'industrial packaging plywood manufacturer India',
+    'moisture resistant packaging plywood',
+    'MR grade packing plywood sheets',
+    'plywood for packing cases and crates',
+    'heavy duty export crate plywood India',
+    'wooden and plywood crates material supplier',
+    'pallet collar plywood sheets',
+    'packaging grade plywood wholesale India',
+    'industrial crating plywood quotation'
+  ]
+});
 
 const VERIFIED_SPECIFICATIONS = [
   {
@@ -81,14 +119,79 @@ const QUOTATION_CHECKLIST = [
 export default function NeomPackingPlywoodPage() {
   const brandJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Brand',
-    name: 'NEOM Packing Plywood',
-    description:
-      'MR packaging-grade plywood for packing cases, crates, dividers and protective enclosures.',
-    parentOrganization: {
-      '@type': 'Organization',
-      name: 'NEOM Panels'
-    }
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Brands', path: '/brands' },
+        { name: 'NEOM Packing Plywood', path: '/brands/neom-packing-plywood' }
+      ]),
+      {
+        '@type': 'WebPage',
+        '@id': `${SITE_URL}/brands/neom-packing-plywood#webpage`,
+        name: 'NEOM Packing Plywood — Moisture-Resistant Industrial Packaging Plywood',
+        url: `${SITE_URL}/brands/neom-packing-plywood`,
+        description:
+          'MR packaging-grade plywood for packing cases, crates, dividers and protective enclosures manufactured by NEOM Panels in India.',
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}/assets/packing-plywood-showcase.jpg`,
+          width: 1400,
+          height: 933,
+          caption: 'NEOM Packing Plywood — Moisture-Resistant Packaging-Grade Plywood Sheets and Crates'
+        },
+        image: [
+          `${SITE_URL}/assets/packing-plywood-showcase.jpg`,
+          `${SITE_URL}/assets/packing-plywood-crates.jpg`,
+          `${SITE_URL}/assets/neom-packing-plywood-logo-stacked.png`,
+          `${SITE_URL}/assets/neom-packing-plywood-logo-horizontal.png`
+        ]
+      },
+      {
+        '@type': 'Brand',
+        '@id': `${SITE_URL}/brands/neom-packing-plywood#brand`,
+        name: 'NEOM Packing Plywood',
+        url: `${SITE_URL}/brands/neom-packing-plywood`,
+        logo: `${SITE_URL}/assets/neom-packing-plywood-logo-horizontal.png`,
+        image: [
+          `${SITE_URL}/assets/packing-plywood-showcase.jpg`,
+          `${SITE_URL}/assets/packing-plywood-crates.jpg`
+        ],
+        description:
+          'MR packaging-grade plywood for packing cases, crates, dividers and protective enclosures.',
+        parentOrganization: {
+          '@type': 'Organization',
+          name: 'NEOM Panels',
+          url: SITE_URL
+        }
+      },
+      {
+        '@type': 'Product',
+        name: 'NEOM Packing Plywood — Moisture-Resistant (MR) Packaging-Grade Plywood',
+        image: [
+          `${SITE_URL}/assets/packing-plywood-showcase.jpg`,
+          `${SITE_URL}/assets/packing-plywood-crates.jpg`,
+          `${SITE_URL}/assets/neom-packing-plywood-logo-stacked.png`
+        ],
+        description:
+          'Moisture-resistant (MR) packaging-grade plywood manufactured by NEOM Panels in India for industrial packing cases, export crates, dividers, liners and protective enclosures.',
+        brand: {
+          '@type': 'Brand',
+          name: 'NEOM Packing Plywood'
+        },
+        manufacturer: {
+          '@type': 'Organization',
+          name: 'NEOM Panels',
+          url: SITE_URL
+        },
+        category: 'Industrial Packaging Plywood',
+        material: 'Multi-Ply Moisture-Resistant (MR) Wood Veneer',
+        additionalProperty: VERIFIED_SPECIFICATIONS.map((spec) => ({
+          '@type': 'PropertyValue',
+          name: spec.parameter,
+          value: spec.value
+        }))
+      }
+    ]
   };
 
   return (

@@ -1,17 +1,26 @@
 import Link from 'next/link';
+import { buildPageMetadata, getBreadcrumbJsonLd } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Website Terms — NEOM Panels',
+export const metadata = buildPageMetadata({
+  title: 'Website Terms — Commercial & Specification Terms of Use',
   description:
-    'Terms of use governing access to the NEOM Panels corporate website, brand representations, and general specification guidance.',
-  alternates: {
-    canonical: '/terms'
-  }
-};
+    'Terms of use governing access to the NEOM Panels corporate website, Starwoods and NEOM Packing Plywood brand representations, and general B2B specification guidance.',
+  path: '/terms',
+  keywords: ['NEOM Panels website terms', 'NEOM Panels commercial terms of use']
+});
 
 export default function TermsPage() {
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Website Terms', path: '/terms' }
+  ]);
+
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <section
         className="page-header section--architectural-grid"
         aria-labelledby="main-heading"

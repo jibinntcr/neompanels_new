@@ -1,14 +1,44 @@
 import Link from 'next/link';
 import { getSiteContent } from '@/lib/storage';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Sustainability — NEOM Panels',
+export const metadata = buildPageMetadata({
+  title: 'Sustainability — Responsible Wood-Panel Manufacturing',
   description:
-    'In a wood-panel business, sustainability is shaped by practical choices across material sourcing, material efficiency, energy, workplace safety, and accurate product documentation.',
-  alternates: {
-    canonical: '/sustainability'
-  }
-};
+    'In a wood-panel business, sustainability is shaped by practical choices across agro-forestry and timber sourcing, material efficiency, energy discipline, workplace safety and accurate product documentation.',
+  path: '/sustainability',
+  ogImage: '/assets/sustainability-materials-studio.jpg',
+  ogImageAlt: 'NEOM Panels — Responsible Wood-Panel Sourcing and Material Efficiency',
+  ogImages: [
+    {
+      url: '/assets/sustainability-materials-studio.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels — Responsible Wood-Panel Sourcing and Material Efficiency'
+    },
+    {
+      url: '/assets/illustration-sustainability.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Sustainable Agro-Forestry Sourcing and Durable Wood-Panel Lifecycle'
+    },
+    {
+      url: '/assets/hero-neom-flagship.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Panels Architectural Wood-Panel Substrates'
+    }
+  ],
+  keywords: [
+    'sustainable wood panels India',
+    'responsible timber and veneer sourcing India',
+    'agro-forestry plywood manufacturing',
+    'eco-friendly commercial plywood sheets',
+    'durable long service life interior panels',
+    'resource-efficient wood panel factory India',
+    'NEOM Panels sustainability'
+  ]
+});
 
 export default function SustainabilityPage() {
   const siteData = getSiteContent();
@@ -16,9 +46,30 @@ export default function SustainabilityPage() {
     siteData.sustainabilityCurrentPractices || siteData.sustainabilityPriorities || [];
   const futureAmbitions = siteData.sustainabilityFutureAmbitions || [];
   const sdgGoals = siteData.sdgAlignment || [];
+  const sustainabilityJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Sustainability', path: '/sustainability' }
+      ]),
+      {
+        '@type': 'WebPage',
+        '@id': `${SITE_URL}/sustainability#webpage`,
+        name: 'Sustainability & Responsible Wood-Panel Manufacturing — NEOM Panels',
+        url: `${SITE_URL}/sustainability`,
+        description:
+          'Practical operational sustainability across timber sourcing, material yield, energy discipline, workplace safety and product durability at NEOM Panels.'
+      }
+    ]
+  };
 
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(sustainabilityJsonLd) }}
+      />
       {/* PAGE HEADER */}
       <section
         className="page-header section--architectural-grid"
@@ -108,14 +159,18 @@ export default function SustainabilityPage() {
           </p>
 
           <ol className="ledger-list" role="list">
-            {currentPractices.map((item) => (
-              <li key={item.id} className="ledger-row">
-                <span className="route-index">{item.number}</span>
+            {currentPractices.map((item, idx) => (
+              <li key={item.id || item.title || idx} className="ledger-row">
+                <span className="route-index">
+                  {item.number || String(idx + 1).padStart(2, '0')}
+                </span>
                 <div>
                   <h3 className="route-title">{item.title}</h3>
-                  <span className="brand-spec-label">{item.focusArea}</span>
+                  {item.focusArea ? (
+                    <span className="brand-spec-label">{item.focusArea}</span>
+                  ) : null}
                 </div>
-                <p style={{ margin: 0 }}>{item.body}</p>
+                <p style={{ margin: 0 }}>{item.body || item.description}</p>
               </li>
             ))}
           </ol>

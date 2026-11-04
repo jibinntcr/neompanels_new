@@ -9,6 +9,8 @@ import {
   isValidEmail,
   isValidPhone,
   verifyAttachmentFile,
+  readEnquiriesFromDisk,
+  writeEnquiriesToDisk,
   MAX_FILES,
   PRIVATE_ATTACHMENTS_DIR,
   ENQUIRIES_JSON_PATH,
@@ -20,8 +22,98 @@ import {
   normalizeBrandParam,
   normalizeCategoryParam
 } from '@/lib/enquiry-config';
+import { getMongoDatabase } from '@/lib/mongodb';
 
 const ALLOWED_CATEGORIES = new Set(ENQUIRY_CATEGORIES);
+
+export async function GET(request) {
+  try {
+    ensureStorageInitialized();
+    let enquiries = readEnquiriesFromDisk();
+
+    try {
+      const db = await getMongoDatabase();
+      if (db) {
+        const col = db.collection('enquiries');
+        const count = await col.countDocuments();
+        if (count === 0 && enquiries.length > 0) {
+          await col.insertMany(enquiries.map((e) => ({ ...e })));
+        } else if (count > 0) {
+          const mongoRecords = await col.find({}, { projection: { _id: 0 } }).toArray();
+          if (mongoRecords.length > 0) {
+            enquiries = mongoRecords;
+            writeEnquiriesToDisk(enquiries);
+          }
+        }
+      }
+    } catch (_) {
+      // Fallback to local durable records
+    }
+
+    const { searchParams } = new URL(request.url);
+    const brandFilter = (searchParams.get('brand') || '').trim();
+    const categoryFilter = (searchParams.get('category') || '').trim();
+    const statusFilter = (searchParams.get('status') || '').trim();
+    const search = (searchParams.get('search') || '').trim().toLowerCase();
+
+    let filtered = [...enquiries].sort(
+      (a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
+    );
+
+    if (brandFilter && brandFilter !== 'all') {
+      filtered = filtered.filter(
+        (item) =>
+          (item.requirement?.brand || 'General / Corporate').toLowerCase() ===
+          brandFilter.toLowerCase()
+      );
+    }
+
+    if (categoryFilter && categoryFilter !== 'all') {
+      filtered = filtered.filter(
+        (item) =>
+          (item.requirement?.category || '').toLowerCase() === categoryFilter.toLowerCase()
+      );
+    }
+
+    if (statusFilter && statusFilter !== 'all') {
+      filtered = filtered.filter(
+        (item) => (item.status || 'received').toLowerCase() === statusFilter.toLowerCase()
+      );
+    }
+
+    if (search) {
+      filtered = filtered.filter((item) => {
+        const haystack = [
+          item.reference,
+          item.contact?.name,
+          item.contact?.organisation,
+          item.contact?.email,
+          item.contact?.phone,
+          item.requirement?.category,
+          item.requirement?.brand,
+          item.requirement?.description,
+          item.requirement?.destination
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase();
+        return haystack.includes(search);
+      });
+    }
+
+    return NextResponse.json({
+      ok: true,
+      total: enquiries.length,
+      filteredCount: filtered.length,
+      enquiries: filtered
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { ok: false, errors: ['Failed to load enquiries.'] },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(request) {
   try {
@@ -62,6 +154,21 @@ export async function POST(request) {
         { ok: false, errors: ['Submission rejected by spam filter.'] },
         { status: 400 }
       );
+    }
+
+    // Security verification challenge check (when submitted from browser UI with captchaExpected)
+    if (fields.captchaExpected !== undefined && !isTestHeader && !fields.testMode) {
+      const expected = String(fields.captchaExpected || '').trim().toUpperCase();
+      const answer = String(fields.captchaAnswer || '').trim().toUpperCase();
+      if (!answer || answer !== expected) {
+        return NextResponse.json(
+          {
+            ok: false,
+            errors: ['Please enter the correct security verification code shown on the form.']
+          },
+          { status: 422 }
+        );
+      }
     }
 
     const errors = [];
@@ -297,6 +404,17 @@ export async function POST(request) {
 
     appendRecordDurably(ENQUIRIES_JSON_PATH, ENQUIRIES_JSONL_PATH, enquiryRecord);
 
+    try {
+      const db = await getMongoDatabase();
+      if (db) {
+        await db
+          .collection('enquiries')
+          .updateOne({ reference }, { $set: enquiryRecord }, { upsert: true });
+      }
+    } catch (_) {
+      // Local durable storage already updated
+    }
+
     const notificationEvent = {
       eventId: `NTF-${reference}`,
       reference,
@@ -327,6 +445,90 @@ export async function POST(request) {
           'Your enquiry could not be submitted. Your entries are still here. Please try again or use our contact details.',
         errors: ['Unable to save your enquiry at this time.']
       },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(request) {
+  try {
+    ensureStorageInitialized();
+    const body = await request.json();
+    const reference = String(body.reference || '').trim();
+    if (!reference) {
+      return NextResponse.json(
+        { ok: false, errors: ['Enquiry reference is required.'] },
+        { status: 400 }
+      );
+    }
+
+    const enquiries = readEnquiriesFromDisk();
+    const idx = enquiries.findIndex((e) => e.reference === reference);
+    if (idx < 0) {
+      return NextResponse.json(
+        { ok: false, errors: ['Enquiry record not found.'] },
+        { status: 404 }
+      );
+    }
+
+    const updated = {
+      ...enquiries[idx],
+      ...(body.status ? { status: String(body.status).trim() } : {}),
+      ...(body.adminNotes !== undefined ? { adminNotes: String(body.adminNotes).trim() } : {}),
+      updatedAt: new Date().toISOString()
+    };
+    enquiries[idx] = updated;
+    writeEnquiriesToDisk(enquiries);
+
+    try {
+      const db = await getMongoDatabase();
+      if (db) {
+        await db
+          .collection('enquiries')
+          .updateOne({ reference }, { $set: updated }, { upsert: true });
+      }
+    } catch (_) {
+      // Ignore
+    }
+
+    return NextResponse.json({ ok: true, enquiry: updated });
+  } catch (_) {
+    return NextResponse.json(
+      { ok: false, errors: ['Could not update enquiry.'] },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    ensureStorageInitialized();
+    const { searchParams } = new URL(request.url);
+    const reference = (searchParams.get('reference') || '').trim();
+    if (!reference) {
+      return NextResponse.json(
+        { ok: false, errors: ['Enquiry reference is required.'] },
+        { status: 400 }
+      );
+    }
+
+    const enquiries = readEnquiriesFromDisk();
+    const remaining = enquiries.filter((e) => e.reference !== reference);
+    writeEnquiriesToDisk(remaining);
+
+    try {
+      const db = await getMongoDatabase();
+      if (db) {
+        await db.collection('enquiries').deleteOne({ reference });
+      }
+    } catch (_) {
+      // Ignore
+    }
+
+    return NextResponse.json({ ok: true, deletedReference: reference });
+  } catch (_) {
+    return NextResponse.json(
+      { ok: false, errors: ['Could not delete enquiry.'] },
       { status: 500 }
     );
   }

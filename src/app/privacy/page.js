@@ -1,17 +1,26 @@
 import Link from 'next/link';
+import { buildPageMetadata, getBreadcrumbJsonLd } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Privacy Notice — NEOM Panels',
+export const metadata = buildPageMetadata({
+  title: 'Privacy Notice — Corporate Data Governance',
   description:
-    'Privacy Notice explaining how NEOM Panels collects, uses, stores, and safeguards business enquiry and corporate contact information.',
-  alternates: {
-    canonical: '/privacy'
-  }
-};
+    'Privacy Notice explaining how NEOM Panels collects, uses, stores and safeguards B2B enquiry, vendor and corporate contact information.',
+  path: '/privacy',
+  keywords: ['NEOM Panels privacy notice', 'B2B enquiry data privacy NEOM Panels']
+});
 
 export default function PrivacyPage() {
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Privacy Notice', path: '/privacy' }
+  ]);
+
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <section
         className="page-header section--architectural-grid"
         aria-labelledby="main-heading"

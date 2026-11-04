@@ -1,17 +1,100 @@
 import Link from 'next/link';
+import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Brands — Starwoods & NEOM Packing Plywood',
   description:
-    'Explore NEOM Panels’ product brands: Starwoods for furniture and interior applications, and NEOM Packing Plywood for moisture-resistant industrial packaging.',
-  alternates: {
-    canonical: '/brands'
-  }
-};
+    'Explore NEOM Panels’ product brands: Starwoods for furniture, modular interiors and commercial fit-outs, and NEOM Packing Plywood for moisture-resistant (MR) industrial packaging.',
+  path: '/brands',
+  ogImage: '/assets/starwoods-brand-showcase.jpg',
+  ogImageAlt: 'NEOM Panels Product Brands — Starwoods and NEOM Packing Plywood',
+  ogImages: [
+    {
+      url: '/assets/starwoods-brand-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'Starwoods — Calibrated Plywood & Wood Panels for Furniture and Interior Applications'
+    },
+    {
+      url: '/assets/packing-plywood-showcase.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood — Moisture-Resistant (MR) Industrial Packaging Plywood'
+    },
+    {
+      url: '/assets/packing-plywood-crates.jpg',
+      width: 1400,
+      height: 933,
+      alt: 'NEOM Packing Plywood — Industrial Packing Cases and Crates'
+    },
+    {
+      url: '/assets/starwood-logo.png',
+      width: 619,
+      height: 177,
+      alt: 'Starwoods — The Plywood Specialist Brand Mark'
+    },
+    {
+      url: '/assets/neom-packing-plywood-logo-horizontal.png',
+      width: 580,
+      height: 168,
+      alt: 'NEOM Packing Plywood Brand Mark'
+    }
+  ],
+  keywords: [
+    'NEOM Panels brands',
+    'Starwoods plywood',
+    'Starwoods furniture and interior panels',
+    'NEOM Packing Plywood',
+    'moisture resistant industrial packaging plywood',
+    'plywood brands in India',
+    'furniture grade plywood brand India',
+    'packing plywood brand India'
+  ]
+});
 
 export default function BrandsPage() {
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Brands', path: '/brands' }
+  ]);
+
+  const brandsCollectionJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${SITE_URL}/brands#webpage`,
+    name: 'NEOM Panels Brands — Starwoods & NEOM Packing Plywood',
+    url: `${SITE_URL}/brands`,
+    description:
+      'Explore NEOM Panels’ product brands: Starwoods for furniture and interior applications, and NEOM Packing Plywood for moisture-resistant industrial packaging.',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Starwoods — Furniture & Interior Applications',
+          url: `${SITE_URL}/brands#starwoods`
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'NEOM Packing Plywood — Moisture-Resistant Industrial Packaging',
+          url: `${SITE_URL}/brands/neom-packing-plywood`
+        }
+      ]
+    }
+  };
+
   return (
     <main id="main-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(brandsCollectionJsonLd) }}
+      />
       <section className="page-header section--architectural-grid">
         <div className="container hero-split">
           <div className="hero-animate">

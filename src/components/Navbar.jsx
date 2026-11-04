@@ -56,6 +56,10 @@ export default function Navbar() {
     };
   }, [openMenu, mobileOpen]);
 
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   const handleMouseEnter = (menuName) => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -83,6 +87,11 @@ export default function Navbar() {
             <span>NEOM PANELS · INDIAN WOOD-PANEL MANUFACTURING</span>
           </span>
           <ul className="utility-links" role="list">
+            <li>
+              <Link href="/blog" className="utility-link">
+                Insights &amp; News
+              </Link>
+            </li>
             <li>
               <Link href="/governance" className="utility-link">
                 Corporate Governance
@@ -353,6 +362,17 @@ export default function Navbar() {
                   Resources
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  href="/blog"
+                  className="nav-link"
+                  aria-current={
+                    pathname === '/blog' || pathname?.startsWith('/blog/') ? 'page' : undefined
+                  }
+                >
+                  Insights &amp; News
+                </Link>
+              </li>
             </ul>
 
             <Link
@@ -498,6 +518,17 @@ export default function Navbar() {
                 aria-current={pathname === '/resources' ? 'page' : undefined}
               >
                 Resources
+              </Link>
+            </li>
+            <li className="mobile-nav-item">
+              <Link
+                href="/blog"
+                className="mobile-nav-link"
+                aria-current={
+                  pathname === '/blog' || pathname?.startsWith('/blog/') ? 'page' : undefined
+                }
+              >
+                Insights &amp; News
               </Link>
             </li>
           </ul>

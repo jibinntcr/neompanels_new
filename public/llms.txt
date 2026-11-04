@@ -1,0 +1,29 @@
+# NEOM Panels — Indian Wood-Panel Manufacturing
+
+> NEOM Panels is an Indian wood-panel manufacturing company operating its own production facility in India. We manufacture calibrated wood-panel substrates for serial furniture & OEM manufacturing, modular kitchens & wardrobes, commercial & architectural joinery, and moisture-resistant (MR) industrial packaging plywood. Home to product brands Starwoods and NEOM Packing Plywood.
+
+## Brand & Manufacturing Hierarchy
+- **Parent Company**: NEOM Panels (`https://neompanels-new.vercel.app`) — Slogan: *ENGINEERED EXCELLENCE, DESIGNED FOR SPACES*
+- **Product Brand 1 (Furniture & Interiors)**: Starwoods (`https://neompanels-new.vercel.app/brands#starwoods`) — Wood-panel substrates for furniture manufacturers, modular kitchen and wardrobe fabricators, commercial interior contractors and trade partners.
+- **Product Brand 2 (Industrial Packaging)**: NEOM Packing Plywood (`https://neompanels-new.vercel.app/brands/neom-packing-plywood`) — Moisture-resistant (MR) packaging-grade plywood for industrial packing cases, export crates, pallet collars, dividers and protective enclosures.
+
+## Core Manufactured Wood-Panel Categories
+1. **Calibrated Furniture & OEM Panels**: Uniform-thickness multi-ply panels engineered for CNC routing, clean edge-banding and serial furniture production.
+2. **Modular Kitchen & Wardrobe Substrates**: Dimensionally stable plywood substrates suited for laminate, acrylic or veneer pressing across modular cabinetry and carcasses.
+3. **Architectural Joinery & Commercial Project Panels**: Project-grade wood panels aligned with consultant specifications, tender schedules and commercial fit-out BOQs.
+4. **Moisture-Resistant (MR) Industrial Packaging Plywood**: Practical MR packaging-grade plywood for heavy-duty packing cases, crates, dividers and liners.
+
+## Primary Website Pages & Crawler Directory
+- [Homepage — NEOM Panels](https://neompanels-new.vercel.app/): Parent company overview, core manufactured panel matrix, 4-layer material architecture, interactive application explorer and B2B sourcing FAQ.
+- [Brands Overview](https://neompanels-new.vercel.app/brands): Brand architecture of NEOM Panels, Starwoods and NEOM Packing Plywood.
+- [NEOM Packing Plywood](https://neompanels-new.vercel.app/brands/neom-packing-plywood): Dedicated page for MR packaging-grade plywood specifications, applications (packing cases, crates, dividers), MR grade suitability guidance and quotation requirements.
+- [Manufacturing & Quality Control](https://neompanels-new.vercel.app/manufacturing): Material selection, multi-ply layup & hot-pressing, 4-stage dimensional & surface inspection, and palletised dispatch in India.
+- [Industries & Applications](https://neompanels-new.vercel.app/industries): B2B buyer guidance across 7 industry contexts (Furniture OEMs, Modular Interiors, Commercial Projects, Institutions, Regional Distributors, Industrial Packaging, Custom OEM).
+- [Resources & Technical Documents](https://neompanels-new.vercel.app/resources): Corporate profiles, brand literature, technical specification sheets and B2B buyer checklists.
+- [Sustainability](https://neompanels-new.vercel.app/sustainability): Responsible timber and agro-forestry veneer sourcing, material efficiency, workplace safety and UN SDG alignment.
+- [About NEOM Panels](https://neompanels-new.vercel.app/about): Corporate background, purpose, vision, mission and operating principles.
+- [Leadership Team](https://neompanels-new.vercel.app/team): Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.
+- [Governance & Corporate Information](https://neompanels-new.vercel.app/governance): Official company information, vendor onboarding details and adopted corporate policies.
+- [Business Enquiry & Quotation Desk](https://neompanels-new.vercel.app/enquiry): Submit a B2B enquiry or quotation request for Starwoods, NEOM Packing Plywood, OEM manufacturing or project BOQs.
+- [HTML Site Map](https://neompanels-new.vercel.app/site-map): Full structural site plan and anchor directory.
+- [XML Sitemap](https://neompanels-new.vercel.app/sitemap.xml): Machine-readable XML sitemap with image extensions.
