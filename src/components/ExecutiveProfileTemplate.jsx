@@ -129,15 +129,27 @@ export default function ExecutiveProfileTemplate({ leader }) {
       >
         <div className="container">
           <div className="exec-profile-nav-row">
-            <nav className="breadcrumb-nav" aria-label="Breadcrumb">
-              <ol className="breadcrumb-list">
-                <li>
-                  <Link href="/">Home</Link>
+            <nav className="exec-breadcrumb" aria-label="Breadcrumb">
+              <ol className="exec-breadcrumb-list">
+                <li className="exec-breadcrumb-item">
+                  <Link href="/" className="exec-breadcrumb-link">
+                    Home
+                  </Link>
                 </li>
-                <li>
-                  <Link href="/team">Team</Link>
+                <li className="exec-breadcrumb-sep" aria-hidden="true">
+                  →
                 </li>
-                <li aria-current="page">{leader.name}</li>
+                <li className="exec-breadcrumb-item">
+                  <Link href="/team" className="exec-breadcrumb-link">
+                    Team
+                  </Link>
+                </li>
+                <li className="exec-breadcrumb-sep" aria-hidden="true">
+                  →
+                </li>
+                <li className="exec-breadcrumb-current" aria-current="page">
+                  {leader.name}
+                </li>
               </ol>
             </nav>
 
