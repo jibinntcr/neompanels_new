@@ -3,7 +3,15 @@
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 
-const POST_TYPES = ['All', 'SEO Article', 'Company News', 'Technical Guide', 'Product Update'];
+const POST_TYPES = ['All', 'Industry Insight', 'Technical Guide', 'Company News', 'Product Update'];
+
+function formatPostType(type) {
+  const raw = String(type || '').trim();
+  if (!raw || raw.toLowerCase() === 'seo article' || raw.toLowerCase() === 'seo guide') {
+    return 'Industry Insight';
+  }
+  return raw;
+}
 const POST_CATEGORIES = [
   'All Categories',
   'Furniture & Interiors',
@@ -26,14 +34,21 @@ export default function BlogExplorerClient({ initialPosts = [] }) {
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (data?.ok && Array.isArray(data.posts) && data.posts.length > 0) {
-          setPosts(data.posts);
+          setPosts(
+            data.posts.map((p) => ({
+              ...p,
+              type: formatPostType(p.type)
+            }))
+          );
         }
       })
       .catch(() => {});
   }, []);
 
   const filteredPosts = useMemo(() => {
-    return posts.filter((post) => {
+    return posts
+      .map((p) => ({ ...p, type: formatPostType(p.type) }))
+      .filter((post) => {
       if (selectedType !== 'All' && post.type !== selectedType) return false;
       if (selectedCategory !== 'All Categories' && post.category !== selectedCategory)
         return false;

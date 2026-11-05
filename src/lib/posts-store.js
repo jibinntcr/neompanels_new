@@ -5,12 +5,20 @@ import { getMongoDatabase } from '@/lib/mongodb';
 
 export const POSTS_JSON_PATH = path.join(STORAGE_DIR, 'posts.json');
 
+export function normalizePostType(type) {
+  const raw = String(type || '').trim();
+  if (!raw || raw.toLowerCase() === 'seo article' || raw.toLowerCase() === 'seo guide') {
+    return 'Industry Insight';
+  }
+  return raw;
+}
+
 export const INITIAL_SEO_POSTS = [
   {
     id: 'post-calibrated-plywood-guide',
     slug: 'how-to-choose-calibrated-plywood-for-modular-kitchens-and-furniture-in-india',
     title: 'How to Choose Calibrated Plywood for Modular Kitchens & OEM Furniture in India',
-    type: 'SEO Article',
+    type: 'Industry Insight',
     category: 'Furniture & Interiors',
     brand: 'Starwoods',
     featured: true,
@@ -151,7 +159,7 @@ export const INITIAL_SEO_POSTS = [
     id: 'post-4-stage-quality-inspection',
     slug: 'inside-our-4-stage-wood-panel-quality-inspection-thickness-squareness-and-bonding',
     title: 'Inside Our 4-Stage Wood-Panel Quality Inspection: Thickness, Squareness & Core Bonding',
-    type: 'SEO Article',
+    type: 'Industry Insight',
     category: 'Manufacturing & Quality',
     brand: 'NEOM Panels',
     featured: false,
@@ -194,7 +202,7 @@ export const INITIAL_SEO_POSTS = [
     id: 'post-commercial-project-boq-guide',
     slug: 'specifying-wood-panels-for-commercial-interiors-and-institutional-tenders',
     title: 'Specifying Wood Panels for Commercial Fit-Outs & Institutional Tender BOQs',
-    type: 'SEO Article',
+    type: 'Industry Insight',
     category: 'Commercial Projects',
     brand: 'Starwoods',
     featured: false,
@@ -299,17 +307,18 @@ export function getLocalPosts() {
     const raw = fs.readFileSync(POSTS_JSON_PATH, 'utf8');
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
+      return parsed.map((p) => ({ ...p, type: normalizePostType(p.type) }));
     }
   } catch (_) {
     // Fallback to initial seed
   }
-  return INITIAL_SEO_POSTS;
+  return INITIAL_SEO_POSTS.map((p) => ({ ...p, type: normalizePostType(p.type) }));
 }
 
 export function saveLocalPosts(posts) {
   ensurePostsFileInitialized();
-  fs.writeFileSync(POSTS_JSON_PATH, JSON.stringify(posts, null, 2), 'utf8');
+  const normalized = (posts || []).map((p) => ({ ...p, type: normalizePostType(p.type) }));
+  fs.writeFileSync(POSTS_JSON_PATH, JSON.stringify(normalized, null, 2), 'utf8');
 }
 
 export async function getAllPosts({ includeDrafts = false } = {}) {
@@ -321,12 +330,21 @@ export async function getAllPosts({ includeDrafts = false } = {}) {
       const col = db.collection('posts');
       const count = await col.countDocuments();
       if (count === 0 && posts.length > 0) {
-        await col.insertMany(posts.map((p) => ({ ...p })));
+        await col.insertMany(posts.map((p) => ({ ...p, type: normalizePostType(p.type) })));
       } else if (count > 0) {
         const mongoPosts = await col.find({}, { projection: { _id: 0 } }).toArray();
         if (mongoPosts.length > 0) {
-          posts = mongoPosts;
+          const hadLegacyType = mongoPosts.some(
+            (p) => String(p.type || '').toLowerCase() === 'seo article'
+          );
+          posts = mongoPosts.map((p) => ({ ...p, type: normalizePostType(p.type) }));
           saveLocalPosts(posts);
+          if (hadLegacyType) {
+            await col.updateMany(
+              { type: 'SEO Article' },
+              { $set: { type: 'Industry Insight' } }
+            );
+          }
         }
       }
     }
@@ -406,7 +424,7 @@ export async function upsertPost(payload) {
     id: existing?.id || payload.id || `post-${Date.now()}`,
     slug,
     title,
-    type: String(payload.type || existing?.type || 'SEO Article').trim(),
+    type: normalizePostType(payload.type || existing?.type || 'Industry Insight'),
     category: String(payload.category || existing?.category || 'Furniture & Interiors').trim(),
     brand: String(payload.brand || existing?.brand || 'NEOM Panels').trim(),
     featured:
