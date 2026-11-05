@@ -23,6 +23,7 @@
 - [Sustainability](https://neompanels-new.vercel.app/sustainability): Responsible timber and agro-forestry veneer sourcing, material efficiency, workplace safety and UN SDG alignment.
 - [About NEOM Panels](https://neompanels-new.vercel.app/about): Corporate background, purpose, vision, mission and operating principles.
 - [Leadership Team](https://neompanels-new.vercel.app/team): Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.
+- [Jibin N — Managing Director Profile](https://neompanels-new.vercel.app/team/jibin-n): Dedicated leadership profile for Jibin N, Managing Director of NEOM Panels, focused on strategic direction, brand development and business growth.
 - [Governance & Corporate Information](https://neompanels-new.vercel.app/governance): Official company information, vendor onboarding details and adopted corporate policies.
 - [Business Enquiry & Quotation Desk](https://neompanels-new.vercel.app/enquiry): Submit a B2B enquiry or quotation request for Starwoods, NEOM Packing Plywood, OEM manufacturing or project BOQs.
 - [HTML Site Map](https://neompanels-new.vercel.app/site-map): Full structural site plan and anchor directory.

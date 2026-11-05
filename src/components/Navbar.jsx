@@ -17,6 +17,7 @@ export default function Navbar() {
   const isCompanyActive =
     pathname === '/about' ||
     pathname === '/team' ||
+    pathname?.startsWith('/team/') ||
     pathname === '/leadership' ||
     pathname === '/governance';
 

@@ -6,14 +6,14 @@ export const metadata = buildPageMetadata({
   description:
     'NEOM Panels brings together executive experience in wood-panel manufacturing, business operations, technology and people development. Meet Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.',
   path: '/team',
-  ogImage: '/assets/team/jibin-n.png',
-  ogImageAlt: 'Jibin N (Managing Director) and NEOM Panels Executive Leadership Team',
+  ogImage: '/assets/team/jibin-n-neom-panels-managing-director.webp',
+  ogImageAlt: 'Jibin N, Managing Director of NEOM Panels',
   ogImages: [
     {
-      url: '/assets/team/jibin-n.png',
+      url: '/assets/team/jibin-n-neom-panels-managing-director.webp',
       width: 800,
       height: 800,
-      alt: 'Jibin N — Managing Director, NEOM Panels'
+      alt: 'Jibin N, Managing Director of NEOM Panels'
     },
     {
       url: '/assets/team/muneer-k-h.png',
@@ -56,9 +56,11 @@ const LEADERSHIP_TEAM = [
     name: 'Jibin N',
     role: 'Managing Director',
     focus: 'Strategic Direction, Brand Development & Business Growth',
-    photo: '/assets/team/jibin-n.png',
+    photo: '/assets/team/jibin-n-neom-panels-managing-director.webp',
+    photoAlt: 'Jibin N, Managing Director of NEOM Panels',
     initials: 'JN',
-    bio: 'Jibin guides NEOM Panels’ strategic direction, brand development and business growth. With his background in information technology and entrepreneurship, he brings a focus on digital capabilities, customer experience and partnerships that support the company’s long-term vision.',
+    bio: 'Jibin N is the Managing Director of NEOM Panels. His work focuses on strategic direction, brand development and business growth, drawing on his background in information technology and entrepreneurship.',
+    profileHref: '/team/jibin-n',
     linkedin: 'https://www.linkedin.com/in/jibintcr/',
     phone: null,
     telHref: null
@@ -69,8 +71,10 @@ const LEADERSHIP_TEAM = [
     role: 'Chief Executive Officer',
     focus: 'Operations, Wood Panel Solutions & Industry Partnerships',
     photo: '/assets/team/muneer-k-h.png',
+    photoAlt: 'Muneer K H — Chief Executive Officer, NEOM Panels',
     initials: 'MK',
     bio: 'Muneer brings an entrepreneurial perspective spanning wood panel solutions, manufacturing, technology and business development. At NEOM Panels, his focus is on translating the company’s vision into everyday execution, strengthening operations and building relationships with customers and industry partners.',
+    profileHref: null,
     linkedin: 'https://www.linkedin.com/in/muneerply/',
     phone: '+91 97454 50618',
     telHref: 'tel:+919745450618'
@@ -81,8 +85,10 @@ const LEADERSHIP_TEAM = [
     role: 'Chief Financial Officer',
     focus: 'Financial Planning, Commercial Discipline & People Development',
     photo: '/assets/team/muhamad-raneef.jpeg',
+    photoAlt: 'Muhamad Raneef T A — Chief Financial Officer, NEOM Panels',
     initials: 'MR',
     bio: 'Raneef oversees NEOM Panels’ financial planning and commercial discipline, supporting responsible resource allocation and sustainable business growth. An HRM postgraduate and national-level medal-winning athlete, he brings a people-focused outlook, discipline and a collaborative approach to the leadership team.',
+    profileHref: null,
     linkedin: 'https://www.linkedin.com/in/muhamad-raneef-t-a-752832232/',
     phone: '+91 90749 34014',
     telHref: 'tel:+919074934014'
@@ -93,8 +99,10 @@ const LEADERSHIP_TEAM = [
     role: 'Chief Technology Officer',
     focus: 'Digital Systems, Supplier Networks & Trading Workflows',
     photo: '/assets/team/muhammed-jabir.png',
+    photoAlt: 'Muhammed Jabir — Chief Technology Officer, NEOM Panels',
     initials: 'MJ',
     bio: 'Jabir leads NEOM Panels’ technology direction, focusing on digital systems that support operations, customer enquiries and business coordination. An M.Com graduate and entrepreneur with experience managing plywood and fruit trading businesses, he brings practical insight into supplier networks, customer needs and trading workflows.',
+    profileHref: null,
     linkedin: 'https://www.linkedin.com/in/muhammed-jabir-09579927b/',
     phone: '+91 97441 16147',
     telHref: 'tel:+919744116147'
@@ -107,47 +115,59 @@ export default function TeamPage() {
     '@graph': [
       getBreadcrumbJsonLd([
         { name: 'Home', path: '/' },
-        { name: 'Our Leadership', path: '/team' }
+        { name: 'Team', path: '/team' }
       ]),
       {
-        '@type': 'ProfilePage',
+        '@type': 'CollectionPage',
         '@id': `${SITE_URL}/team#webpage`,
         name: 'Our Leadership — The People Behind NEOM Panels',
         url: `${SITE_URL}/team`,
         description:
           'Meet the executive leadership team behind NEOM Panels: Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.',
+        isPartOf: {
+          '@id': `${SITE_URL}/#website`
+        },
+        about: {
+          '@id': `${SITE_URL}/#organization`
+        },
         primaryImageOfPage: {
           '@type': 'ImageObject',
-          url: `${SITE_URL}/assets/team/jibin-n.png`,
+          url: `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.webp`,
           width: 800,
           height: 800,
-          caption: 'Jibin N — Managing Director, NEOM Panels'
+          caption: 'Jibin N, Managing Director of NEOM Panels'
         },
         image: LEADERSHIP_TEAM.map((member) => ({
           '@type': 'ImageObject',
           url: `${SITE_URL}${member.photo}`,
           width: 800,
           height: 800,
-          caption: `${member.name} — ${member.role}, NEOM Panels`
+          caption: member.photoAlt
+        })),
+        hasPart: LEADERSHIP_TEAM.map((member) => ({
+          '@id': member.profileHref
+            ? `${SITE_URL}${member.profileHref}#person`
+            : `${SITE_URL}/team#${member.id}`
         }))
       },
       ...LEADERSHIP_TEAM.map((member) => ({
         '@type': 'Person',
-        '@id': `${SITE_URL}/team#${member.id}`,
+        '@id': member.profileHref
+          ? `${SITE_URL}${member.profileHref}#person`
+          : `${SITE_URL}/team#${member.id}`,
         name: member.name,
         jobTitle: member.role,
+        url: member.profileHref ? `${SITE_URL}${member.profileHref}` : `${SITE_URL}/team#${member.id}`,
         description: member.bio,
         image: {
           '@type': 'ImageObject',
           url: `${SITE_URL}${member.photo}`,
           width: 800,
           height: 800,
-          caption: `${member.name} — ${member.role}, NEOM Panels`
+          caption: member.photoAlt
         },
         worksFor: {
-          '@type': 'Organization',
-          name: 'NEOM Panels',
-          url: SITE_URL
+          '@id': `${SITE_URL}/#organization`
         },
         ...(member.phone ? { telephone: member.phone } : {}),
         ...(member.linkedin ? { sameAs: [member.linkedin] } : {})
@@ -199,14 +219,14 @@ export default function TeamPage() {
               aria-label="Executive team quick directory"
             >
               {LEADERSHIP_TEAM.map((member) => (
-                <a
+                <Link
                   key={member.id}
-                  href={`#${member.id}`}
+                  href={member.profileHref || `#${member.id}`}
                   className="leader-quick-chip"
                 >
                   <img
                     src={member.photo}
-                    alt={`${member.name} — ${member.role}`}
+                    alt={member.photoAlt}
                     width="44"
                     height="44"
                     className="leader-quick-chip-avatar"
@@ -215,7 +235,7 @@ export default function TeamPage() {
                     <div className="leader-quick-chip-name">{member.name}</div>
                     <div className="leader-quick-chip-role">{member.role}</div>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
             <div className="brand-architecture-row">
@@ -252,13 +272,30 @@ export default function TeamPage() {
                 <div className="leader-card-top">
                   <div className="leader-portrait-wrap">
                     {member.photo ? (
-                      <img
-                        src={member.photo}
-                        alt={`${member.name} — ${member.role}, NEOM Panels`}
-                        className="leader-portrait"
-                        width="800"
-                        height="800"
-                      />
+                      member.profileHref ? (
+                        <Link
+                          href={member.profileHref}
+                          aria-label={`View ${member.name}'s profile`}
+                        >
+                          <img
+                            src={member.photo}
+                            alt={member.photoAlt}
+                            className="leader-portrait"
+                            width="800"
+                            height="800"
+                            sizes="(max-width: 520px) 148px, 148px"
+                          />
+                        </Link>
+                      ) : (
+                        <img
+                          src={member.photo}
+                          alt={member.photoAlt}
+                          className="leader-portrait"
+                          width="800"
+                          height="800"
+                          sizes="(max-width: 520px) 148px, 148px"
+                        />
+                      )
                     ) : (
                       <div
                         className="leader-monogram"
@@ -273,7 +310,15 @@ export default function TeamPage() {
                     <div className="leader-role-row">
                       <span className="leader-role">{member.role}</span>
                     </div>
-                    <h2 className="leader-name">{member.name}</h2>
+                    <h2 className="leader-name">
+                      {member.profileHref ? (
+                        <Link href={member.profileHref} className="leader-name-link">
+                          {member.name}
+                        </Link>
+                      ) : (
+                        member.name
+                      )}
+                    </h2>
                     <p className="leader-focus-tag">{member.focus}</p>
                   </div>
                 </div>
@@ -282,7 +327,14 @@ export default function TeamPage() {
                   <p className="leader-bio">{member.bio}</p>
 
                   <div className="leader-footer">
-                    <span className="brand-spec-label">NEOM Panels Executive Leadership</span>
+                    {member.profileHref ? (
+                      <Link href={member.profileHref} className="leader-view-profile-link">
+                        <span>View Profile</span>
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    ) : (
+                      <span className="brand-spec-label">NEOM Panels Leadership</span>
+                    )}
                     <div className="leader-footer-actions">
                       {member.telHref ? (
                         <a

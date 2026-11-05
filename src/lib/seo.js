@@ -1,4 +1,6 @@
-export const SITE_URL = 'https://neompanels-new.vercel.app';
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://neompanels-new.vercel.app'
+).replace(/\/$/, '');
 export const SITE_NAME = 'NEOM Panels';
 export const DEFAULT_OG_IMAGE = '/assets/hero-neom-flagship.jpg';
 
@@ -89,6 +91,12 @@ export const SITE_NAVIGATION_ITEMS = [
       'Executive leadership team guiding NEOM Panels: Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.'
   },
   {
+    name: 'Jibin N — Managing Director Profile',
+    path: '/team/jibin-n',
+    description:
+      'Dedicated leadership profile for Jibin N, Managing Director of NEOM Panels, focused on strategic direction, brand development and business growth.'
+  },
+  {
     name: 'Governance & Corporate Information',
     path: '/governance',
     description:
@@ -174,11 +182,11 @@ export function buildPageMetadata({
     publisher: 'NEOM Panels',
     category: 'Wood-Panel Manufacturing & Industrial B2B Supply',
     alternates: {
-      canonical: canonicalPath,
+      canonical: fullUrl,
       languages: {
-        'en-IN': canonicalPath,
-        en: canonicalPath,
-        'x-default': canonicalPath
+        'en-IN': fullUrl,
+        en: fullUrl,
+        'x-default': fullUrl
       }
     },
     robots: {
@@ -207,7 +215,10 @@ export function buildPageMetadata({
       card: 'summary_large_image',
       title: socialTitle,
       description,
-      images: resolvedOgImages.map((img) => img.url)
+      images: resolvedOgImages.map((img) => ({
+        url: img.url,
+        alt: img.alt || ogImageAlt
+      }))
     },
     other: {
       image: primaryImageUrl,

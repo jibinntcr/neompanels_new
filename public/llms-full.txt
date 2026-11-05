@@ -38,7 +38,7 @@ NEOM Panels manufactures wood-panel products for furniture, interior projects an
 4. **Packing and dispatch**: Sorting verified sheets into protected pallet lots matched to purchase orders, brand and grade markings, and buyer delivery schedules.
 
 ## 4. Executive Leadership Team
-- **Jibin N** — Managing Director (Strategic Direction, Brand Development & Business Growth)
+- **Jibin N** — Managing Director (`https://neompanels-new.vercel.app/team/jibin-n`) — IT professional and entrepreneur guiding strategic direction, brand development and business growth at NEOM Panels; Founder of Infinio Technology Solutions and Flexon Sports Foundation; involved in teaching and evaluation through BITS Pilani’s Work Integrated Learning Programmes and professional development through ISTD Thrissur Chapter.
 - **Muneer K H** — Chief Executive Officer (Operations, Wood Panel Solutions & Industry Partnerships)
 - **Muhamad Raneef T A** — Chief Financial Officer (Financial Planning, Commercial Discipline & People Development)
 - **Muhammed Jabir** — Chief Technology Officer (Digital Systems, Supplier Networks & Trading Workflows)
@@ -53,6 +53,7 @@ NEOM Panels manufactures wood-panel products for furniture, interior projects an
 - Sustainability: https://neompanels-new.vercel.app/sustainability
 - About NEOM Panels: https://neompanels-new.vercel.app/about
 - Leadership Team: https://neompanels-new.vercel.app/team
+- Jibin N — Managing Director Profile: https://neompanels-new.vercel.app/team/jibin-n
 - Governance & Policies: https://neompanels-new.vercel.app/governance
 - Business Enquiry & Quotations: https://neompanels-new.vercel.app/enquiry
 - HTML Site Map: https://neompanels-new.vercel.app/site-map
