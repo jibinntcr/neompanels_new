@@ -84,8 +84,8 @@ const LEADERSHIP_TEAM = [
     initials: 'MR',
     bio: 'Raneef oversees NEOM Panels’ financial planning and commercial discipline, supporting responsible resource allocation and sustainable business growth. An HRM postgraduate and national-level medal-winning athlete, he brings a people-focused outlook, discipline and a collaborative approach to the leadership team.',
     linkedin: 'https://www.linkedin.com/in/muhamad-raneef-t-a-752832232/',
-    phone: null,
-    telHref: null
+    phone: '+91 90749 34014',
+    telHref: 'tel:+919074934014'
   },
   {
     id: 'muhammed-jabir',
