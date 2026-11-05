@@ -2409,6 +2409,73 @@ dialog.corporate-dialog::backdrop {
 /* ==========================================================================
    Executive Leadership & Team Grid
    ========================================================================== */
+.leader-quick-directory {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.leader-quick-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #E5DFD5;
+  background-color: #FAF8F4;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease,
+    background-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.leader-quick-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-oak);
+  background-color: var(--color-white);
+  box-shadow: 0 6px 16px rgba(7, 59, 42, 0.09);
+}
+
+.leader-quick-chip-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--color-forest);
+  flex-shrink: 0;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), border-color 260ms ease;
+}
+
+.leader-quick-chip:hover .leader-quick-chip-avatar {
+  transform: scale(1.06);
+  border-color: var(--color-oak);
+}
+
+.leader-quick-chip-name {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-forest);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leader-quick-chip-role {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .leadership-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -2424,22 +2491,48 @@ dialog.corporate-dialog::backdrop {
 }
 
 .leader-card {
+  position: relative;
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-forest);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-subtle);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms ease;
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
 }
 
-.leader-card:hover {
-  box-shadow: 0 10px 28px rgba(7, 59, 42, 0.08);
+.leader-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-forest) 0%, var(--color-oak) 55%, var(--color-leaf) 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.leader-card:hover,
+.leader-card:focus-within {
+  transform: translateY(-5px);
+  border-color: #C7B9A3;
+  box-shadow: 0 16px 36px -8px rgba(7, 59, 42, 0.14), 0 4px 12px rgba(7, 59, 42, 0.06);
+}
+
+.leader-card:hover::before,
+.leader-card:focus-within::before {
+  transform: scaleX(1);
 }
 
 .leader-card-top {
@@ -2450,6 +2543,11 @@ dialog.corporate-dialog::backdrop {
   background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-white) 100%);
   border-bottom: 1px solid var(--color-border);
   align-items: center;
+  transition: background 320ms ease;
+}
+
+.leader-card:hover .leader-card-top {
+  background: linear-gradient(135deg, #FBF8F1 0%, #FFFFFF 65%, #F2F7F4 100%);
 }
 
 @media (min-width: 520px) {
@@ -2462,12 +2560,38 @@ dialog.corporate-dialog::backdrop {
 .leader-portrait-wrap {
   width: 9.25rem;
   height: 9.25rem;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   background-color: var(--color-sage-subtle);
   flex-shrink: 0;
   position: relative;
+  box-shadow: 0 4px 12px rgba(7, 59, 42, 0.08);
+  transition: border-color 320ms ease, box-shadow 320ms ease;
+}
+
+.leader-portrait-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.leader-card:hover .leader-portrait-wrap {
+  border-color: var(--color-oak);
+  box-shadow: 0 8px 20px rgba(7, 59, 42, 0.14);
+}
+
+.leader-card:hover .leader-portrait-wrap::after {
+  transform: translateX(120%);
 }
 
 .leader-portrait {
@@ -2476,6 +2600,11 @@ dialog.corporate-dialog::backdrop {
   object-fit: cover;
   object-position: center top;
   display: block;
+  transition: transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.leader-card:hover .leader-portrait {
+  transform: scale(1.045);
 }
 
 .leader-monogram {
@@ -2509,6 +2638,18 @@ dialog.corporate-dialog::backdrop {
   font-weight: 600;
 }
 
+.leader-header-meta {
+  min-width: 0;
+}
+
+.leader-role-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-block-end: 0.5rem;
+}
+
 .leader-role {
   display: inline-block;
   font-size: 0.78125rem;
@@ -2518,8 +2659,41 @@ dialog.corporate-dialog::backdrop {
   color: var(--color-leaf);
   background-color: var(--color-sage);
   padding: 0.25rem 0.65rem;
-  border-radius: 2px;
-  margin-block-end: 0.5rem;
+  border-radius: 3px;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+
+.leader-card:hover .leader-role {
+  background-color: var(--color-forest);
+  color: var(--color-white);
+}
+
+.leader-linkedin-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 6px;
+  color: #0A66C2;
+  background-color: rgba(10, 102, 194, 0.09);
+  border: 1px solid rgba(10, 102, 194, 0.22);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 240ms ease,
+    color 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.leader-linkedin-icon-btn:hover,
+.leader-linkedin-icon-btn:focus-visible {
+  background-color: #0A66C2;
+  color: #FFFFFF;
+  border-color: #0A66C2;
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 6px 14px rgba(10, 102, 194, 0.28);
 }
 
 .leader-name {
@@ -2566,22 +2740,47 @@ dialog.corporate-dialog::backdrop {
 .leader-linkedin {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--color-forest);
+  gap: 0.45rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0A66C2;
   text-decoration: none;
-  padding: 0.35rem 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background-color: var(--color-warm-white);
-  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  padding: 0.4rem 0.85rem 0.4rem 0.65rem;
+  border: 1.5px solid rgba(10, 102, 194, 0.28);
+  border-radius: 6px;
+  background-color: #F4F8FD;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 240ms ease,
+    border-color 240ms ease,
+    color 240ms ease,
+    box-shadow 240ms ease;
 }
 
-.leader-linkedin:hover {
-  background-color: var(--color-forest);
-  border-color: var(--color-forest);
-  color: var(--color-white);
+.leader-linkedin-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.leader-linkedin-arrow {
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 220ms ease;
+}
+
+.leader-linkedin:hover,
+.leader-linkedin:focus-visible {
+  background-color: #0A66C2;
+  border-color: #0A66C2;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 102, 194, 0.24);
+}
+
+.leader-linkedin:hover .leader-linkedin-arrow,
+.leader-linkedin:focus-visible .leader-linkedin-arrow {
+  transform: translate(2px, -2px);
 }
 
 /* ==========================================================================

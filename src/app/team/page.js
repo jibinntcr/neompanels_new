@@ -59,7 +59,7 @@ const LEADERSHIP_TEAM = [
     photo: '/assets/team/jibin-n.png',
     initials: 'JN',
     bio: 'Jibin guides NEOM Panels’ strategic direction, brand development and business growth. With his background in information technology and entrepreneurship, he brings a focus on digital capabilities, customer experience and partnerships that support the company’s long-term vision.',
-    linkedin: null
+    linkedin: 'https://www.linkedin.com/in/jibintcr/'
   },
   {
     id: 'muneer-k-h',
@@ -89,7 +89,7 @@ const LEADERSHIP_TEAM = [
     photo: '/assets/team/muhammed-jabir.png',
     initials: 'MJ',
     bio: 'Jabir leads NEOM Panels’ technology direction, focusing on digital systems that support operations, customer enquiries and business coordination. An M.Com graduate and entrepreneur with experience managing plywood and fruit trading businesses, he brings practical insight into supplier networks, customer needs and trading workflows.',
-    linkedin: null
+    linkedin: 'https://www.linkedin.com/in/muhammed-jabir-09579927b/'
   }
 ];
 
@@ -186,73 +186,25 @@ export default function TeamPage() {
               </p>
             </div>
             <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                gap: '0.65rem',
-                marginTop: '0.75rem',
-                paddingTop: '0.75rem',
-                borderTop: '1px solid var(--color-border)'
-              }}
+              className="leader-quick-directory"
               aria-label="Executive team quick directory"
             >
               {LEADERSHIP_TEAM.map((member) => (
                 <a
                   key={member.id}
                   href={`#${member.id}`}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.65rem',
-                    padding: '0.45rem 0.55rem',
-                    borderRadius: '8px',
-                    border: '1px solid #E5DFD5',
-                    backgroundColor: '#FAF8F4',
-                    textDecoration: 'none',
-                    color: 'inherit'
-                  }}
+                  className="leader-quick-chip"
                 >
                   <img
                     src={member.photo}
                     alt={`${member.name} — ${member.role}`}
                     width="44"
                     height="44"
-                    style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '50%',
-                      objectFit: 'cover',
-                      objectPosition: 'center top',
-                      border: '2px solid var(--color-forest)',
-                      flexShrink: 0
-                    }}
+                    className="leader-quick-chip-avatar"
                   />
-                  <div style={{ minWidth: 0 }}>
-                    <div
-                      style={{
-                        fontSize: '0.84rem',
-                        fontWeight: 700,
-                        color: 'var(--color-forest)',
-                        lineHeight: 1.2,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                      }}
-                    >
-                      {member.name}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '0.72rem',
-                        color: 'var(--color-text-muted)',
-                        lineHeight: 1.25,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                      }}
-                    >
-                      {member.role}
-                    </div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div className="leader-quick-chip-name">{member.name}</div>
+                    <div className="leader-quick-chip-role">{member.role}</div>
                   </div>
                 </a>
               ))}
@@ -281,8 +233,13 @@ export default function TeamPage() {
       <section className="section reveal-once" aria-label="Executive Leadership Profiles">
         <div className="container">
           <div className="leadership-grid">
-            {LEADERSHIP_TEAM.map((member) => (
-              <article key={member.id} id={member.id} className="leader-card">
+            {LEADERSHIP_TEAM.map((member, index) => (
+              <article
+                key={member.id}
+                id={member.id}
+                className="leader-card"
+                style={{ '--card-index': index }}
+              >
                 <div className="leader-card-top">
                   <div className="leader-portrait-wrap">
                     {member.photo ? (
@@ -303,8 +260,30 @@ export default function TeamPage() {
                       </div>
                     )}
                   </div>
-                  <div>
-                    <span className="leader-role">{member.role}</span>
+                  <div className="leader-header-meta">
+                    <div className="leader-role-row">
+                      <span className="leader-role">{member.role}</span>
+                      {member.linkedin ? (
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="leader-linkedin-icon-btn"
+                          aria-label={`${member.name} on LinkedIn`}
+                          title={`Connect with ${member.name} on LinkedIn`}
+                        >
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                          </svg>
+                        </a>
+                      ) : null}
+                    </div>
                     <h2 className="leader-name">{member.name}</h2>
                     <p className="leader-focus-tag">{member.focus}</p>
                   </div>
@@ -322,17 +301,22 @@ export default function TeamPage() {
                         rel="noopener noreferrer"
                         className="leader-linkedin"
                         aria-label={`${member.name} on LinkedIn`}
+                        title={`View ${member.name}'s LinkedIn Profile`}
                       >
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                        </svg>
-                        <span>LinkedIn Profile</span>
+                        <span className="leader-linkedin-logo" aria-hidden="true">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                          </svg>
+                        </span>
+                        <span className="leader-linkedin-text">LinkedIn</span>
+                        <span className="leader-linkedin-arrow" aria-hidden="true">
+                          ↗
+                        </span>
                       </a>
                     ) : null}
                   </div>

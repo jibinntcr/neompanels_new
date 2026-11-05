@@ -100,22 +100,26 @@
       {
         "id": "jibin-n",
         "name": "Jibin N",
-        "role": "Managing Director"
+        "role": "Managing Director",
+        "linkedin": "https://www.linkedin.com/in/jibintcr/"
       },
       {
         "id": "muneer-k-h",
         "name": "Muneer K H",
-        "role": "Chief Executive Officer"
+        "role": "Chief Executive Officer",
+        "linkedin": "https://www.linkedin.com/in/muneerply/"
       },
       {
         "id": "muhamad-raneef-t-a",
         "name": "Muhamad Raneef T A",
-        "role": "Chief Financial Officer"
+        "role": "Chief Financial Officer",
+        "linkedin": "https://www.linkedin.com/in/muhamad-raneef-t-a-752832232/"
       },
       {
         "id": "muhammed-jabir",
         "name": "Muhammed Jabir",
-        "role": "Chief Technology Officer"
+        "role": "Chief Technology Officer",
+        "linkedin": "https://www.linkedin.com/in/muhammed-jabir-09579927b/"
       }
     ]
   },
