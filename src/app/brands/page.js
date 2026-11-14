@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
+import InteractiveProductArchitecture from '@/components/InteractiveProductArchitecture';
 
 export const metadata = buildPageMetadata({
-  title: 'Brands — Starwoods & NEOM Packing Plywood',
+  title: 'Materials Portfolio & Brands — Structural Plywood, Engineered Boards & Decorative Surfaces',
   description:
-    'Explore NEOM Panels’ product brands: Starwoods for furniture, modular interiors and commercial fit-outs, and NEOM Packing Plywood for moisture-resistant (MR) industrial packaging.',
+    'Explore NEOM Panels’ complete material architecture: Structural & Specialty Plywood (IS:710 Marine & Calibrated), Solid Engineered Boards (HDHMR Green Core, MDF), Decorative Surfaces (Veneers, HPL, Acrylics), and dedicated brands Starwoods and NEOM Packing Plywood.',
   path: '/brands',
   ogImage: '/assets/starwoods-brand-showcase.jpg',
   ogImageAlt: 'NEOM Panels Product Brands — Starwoods and NEOM Packing Plywood',
@@ -212,6 +213,30 @@ export default function BrandsPage() {
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Phase 1 Product Architecture & Material Selector */}
+      <section className="section section--warm-white reveal-once" id="portfolio">
+        <div className="container">
+          <div className="section-header-split">
+            <div>
+              <p className="eyebrow font-mono">PHASE 1 PRODUCT ARCHITECTURE</p>
+              <h2 className="section-title">Materials engineered for precision &amp; performance.</h2>
+              <p className="lead-text" style={{ marginBottom: 0 }}>
+                Explore technical specifications, core compositions, and application metrics across our structural plywood, solid engineered boards, and decorative surfaces.
+              </p>
+            </div>
+            <div className="section-header-actions">
+              <Link href="/enquiry?category=sample-request" className="btn btn--primary">
+                Order Architectural Sample Box →
+              </Link>
+            </div>
+          </div>
+
+          <div style={{ marginTop: 'var(--space-6)' }}>
+            <InteractiveProductArchitecture />
           </div>
         </div>
       </section>

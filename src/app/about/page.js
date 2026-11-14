@@ -187,36 +187,91 @@ export default function AboutPage() {
 
       <section className="section section--warm reveal-once">
         <div className="container">
-          <p className="eyebrow">FOUNDATION</p>
-          <h2 className="section-title">Purpose, vision and mission.</h2>
+          <p className="eyebrow font-mono">STRATEGIC FOUNDATION · 2026–2036</p>
+          <h2 className="section-title">Vision, mission &amp; brand promise.</h2>
 
           <div className="pillars-grid">
             <div className="pillar-cell">
-              <p className="eyebrow">PURPOSE</p>
-              <h3 className="subsection-title">Why we operate</h3>
+              <p className="eyebrow font-mono">VISION</p>
+              <h3 className="subsection-title">Where we are headed</h3>
               <p>
-                To supply panels for useful, well-considered spaces and industrial applications,
-                and build lasting value through the business behind them.
+                To become one of the most trusted engineered wood and interior materials brands from
+                India, recognized for quality, design relevance, sustainability, digital excellence,
+                and international market reach.
               </p>
             </div>
 
             <div className="pillar-cell pillar-cell--highlight">
-              <p className="eyebrow">VISION</p>
-              <h3 className="subsection-title">Where we are headed</h3>
+              <p className="eyebrow font-mono">BRAND PROMISE</p>
+              <h3 className="subsection-title">Engineered Excellence, Designed for Spaces.</h3>
               <p>
-                To build an enduring Indian panel company, recognised for its products, responsible
-                practices and strong business relationships.
+                Our commitment to architects, builders, and manufacturing partners: reliable,
+                precision-calibrated panel solutions engineered to endure and elevate every interior.
               </p>
             </div>
 
             <div className="pillar-cell">
-              <p className="eyebrow">MISSION</p>
-              <h3 className="subsection-title">How we work</h3>
+              <p className="eyebrow font-mono">MISSION</p>
+              <h3 className="subsection-title">How we deliver</h3>
               <p>
-                To develop our manufacturing business and brands through attention to material
-                quality, clear product information, resource efficiency and accountable
-                partnerships.
+                To deliver reliable, design-ready, and scalable panel solutions through strong
+                manufacturing partnerships, disciplined quality systems, dealer empowerment,
+                architect engagement, project supply capability, and digital-first customer experience.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4-Stage Scalable Business Model */}
+      <section className="section reveal-once">
+        <div className="container">
+          <p className="eyebrow font-mono">STRATEGIC GROWTH BLUEPRINT</p>
+          <h2 className="section-title">A disciplined 4-stage business model.</h2>
+          <p className="lead-text">
+            From agile trading and contract manufacturing to long-term manufacturing partnerships
+            and an integrated industrial ecosystem.
+          </p>
+
+          <div className="stages-flow-grid" style={{ marginTop: 'var(--space-6)' }}>
+            <div className="business-stage-card">
+              <span className="stage-pill font-mono">Stage 01</span>
+              <h4 className="stage-title">Brand Building + Trading</h4>
+              <p className="stage-desc">
+                Build brand equity, expand curated product range, and establish strong market presence
+                through disciplined trading and distribution channels.
+              </p>
+              <span className="stage-step-num font-mono">01</span>
+            </div>
+
+            <div className="business-stage-card">
+              <span className="stage-pill font-mono">Stage 02</span>
+              <h4 className="stage-title">Contract Manufacturing</h4>
+              <p className="stage-desc">
+                Leverage verified partner facilities to ensure thickness calibration, scalability,
+                and cost efficiency while actively validating customer demand.
+              </p>
+              <span className="stage-step-num font-mono">02</span>
+            </div>
+
+            <div className="business-stage-card">
+              <span className="stage-pill font-mono">Stage 03</span>
+              <h4 className="stage-title">Manufacturing Partnerships</h4>
+              <p className="stage-desc">
+                Form strategic alliances with advanced manufacturers to secure dedicated capacity,
+                technical innovation, and long-term supply stability.
+              </p>
+              <span className="stage-step-num font-mono">03</span>
+            </div>
+
+            <div className="business-stage-card">
+              <span className="stage-pill font-mono">Stage 04</span>
+              <h4 className="stage-title">Integrated Manufacturing Ecosystem</h4>
+              <p className="stage-desc">
+                Establish owned automated manufacturing infrastructure to achieve complete operational
+                control, product diversification, and sustainable competitive advantage.
+              </p>
+              <span className="stage-step-num font-mono">04</span>
             </div>
           </div>
         </div>

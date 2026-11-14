@@ -23,7 +23,7 @@ const EMPTY_POST_FORM = {
   id: '',
   title: '',
   slug: '',
-  type: 'SEO Article',
+  type: 'Industry Insight',
   category: 'Furniture & Interiors',
   brand: 'NEOM Panels',
   featured: false,
@@ -310,7 +310,7 @@ export default function AdminPortalClient({
       id: post.id || '',
       title: post.title || '',
       slug: post.slug || '',
-      type: post.type || 'SEO Article',
+      type: post.type === 'SEO Article' ? 'Industry Insight' : post.type || 'Industry Insight',
       category: post.category || 'Furniture & Interiors',
       brand: post.brand || 'NEOM Panels',
       featured: Boolean(post.featured),
@@ -747,11 +747,11 @@ export default function AdminPortalClient({
               onClick={() => setActiveTab('cms')}
               style={{ cursor: 'pointer' }}
             >
-              <span className="admin-kpi-label">SEO Articles &amp; News</span>
+              <span className="admin-kpi-label">Insights &amp; News</span>
               <strong className="admin-kpi-value">{posts.length}</strong>
               <span className="admin-kpi-sub">
                 {posts.filter((p) => p.type === 'Company News').length} News ·{' '}
-                {posts.filter((p) => p.type !== 'Company News').length} SEO Guides
+                {posts.filter((p) => p.type !== 'Company News').length} Technical &amp; Industry Guides
               </span>
             </div>
 
@@ -1072,7 +1072,7 @@ export default function AdminPortalClient({
                   <h3 className="subsection-title">
                     {postForm.id
                       ? `Edit Post: ${postForm.title}`
-                      : 'Create New SEO Article or Company News'}
+                      : 'Create New Industry Insight, Technical Guide or Company News'}
                   </h3>
 
                   <div className="form-row-split">
@@ -1117,9 +1117,9 @@ export default function AdminPortalClient({
                         value={postForm.type}
                         onChange={(e) => setPostForm({ ...postForm, type: e.target.value })}
                       >
-                        <option value="SEO Article">SEO Article</option>
-                        <option value="Company News">Company News</option>
+                        <option value="Industry Insight">Industry Insight</option>
                         <option value="Technical Guide">Technical Guide</option>
+                        <option value="Company News">Company News</option>
                         <option value="Product Update">Product Update</option>
                       </select>
                     </div>
@@ -1317,9 +1317,9 @@ export default function AdminPortalClient({
                         onChange={(e) => setPostTypeFilter(e.target.value)}
                       >
                         <option value="all">All Types ({posts.length})</option>
-                        <option value="SEO Article">SEO Article</option>
-                        <option value="Company News">Company News</option>
+                        <option value="Industry Insight">Industry Insight</option>
                         <option value="Technical Guide">Technical Guide</option>
+                        <option value="Company News">Company News</option>
                         <option value="Product Update">Product Update</option>
                       </select>
                     </div>

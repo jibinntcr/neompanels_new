@@ -103,11 +103,47 @@ export default function sitemap() {
     {
       path: '/team',
       changeFrequency: 'monthly',
-      priority: 0.75,
+      priority: 0.85,
       images: [
-        `${SITE_URL}/assets/team/jibin-n.png`,
-        `${SITE_URL}/assets/team/muneer-k-h.png`,
-        `${SITE_URL}/assets/team/muhamad-raneef.jpeg`,
+        `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.webp`,
+        `${SITE_URL}/assets/team/muneer-k-h-neom-panels-ceo.webp`,
+        `${SITE_URL}/assets/team/muhamad-raneef-t-a-neom-panels-cfo.webp`,
+        `${SITE_URL}/assets/team/muhammed-jabir-neom-panels-cto.webp`
+      ]
+    },
+    {
+      path: '/team/jibin-n',
+      changeFrequency: 'monthly',
+      priority: 0.88,
+      images: [
+        `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.webp`,
+        `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.png`
+      ]
+    },
+    {
+      path: '/team/muneer-k-h',
+      changeFrequency: 'monthly',
+      priority: 0.86,
+      images: [
+        `${SITE_URL}/assets/team/muneer-k-h-neom-panels-ceo.webp`,
+        `${SITE_URL}/assets/team/muneer-k-h.png`
+      ]
+    },
+    {
+      path: '/team/muhamad-raneef-t-a',
+      changeFrequency: 'monthly',
+      priority: 0.86,
+      images: [
+        `${SITE_URL}/assets/team/muhamad-raneef-t-a-neom-panels-cfo.webp`,
+        `${SITE_URL}/assets/team/muhamad-raneef.jpeg`
+      ]
+    },
+    {
+      path: '/team/muhammed-jabir',
+      changeFrequency: 'monthly',
+      priority: 0.86,
+      images: [
+        `${SITE_URL}/assets/team/muhammed-jabir-neom-panels-cto.webp`,
         `${SITE_URL}/assets/team/muhammed-jabir.png`
       ]
     },
@@ -116,7 +152,7 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.7,
       images: [
-        `${SITE_URL}/assets/team/jibin-n.png`,
+        `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.webp`,
         `${SITE_URL}/assets/team/muneer-k-h.png`,
         `${SITE_URL}/assets/team/muhamad-raneef.jpeg`,
         `${SITE_URL}/assets/team/muhammed-jabir.png`

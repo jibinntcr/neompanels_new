@@ -14,7 +14,7 @@ import {
 } from '@/lib/seo';
 
 export const viewport = {
-  themeColor: '#073B2A',
+  themeColor: '#0B3B24',
   width: 'device-width',
   initialScale: 1
 };
@@ -24,16 +24,16 @@ export const metadata = {
   applicationName: SITE_NAME,
   title: {
     default:
-      'NEOM Panels | Indian Wood-Panel Manufacturer — Calibrated Furniture, Interior & Industrial Packaging Plywood',
+      'NEOM Panels | Engineered Excellence, Designed for Spaces — Indian Wood Panels & GCC Supply Ecosystem',
     template: '%s | NEOM Panels'
   },
   description:
-    'NEOM Panels manufactures wood-panel products in India for furniture OEMs, modular interiors, commercial fit-out projects and industrial packaging. Home to Starwoods and NEOM Packing Plywood.',
+    'NEOM Panels is building a next-generation engineered wood, interior materials, and project supply ecosystem for India and global markets. High-performance structural plywood, MDF, HDHMR, and decorative surfaces.',
   keywords: CORE_SEO_KEYWORDS,
   authors: [{ name: 'NEOM Panels', url: SITE_URL }],
   creator: 'NEOM Panels',
   publisher: 'NEOM Panels',
-  category: 'Wood-Panel Manufacturing & B2B Industrial Supply',
+  category: 'Architectural Engineered Wood, Interior Materials & Project Supply',
   formatDetection: {
     email: false,
     address: false,
@@ -55,9 +55,9 @@ export const metadata = {
   },
   openGraph: {
     title:
-      'NEOM Panels | Indian Wood-Panel Manufacturer — Furniture, Interiors & Industrial Packaging',
+      'NEOM Panels | Engineered Excellence, Designed for Spaces',
     description:
-      'NEOM Panels manufactures calibrated wood-panel substrates for furniture OEMs, modular kitchens, commercial interiors and MR industrial packaging plywood in India.',
+      'Next-generation engineered wood, interior materials, and project supply ecosystem across India and the GCC corridor. Structural plywood, MDF, HDHMR, and architectural decorative surfaces.',
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: 'en_IN',
@@ -67,16 +67,16 @@ export const metadata = {
         url: DEFAULT_OG_IMAGE,
         width: 1400,
         height: 933,
-        alt: 'NEOM Panels — Calibrated Wood-Panel Substrates and Architectural Joinery'
+        alt: 'NEOM Panels — Engineered Excellence, Designed for Spaces'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
     title:
-      'NEOM Panels | Indian Wood-Panel Manufacturer — Furniture, Interiors & Industrial Packaging',
+      'NEOM Panels | Engineered Excellence, Designed for Spaces',
     description:
-      'Direct factory wood-panel manufacturing in India for furniture OEMs, modular interiors, commercial projects and industrial packaging.',
+      'Next-generation engineered wood, interior materials, and project supply ecosystem for India and global markets.',
     images: [DEFAULT_OG_IMAGE]
   }
 };
@@ -92,7 +92,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
         />
       </head>
       <body>

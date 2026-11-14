@@ -1,38 +1,21 @@
 import Link from 'next/link';
 import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
+import { LEADERSHIP_PROFILES } from '@/lib/leadership-data';
 
 export const metadata = buildPageMetadata({
   title: 'Our Leadership — The People Behind NEOM Panels',
   description:
     'NEOM Panels brings together executive experience in wood-panel manufacturing, business operations, technology and people development. Meet Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.',
   path: '/team',
-  ogImage: '/assets/team/jibin-n.png',
-  ogImageAlt: 'Jibin N (Managing Director) and NEOM Panels Executive Leadership Team',
+  ogImage: '/assets/team/jibin-n-neom-panels-managing-director.webp',
+  ogImageAlt: 'Jibin N, Managing Director of NEOM Panels',
   ogImages: [
-    {
-      url: '/assets/team/jibin-n.png',
+    ...LEADERSHIP_PROFILES.map((member) => ({
+      url: member.photo,
       width: 800,
       height: 800,
-      alt: 'Jibin N — Managing Director, NEOM Panels'
-    },
-    {
-      url: '/assets/team/muneer-k-h.png',
-      width: 800,
-      height: 800,
-      alt: 'Muneer K H — Chief Executive Officer, NEOM Panels'
-    },
-    {
-      url: '/assets/team/muhamad-raneef.jpeg',
-      width: 800,
-      height: 800,
-      alt: 'Muhamad Raneef T A — Chief Financial Officer, NEOM Panels'
-    },
-    {
-      url: '/assets/team/muhammed-jabir.png',
-      width: 800,
-      height: 800,
-      alt: 'Muhammed Jabir — Chief Technology Officer, NEOM Panels'
-    },
+      alt: member.photoAlt
+    })),
     {
       url: '/assets/hero-neom-flagship.jpg',
       width: 1400,
@@ -50,97 +33,63 @@ export const metadata = buildPageMetadata({
   ]
 });
 
-const LEADERSHIP_TEAM = [
-  {
-    id: 'jibin-n',
-    name: 'Jibin N',
-    role: 'Managing Director',
-    focus: 'Strategic Direction, Brand Development & Business Growth',
-    photo: '/assets/team/jibin-n.png',
-    initials: 'JN',
-    bio: 'Jibin guides NEOM Panels’ strategic direction, brand development and business growth. With his background in information technology and entrepreneurship, he brings a focus on digital capabilities, customer experience and partnerships that support the company’s long-term vision.',
-    linkedin: null
-  },
-  {
-    id: 'muneer-k-h',
-    name: 'Muneer K H',
-    role: 'Chief Executive Officer',
-    focus: 'Operations, Wood Panel Solutions & Industry Partnerships',
-    photo: '/assets/team/muneer-k-h.png',
-    initials: 'MK',
-    bio: 'Muneer brings an entrepreneurial perspective spanning wood panel solutions, manufacturing, technology and business development. At NEOM Panels, his focus is on translating the company’s vision into everyday execution, strengthening operations and building relationships with customers and industry partners.',
-    linkedin: 'https://www.linkedin.com/in/muneerply/'
-  },
-  {
-    id: 'muhamad-raneef-t-a',
-    name: 'Muhamad Raneef T A',
-    role: 'Chief Financial Officer',
-    focus: 'Financial Planning, Commercial Discipline & People Development',
-    photo: '/assets/team/muhamad-raneef.jpeg',
-    initials: 'MR',
-    bio: 'Raneef oversees NEOM Panels’ financial planning and commercial discipline, supporting responsible resource allocation and sustainable business growth. An HRM postgraduate and national-level medal-winning athlete, he brings a people-focused outlook, discipline and a collaborative approach to the leadership team.',
-    linkedin: 'https://www.linkedin.com/in/muhamad-raneef-t-a-752832232/'
-  },
-  {
-    id: 'muhammed-jabir',
-    name: 'Muhammed Jabir',
-    role: 'Chief Technology Officer',
-    focus: 'Digital Systems, Supplier Networks & Trading Workflows',
-    photo: '/assets/team/muhammed-jabir.png',
-    initials: 'MJ',
-    bio: 'Jabir leads NEOM Panels’ technology direction, focusing on digital systems that support operations, customer enquiries and business coordination. An M.Com graduate and entrepreneur with experience managing plywood and fruit trading businesses, he brings practical insight into supplier networks, customer needs and trading workflows.',
-    linkedin: null
-  }
-];
-
 export default function TeamPage() {
   const teamJsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       getBreadcrumbJsonLd([
         { name: 'Home', path: '/' },
-        { name: 'Our Leadership', path: '/team' }
+        { name: 'Team', path: '/team' }
       ]),
       {
-        '@type': 'ProfilePage',
+        '@type': 'CollectionPage',
         '@id': `${SITE_URL}/team#webpage`,
         name: 'Our Leadership — The People Behind NEOM Panels',
         url: `${SITE_URL}/team`,
         description:
           'Meet the executive leadership team behind NEOM Panels: Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.',
+        isPartOf: {
+          '@id': `${SITE_URL}/#website`
+        },
+        about: {
+          '@id': `${SITE_URL}/#organization`
+        },
         primaryImageOfPage: {
           '@type': 'ImageObject',
-          url: `${SITE_URL}/assets/team/jibin-n.png`,
+          url: `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.webp`,
           width: 800,
           height: 800,
-          caption: 'Jibin N — Managing Director, NEOM Panels'
+          caption: 'Jibin N, Managing Director of NEOM Panels'
         },
-        image: LEADERSHIP_TEAM.map((member) => ({
+        image: LEADERSHIP_PROFILES.map((member) => ({
           '@type': 'ImageObject',
           url: `${SITE_URL}${member.photo}`,
           width: 800,
           height: 800,
-          caption: `${member.name} — ${member.role}, NEOM Panels`
+          caption: member.photoAlt
+        })),
+        hasPart: LEADERSHIP_PROFILES.map((member) => ({
+          '@id': `${SITE_URL}${member.profileHref}#person`
         }))
       },
-      ...LEADERSHIP_TEAM.map((member) => ({
+      ...LEADERSHIP_PROFILES.map((member) => ({
         '@type': 'Person',
-        '@id': `${SITE_URL}/team#${member.id}`,
+        '@id': `${SITE_URL}${member.profileHref}#person`,
         name: member.name,
         jobTitle: member.role,
-        description: member.bio,
+        url: `${SITE_URL}${member.profileHref}`,
+        description: member.overviewBio,
         image: {
           '@type': 'ImageObject',
           url: `${SITE_URL}${member.photo}`,
           width: 800,
           height: 800,
-          caption: `${member.name} — ${member.role}, NEOM Panels`
+          caption: member.photoAlt
         },
         worksFor: {
-          '@type': 'Organization',
-          name: 'NEOM Panels',
-          url: SITE_URL
+          '@id': `${SITE_URL}/#organization`
         },
+        ...(member.phone ? { telephone: member.phone } : {}),
         ...(member.linkedin ? { sameAs: [member.linkedin] } : {})
       }))
     ]
@@ -186,75 +135,27 @@ export default function TeamPage() {
               </p>
             </div>
             <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                gap: '0.65rem',
-                marginTop: '0.75rem',
-                paddingTop: '0.75rem',
-                borderTop: '1px solid var(--color-border)'
-              }}
+              className="leader-quick-directory"
               aria-label="Executive team quick directory"
             >
-              {LEADERSHIP_TEAM.map((member) => (
-                <a
+              {LEADERSHIP_PROFILES.map((member) => (
+                <Link
                   key={member.id}
-                  href={`#${member.id}`}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.65rem',
-                    padding: '0.45rem 0.55rem',
-                    borderRadius: '8px',
-                    border: '1px solid #E5DFD5',
-                    backgroundColor: '#FAF8F4',
-                    textDecoration: 'none',
-                    color: 'inherit'
-                  }}
+                  href={member.profileHref}
+                  className="leader-quick-chip"
                 >
                   <img
                     src={member.photo}
-                    alt={`${member.name} — ${member.role}`}
+                    alt={member.photoAlt}
                     width="44"
                     height="44"
-                    style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '50%',
-                      objectFit: 'cover',
-                      objectPosition: 'center top',
-                      border: '2px solid var(--color-forest)',
-                      flexShrink: 0
-                    }}
+                    className="leader-quick-chip-avatar"
                   />
-                  <div style={{ minWidth: 0 }}>
-                    <div
-                      style={{
-                        fontSize: '0.84rem',
-                        fontWeight: 700,
-                        color: 'var(--color-forest)',
-                        lineHeight: 1.2,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                      }}
-                    >
-                      {member.name}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '0.72rem',
-                        color: 'var(--color-text-muted)',
-                        lineHeight: 1.25,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                      }}
-                    >
-                      {member.role}
-                    </div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div className="leader-quick-chip-name">{member.name}</div>
+                    <div className="leader-quick-chip-role">{member.role}</div>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
             <div className="brand-architecture-row">
@@ -281,60 +182,90 @@ export default function TeamPage() {
       <section className="section reveal-once" aria-label="Executive Leadership Profiles">
         <div className="container">
           <div className="leadership-grid">
-            {LEADERSHIP_TEAM.map((member) => (
-              <article key={member.id} id={member.id} className="leader-card">
+            {LEADERSHIP_PROFILES.map((member, index) => (
+              <article
+                key={member.id}
+                id={member.id}
+                className="leader-card"
+                style={{ '--card-index': index }}
+              >
                 <div className="leader-card-top">
                   <div className="leader-portrait-wrap">
-                    {member.photo ? (
+                    <Link
+                      href={member.profileHref}
+                      aria-label={`View ${member.name}'s profile`}
+                    >
                       <img
                         src={member.photo}
-                        alt={`${member.name} — ${member.role}, NEOM Panels`}
+                        alt={member.photoAlt}
                         className="leader-portrait"
                         width="800"
                         height="800"
+                        sizes="(max-width: 520px) 148px, 148px"
                       />
-                    ) : (
-                      <div
-                        className="leader-monogram"
-                        aria-label={`${member.name} executive monogram`}
-                      >
-                        <span className="leader-monogram-initials">{member.initials}</span>
-                        <span className="leader-monogram-sub">NEOM Panels</span>
-                      </div>
-                    )}
+                    </Link>
                   </div>
-                  <div>
-                    <span className="leader-role">{member.role}</span>
-                    <h2 className="leader-name">{member.name}</h2>
+                  <div className="leader-header-meta">
+                    <div className="leader-role-row">
+                      <span className="leader-role">{member.role}</span>
+                    </div>
+                    <h2 className="leader-name">
+                      <Link href={member.profileHref} className="leader-name-link">
+                        {member.name}
+                      </Link>
+                    </h2>
                     <p className="leader-focus-tag">{member.focus}</p>
                   </div>
                 </div>
 
                 <div className="leader-body">
-                  <p className="leader-bio">{member.bio}</p>
+                  <p className="leader-bio">{member.overviewBio}</p>
 
                   <div className="leader-footer">
-                    <span className="brand-spec-label">NEOM Panels Executive Leadership</span>
-                    {member.linkedin ? (
-                      <a
-                        href={member.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="leader-linkedin"
-                        aria-label={`${member.name} on LinkedIn`}
-                      >
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          aria-hidden="true"
+                    <Link href={member.profileHref} className="leader-view-profile-link">
+                      <span>View Profile</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                    <div className="leader-footer-actions">
+                      {member.telHref ? (
+                        <a
+                          href={member.telHref}
+                          className="leader-phone-logo-only"
+                          aria-label={`Call ${member.name} (${member.phone})`}
+                          title={`Call ${member.name} (${member.phone})`}
                         >
-                          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                        </svg>
-                        <span>LinkedIn Profile</span>
-                      </a>
-                    ) : null}
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z" />
+                          </svg>
+                        </a>
+                      ) : null}
+                      {member.linkedin ? (
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="leader-linkedin-logo-only"
+                          aria-label={`${member.name} on LinkedIn`}
+                          title={`${member.name} — LinkedIn`}
+                        >
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                          </svg>
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </article>

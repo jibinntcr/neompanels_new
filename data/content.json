@@ -18,15 +18,21 @@
     },
     "verifiedContactDetails": {
       "enquiryRouteUrl": "/enquiry",
-      "verifiedEmail": null,
-      "verifiedPhone": null,
-      "verifiedWhatsapp": null,
-      "verifiedRegisteredAddress": null,
-      "verifiedFactoryLocation": "India (Company-owned wood-panel manufacturing facility)",
-      "verifiedSocialLinks": [],
+      "verifiedEmail": "neompanels@gmail.com",
+      "verifiedPhone": "+91 97454 50618",
+      "verifiedWhatsapp": "+91 97454 50618",
+      "verifiedRegisteredAddress": "India (Corporate Headquarters & Project Supply Hub)",
+      "verifiedFactoryLocation": "India (Company-owned & Partner Wood-Panel Manufacturing Network)",
+      "verifiedWebsite": "https://www.neompanels.com",
+      "verifiedSocialLinks": [
+        {
+          "platform": "LinkedIn",
+          "url": "https://www.linkedin.com/company/neom-panels"
+        }
+      ],
       "publicationStatus": "published",
-      "reviewDate": "2026-11-04",
-      "dependencyNote": "Direct email, telephone, WhatsApp and registered postal address fields are withheld from public display until verified corporate contact records are supplied in configuration."
+      "reviewDate": "2026-11-14",
+      "dependencyNote": "Verified corporate contact records from NEOM Panels Strategic Blueprint."
     }
   },
   "navigation": {
@@ -100,22 +106,31 @@
       {
         "id": "jibin-n",
         "name": "Jibin N",
-        "role": "Managing Director"
+        "role": "Managing Director",
+        "profileUrl": "/team/jibin-n",
+        "portrait": "/assets/team/jibin-n-neom-panels-managing-director.webp",
+        "linkedin": "https://www.linkedin.com/in/jibintcr/"
       },
       {
         "id": "muneer-k-h",
         "name": "Muneer K H",
-        "role": "Chief Executive Officer"
+        "role": "Chief Executive Officer",
+        "linkedin": "https://www.linkedin.com/in/muneerply/",
+        "phone": "+91 97454 50618"
       },
       {
         "id": "muhamad-raneef-t-a",
         "name": "Muhamad Raneef T A",
-        "role": "Chief Financial Officer"
+        "role": "Chief Financial Officer",
+        "linkedin": "https://www.linkedin.com/in/muhamad-raneef-t-a-752832232/",
+        "phone": "+91 90749 34014"
       },
       {
         "id": "muhammed-jabir",
         "name": "Muhammed Jabir",
-        "role": "Chief Technology Officer"
+        "role": "Chief Technology Officer",
+        "linkedin": "https://www.linkedin.com/in/muhammed-jabir-09579927b/",
+        "phone": "+91 97441 16147"
       }
     ]
   },

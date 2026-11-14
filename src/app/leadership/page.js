@@ -6,14 +6,14 @@ export const metadata = buildPageMetadata({
   description:
     'Meet the executive leadership team behind NEOM Panels, Starwoods and NEOM Packing Plywood: Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.',
   path: '/leadership',
-  ogImage: '/assets/team/jibin-n.png',
-  ogImageAlt: 'Jibin N (Managing Director) and NEOM Panels Executive Leadership Team',
+  ogImage: '/assets/team/jibin-n-neom-panels-managing-director.webp',
+  ogImageAlt: 'Jibin N, Managing Director of NEOM Panels',
   ogImages: [
     {
-      url: '/assets/team/jibin-n.png',
+      url: '/assets/team/jibin-n-neom-panels-managing-director.webp',
       width: 800,
       height: 800,
-      alt: 'Jibin N — Managing Director, NEOM Panels'
+      alt: 'Jibin N, Managing Director of NEOM Panels'
     },
     {
       url: '/assets/team/muneer-k-h.png',

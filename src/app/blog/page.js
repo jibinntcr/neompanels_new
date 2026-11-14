@@ -6,7 +6,7 @@ import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 export const dynamic = 'force-dynamic';
 
 export const metadata = buildPageMetadata({
-  title: 'Insights, SEO Articles & Company News — Wood-Panel Buyer Guides',
+  title: 'Insights, Technical Guides & Company News — Wood-Panel Specifications',
   description:
     'Read technical wood-panel buyer guides, calibrated plywood specifications, MR industrial packaging plywood insights and company news from NEOM Panels in India.',
   path: '/blog',

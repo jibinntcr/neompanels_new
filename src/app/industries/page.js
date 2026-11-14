@@ -110,6 +110,96 @@ export default function IndustriesPage() {
       </section>
 
       <section
+        className="section section--warm-white reveal-once"
+        style={{ paddingBlock: 'var(--space-6)' }}
+      >
+        <div className="container">
+          <div className="section-header-split">
+            <div>
+              <p className="eyebrow font-mono">SECTORS WE SUPPORT</p>
+              <h2 className="section-title">One brand. Multiple industries.</h2>
+              <p className="lead-text" style={{ marginBottom: 0 }}>
+                Scalable wood-panel solutions engineered across build, produce, store, and furnish environments.
+              </p>
+            </div>
+            <div className="section-header-actions">
+              <span className="badge-highlight font-mono">BUILD · PRODUCE · STORE · FURNISH</span>
+            </div>
+          </div>
+
+          <div className="sectors-quad-grid" style={{ marginTop: 'var(--space-5)' }}>
+            <div className="sector-card">
+              <div className="sector-media-wrap">
+                <img src="/assets/sector-construction.jpg" alt="Construction & Real Estate" className="sector-img" width="800" height="450" />
+                <span className="sector-num font-mono">01</span>
+              </div>
+              <div className="sector-body">
+                <span className="sector-kicker font-mono">BUILD ENVIRONMENT</span>
+                <h3 className="sector-title">Construction &amp; Real Estate</h3>
+                <p className="sector-subtitle">Residential towers, commercial complexes, project-led building envelopes.</p>
+                <p className="sector-desc">Structural formwork, multi-ply partitions, and ceiling joinery engineered for heavy casting cycles and high point loads.</p>
+                <a href="#projects-interiors" className="editorial-link" style={{ marginTop: 'auto' }}>
+                  <span>View Construction Specs</span>
+                  <span className="link-arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="sector-card">
+              <div className="sector-media-wrap">
+                <img src="/assets/sector-manufacturing.jpg" alt="Industrial Manufacturing" className="sector-img" width="800" height="450" />
+                <span className="sector-num font-mono">02</span>
+              </div>
+              <div className="sector-body">
+                <span className="sector-kicker font-mono">PRODUCE ENVIRONMENT</span>
+                <h3 className="sector-title">Industrial Facilities</h3>
+                <p className="sector-subtitle">Machinery platforms, production lines, and heavy-duty utility spaces.</p>
+                <p className="sector-desc">High-density hardwood composites resisting mechanical vibration, point abrasion, and long fatigue cycles.</p>
+                <a href="#furniture-oem" className="editorial-link" style={{ marginTop: 'auto' }}>
+                  <span>View Industrial Specs</span>
+                  <span className="link-arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="sector-card">
+              <div className="sector-media-wrap">
+                <img src="/assets/sector-packaging.jpg" alt="Packaging & Warehousing" className="sector-img" width="800" height="450" />
+                <span className="sector-num font-mono">03</span>
+              </div>
+              <div className="sector-body">
+                <span className="sector-kicker font-mono">STORE ENVIRONMENT</span>
+                <h3 className="sector-title">Packaging &amp; Warehousing</h3>
+                <p className="sector-subtitle">Storage systems, logistics hubs, and export shipping crating.</p>
+                <p className="sector-desc">Moisture-resistant (MR) packaging-grade plywood designed to protect export machinery during maritime transport.</p>
+                <a href="#industrial-packaging" className="editorial-link" style={{ marginTop: 'auto' }}>
+                  <span>View Packaging Specs</span>
+                  <span className="link-arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="sector-card">
+              <div className="sector-media-wrap">
+                <img src="/assets/sector-furniture.jpg" alt="Furniture & Interiors" className="sector-img" width="800" height="450" />
+                <span className="sector-num font-mono">04</span>
+              </div>
+              <div className="sector-body">
+                <span className="sector-kicker font-mono">FURNISH ENVIRONMENT</span>
+                <h3 className="sector-title">Furniture &amp; Interiors</h3>
+                <p className="sector-subtitle">Modular cabinetry, wardrobes, bespoke kitchens, luxury spaces.</p>
+                <p className="sector-desc">Quad-press calibrated thickness (±0.2mm) with zero core voids, ensuring clean CNC routing and flawless edge-banding.</p>
+                <a href="#modular-furniture" className="editorial-link" style={{ marginTop: 'auto' }}>
+                  <span>View Interior Specs</span>
+                  <span className="link-arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
         className="section section--sage-subtle reveal-once"
         style={{ paddingBlock: 'var(--space-5)' }}
       >
