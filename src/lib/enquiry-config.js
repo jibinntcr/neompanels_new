@@ -1,4 +1,5 @@
 export const ENQUIRY_BRANDS = [
+  'NEOM Panels',
   'Starwoods',
   'NEOM Packing Plywood',
   'General NEOM Panels Enquiry',
@@ -6,6 +7,11 @@ export const ENQUIRY_BRANDS = [
 ];
 
 export const ENQUIRY_CATEGORIES = [
+  'Product Enquiry',
+  'Project Supply',
+  'Partnership',
+  'Sample Request',
+  'International Enquiry',
   'Industrial Packaging / Packing Plywood',
   'Manufacturing & recurring supply',
   'Project requirement',
@@ -14,6 +20,26 @@ export const ENQUIRY_CATEGORIES = [
   'Distribution partnership',
   'Supplier introduction',
   'Other business enquiry'
+];
+
+export const STAKEHOLDER_ROLES = [
+  'Architects',
+  'Interior Designers',
+  'Dealers',
+  'Distributors',
+  'Furniture Manufacturers',
+  'Contractors',
+  'Builders',
+  'Institutional Buyers',
+  'Other'
+];
+
+export const PRODUCT_FAMILIES = [
+  'Structural & Specialty Plywood',
+  'Engineered Boards',
+  'Decorative Surfaces',
+  'All / Multiple Families',
+  'Other / General'
 ];
 
 export const PACKAGING_APPLICATIONS = [
@@ -48,6 +74,24 @@ const BRAND_LOOKUP = {
 };
 
 const CATEGORY_LOOKUP = {
+  'product-enquiry': 'Product Enquiry',
+  'product enquiry': 'Product Enquiry',
+  'product': 'Product Enquiry',
+  'project-supply': 'Project Supply',
+  'project supply': 'Project Supply',
+  'partnership': 'Partnership',
+  'partnerships': 'Partnership',
+  'channel-partnership': 'Partnership',
+  'sample-request': 'Sample Request',
+  'sample request': 'Sample Request',
+  'sample': 'Sample Request',
+  'samples': 'Sample Request',
+  'international-enquiry': 'International Enquiry',
+  'international enquiry': 'International Enquiry',
+  'international': 'International Enquiry',
+  'gcc': 'International Enquiry',
+  'export': 'International Enquiry',
+
   'industrial-packaging': 'Industrial Packaging / Packing Plywood',
   'industrial packaging': 'Industrial Packaging / Packing Plywood',
   'packing-plywood': 'Industrial Packaging / Packing Plywood',

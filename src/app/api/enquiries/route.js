@@ -172,10 +172,14 @@ export async function POST(request) {
     }
 
     const errors = [];
-    const rawCategory = String(fields.category || fields.requirementCategory || '').trim();
-    const category = normalizeCategoryParam(rawCategory) || rawCategory;
-    const rawBrand = String(fields.brand || '').trim();
-    const brand = normalizeBrandParam(rawBrand);
+    const rawCategory = String(fields.category || fields.enquiryType || fields.requirementCategory || '').trim();
+    const category = normalizeCategoryParam(rawCategory) || rawCategory || 'Product Enquiry';
+    const rawBrand = String(fields.brand || 'NEOM Panels').trim();
+    const brand = normalizeBrandParam(rawBrand) || 'NEOM Panels';
+
+    const role = String(fields.role || '').trim();
+    const productFamily = String(fields.productFamily || '').trim();
+    const cityCountry = String(fields.cityCountry || fields.destination || fields.deliveryLocation || '').trim();
 
     const packagingApplication = String(
       fields.packagingApplication || fields.applicationUseCase || ''
@@ -260,10 +264,6 @@ export async function POST(request) {
 
     if (!name || name.length < 2) {
       errors.push('Please enter your full name.');
-    }
-
-    if (!organisation || organisation.length < 2) {
-      errors.push('Please enter your company, organisation, or independent practice name.');
     }
 
     const hasValidEmail = isValidEmail(email);
@@ -365,11 +365,14 @@ export async function POST(request) {
       requirement: {
         category,
         description: requirementDescription,
-        brand: brand || null,
+        brand: brand || 'NEOM Panels',
+        role: role || null,
+        productFamily: productFamily || null,
+        cityCountry: cityCountry || destination || null,
         applicationProduct: applicationProduct || null,
         quantity: quantity || null,
         quantityUnit: quantity ? quantityUnit || 'Sheets' : null,
-        destination: destination || null,
+        destination: cityCountry || destination || null,
         requestedDate: requestedDate || null,
         conditionalDetails: {
           purchasingFrequency: purchasingFrequency || null,

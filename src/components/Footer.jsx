@@ -10,147 +10,158 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="container">
-        {/* Top Brand Statement Banner */}
-        <div className="footer-lead-banner">
-          <div className="footer-lead-copy">
-            <span className="footer-lead-kicker font-mono">NEOM PANELS · 2026–2036 BLUEPRINT</span>
-            <h3 className="footer-lead-headline">Engineered Excellence, Designed for Spaces.</h3>
-            <p className="footer-lead-sub">
-              Building a next-generation engineered wood, interior materials, and project supply ecosystem across India and the GCC corridor.
-            </p>
-          </div>
-          <div className="footer-lead-actions">
-            <Link href="/enquiry?category=sample-request" className="btn btn--secondary btn--sm">
-              Order Sample Box
-            </Link>
-            <Link href="/enquiry" className="btn btn--primary btn--sm">
-              <span>Discuss Project Supply</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </div>
-
         {/* 4-Column Footer Navigation Grid */}
         <div className="footer-grid">
-          {/* Col 1: Brand & Parent Identity */}
-          <div>
+          {/* Col 1: Brand & Master Positioning */}
+          <div className="footer-brand-col">
             <Link href="/" aria-label="NEOM Panels — Home">
               <img
-                src="/assets/logo-full.png"
+                src="/assets/neom-wordmark-clean.png"
                 alt="NEOM Panels"
-                className="footer-logo-img"
-                width="356"
-                height="366"
+                className="footer-logo-wordmark"
+                width="220"
+                height="78"
                 loading="lazy"
               />
             </Link>
-            <p className="secondary-text" style={{ margin: '1rem 0 0.875rem' }}>
-              Integrated manufacturer and project supply partner for furniture OEMs, architectural specifiers, and industrial packaging logistics.
+            <p className="footer-tagline-text">
+              Engineered Excellence, Designed for Spaces.
             </p>
-            <div className="footer-brand-pills">
-              <span className="footer-brand-pill">NEOM Architectural</span>
-              <span className="footer-brand-pill">Starwoods</span>
-              <span className="footer-brand-pill">NEOM Packing Plywood</span>
+            <p className="secondary-text" style={{ margin: '0.75rem 0 1.25rem', fontSize: '0.9375rem', lineHeight: '1.6' }}>
+              Building an integrated engineered wood, interior materials, and project supply ecosystem for India and global markets.
+            </p>
+            <div className="footer-contact-block">
+              <a href={cleanPhoneHref} className="footer-contact-item font-mono">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                <span>{phone}</span>
+              </a>
+              <a href={`mailto:${email}`} className="footer-contact-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                <span>{email}</span>
+              </a>
             </div>
           </div>
 
-          {/* Col 2: Materials & Products */}
-          <nav aria-label="Footer Materials & Products">
-            <h2 className="footer-heading">Materials &amp; Products</h2>
+          {/* Col 2: Product Families */}
+          <nav aria-label="Footer Product Families">
+            <h2 className="footer-heading">Product Families</h2>
             <ul className="footer-links" role="list">
               <li>
-                <Link href="/#portfolio" className="footer-link">
+                <Link href="/products" className="footer-link">
+                  Portfolio Overview
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/plywood" className="footer-link">
                   Structural &amp; Specialty Plywood
                 </Link>
               </li>
               <li>
-                <Link href="/#portfolio" className="footer-link">
-                  Marine Grade Plywood (IS:710)
+                <Link href="/products/plywood" className="footer-sublink">
+                  • Premium Plywood
                 </Link>
               </li>
               <li>
-                <Link href="/#portfolio" className="footer-link">
-                  High-Density HDHMR (Green Core)
+                <Link href="/products/plywood" className="footer-sublink">
+                  • Marine Plywood
                 </Link>
               </li>
               <li>
-                <Link href="/#portfolio" className="footer-link">
-                  Engineered MDF &amp; Pre-Laminated
+                <Link href="/products/plywood" className="footer-sublink">
+                  • BWR / BWP Plywood
                 </Link>
               </li>
               <li>
-                <Link href="/#portfolio" className="footer-link">
-                  Architectural Natural Veneers
+                <Link href="/products/engineered-boards" className="footer-link" style={{ marginTop: '0.5rem' }}>
+                  Engineered Boards
                 </Link>
               </li>
               <li>
-                <Link href="/#portfolio" className="footer-link">
-                  High-Pressure Laminates (HPL)
+                <Link href="/products/engineered-boards" className="footer-sublink">
+                  • MDF &amp; HDHMR Core
                 </Link>
               </li>
               <li>
-                <Link href="/#portfolio" className="footer-link">
-                  6H Acrylic &amp; Charcoal Fluted Panels
+                <Link href="/products/engineered-boards" className="footer-sublink">
+                  • Pre-Laminated MDF
                 </Link>
               </li>
               <li>
-                <Link href="/brands/neom-packing-plywood" className="footer-link">
-                  Industrial Packaging Plywood
+                <Link href="/products/decorative-surfaces" className="footer-link" style={{ marginTop: '0.5rem' }}>
+                  Decorative Surfaces
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/decorative-surfaces" className="footer-sublink">
+                  • Veneers &amp; Laminates
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/decorative-surfaces" className="footer-sublink">
+                  • Acrylic &amp; Charcoal Panels
                 </Link>
               </li>
             </ul>
           </nav>
 
-          {/* Col 3: Ecosystem & Global Corridor */}
-          <nav aria-label="Footer Ecosystem and Global Reach">
-            <h2 className="footer-heading">Ecosystem &amp; Global</h2>
+          {/* Col 3: Applications & Partners */}
+          <nav aria-label="Footer Applications and Partners">
+            <h2 className="footer-heading">Applications &amp; Sectors</h2>
             <ul className="footer-links" role="list">
               <li>
-                <a href="/#ecosystem" className="footer-link">
-                  The 8-Pillar Ecosystem
-                </a>
-              </li>
-              <li>
-                <a href="/#gcc-corridor" className="footer-link">
-                  India &amp; GCC Trade Corridor
-                </a>
-              </li>
-              <li>
-                <a href="/#roadmap" className="footer-link">
-                  Roadmap to Scale (2026–2036)
-                </a>
-              </li>
-              <li>
-                <Link href="/industries" className="footer-link">
-                  Industries &amp; Spaces We Support
+                <Link href="/applications#construction" className="footer-link">
+                  Construction
                 </Link>
               </li>
               <li>
-                <Link href="/manufacturing" className="footer-link">
-                  Manufacturing &amp; Quality Systems
+                <Link href="/applications#manufacturing" className="footer-link">
+                  Manufacturing Facilities
                 </Link>
               </li>
               <li>
-                <Link href="/sustainability" className="footer-link">
-                  E0 Low-Emissions &amp; Sustainability
+                <Link href="/applications#packaging" className="footer-link">
+                  Packaging &amp; Warehousing
                 </Link>
               </li>
               <li>
-                <Link href="/resources" className="footer-link">
-                  Technical Spec Sheets &amp; CAD/BIM
+                <Link href="/applications#furniture" className="footer-link">
+                  Furniture &amp; Interiors
+                </Link>
+              </li>
+              <li style={{ marginTop: '1.25rem' }}>
+                <h3 className="footer-subheading">Partnerships</h3>
+              </li>
+              <li>
+                <Link href="/partners#architects" className="footer-link">
+                  Architects &amp; Designers
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="footer-link">
-                  Insights &amp; Industry Analysis
+                <Link href="/partners#dealers" className="footer-link">
+                  Dealers &amp; Distributors
+                </Link>
+              </li>
+              <li>
+                <Link href="/partners#contractors" className="footer-link">
+                  Contractors &amp; Builders
+                </Link>
+              </li>
+              <li>
+                <Link href="/partners#institutional" className="footer-link">
+                  Institutional Buyers
                 </Link>
               </li>
             </ul>
           </nav>
 
-          {/* Col 4: Corporate & Verified Contacts */}
-          <div>
-            <h2 className="footer-heading">Corporate &amp; Contact</h2>
+          {/* Col 4: Company & Vision */}
+          <nav aria-label="Footer Company and Vision">
+            <h2 className="footer-heading">Company &amp; Vision</h2>
             <ul className="footer-links" role="list">
               <li>
                 <Link href="/about" className="footer-link">
@@ -158,75 +169,69 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/team" className="footer-link">
-                  Executive Leadership
+                <Link href="/about#vision-mission" className="footer-link">
+                  Vision &amp; Mission
                 </Link>
               </li>
               <li>
-                <Link href="/governance" className="footer-link">
-                  Corporate Governance &amp; Registry
+                <Link href="/about#pillars" className="footer-link">
+                  The 8-Pillar Ecosystem
                 </Link>
               </li>
               <li>
-                <Link href="/enquiry" className="footer-link" style={{ fontWeight: 600, color: 'var(--color-forest)' }}>
-                  Submit Project Requirement →
+                <Link href="/about#growth-model" className="footer-link">
+                  4-Stage Growth Model
+                </Link>
+              </li>
+              <li>
+                <Link href="/growth-vision" className="footer-link">
+                  Growth Vision &amp; Roadmap
+                </Link>
+              </li>
+              <li>
+                <Link href="/growth-vision#gcc-corridor" className="footer-link">
+                  India &amp; GCC Corridor
+                </Link>
+              </li>
+              <li>
+                <Link href="/resources" className="footer-link">
+                  Resource Enquiry
+                </Link>
+              </li>
+              <li>
+                <Link href="/enquiry" className="footer-link">
+                  Direct Enquiry Desk
                 </Link>
               </li>
             </ul>
-
-            <div className="footer-contact-meta">
-              <p className="footer-contact-line">
-                <strong>Corporate HQ:</strong> India (Supply Hub for India &amp; GCC)
-              </p>
-              <p className="footer-contact-line">
-                <strong>Direct Line:</strong>{' '}
-                <a href={cleanPhoneHref} className="footer-contact-link font-mono">
-                  {phone}
-                </a>
-              </p>
-              <p className="footer-contact-line">
-                <strong>Email:</strong>{' '}
-                <a href={`mailto:${email}`} className="footer-contact-link font-mono">
-                  {email}
-                </a>
-              </p>
-              <p className="footer-contact-line">
-                <strong>Digital Platform:</strong>{' '}
-                <a href="https://www.neompanels.com" target="_blank" rel="noopener noreferrer" className="footer-contact-link font-mono">
-                  www.neompanels.com
-                </a>
-              </p>
-            </div>
-          </div>
+          </nav>
         </div>
 
-        {/* Footer Bottom Bar */}
+        {/* Bottom Legal & Copyright Bar */}
         <div className="footer-bottom">
-          <p>© 2026 NEOM Panels. All rights reserved. Strategic Blueprint 2026–2036.</p>
+          <p className="copyright-text">
+            © {new Date().getFullYear()} NEOM Panels. All rights reserved. Registered Indian Wood-Panel Business.
+          </p>
           <ul className="footer-legal-links" role="list">
             <li>
-              <a href="/#gcc-corridor" className="footer-link">
-                GCC Trade Corridor
-              </a>
+              <Link href="/privacy" className="footer-legal-link">
+                Privacy Policy
+              </Link>
             </li>
             <li>
-              <Link href="/site-map" className="footer-link">
+              <span className="footer-legal-divider" aria-hidden="true">·</span>
+            </li>
+            <li>
+              <Link href="/terms" className="footer-legal-link">
+                Terms of Use
+              </Link>
+            </li>
+            <li>
+              <span className="footer-legal-divider" aria-hidden="true">·</span>
+            </li>
+            <li>
+              <Link href="/site-map" className="footer-legal-link">
                 Site Map
-              </Link>
-            </li>
-            <li>
-              <a href="/sitemap.xml" className="footer-link">
-                XML Sitemap
-              </a>
-            </li>
-            <li>
-              <Link href="/privacy" className="footer-link">
-                Privacy Notice
-              </Link>
-            </li>
-            <li>
-              <Link href="/terms" className="footer-link">
-                Website Terms
               </Link>
             </li>
           </ul>

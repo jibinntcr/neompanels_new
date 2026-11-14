@@ -6,44 +6,33 @@ import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [openMenu, setOpenMenu] = useState(null); // 'products' | 'industries' | 'ecosystem' | 'company' | null
+  const [openDropdown, setOpenDropdown] = useState(null); // 'products' | 'about' | null
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navRef = useRef(null);
-  const productsTriggerRef = useRef(null);
-  const industriesTriggerRef = useRef(null);
-  const ecosystemTriggerRef = useRef(null);
-  const companyTriggerRef = useRef(null);
   const closeTimeoutRef = useRef(null);
 
-  const isProductsActive =
-    pathname === '/brands' ||
-    pathname?.startsWith('/brands/') ||
-    pathname === '/#portfolio';
-
-  const isCompanyActive =
-    pathname === '/about' ||
-    pathname === '/team' ||
-    pathname?.startsWith('/team/') ||
-    pathname === '/leadership' ||
-    pathname === '/governance';
-
-  const isIndustriesActive = pathname === '/industries';
+  const isHome = pathname === '/';
+  const isProducts = pathname?.startsWith('/products');
+  const isApplications = pathname === '/applications' || pathname === '/industries';
+  const isAbout = pathname === '/about' || pathname === '/growth-vision';
+  const isPartners = pathname === '/partners';
+  const isContact = pathname === '/enquiry' || pathname === '/contact';
 
   useEffect(() => {
-    setOpenMenu(null);
+    setOpenDropdown(null);
     setMobileOpen(false);
   }, [pathname]);
 
   useEffect(() => {
     function handleClickOutside(e) {
       if (navRef.current && !navRef.current.contains(e.target)) {
-        setOpenMenu(null);
+        setOpenDropdown(null);
       }
     }
     function handleKeyDown(e) {
       if (e.key === 'Escape') {
-        setOpenMenu(null);
+        setOpenDropdown(null);
         if (mobileOpen) setMobileOpen(false);
       }
     }
@@ -53,68 +42,57 @@ export default function Navbar() {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [openMenu, mobileOpen]);
+  }, [openDropdown, mobileOpen]);
 
   if (pathname?.startsWith('/admin')) {
     return null;
   }
 
-  const handleMouseEnter = (menuName) => {
+  const handleMouseEnter = (name) => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
-    setOpenMenu(menuName);
+    setOpenDropdown(name);
   };
 
   const handleMouseLeave = () => {
     closeTimeoutRef.current = setTimeout(() => {
-      setOpenMenu(null);
-    }, 150);
+      setOpenDropdown(null);
+    }, 180);
   };
 
-  const toggleSubmenu = (menuName) => {
-    setOpenMenu((prev) => (prev === menuName ? null : menuName));
+  const toggleDropdown = (name) => {
+    setOpenDropdown((prev) => (prev === name ? null : name));
   };
 
   return (
     <>
-      {/* Top Architectural Utility Bar */}
+      {/* Top Architectural Micro-Bar */}
       <div className="utility-bar">
         <div className="container utility-bar-inner">
-          <span className="utility-tag">
-            <span className="utility-dot" aria-hidden="true" />
-            <span>NEOM PANELS · ENGINEERED EXCELLENCE, DESIGNED FOR SPACES · 2026–2036 BLUEPRINT</span>
-          </span>
-          <ul className="utility-links" role="list">
-            <li>
-              <a href="/#gcc-corridor" className="utility-link">
-                India &amp; GCC Corridor
-              </a>
-            </li>
-            <li>
-              <Link href="/enquiry?category=sample-request" className="utility-link">
-                Architectural Sample Box
-              </Link>
-            </li>
-            <li>
-              <Link href="/resources" className="utility-link">
-                Spec Center &amp; CAD/BIM
-              </Link>
-            </li>
-            <li>
-              <a href="tel:+919745450618" className="utility-link utility-link--highlight font-mono">
-                +91 97454 50618
-              </a>
-            </li>
-          </ul>
+          <div className="utility-bar-left">
+            <span className="utility-tag">
+              <span className="utility-dot" aria-hidden="true" />
+              <span>NEOM PANELS · ENGINEERED EXCELLENCE, DESIGNED FOR SPACES</span>
+            </span>
+          </div>
+          <div className="utility-bar-right">
+            <a href="tel:+919745450618" className="utility-contact-link font-mono">
+              <span className="utility-contact-label">Enquiry Desk:</span> +91 97454 50618
+            </a>
+            <span className="utility-divider" aria-hidden="true">·</span>
+            <a href="mailto:neompanels@gmail.com" className="utility-contact-link">
+              neompanels@gmail.com
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Main Header */}
-      <header className="site-header">
+      {/* Main Architectural Header */}
+      <header className="site-header" ref={navRef}>
         <div className="container header-inner">
-          {/* Logo */}
+          {/* Authentic NEOM Logo */}
           <Link href="/" className="brand-logo-link" aria-label="NEOM Panels — Home">
             <span className="brand-logo-3d-stage" aria-hidden="true">
               <span className="brand-logo-3d-emblem">
@@ -161,223 +139,113 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav ref={navRef} className="primary-nav" aria-label="Primary">
-            <ul className="nav-list">
-              {/* Products Submenu */}
-              <li
-                className="nav-item"
-                onMouseEnter={() => handleMouseEnter('products')}
-                onMouseLeave={handleMouseLeave}
-              >
-                <button
-                  ref={productsTriggerRef}
-                  type="button"
-                  className="nav-submenu-trigger"
-                  id="products-submenu-trigger"
-                  aria-expanded={openMenu === 'products' ? 'true' : 'false'}
-                  aria-controls="products-submenu"
-                  data-active={isProductsActive ? 'true' : undefined}
-                  onClick={() => toggleSubmenu('products')}
-                >
-                  <span>Materials &amp; Products</span>
-                  <svg className="submenu-caret" aria-hidden="true" viewBox="0 0 12 8">
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M1 1.5L6 6.5L11 1.5"
-                    />
-                  </svg>
-                </button>
-                <div
-                  className="nav-submenu nav-submenu--products"
-                  id="products-submenu"
-                  hidden={openMenu !== 'products'}
-                >
-                  <div className="nav-submenu-header">PHASE 1 PRODUCT ARCHITECTURE</div>
-                  <ul className="nav-submenu-list" role="list">
-                    <li>
-                      <Link
-                        href="/#portfolio"
-                        className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <div className="nav-submenu-title-row">
-                          <span className="nav-submenu-title">Structural &amp; Specialty Plywood</span>
-                          <span className="nav-submenu-badge">IS:710 · IS:303</span>
-                        </div>
-                        <span className="nav-submenu-desc">
-                          Calibrated premium plywood, Marine Grade IS:710, BWR &amp; BWP moisture-resistant cores
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/#portfolio"
-                        className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <div className="nav-submenu-title-row">
-                          <span className="nav-submenu-title">Engineered Boards (MDF &amp; HDHMR)</span>
-                          <span className="nav-submenu-badge nav-submenu-badge--green">Green Core &gt;850 kg/m³</span>
-                        </div>
-                        <span className="nav-submenu-desc">
-                          High-density HDHMR, architectural high-density MDF, and pre-laminated melamine boards
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/#portfolio"
-                        className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <div className="nav-submenu-title-row">
-                          <span className="nav-submenu-title">Decorative Surfaces &amp; Panels</span>
-                          <span className="nav-submenu-badge nav-submenu-badge--oak">Architectural Finishes</span>
-                        </div>
-                        <span className="nav-submenu-desc">
-                          Natural &amp; smoked veneers, high-pressure laminates (HPL), 6H acrylics, and fluted wall panels
-                        </span>
-                      </Link>
-                    </li>
-                    <li className="nav-submenu-divider" />
-                    <li>
-                      <Link
-                        href="/brands#starwoods"
-                        className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <div className="nav-submenu-title-row">
-                          <span className="nav-submenu-title">Starwoods</span>
-                          <span className="nav-submenu-badge">Furniture &amp; Interiors</span>
-                        </div>
-                        <span className="nav-submenu-desc">
-                          Specialty brand for furniture manufacturers and modular kitchen fabricators
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/brands/neom-packing-plywood"
-                        className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <div className="nav-submenu-title-row">
-                          <span className="nav-submenu-title">NEOM Packing Plywood</span>
-                          <span className="nav-submenu-badge nav-submenu-badge--oak">Industrial Packaging</span>
-                        </div>
-                        <span className="nav-submenu-desc">
-                          Moisture-resistant packaging-grade plywood for heavy equipment packing cases and export crates
-                        </span>
-                      </Link>
-                    </li>
-                  </ul>
-                  <div className="nav-submenu-footer">
-                    <Link
-                      href="/brands"
-                      className="nav-submenu-footer-link"
-                      onClick={() => setOpenMenu(null)}
-                    >
-                      <span>Explore Complete Portfolio &amp; Spec Sheets</span>
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                  </div>
-                </div>
-              </li>
-
-              {/* Industries Link */}
+          <nav className="desktop-nav" aria-label="Main Navigation">
+            <ul className="nav-list" role="list">
+              {/* Home */}
               <li className="nav-item">
                 <Link
-                  href="/industries"
-                  className="nav-link"
-                  aria-current={isIndustriesActive ? 'page' : undefined}
+                  href="/"
+                  className={`nav-link ${isHome ? 'nav-link--active' : ''}`}
+                  aria-current={isHome ? 'page' : undefined}
                 >
-                  Industries &amp; Spaces
+                  Home
                 </Link>
               </li>
 
-              {/* Ecosystem & Corridor Submenu */}
+              {/* Products (with accessible dropdown) */}
               <li
-                className="nav-item"
-                onMouseEnter={() => handleMouseEnter('ecosystem')}
+                className="nav-item nav-item--dropdown"
+                onMouseEnter={() => handleMouseEnter('products')}
                 onMouseLeave={handleMouseLeave}
               >
-                <button
-                  ref={ecosystemTriggerRef}
-                  type="button"
-                  className="nav-submenu-trigger"
-                  id="ecosystem-submenu-trigger"
-                  aria-expanded={openMenu === 'ecosystem' ? 'true' : 'false'}
-                  aria-controls="ecosystem-submenu"
-                  onClick={() => toggleSubmenu('ecosystem')}
-                >
-                  <span>Ecosystem &amp; Corridor</span>
-                  <svg className="submenu-caret" aria-hidden="true" viewBox="0 0 12 8">
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M1 1.5L6 6.5L11 1.5"
-                    />
-                  </svg>
-                </button>
+                <div className="nav-dropdown-trigger-group">
+                  <Link
+                    href="/products"
+                    className={`nav-link ${isProducts ? 'nav-link--active' : ''}`}
+                    aria-current={isProducts ? 'page' : undefined}
+                  >
+                    Products
+                  </Link>
+                  <button
+                    type="button"
+                    className="nav-dropdown-btn"
+                    aria-expanded={openDropdown === 'products'}
+                    aria-label="Toggle products menu"
+                    onClick={() => toggleDropdown('products')}
+                  >
+                    <svg className="submenu-caret" aria-hidden="true" viewBox="0 0 12 8" width="10" height="7">
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M1 1.5L6 6.5L11 1.5"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
                 <div
-                  className="nav-submenu"
-                  id="ecosystem-submenu"
-                  hidden={openMenu !== 'ecosystem'}
+                  className={`nav-submenu ${openDropdown === 'products' ? 'nav-submenu--open' : ''}`}
+                  hidden={openDropdown !== 'products'}
                 >
-                  <div className="nav-submenu-header">STRATEGIC GROWTH BLUEPRINT</div>
+                  <div className="nav-submenu-header">PHASE 1 PORTFOLIO</div>
                   <ul className="nav-submenu-list" role="list">
                     <li>
-                      <a
-                        href="/#ecosystem"
+                      <Link
+                        href="/products"
                         className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
+                        onClick={() => setOpenDropdown(null)}
                       >
-                        <span className="nav-submenu-title">The 8-Pillar Ecosystem</span>
+                        <span className="nav-submenu-title">Portfolio Overview</span>
                         <span className="nav-submenu-desc">
-                          Quality, design, dealer enablement, architect engagement &amp; digital platform
+                          Overview of all 3 Phase 1 product families and architectural applications
                         </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/#gcc-corridor"
-                        className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <span className="nav-submenu-title">India &amp; GCC Expansion Corridor</span>
-                        <span className="nav-submenu-desc">
-                          Domestic market anchor + UAE, Saudi Arabia, Qatar, Oman export connectivity
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/#roadmap"
-                        className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <span className="nav-submenu-title">Roadmap to Scale (2026–2036)</span>
-                        <span className="nav-submenu-desc">
-                          From brand building to integrated multi-state manufacturing leadership
-                        </span>
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <Link
-                        href="/manufacturing"
+                        href="/products/plywood"
                         className="nav-submenu-link"
-                        onClick={() => setOpenMenu(null)}
+                        onClick={() => setOpenDropdown(null)}
                       >
-                        <span className="nav-submenu-title">Manufacturing Infrastructure</span>
+                        <div className="nav-submenu-title-row">
+                          <span className="nav-submenu-title">Structural &amp; Specialty Plywood</span>
+                          <span className="nav-submenu-badge">Phase 1</span>
+                        </div>
                         <span className="nav-submenu-desc">
-                          Quad-press calibration, raw veneer selection, and quality systems
+                          Premium Plywood, Marine Plywood, and BWR / BWP calibrated substrates
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/products/engineered-boards"
+                        className="nav-submenu-link"
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        <div className="nav-submenu-title-row">
+                          <span className="nav-submenu-title">Engineered Boards</span>
+                          <span className="nav-submenu-badge">Phase 1</span>
+                        </div>
+                        <span className="nav-submenu-desc">
+                          High-density MDF, HDHMR moisture-resistant core, and pre-laminated MDF
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/products/decorative-surfaces"
+                        className="nav-submenu-link"
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        <div className="nav-submenu-title-row">
+                          <span className="nav-submenu-title">Decorative Surfaces</span>
+                          <span className="nav-submenu-badge nav-submenu-badge--oak">Phase 1</span>
+                        </div>
+                        <span className="nav-submenu-desc">
+                          Architectural veneers, laminates, acrylic panels, and charcoal fluted surfaces
                         </span>
                       </Link>
                     </li>
@@ -385,92 +253,81 @@ export default function Navbar() {
                 </div>
               </li>
 
-              {/* Company Submenu */}
+              {/* Applications */}
+              <li className="nav-item">
+                <Link
+                  href="/applications"
+                  className={`nav-link ${isApplications ? 'nav-link--active' : ''}`}
+                  aria-current={isApplications ? 'page' : undefined}
+                >
+                  Applications
+                </Link>
+              </li>
+
+              {/* About NEOM (with dropdown) */}
               <li
-                className="nav-item"
-                onMouseEnter={() => handleMouseEnter('company')}
+                className="nav-item nav-item--dropdown"
+                onMouseEnter={() => handleMouseEnter('about')}
                 onMouseLeave={handleMouseLeave}
               >
-                <button
-                  ref={companyTriggerRef}
-                  type="button"
-                  className="nav-submenu-trigger"
-                  id="company-submenu-trigger"
-                  aria-expanded={openMenu === 'company' ? 'true' : 'false'}
-                  aria-controls="company-submenu"
-                  data-active={isCompanyActive ? 'true' : undefined}
-                  onClick={() => toggleSubmenu('company')}
-                >
-                  <span>Company</span>
-                  <svg className="submenu-caret" aria-hidden="true" viewBox="0 0 12 8">
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M1 1.5L6 6.5L11 1.5"
-                    />
-                  </svg>
-                </button>
+                <div className="nav-dropdown-trigger-group">
+                  <Link
+                    href="/about"
+                    className={`nav-link ${isAbout ? 'nav-link--active' : ''}`}
+                    aria-current={isAbout ? 'page' : undefined}
+                  >
+                    About NEOM
+                  </Link>
+                  <button
+                    type="button"
+                    className="nav-dropdown-btn"
+                    aria-expanded={openDropdown === 'about'}
+                    aria-label="Toggle about menu"
+                    onClick={() => toggleDropdown('about')}
+                  >
+                    <svg className="submenu-caret" aria-hidden="true" viewBox="0 0 12 8" width="10" height="7">
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M1 1.5L6 6.5L11 1.5"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
                 <div
-                  className="nav-submenu"
-                  id="company-submenu"
-                  hidden={openMenu !== 'company'}
+                  className={`nav-submenu ${openDropdown === 'about' ? 'nav-submenu--open' : ''}`}
+                  hidden={openDropdown !== 'about'}
                 >
-                  <div className="nav-submenu-header">CORPORATE PROFILE &amp; VALUES</div>
+                  <div className="nav-submenu-header">STRATEGIC DIRECTION</div>
                   <ul className="nav-submenu-list" role="list">
                     <li>
                       <Link
                         href="/about"
                         className="nav-submenu-link"
-                        aria-current={pathname === '/about' ? 'page' : undefined}
-                        onClick={() => setOpenMenu(null)}
+                        onClick={() => setOpenDropdown(null)}
                       >
-                        <span className="nav-submenu-title">About NEOM Panels</span>
+                        <span className="nav-submenu-title">Company Vision &amp; Mission</span>
                         <span className="nav-submenu-desc">
-                          Vision, mission, brand promise, and 4-stage business model
+                          Our purpose, 8 ecosystem pillars, and 4-stage business growth model
                         </span>
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href="/team"
+                        href="/growth-vision"
                         className="nav-submenu-link"
-                        aria-current={
-                          pathname === '/team' || pathname === '/leadership' ? 'page' : undefined
-                        }
-                        onClick={() => setOpenMenu(null)}
+                        onClick={() => setOpenDropdown(null)}
                       >
-                        <span className="nav-submenu-title">Executive Leadership</span>
+                        <div className="nav-submenu-title-row">
+                          <span className="nav-submenu-title">Growth Vision &amp; Expansion</span>
+                          <span className="nav-submenu-badge nav-submenu-badge--oak">Roadmap</span>
+                        </div>
                         <span className="nav-submenu-desc">
-                          The management team directing NEOM Panels
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/sustainability"
-                        className="nav-submenu-link"
-                        aria-current={pathname === '/sustainability' ? 'page' : undefined}
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <span className="nav-submenu-title">Sustainability &amp; Low Emissions</span>
-                        <span className="nav-submenu-desc">
-                          E0 emissions, agro-forestry sourcing, and circular biomass energy
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/governance"
-                        className="nav-submenu-link"
-                        aria-current={pathname === '/governance' ? 'page' : undefined}
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        <span className="nav-submenu-title">Governance &amp; Corporate Records</span>
-                        <span className="nav-submenu-desc">
-                          Verified corporate identity, policies, and registry documentation
+                          Domestic foundation, GCC target corridor, and strategic timeline
                         </span>
                       </Link>
                     </li>
@@ -478,193 +335,149 @@ export default function Navbar() {
                 </div>
               </li>
 
-              {/* Resources Link */}
+              {/* Partners */}
               <li className="nav-item">
                 <Link
-                  href="/resources"
-                  className="nav-link"
-                  aria-current={pathname === '/resources' ? 'page' : undefined}
+                  href="/partners"
+                  className={`nav-link ${isPartners ? 'nav-link--active' : ''}`}
+                  aria-current={isPartners ? 'page' : undefined}
                 >
-                  Resources
+                  Partners
+                </Link>
+              </li>
+
+              {/* Contact */}
+              <li className="nav-item">
+                <Link
+                  href="/enquiry"
+                  className={`nav-link ${isContact ? 'nav-link--active' : ''}`}
+                  aria-current={isContact ? 'page' : undefined}
+                >
+                  Contact
                 </Link>
               </li>
             </ul>
-
-            {/* Header Action Buttons */}
-            <div className="nav-action-cluster">
-              <Link
-                href="/enquiry?category=sample-request"
-                className="btn btn--secondary nav-sample-btn"
-              >
-                Order Sample Box
-              </Link>
-              <Link
-                href="/enquiry"
-                className="btn btn--primary nav-cta-btn"
-                aria-current={pathname === '/enquiry' ? 'page' : undefined}
-              >
-                <span>Spec Quote</span>
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className="mobile-menu-toggle"
-            id="mobile-menu-toggle"
-            aria-expanded={mobileOpen ? 'true' : 'false'}
-            aria-controls="mobile-nav-panel"
-            onClick={() => setMobileOpen((prev) => !prev)}
-          >
-            <span className="mobile-menu-label">{mobileOpen ? 'Close' : 'Menu'}</span>
-            <svg aria-hidden="true" width="18" height="14" viewBox="0 0 18 14">
-              <path
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                d="M1 1h16M1 7h16M1 13h16"
-              />
-            </svg>
-          </button>
+          {/* Primary Header Action */}
+          <div className="header-actions">
+            <Link href="/enquiry" className="btn btn-primary header-cta-btn">
+              <span>Discuss Your Requirement</span>
+              <svg className="btn-icon-arrow" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14">
+                <path fill="currentColor" d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06l2.97-2.97H2.75a.75.75 0 0 1 0-1.5h8.44L8.22 4.03a.75.75 0 0 1 0-1.06Z" />
+              </svg>
+            </Link>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              type="button"
+              className="mobile-nav-toggle"
+              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              <span className={`hamburger-bar ${mobileOpen ? 'hamburger-bar--open-1' : ''}`} />
+              <span className={`hamburger-bar ${mobileOpen ? 'hamburger-bar--open-2' : ''}`} />
+              <span className={`hamburger-bar ${mobileOpen ? 'hamburger-bar--open-3' : ''}`} />
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Navigation Panel */}
-        <nav
-          className="mobile-nav-panel"
-          id="mobile-nav-panel"
-          aria-label="Mobile"
-          hidden={!mobileOpen}
-        >
-          <ul className="mobile-nav-list">
-            <li className="mobile-nav-item">
-              <span className="mobile-nav-link" style={{ fontWeight: 700, color: 'var(--color-forest)' }}>
-                Materials &amp; Portfolio
-              </span>
-              <ul className="mobile-submenu-list">
+        {/* Mobile Navigation Drawer */}
+        {mobileOpen && (
+          <div className="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+            <div className="mobile-nav-inner">
+              <ul className="mobile-nav-list" role="list">
                 <li>
-                  <Link href="/#portfolio" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Structural Plywood (Calibrated &amp; Marine IS:710)
+                  <Link href="/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                    Home
+                  </Link>
+                </li>
+                <li className="mobile-nav-group">
+                  <div className="mobile-nav-group-header">
+                    <Link href="/products" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                      Products
+                    </Link>
+                  </div>
+                  <ul className="mobile-nav-sublist" role="list">
+                    <li>
+                      <Link href="/products/plywood" className="mobile-nav-sublink" onClick={() => setMobileOpen(false)}>
+                        Structural &amp; Specialty Plywood
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/products/engineered-boards" className="mobile-nav-sublink" onClick={() => setMobileOpen(false)}>
+                        Engineered Boards (MDF &amp; HDHMR)
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/products/decorative-surfaces" className="mobile-nav-sublink" onClick={() => setMobileOpen(false)}>
+                        Decorative Surfaces &amp; Panels
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <Link href="/applications" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                    Applications
+                  </Link>
+                </li>
+                <li className="mobile-nav-group">
+                  <div className="mobile-nav-group-header">
+                    <Link href="/about" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                      About NEOM
+                    </Link>
+                  </div>
+                  <ul className="mobile-nav-sublist" role="list">
+                    <li>
+                      <Link href="/about" className="mobile-nav-sublink" onClick={() => setMobileOpen(false)}>
+                        Vision, Mission &amp; Model
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/growth-vision" className="mobile-nav-sublink" onClick={() => setMobileOpen(false)}>
+                        Growth Vision &amp; GCC Expansion
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <Link href="/partners" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                    Partners
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#portfolio" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Engineered Boards (MDF &amp; HDHMR)
+                  <Link href="/resources" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                    Resources
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#portfolio" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Decorative Surfaces (Veneers, HPL, Acrylic)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/brands#starwoods" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Starwoods (Furniture Plywood)
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/brands/neom-packing-plywood" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    NEOM Packing Plywood (Industrial Crates)
-                  </Link>
-                </li>
-              </ul>
-            </li>
-
-            <li className="mobile-nav-item">
-              <Link href="/industries" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
-                Industries &amp; Spaces
-              </Link>
-            </li>
-
-            <li className="mobile-nav-item">
-              <span className="mobile-nav-link" style={{ fontWeight: 700, color: 'var(--color-forest)' }}>
-                Ecosystem &amp; Corridor
-              </span>
-              <ul className="mobile-submenu-list">
-                <li>
-                  <a href="/#ecosystem" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    The 8-Pillar Ecosystem
-                  </a>
-                </li>
-                <li>
-                  <a href="/#gcc-corridor" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    India &amp; GCC Expansion Corridor
-                  </a>
-                </li>
-                <li>
-                  <a href="/#roadmap" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Roadmap to Scale (2026–2036)
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li className="mobile-nav-item">
-              <span className="mobile-nav-link" style={{ fontWeight: 700, color: 'var(--color-forest)' }}>
-                Company
-              </span>
-              <ul className="mobile-submenu-list">
-                <li>
-                  <Link href="/about" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    About NEOM Panels
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/team" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Executive Leadership
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/manufacturing" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Manufacturing Infrastructure
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/sustainability" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Sustainability &amp; Low Emissions
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/governance" className="mobile-submenu-link" onClick={() => setMobileOpen(false)}>
-                    Governance &amp; Corporate Info
+                  <Link href="/enquiry" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                    Contact &amp; Enquiries
                   </Link>
                 </li>
               </ul>
-            </li>
 
-            <li className="mobile-nav-item">
-              <Link href="/resources" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
-                Resources &amp; Specification Center
-              </Link>
-            </li>
-            <li className="mobile-nav-item">
-              <Link href="/blog" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
-                Insights &amp; News
-              </Link>
-            </li>
-          </ul>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.5rem' }}>
-            <Link
-              href="/enquiry?category=sample-request"
-              className="btn btn--secondary"
-              style={{ width: '100%', textAlign: 'center' }}
-              onClick={() => setMobileOpen(false)}
-            >
-              Order Material Sample Box
-            </Link>
-            <Link
-              href="/enquiry"
-              className="btn btn--primary"
-              style={{ width: '100%', textAlign: 'center' }}
-              onClick={() => setMobileOpen(false)}
-            >
-              Request Price Quote →
-            </Link>
+              <div className="mobile-nav-footer">
+                <Link
+                  href="/enquiry"
+                  className="btn btn-primary mobile-cta-btn"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <span>Discuss Your Requirement</span>
+                </Link>
+                <div className="mobile-contact-info">
+                  <a href="tel:+919745450618" className="mobile-phone-link font-mono">
+                    +91 97454 50618
+                  </a>
+                  <a href="mailto:neompanels@gmail.com" className="mobile-email-link">
+                    neompanels@gmail.com
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-        </nav>
+        )}
       </header>
     </>
   );

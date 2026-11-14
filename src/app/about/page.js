@@ -1,357 +1,288 @@
 import Link from 'next/link';
-import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = buildPageMetadata({
-  title: 'About NEOM Panels — Indian Wood-Panel Manufacturing Company',
+export const metadata = {
+  title: 'About NEOM Panels — Vision, Mission & Ecosystem',
   description:
-    'NEOM Panels is an Indian wood-panel manufacturing business and the company behind Starwoods and NEOM Packing Plywood. Learn about our factory, purpose, vision, mission and operating principles.',
-  path: '/about',
-  ogImage: '/assets/hero-neom-flagship.jpg',
-  ogImageAlt: 'About NEOM Panels — Indian Wood-Panel Manufacturing Company',
-  ogImages: [
-    {
-      url: '/assets/hero-neom-flagship.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'About NEOM Panels — Indian Wood-Panel Manufacturing Company'
-    },
-    {
-      url: '/assets/starwoods-brand-showcase.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'Starwoods — Furniture & Interior Applications by NEOM Panels'
-    },
-    {
-      url: '/assets/packing-plywood-showcase.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Packing Plywood — Moisture-Resistant Industrial Packaging Plywood'
-    },
-    {
-      url: '/assets/team/jibin-n.png',
-      width: 800,
-      height: 800,
-      alt: 'Jibin N — Managing Director, NEOM Panels'
-    }
-  ],
-  keywords: [
-    'about NEOM Panels',
-    'Indian wood panel manufacturing company',
-    'plywood manufacturer corporate profile India',
-    'Starwoods parent company NEOM Panels',
-    'NEOM Packing Plywood manufacturer',
-    'direct factory wood panel company India'
-  ]
-});
+    'Learn about NEOM Panels: our corporate vision, mission, 8 ecosystem pillars, market context, and 4-stage business growth model for engineered wood and interior materials.',
+  alternates: {
+    canonical: '/about'
+  }
+};
 
 export default function AboutPage() {
-  const aboutJsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      getBreadcrumbJsonLd([
-        { name: 'Home', path: '/' },
-        { name: 'About NEOM', path: '/about' }
-      ]),
-      {
-        '@type': 'AboutPage',
-        '@id': `${SITE_URL}/about#webpage`,
-        name: 'About NEOM Panels — Indian Wood-Panel Manufacturing Business',
-        url: `${SITE_URL}/about`,
-        description:
-          'NEOM Panels is an Indian wood-panel manufacturing business and the company behind Starwoods and NEOM Packing Plywood.'
-      }
-    ]
-  };
-
   return (
-    <main id="main-content">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
-      />
-      <section className="page-header section--architectural-grid">
-        <div className="container hero-split">
-          <div className="hero-animate">
-            <p className="eyebrow">ABOUT NEOM</p>
-            <h1 id="main-heading" tabIndex={-1} className="page-title">
-              A manufacturing business with a longer view.
-            </h1>
-            <p className="lead-text">
-              NEOM Panels is an Indian wood-panel manufacturing business and the company behind
-              Starwoods and NEOM Packing Plywood. With our own factory, we bring together panel
-              solutions for furniture, interior projects and industrial packaging, supported by a
-              focus on material quality and lasting business relationships.
-            </p>
-          </div>
+    <div className="page-view">
+      {/* Page Header */}
+      <section className="page-header-section bg-warm-ivory border-bottom-divider">
+        <div className="container">
+          <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+            <ol className="breadcrumb-list font-mono" role="list">
+              <li><Link href="/">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page">About NEOM</li>
+            </ol>
+          </nav>
 
-          <figure className="architectural-photo-card hero-animate--delay" style={{ margin: 0 }}>
-            <img
-              src="/assets/hero-neom-flagship.jpg"
-              alt="Calibrated multi-ply wood-panel substrates and warm oak architectural joinery in a contemporary studio."
-              width="1400"
-              height="933"
-            />
-            <figcaption className="architectural-photo-meta">
-              <span>Furniture and Interior Applications</span>
-            </figcaption>
-          </figure>
+          <div className="page-header-content">
+            <span className="section-eyebrow font-mono">OUR PURPOSE &amp; PHILOSOPHY</span>
+            <h1 className="page-title">Building an Integrated Materials Ecosystem</h1>
+            <p className="page-lead-text">
+              NEOM Panels is an Indian engineered wood and interior materials brand established with a clear long-term horizon: bridging the structural gaps in quality, design support, and supply reliability for spaces across India and global markets.
+            </p>
+            <div className="brand-promise-callout font-mono">
+              <span className="promise-tag">BRAND PROMISE:</span>
+              <span className="promise-quote">“Engineered Excellence, Designed for Spaces.”</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="section reveal-once">
-        <div className="container editorial-statement">
-          <div>
-            <p className="eyebrow">OUR ROLE</p>
-            <h2 className="section-title">Connecting manufacturing with material choices.</h2>
+      {/* Vision & Mission Section */}
+      <section className="section-spacing" id="vision-mission" aria-label="Vision and Mission">
+        <div className="container">
+          <div className="vision-mission-grid">
+            {/* Vision */}
+            <div className="vision-card bg-forest text-warm">
+              <span className="vm-badge font-mono text-gold">OUR VISION</span>
+              <blockquote className="vm-statement">
+                “To become one of the most trusted engineered wood and interior materials brands from India, recognized for quality, design relevance, sustainability, digital excellence, and international market reach.”
+              </blockquote>
+              <p className="vm-context text-warm-muted">
+                From physical slide 3 of the NEOM Panels strategic blueprint: anchoring an enduring corporate standard for domestic and export markets.
+              </p>
+            </div>
+
+            {/* Mission */}
+            <div className="mission-card bg-warm-ivory border-strong">
+              <span className="vm-badge font-mono text-forest">OUR MISSION</span>
+              <blockquote className="vm-statement text-forest">
+                “To deliver reliable, design-ready, and scalable panel solutions through strong manufacturing partnerships, disciplined quality systems, dealer empowerment, architect engagement, project supply capability, and digital-first customer experience.”
+              </blockquote>
+              <p className="vm-context text-muted">
+                From physical slide 3 of the NEOM Panels strategic blueprint: translating customer requirements into disciplined operational execution.
+              </p>
+            </div>
           </div>
-          <div className="editorial-statement-body">
-            <p className="lead-text">
-              Manufacturers turn panels into furniture. Contractors and designers use materials to
-              shape interiors. Packaging fabricators and industrial buyers rely on plywood for
-              packing cases and crates. Institutions make purchasing decisions for the spaces
-              people use every day. NEOM’s role is to develop the manufacturing business and
-              information behind those material choices.
+        </div>
+      </section>
+
+      {/* Market Drivers Section */}
+      <section className="section-spacing bg-warm-ivory" id="market-drivers" aria-label="Market Context and Drivers">
+        <div className="container">
+          <div className="section-header-compact">
+            <span className="section-eyebrow font-mono">MARKET EVOLUTION</span>
+            <h2 className="section-title">Six Key Demand Drivers</h2>
+            <p className="section-subtitle">
+              The structural forces reshaping the Indian engineered wood and interior materials landscape.
             </p>
-            <p>
-              By operating our own manufacturing facility in India and organising our commercial
-              range under defined product brands—Starwoods and NEOM Packing Plywood—we focus on
-              building consistent operating discipline, clear technical communication and
-              dependable B2B relationships.
+          </div>
+
+          <div className="drivers-grid">
+            <div className="driver-card">
+              <span className="driver-num font-mono">01</span>
+              <h3 className="driver-title">Urban Housing &amp; Modern Living</h3>
+              <p className="driver-desc">
+                Accelerated urbanisation and residential apartment construction creating continuous baseline demand for calibrated furniture and interior panel substrates.
+              </p>
+            </div>
+
+            <div className="driver-card">
+              <span className="driver-num font-mono">02</span>
+              <h3 className="driver-title">Modular Furniture Boom</h3>
+              <p className="driver-desc">
+                Transition from manual on-site carpentry toward factory-finished modular kitchens, precision-machined wardrobes, and pre-fabricated joinery systems.
+              </p>
+            </div>
+
+            <div className="driver-card">
+              <span className="driver-num font-mono">03</span>
+              <h3 className="driver-title">Commercial &amp; Institutional Interiors</h3>
+              <p className="driver-desc">
+                Substantial expansion in flexible corporate offices, co-working spaces, healthcare infrastructure, and retail developments requiring reliable BOQ supply.
+              </p>
+            </div>
+
+            <div className="driver-card">
+              <span className="driver-num font-mono">04</span>
+              <h3 className="driver-title">Hospitality &amp; Experiential Spaces</h3>
+              <p className="driver-desc">
+                Rise in domestic tourism, luxury boutique hotels, and dining destinations demanding distinctive decorative finishes and durable wet-area substrates.
+              </p>
+            </div>
+
+            <div className="driver-card">
+              <span className="driver-num font-mono">05</span>
+              <h3 className="driver-title">Evolving Design &amp; Aesthetic Expectations</h3>
+              <p className="driver-desc">
+                Growing client appreciation for refined wood textures, fluted wall treatments, matte acrylics, and natural veneers over generic plain surfaces.
+              </p>
+            </div>
+
+            <div className="driver-card">
+              <span className="driver-num font-mono">06</span>
+              <h3 className="driver-title">Sustainability &amp; Low-Emission Preferences</h3>
+              <p className="driver-desc">
+                Increasing specifier and institutional focus on agro-forestry timber sourcing, circular raw material utilization, and healthier indoor air formulations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The 8 Ecosystem Pillars */}
+      <section className="section-spacing" id="pillars" aria-label="The 8-Pillar Ecosystem">
+        <div className="container">
+          <div className="section-header-compact">
+            <span className="section-eyebrow font-mono">INTEGRATED ARCHITECTURE</span>
+            <h2 className="section-title">The Eight Ecosystem Pillars</h2>
+            <p className="section-subtitle">
+              Physical page 8 of our strategic blueprint establishes eight operational commitments guiding how NEOM Panels engages the market.
             </p>
-            <div className="brand-architecture-tree" style={{ marginTop: 'var(--space-5)' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  gap: '0.75rem'
-                }}
-              >
-                <span className="brand-spec-label">Official Product Brands of NEOM Panels</span>
-                <Link href="/brands" className="editorial-link">
-                  <span>Explore Brands</span>
-                  <span className="link-arrow" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
+          </div>
+
+          <div className="pillars-grid-eight">
+            <div className="pillar-item">
+              <div className="pillar-item-header">
+                <span className="pillar-item-num font-mono">01</span>
+                <h3 className="pillar-item-title">Quality</h3>
               </div>
-              <div className="brand-architecture-children">
-                <Link href="/brands#starwoods" className="brand-architecture-child-node">
-                  <span className="brand-spec-label">Furniture &amp; Interiors</span>
-                  <img
-                    src="/assets/starwood-logo.png"
-                    alt="Starwoods — The Plywood Specialist"
-                    className="starwood-logo-img--xs"
-                    width="619"
-                    height="177"
-                  />
-                  <span
-                    style={{
-                      fontWeight: 600,
-                      color: 'var(--color-forest)',
-                      fontSize: '0.9rem'
-                    }}
-                  >
-                    Starwoods
-                  </span>
-                </Link>
+              <p className="pillar-item-desc">
+                Disciplined manufacturing partner selection, strict raw veneer grading, and verified resin formulation to deliver consistent panel flat-bonding.
+              </p>
+            </div>
 
-                <Link
-                  href="/brands/neom-packing-plywood"
-                  className="brand-architecture-child-node"
-                >
-                  <span className="brand-spec-label">Industrial Packaging</span>
-                  <img
-                    src="/assets/neom-packing-plywood-logo-compact.svg"
-                    alt="NEOM Packing Plywood"
-                    className="packing-logo-img--xs"
-                    width="540"
-                    height="112"
-                  />
-                  <span
-                    style={{
-                      fontWeight: 600,
-                      color: 'var(--color-forest)',
-                      fontSize: '0.9rem'
-                    }}
-                  >
-                    NEOM Packing Plywood
-                  </span>
-                </Link>
+            <div className="pillar-item">
+              <div className="pillar-item-header">
+                <span className="pillar-item-num font-mono">02</span>
+                <h3 className="pillar-item-title">Design Support</h3>
               </div>
+              <p className="pillar-item-desc">
+                Providing architectural specifiers with physical sample swatches, technical edge-banding guidance, and grain-matching advice.
+              </p>
+            </div>
+
+            <div className="pillar-item">
+              <div className="pillar-item-header">
+                <span className="pillar-item-num font-mono">03</span>
+                <h3 className="pillar-item-title">Dealer Enablement</h3>
+              </div>
+              <p className="pillar-item-desc">
+                Transparent stock communication, structured regional wholesale supply, and promotional materials to empower local retail partners.
+              </p>
+            </div>
+
+            <div className="pillar-item">
+              <div className="pillar-item-header">
+                <span className="pillar-item-num font-mono">04</span>
+                <h3 className="pillar-item-title">Architect Engagement</h3>
+              </div>
+              <p className="pillar-item-desc">
+                Continuous dialogue with design practices to anticipate emerging interior textures, acoustic cladding needs, and bespoke joinery requirements.
+              </p>
+            </div>
+
+            <div className="pillar-item">
+              <div className="pillar-item-header">
+                <span className="pillar-item-num font-mono">05</span>
+                <h3 className="pillar-item-title">Digital Infrastructure</h3>
+              </div>
+              <p className="pillar-item-desc">
+                Developing digital channels to connect enquiry processing, order specifications, and dealer support in a cohesive framework.
+              </p>
+            </div>
+
+            <div className="pillar-item">
+              <div className="pillar-item-header">
+                <span className="pillar-item-num font-mono">06</span>
+                <h3 className="pillar-item-title">Project Supply</h3>
+              </div>
+              <p className="pillar-item-desc">
+                Dependable multi-truckload and scheduled container fulfillment designed for the rigorous milestones of large commercial projects.
+              </p>
+            </div>
+
+            <div className="pillar-item">
+              <div className="pillar-item-header">
+                <span className="pillar-item-num font-mono">07</span>
+                <h3 className="pillar-item-title">Sustainability</h3>
+              </div>
+              <p className="pillar-item-desc">
+                Promoting renewable agro-forestry plantation timber (eucalyptus, poplar) and low-emission resin technologies to reduce ecological footprint.
+              </p>
+            </div>
+
+            <div className="pillar-item">
+              <div className="pillar-item-header">
+                <span className="pillar-item-num font-mono">08</span>
+                <h3 className="pillar-item-title">Export Readiness</h3>
+              </div>
+              <p className="pillar-item-desc">
+                Developing product standards, packaging compliance, and logistics protocols geared toward maritime export to GCC nations.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section section--warm reveal-once">
+      {/* 4-Stage Growth Model */}
+      <section className="section-spacing bg-warm-ivory border-top-divider" id="growth-model" aria-label="4-Stage Growth Model">
         <div className="container">
-          <p className="eyebrow font-mono">STRATEGIC FOUNDATION · 2026–2036</p>
-          <h2 className="section-title">Vision, mission &amp; brand promise.</h2>
-
-          <div className="pillars-grid">
-            <div className="pillar-cell">
-              <p className="eyebrow font-mono">VISION</p>
-              <h3 className="subsection-title">Where we are headed</h3>
-              <p>
-                To become one of the most trusted engineered wood and interior materials brands from
-                India, recognized for quality, design relevance, sustainability, digital excellence,
-                and international market reach.
-              </p>
-            </div>
-
-            <div className="pillar-cell pillar-cell--highlight">
-              <p className="eyebrow font-mono">BRAND PROMISE</p>
-              <h3 className="subsection-title">Engineered Excellence, Designed for Spaces.</h3>
-              <p>
-                Our commitment to architects, builders, and manufacturing partners: reliable,
-                precision-calibrated panel solutions engineered to endure and elevate every interior.
-              </p>
-            </div>
-
-            <div className="pillar-cell">
-              <p className="eyebrow font-mono">MISSION</p>
-              <h3 className="subsection-title">How we deliver</h3>
-              <p>
-                To deliver reliable, design-ready, and scalable panel solutions through strong
-                manufacturing partnerships, disciplined quality systems, dealer empowerment,
-                architect engagement, project supply capability, and digital-first customer experience.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4-Stage Scalable Business Model */}
-      <section className="section reveal-once">
-        <div className="container">
-          <p className="eyebrow font-mono">STRATEGIC GROWTH BLUEPRINT</p>
-          <h2 className="section-title">A disciplined 4-stage business model.</h2>
-          <p className="lead-text">
-            From agile trading and contract manufacturing to long-term manufacturing partnerships
-            and an integrated industrial ecosystem.
-          </p>
-
-          <div className="stages-flow-grid" style={{ marginTop: 'var(--space-6)' }}>
-            <div className="business-stage-card">
-              <span className="stage-pill font-mono">Stage 01</span>
-              <h4 className="stage-title">Brand Building + Trading</h4>
-              <p className="stage-desc">
-                Build brand equity, expand curated product range, and establish strong market presence
-                through disciplined trading and distribution channels.
-              </p>
-              <span className="stage-step-num font-mono">01</span>
-            </div>
-
-            <div className="business-stage-card">
-              <span className="stage-pill font-mono">Stage 02</span>
-              <h4 className="stage-title">Contract Manufacturing</h4>
-              <p className="stage-desc">
-                Leverage verified partner facilities to ensure thickness calibration, scalability,
-                and cost efficiency while actively validating customer demand.
-              </p>
-              <span className="stage-step-num font-mono">02</span>
-            </div>
-
-            <div className="business-stage-card">
-              <span className="stage-pill font-mono">Stage 03</span>
-              <h4 className="stage-title">Manufacturing Partnerships</h4>
-              <p className="stage-desc">
-                Form strategic alliances with advanced manufacturers to secure dedicated capacity,
-                technical innovation, and long-term supply stability.
-              </p>
-              <span className="stage-step-num font-mono">03</span>
-            </div>
-
-            <div className="business-stage-card">
-              <span className="stage-pill font-mono">Stage 04</span>
-              <h4 className="stage-title">Integrated Manufacturing Ecosystem</h4>
-              <p className="stage-desc">
-                Establish owned automated manufacturing infrastructure to achieve complete operational
-                control, product diversification, and sustainable competitive advantage.
-              </p>
-              <span className="stage-step-num font-mono">04</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section reveal-once">
-        <div className="container">
-          <p className="eyebrow">OPERATING PRINCIPLES</p>
-          <h2 className="section-title">Values that guide our decisions.</h2>
-          <p className="secondary-text">
-            How we approach materials, specifications, resources and commercial commitments.
-          </p>
-
-          <ol className="ledger-list" role="list">
-            <li className="ledger-row">
-              <span className="route-index">01</span>
-              <h3 className="route-title">Care for the material</h3>
-              <p style={{ margin: 0 }}>
-                Understand the product, its application and opportunities for improvement.
-              </p>
-            </li>
-            <li className="ledger-row">
-              <span className="route-index">02</span>
-              <h3 className="route-title">Clarity in business</h3>
-              <p style={{ margin: 0 }}>Communicate requirements and commitments clearly.</p>
-            </li>
-            <li className="ledger-row">
-              <span className="route-index">03</span>
-              <h3 className="route-title">Respect for resources</h3>
-              <p style={{ margin: 0 }}>
-                Consider sourcing, material yield and resource use in business decisions.
-              </p>
-            </li>
-            <li className="ledger-row">
-              <span className="route-index">04</span>
-              <h3 className="route-title">Accountability in action</h3>
-              <p style={{ margin: 0 }}>
-                Take responsibility and build systems that support follow-through.
-              </p>
-            </li>
-            <li className="ledger-row">
-              <span className="route-index">05</span>
-              <h3 className="route-title">Long-term relationships</h3>
-              <p style={{ margin: 0 }}>
-                Develop customer, employee and partner relationships with a view to the future.
-              </p>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section className="section section--sage-subtle section--no-border reveal-once">
-        <div className="container split-editorial">
-          <div>
-            <p className="eyebrow">EXPLORE FURTHER</p>
-            <h2 className="section-title">See how the business is organised.</h2>
-            <p className="lead-text">
-              Review our brands, manufacturing operations, governance structure or begin a
-              conversation about your next requirement.
+          <div className="section-header-compact">
+            <span className="section-eyebrow font-mono">BUSINESS PROGRESSION</span>
+            <h2 className="section-title">The 4-Stage Growth Model</h2>
+            <p className="section-subtitle">
+              From physical page 9 of the pitch deck: our structured operational evolution from market entry to an integrated manufacturing ecosystem.
             </p>
           </div>
-          <div className="btn-group">
-            <Link href="/team" className="btn btn--primary">
-              Meet Our Leadership
-            </Link>
-            <Link href="/brands" className="btn btn--secondary">
-              Explore Our Brands
-            </Link>
-            <Link href="/governance" className="btn btn--secondary">
-              Governance &amp; Corporate Information
-            </Link>
-            <Link href="/enquiry" className="editorial-link">
-              <span>Submit a Business Enquiry</span>
-              <span className="link-arrow" aria-hidden="true">
-                →
-              </span>
+
+          <div className="growth-stages-grid">
+            <div className="growth-stage-card">
+              <div className="stage-card-step font-mono">STAGE 01</div>
+              <h3 className="stage-card-title">Brand Building + Trading</h3>
+              <p className="stage-card-desc">
+                Establishing the NEOM Panels brand presence, validating market acceptance, building initial distribution relationships, and developing customer trust.
+              </p>
+            </div>
+
+            <div className="growth-stage-card">
+              <div className="stage-card-step font-mono">STAGE 02</div>
+              <h3 className="stage-card-title">Contract Manufacturing</h3>
+              <p className="stage-card-desc">
+                Securing disciplined contract production capacity with vetted manufacturing facilities operating under NEOM Panels quality guidelines and formulations.
+              </p>
+            </div>
+
+            <div className="growth-stage-card">
+              <div className="stage-card-step font-mono">STAGE 03</div>
+              <h3 className="stage-card-title">Manufacturing Partnerships</h3>
+              <p className="stage-card-desc">
+                Deepening manufacturing alliances, implementing dedicated production lines, and standardizing quality control across multi-state production centers.
+              </p>
+            </div>
+
+            <div className="growth-stage-card">
+              <div className="stage-card-step font-mono">STAGE 04</div>
+              <h3 className="stage-card-title">Integrated Manufacturing Ecosystem</h3>
+              <p className="stage-card-desc">
+                Realizing a fully integrated manufacturing ecosystem combining owned facilities, joint ventures, direct timber sourcing, and automated logistics.
+              </p>
+            </div>
+          </div>
+
+          <div className="growth-model-note">
+            <p className="secondary-text font-mono text-center">
+              Strategic Blueprint Reference: Physical Page 9 · Structured progression roadmap for long-term value creation.
+            </p>
+          </div>
+
+          <div className="text-center" style={{ marginTop: '2.5rem' }}>
+            <Link href="/growth-vision" className="btn btn-secondary">
+              <span>View 10-Year Strategic Growth Vision</span>
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

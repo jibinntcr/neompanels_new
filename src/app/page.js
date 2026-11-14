@@ -1,734 +1,553 @@
 import Link from 'next/link';
-import { buildPageMetadata, SITE_URL } from '@/lib/seo';
-import InteractiveProductArchitecture from '@/components/InteractiveProductArchitecture';
-import InteractiveMarketShift from '@/components/InteractiveMarketShift';
-import InteractiveEcosystemExplorer from '@/components/InteractiveEcosystemExplorer';
-import InteractiveGccCorridor from '@/components/InteractiveGccCorridor';
+import Image from 'next/image';
 
-export const metadata = buildPageMetadata({
-  absoluteTitle:
-    'NEOM Panels | Engineered Excellence, Designed for Spaces — Indian Wood Panels & GCC Supply Ecosystem',
+export const metadata = {
+  title: 'NEOM Panels | Engineered Excellence, Designed for Spaces',
   description:
-    'NEOM Panels is building a next-generation engineered wood, interior materials, and project supply ecosystem for India and global markets. Phase 1 portfolio includes calibrated plywood, marine grade IS:710, HDHMR, MDF, and decorative surfaces.',
-  path: '/',
-  ogImage: '/assets/arch-lobby-reception.jpg',
-  ogImageAlt: 'NEOM Panels — Engineered Excellence, Designed for Spaces',
-  ogImages: [
-    {
-      url: '/assets/arch-lobby-reception.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels — Corporate Lobby & Architectural Joinery'
-    },
-    {
-      url: '/assets/product-structural-plywood.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels — Structural & Specialty Calibrated Plywood'
-    },
-    {
-      url: '/assets/product-engineered-boards.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels — High-Density HDHMR & Engineered MDF'
-    },
-    {
-      url: '/assets/product-decorative-surfaces.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels — Architectural Veneers, Acrylics and Laminates'
-    }
-  ],
-  keywords: [
-    'NEOM Panels',
-    'Engineered Excellence Designed for Spaces',
-    'wood panel manufacturer India',
-    'plywood manufacturer India',
-    'calibrated plywood supplier',
-    'marine plywood IS 710',
-    'HDHMR green board India',
-    'architectural MDF panels',
-    'natural wood veneers India',
-    'acrylic cabinetry panels',
-    'fluted charcoal wall panels',
-    'GCC wood panel supply',
-    'Dubai plywood export',
-    'Saudi Arabia interior panels',
-    'Starwoods plywood',
-    'NEOM Packing Plywood'
-  ]
-});
-
-const SECTORS_WE_SUPPORT = [
-  {
-    id: 'construction',
-    num: '01',
-    title: 'Construction & Real Estate',
-    subtitle: 'High-rise residential towers, commercial complexes, and project-led building envelopes.',
-    description:
-      'Dimensionally stable structural plywood and formwork substrates engineered to withstand heavy casting cycles, high shear stress, and demanding site conditions.',
-    image: '/assets/sector-construction.jpg',
-    useCases: 'Structural joinery, partitions, ceiling framing, concrete formwork',
-    href: '/industries#projects-interiors'
-  },
-  {
-    id: 'manufacturing',
-    num: '02',
-    title: 'Industrial Manufacturing',
-    subtitle: 'Production environments, machinery platforms, and utility facilities.',
-    description:
-      'High-density, cross-laminated wood composite panels engineered for high point-load bearing, electrical non-conductivity, and long operational fatigue resistance.',
-    image: '/assets/sector-manufacturing.jpg',
-    useCases: 'Machinery baseboards, industrial workbenches, electrical backing, utility walls',
-    href: '/industries#furniture-oem'
-  },
-  {
-    id: 'packaging',
-    num: '03',
-    title: 'Packaging & Warehousing',
-    subtitle: 'Heavy-duty packing cases, export shipping crates, and logistics support systems.',
-    description:
-      'Moisture-resistant (MR) industrial packaging-grade plywood built to protect heavy machinery, automotive components, and sensitive equipment during intercontinental transit.',
-    image: '/assets/sector-packaging.jpg',
-    useCases: 'Heavy equipment packing cases, export crates, pallet collars, internal dividers',
-    href: '/brands/neom-packing-plywood'
-  },
-  {
-    id: 'furniture',
-    num: '04',
-    title: 'Furniture & Interiors',
-    subtitle: 'Modular cabinetry, wardrobes, bespoke kitchens, and luxury architectural fit-outs.',
-    description:
-      'Quad-press calibrated plywood, water-repellent HDHMR, and synchronized pre-laminated boards built for clean CNC cutting, tight edge-banding, and high screw-holding torque.',
-    image: '/assets/sector-furniture.jpg',
-    useCases: 'Modular kitchens, wardrobes, luxury wall panelling, executive office desks',
-    href: '/industries#modular-furniture'
+    'NEOM Panels is building an integrated ecosystem of engineered wood, interior materials and project supply solutions for India and global markets. Explore our Phase 1 portfolio of structural plywood, engineered boards, and decorative surfaces.',
+  alternates: {
+    canonical: '/'
   }
-];
-
-const MARKET_GAPS_SOLUTIONS = [
-  {
-    gap: 'Fragmented Product Discovery',
-    gapDesc: 'Architects and buyers struggle through fragmented physical catalogs with outdated stock visibility.',
-    solution: 'Unified Digital Platform & Product Selector',
-    solutionDesc: 'Centralized digital catalog with technical filters, live specs, and 48h physical sample ordering.'
-  },
-  {
-    gap: 'Inconsistent Quality Visibility',
-    gapDesc: 'Uneven sheet thickness, hidden core voids, and delamination causing costly CNC routing errors on shop floors.',
-    solution: 'Quad-Press Calibration & Batch Testing',
-    solutionDesc: '100% calibrated thickness (±0.2mm), zero core gaps, and certified IS:710 / IS:303 batch validation.'
-  },
-  {
-    gap: 'Limited Technical Guidance',
-    gapDesc: 'Generic timber sales reps unable to advise on resin chemistry, emission grades, or acoustic performance.',
-    solution: 'Architectural Spec Concierge & BIM Data',
-    solutionDesc: 'Dedicated technical team offering CAD/BIM details, fire/moisture ratings, and customized BOQ guidance.'
-  },
-  {
-    gap: 'Weak Architect Engagement',
-    gapDesc: 'Specifiers neglected by traditional commodity distributors who only focus on retail counter sales.',
-    solution: 'Architect Portal & Physical Sample Boxes',
-    solutionDesc: 'Curated material swatch boxes delivered directly to architectural studios and OEM procurement desks.'
-  },
-  {
-    gap: 'Traditional Channel Dependency',
-    gapDesc: 'Opaque pricing, multi-tier middleman markups, and uncertain project dispatch timelines.',
-    solution: 'Hybrid B2B Dealer Enablement Network',
-    solutionDesc: 'Direct manufacturer coordination empowering regional dealers with digital inventory and transparent terms.'
-  },
-  {
-    gap: 'Low Digital Adoption & Project Tracking',
-    gapDesc: 'Paper-based quotation processes leading to delayed site deliveries and misplaced project BOQs.',
-    solution: 'Real-Time Project Dispatch & BOQ Calculator',
-    solutionDesc: 'End-to-end digital order pipeline, material yield calculators, and scheduled site delivery tracking.'
-  }
-];
-
-const BUSINESS_STAGES = [
-  {
-    stage: 'Stage 01',
-    title: 'Brand Building + Trading',
-    desc: 'Build strong brand equity, expand curated product range, and establish robust market presence through disciplined trading and regional distribution.'
-  },
-  {
-    stage: 'Stage 02',
-    title: 'Contract Manufacturing',
-    desc: 'Leverage partner facilities with proprietary quality protocols to ensure scalability, cost efficiency, and rigorous thickness calibration while validating demand.'
-  },
-  {
-    stage: 'Stage 03',
-    title: 'Manufacturing Partnerships',
-    desc: 'Form strategic joint alliances with advanced manufacturers to secure dedicated capacity, technical innovation, and long-term supply stability.'
-  },
-  {
-    stage: 'Stage 04',
-    title: 'Integrated Manufacturing Ecosystem',
-    desc: 'Establish company-owned automated manufacturing infrastructure to achieve complete operational control, product diversification, and international competitive edge.'
-  }
-];
-
-const SCALE_ROADMAP = [
-  {
-    year: 'Year 1',
-    phase: 'Brand Establishment',
-    target: '₹10–15 Crore',
-    desc: 'Establish flagship presence, seed architect & OEM networks, launch digital platform.'
-  },
-  {
-    year: 'Year 2',
-    phase: 'Regional Expansion',
-    target: '₹25–40 Crore',
-    desc: 'Deepen distribution across key southern & western states, expand contractor network.'
-  },
-  {
-    year: 'Year 3',
-    phase: 'Multi-State Presence',
-    target: '₹50–75 Crore',
-    desc: 'Scale OEM contract manufacturing, launch full decorative surface lines, enter metro markets.'
-  },
-  {
-    year: 'Year 5',
-    phase: 'National Expansion',
-    target: '₹150–250 Crore',
-    desc: 'Pan-India supply infrastructure, establish owned manufacturing facilities, initiate GCC corridors.'
-  },
-  {
-    year: 'Year 10',
-    phase: 'India + GCC Leadership',
-    target: '₹500+ Crore',
-    desc: 'Integrated multinational materials ecosystem leading both domestic Indian and GCC trade markets.'
-  }
-];
-
-const HOME_FAQS = [
-  {
-    question: 'What is NEOM Panels and what does the company manufacture?',
-    answer:
-      'NEOM Panels is a next-generation engineered wood, interior materials, and project supply company. Our Phase 1 portfolio encompasses three core pillars: Structural & Specialty Plywood (Calibrated, Marine Grade IS:710, BWR/BWP), Solid Engineered Boards (High-Density HDHMR Green Core, MDF, Pre-Laminated), and Decorative Architectural Surfaces (Natural & Smoked Veneers, High-Pressure Laminates, 6H Acrylics, Charcoal Fluted Panels).'
-  },
-  {
-    question: 'What is the brand architecture of NEOM Panels, Starwoods, and NEOM Packing Plywood?',
-    answer:
-      'NEOM Panels operates as the parent corporate entity and ecosystem brand. Starwoods is our dedicated brand specializing in furniture manufacturing and modular interior substrates, while NEOM Packing Plywood specializes in moisture-resistant industrial packaging plywood for machinery cases and export crates.'
-  },
-  {
-    question: 'What makes NEOM Panels calibrated plywood suitable for OEM and modular furniture factories?',
-    answer:
-      'Our calibrated panels undergo a 4-stage quad-press thickness calibration process that guarantees a tight tolerance of ±0.2mm across the entire 8×4 ft sheet. This uniform thickness eliminates cutter deflection on CNC nesting machines, ensures seamless edge-banding without glue lines, and prevents hinge misalignments in factory-made cabinetry.'
-  },
-  {
-    question: 'How can architects and interior designers request material samples?',
-    answer:
-      'Architects and specifiers can request the NEOM Architecture Sample Box directly through our website. The box contains physical swatches of our calibrated plywood, HDHMR green core, architectural veneers, and acrylic panels, delivered directly to your studio within 48 to 72 hours.'
-  },
-  {
-    question: 'What is NEOM Panels’ export capability and GCC expansion corridor?',
-    answer:
-      'NEOM Panels operates a strategic supply corridor connecting Western Indian manufacturing and maritime ports with key GCC markets, including the UAE (Dubai trade gateway), Saudi Arabia (Riyadh & Giga-projects), Qatar, Oman, Bahrain, and Kuwait. All export orders feature ISPM-15 compliant packaging and containerized moisture-proof bundling.'
-  },
-  {
-    question: 'What information is needed to receive a formal B2B quotation?',
-    answer:
-      'Simply share your application (furniture OEM, modular kitchen, commercial interior fit-out, or industrial packaging), required panel thickness (mm), sheet dimensions, approximate sheet quantity or recurring monthly requirement, and delivery destination.'
-  }
-];
+};
 
 export default function HomePage() {
-  const homeJsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': `${SITE_URL}/#organization`,
-        name: 'NEOM Panels',
-        url: SITE_URL,
-        logo: `${SITE_URL}/assets/logo-full.png`,
-        slogan: 'Engineered Excellence, Designed for Spaces',
-        description:
-          'Building a next-generation engineered wood, interior materials, and project supply ecosystem for India and global markets.'
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': `${SITE_URL}/#faq`,
-        mainEntity: HOME_FAQS.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answer
-          }
-        }))
-      }
-    ]
-  };
-
   return (
-    <main id="main-content">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
-      />
-
-      {/* 1. HERO SECTION — ARCHITECTURAL PRESTIGE & SPECIFICATION RIGOR */}
-      <section className="hero-section hero-section--architectural section--architectural-grid">
+    <div className="home-view">
+      {/* SECTION A: HEADER & HERO */}
+      <section className="hero-section" aria-label="NEOM Panels Hero">
         <div className="container">
-          <div className="hero-split hero-split--elevated">
-            {/* Left Column: Vision, Headline & Action */}
-            <div className="hero-copy hero-animate">
-              <div className="hero-kicker-bar">
-                <span className="hero-kicker-dot" aria-hidden="true" />
-                <span className="font-mono">NEOM PANELS · STRATEGIC BLUEPRINT 2026–2036</span>
-              </div>
-
-              <h1 id="main-heading" tabIndex={-1} className="hero-title">
-                Engineered Excellence,
-                <br />
-                <span className="hero-title-accent">Designed for Spaces.</span>
+          <div className="hero-split-grid">
+            {/* Left Column: Copy (45%) */}
+            <div className="hero-copy-col">
+              <span className="hero-eyebrow font-mono">
+                ENGINEERED WOOD &amp; INTERIOR MATERIALS
+              </span>
+              <h1 className="hero-headline">
+                Engineered Excellence, Designed for Spaces.
               </h1>
-
-              <p className="lead-text hero-lead">
-                Building a next-generation engineered wood, interior materials, and project supply
-                ecosystem for India and global markets. From precision-calibrated core substrates to
-                artisan architectural surfaces.
+              <p className="hero-lead-text">
+                NEOM Panels is building an integrated ecosystem of engineered wood, interior materials and project supply solutions for India and global markets.
               </p>
-
-              <div className="btn-group hero-cta-row">
-                <a href="#portfolio" className="btn btn--primary">
-                  <span>Explore Phase 1 Portfolio</span>
-                  <span aria-hidden="true">↓</span>
-                </a>
-                <Link href="/enquiry?category=sample-request" className="btn btn--secondary">
-                  Order Sample Box
+              <div className="hero-actions-row">
+                <Link href="/products" className="btn btn-primary">
+                  <span>Explore Products</span>
+                  <svg className="btn-icon-arrow" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14">
+                    <path fill="currentColor" d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06l2.97-2.97H2.75a.75.75 0 0 1 0-1.5h8.44L8.22 4.03a.75.75 0 0 1 0-1.06Z" />
+                  </svg>
                 </Link>
-                <a href="#gcc-corridor" className="editorial-link" style={{ marginLeft: '0.5rem' }}>
-                  <span>India &amp; GCC Corridor</span>
-                  <span className="link-arrow" aria-hidden="true">→</span>
-                </a>
+                <Link href="/enquiry" className="btn btn-secondary">
+                  <span>Discuss Your Requirement</span>
+                </Link>
               </div>
-
-              {/* Scannable Specifier Trust Metrics */}
-              <div className="hero-spec-strip" aria-label="Key Engineering Specifications">
-                <div className="hero-spec-chip">
-                  <span className="spec-chip-label">THICKNESS TOLERANCE</span>
-                  <strong className="spec-chip-val font-mono">±0.2mm Calibrated</strong>
-                </div>
-                <div className="hero-spec-chip">
-                  <span className="spec-chip-label">CERTIFICATION STANDARDS</span>
-                  <strong className="spec-chip-val font-mono">IS:710 · IS:303 · E0</strong>
-                </div>
-                <div className="hero-spec-chip">
-                  <span className="spec-chip-label">GLOBAL SUPPLY REACH</span>
-                  <strong className="spec-chip-val font-mono">Pan-India + 6 GCC States</strong>
-                </div>
+              <div className="hero-category-line font-mono">
+                <span>Plywood</span>
+                <span className="hero-dot-separator" aria-hidden="true">/</span>
+                <span>Engineered Boards</span>
+                <span className="hero-dot-separator" aria-hidden="true">/</span>
+                <span>Decorative Surfaces</span>
               </div>
             </div>
 
-            {/* Right Column: Architectural Visual Stage with Live Spec Overlays */}
-            <div className="hero-visual-stage hero-animate--delay">
+            {/* Right Column: Architectural Scene (55%) */}
+            <div className="hero-visual-col">
               <div className="hero-visual-frame">
                 <img
                   src="/assets/arch-lobby-reception.jpg"
-                  alt="NEOM Panels flagship architectural reception with fluted timber panelling and warm illuminated joinery."
+                  alt="Contemporary architectural interior featuring engineered timber wall paneling and reception joinery"
                   className="hero-main-img"
-                  width="1400"
-                  height="933"
-                  priority="true"
+                  width="1200"
+                  height="800"
+                  loading="eager"
+                  fetchPriority="high"
                 />
-
-                {/* Floating Architectural Spec Badges */}
-                <div className="hero-floating-badge hero-floating-badge--top">
-                  <span className="floating-badge-dot" aria-hidden="true" />
-                  <div>
-                    <span className="floating-badge-title">QUAD-PRESS CALIBRATED</span>
-                    <span className="floating-badge-sub font-mono">100% Flatness · Zero Voids</span>
-                  </div>
-                </div>
-
-                <div className="hero-floating-badge hero-floating-badge--bottom">
-                  <span className="floating-badge-icon" aria-hidden="true">⚓</span>
-                  <div>
-                    <span className="floating-badge-title">IS:710 MARINE GRADE</span>
-                    <span className="floating-badge-sub font-mono">72H Boiling Water Proof</span>
-                  </div>
-                </div>
-
-                <span className="hero-location-badge font-mono">
-                  DIRECT FACTORY SUPPLY · INDIA &amp; GCC
-                </span>
-              </div>
-
-              <div className="hero-visual-caption">
-                <span className="caption-tag">STRATEGIC BLUEPRINT</span>
-                <p>
-                  Integrated manufacturing and digital supply infrastructure designed to meet the
-                  rigorous specifications of architects, furniture OEMs, and high-rise builders.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. THE BIG MARKET SHIFT (SLIDE 2) */}
-      <section id="market-shift" className="section section--warm-white reveal-once" aria-labelledby="market-shift-heading">
-        <div className="container">
-          <InteractiveMarketShift />
-        </div>
-      </section>
-
-      {/* 3. PHASE 1 PRODUCT PORTFOLIO ARCHITECTURE (SLIDE 9) */}
-      <section id="portfolio" className="section section--architectural-grid reveal-once" aria-labelledby="portfolio-heading">
-        <div className="container">
-          <div className="section-header-split">
-            <div>
-              <p className="eyebrow">PHASE 1 PRODUCT ARCHITECTURE</p>
-              <h2 id="portfolio-heading" className="section-title">
-                Engineered for precision. Crafted for spaces.
-              </h2>
-              <p className="lead-text" style={{ marginBottom: 0 }}>
-                Explore NEOM Panels’ comprehensive material portfolio across structural core substrates, solid composite boards, and luxury architectural surface finishes.
-              </p>
-            </div>
-            <div className="section-header-actions">
-              <Link href="/enquiry?category=sample-request" className="btn btn--primary">
-                Order Architectural Sample Box →
-              </Link>
-            </div>
-          </div>
-
-          <div style={{ marginTop: 'var(--space-6)' }}>
-            <InteractiveProductArchitecture />
-          </div>
-        </div>
-      </section>
-
-      {/* 4. INDUSTRIES WE SUPPORT (SLIDE 7) */}
-      <section id="industries" className="section section--warm-white reveal-once" aria-labelledby="industries-heading">
-        <div className="container">
-          <div className="section-header-split">
-            <div>
-              <p className="eyebrow">APPLICATION SECTORS</p>
-              <h2 id="industries-heading" className="section-title">
-                One brand. Multiple industries.
-              </h2>
-              <p className="lead-text" style={{ marginBottom: 0 }}>
-                Scalable wood-panel applications engineered across build, produce, store, and furnish environments.
-              </p>
-            </div>
-            <div className="section-header-actions">
-              <Link href="/industries" className="editorial-link">
-                <span>View All Technical Industry Specs</span>
-                <span className="link-arrow" aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="sectors-quad-grid" style={{ marginTop: 'var(--space-6)' }}>
-            {SECTORS_WE_SUPPORT.map((sector) => (
-              <article key={sector.id} className="sector-card">
-                <div className="sector-media-wrap">
-                  <img
-                    src={sector.image}
-                    alt={sector.title}
-                    className="sector-img"
-                    width="800"
-                    height="450"
-                    loading="lazy"
-                  />
-                  <span className="sector-num font-mono">{sector.num}</span>
-                </div>
-
-                <div className="sector-body">
-                  <span className="sector-kicker font-mono">SECTOR {sector.num}</span>
-                  <h3 className="sector-title">{sector.title}</h3>
-                  <p className="sector-subtitle">{sector.subtitle}</p>
-                  <p className="sector-desc">{sector.description}</p>
-
-                  <div className="sector-meta">
-                    <span className="sector-meta-label">KEY USE CASES:</span>
-                    <span className="sector-meta-val">{sector.useCases}</span>
-                  </div>
-
-                  <Link href={sector.href} className="editorial-link" style={{ marginTop: 'auto' }}>
-                    <span>Explore Specifications</span>
-                    <span className="link-arrow" aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. THE 8-PILLAR ECOSYSTEM (SLIDE 8) */}
-      <section id="ecosystem" className="section section--sage-tint reveal-once" aria-labelledby="ecosystem-heading">
-        <div className="container">
-          <InteractiveEcosystemExplorer />
-        </div>
-      </section>
-
-      {/* 6. INDIA & GCC EXPANSION CORRIDOR (SLIDE 4 & 5) */}
-      <section id="gcc-corridor" className="section section--architectural-grid reveal-once" aria-labelledby="gcc-heading">
-        <div className="container">
-          <InteractiveGccCorridor />
-        </div>
-      </section>
-
-      {/* 7. WHAT THE MARKET STILL LACKS & OUR SOLUTION (SLIDE 6) */}
-      <section id="market-gaps" className="section section--warm-white reveal-once" aria-labelledby="gaps-heading">
-        <div className="container">
-          <div className="section-header-split">
-            <div>
-              <p className="eyebrow">CLOSING CRITICAL INDUSTRY GAPS</p>
-              <h2 id="gaps-heading" className="section-title">
-                What the market still lacks.
-              </h2>
-              <p className="lead-text" style={{ marginBottom: 0 }}>
-                The wood panel industry still suffers from fragmentation and opacity. NEOM Panels is built from the ground up to replace friction with structure, service, and digital access.
-              </p>
-            </div>
-            <div className="section-header-actions">
-              <span className="badge-highlight font-mono">STRUCTURE · SERVICE · DIGITAL ACCESS</span>
-            </div>
-          </div>
-
-          <div className="gaps-comparison-grid" style={{ marginTop: 'var(--space-6)' }}>
-            {MARKET_GAPS_SOLUTIONS.map((item, idx) => (
-              <div key={idx} className="gap-solution-card">
-                {/* Friction / Gap */}
-                <div className="gap-side">
-                  <div className="gap-badge">
-                    <span className="gap-indicator" aria-hidden="true">✕</span>
-                    <span className="gap-tag font-mono">INDUSTRY FRICTION</span>
-                  </div>
-                  <h4 className="gap-title">{item.gap}</h4>
-                  <p className="gap-desc">{item.gapDesc}</p>
-                </div>
-
-                {/* Arrow */}
-                <div className="gap-arrow" aria-hidden="true">→</div>
-
-                {/* NEOM Solution */}
-                <div className="solution-side">
-                  <div className="solution-badge">
-                    <span className="solution-indicator" aria-hidden="true">✔</span>
-                    <span className="solution-tag font-mono">NEOM PANELS SOLUTION</span>
-                  </div>
-                  <h4 className="solution-title">{item.solution}</h4>
-                  <p className="solution-desc">{item.solutionDesc}</p>
+                <div className="hero-caption-card">
+                  <span className="hero-caption-label font-mono">MATERIAL HARMONY</span>
+                  <span className="hero-caption-text">Precision wood substrates for enduring spaces</span>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 8. DIGITAL GROWTH ENGINE & SPECIFIER PLATFORM (SLIDE 10) */}
-      <section id="digital-platform" className="section section--architectural-grid reveal-once" aria-labelledby="platform-heading">
+      {/* SECTION B: THREE PRODUCT FAMILIES */}
+      <section className="section-spacing bg-warm-ivory" id="products-overview" aria-label="Product Families">
         <div className="container">
-          <div className="digital-platform-split">
-            {/* Left: Digital Platform Showcase */}
-            <div>
-              <p className="eyebrow">GO-TO-MARKET &amp; DIGITAL PLATFORM</p>
-              <h2 id="platform-heading" className="section-title">
-                Digital infrastructure as a competitive advantage.
-              </h2>
-              <p className="lead-text">
-                We empower 8 critical stakeholder channels—dealers, distributors, architects, interior designers, furniture manufacturers, contractors, builders, and institutional procurement—with integrated digital tools.
-              </p>
+          <div className="section-header-compact">
+            <span className="section-eyebrow font-mono">PHASE 1 PORTFOLIO</span>
+            <h2 className="section-title">Materials for the spaces you create.</h2>
+            <p className="section-subtitle">
+              Engineered substrates and decorative surfaces formulated for commercial stability, interior joinery, and design integrity.
+            </p>
+          </div>
 
-              <div className="digital-tools-list">
-                <div className="digital-tool-item">
-                  <span className="tool-icon">📱</span>
-                  <div>
-                    <strong>Architect &amp; Specifier Portal</strong>
-                    <p>Instant access to BIM models, high-res texture maps, and 1-click sample box orders.</p>
-                  </div>
-                </div>
-
-                <div className="digital-tool-item">
-                  <span className="tool-icon">📊</span>
-                  <div>
-                    <strong>Dealer Order &amp; Stock Portal</strong>
-                    <p>Direct B2B lot bookings, invoice downloads, dispatch notifications, and regional trade support.</p>
-                  </div>
-                </div>
-
-                <div className="digital-tool-item">
-                  <span className="tool-icon">🧮</span>
-                  <div>
-                    <strong>Project BOQ &amp; Thickness Calculator</strong>
-                    <p>Calculate sheet requirements, optimal cutting layouts, and weight specifications in seconds.</p>
-                  </div>
-                </div>
-
-                <div className="digital-tool-item">
-                  <span className="tool-icon">📦</span>
-                  <div>
-                    <strong>Sample Request &amp; Tracking System</strong>
-                    <p>Doorstep delivery of physical 150×150mm hand swatches with live tracking.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="btn-group" style={{ marginTop: 'var(--space-5)' }}>
-                <Link href="/enquiry?category=sample-request" className="btn btn--primary">
-                  <span>Order Sample Box</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-                <Link href="/resources" className="btn btn--secondary">
-                  Access Spec Center
-                </Link>
-              </div>
-            </div>
-
-            {/* Right: Platform Visual */}
-            <div className="digital-platform-media">
-              <figure className="digital-platform-card">
+          <div className="products-card-grid">
+            {/* Card 1: Structural & Specialty Plywood */}
+            <div className="product-family-card">
+              <div className="product-card-img-wrap">
                 <img
-                  src="/assets/digital-platform-laptop.jpg"
-                  alt="NEOM Panels B2B Dashboard and physical wood sample blocks on a designer desk."
-                  width="1000"
-                  height="650"
-                  className="digital-laptop-img"
+                  src="/assets/product-structural-plywood.jpg"
+                  alt="Multi-ply calibrated hardwood structural plywood panel stack"
+                  className="product-card-img"
+                  width="600"
+                  height="400"
                   loading="lazy"
                 />
-                <figcaption className="digital-caption">
-                  <div>
-                    <strong>NEOM Panels Digital Platform</strong>
-                    <p>Connecting physical timber engineering with digital convenience.</p>
-                  </div>
-                  <span className="digital-status-live font-mono">● LIVE B2B PORTAL</span>
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. SCALABLE BUSINESS MODEL & ROADMAP TO SCALE (SLIDE 9 & 11) */}
-      <section id="roadmap" className="section section--warm-white reveal-once" aria-labelledby="roadmap-heading">
-        <div className="container">
-          <div className="section-header-split">
-            <div>
-              <p className="eyebrow">SCALE BLUEPRINT 2026–2036</p>
-              <h2 id="roadmap-heading" className="section-title">
-                A disciplined roadmap to long-term scale.
-              </h2>
-              <p className="lead-text" style={{ marginBottom: 0 }}>
-                Combining strong brand building, disciplined contract manufacturing, strategic partnerships, and an integrated manufacturing ecosystem.
-              </p>
-            </div>
-            <div className="section-header-actions">
-              <span className="badge-highlight font-mono">10-YEAR GROWTH HORIZON</span>
-            </div>
-          </div>
-
-          {/* 4 Business Model Stages */}
-          <div className="stages-flow-grid" style={{ marginTop: 'var(--space-6)' }}>
-            {BUSINESS_STAGES.map((s, idx) => (
-              <div key={idx} className="business-stage-card">
-                <span className="stage-pill font-mono">{s.stage}</span>
-                <h4 className="stage-title">{s.title}</h4>
-                <p className="stage-desc">{s.desc}</p>
-                <span className="stage-step-num font-mono">0{idx + 1}</span>
+                <span className="product-card-tag font-mono">CORE SUBSTRATES</span>
               </div>
-            ))}
-          </div>
-
-          {/* 10-Year Revenue Roadmap */}
-          <div className="scale-milestones-box" style={{ marginTop: 'var(--space-7)' }}>
-            <div className="scale-milestones-header">
-              <h3 className="milestones-title">10-Year Scale &amp; Expansion Milestones</h3>
-              <span className="milestones-note font-mono">TARGET HORIZON: 2026 – 2036</span>
-            </div>
-
-            <div className="scale-milestones-grid">
-              {SCALE_ROADMAP.map((m, idx) => (
-                <div key={idx} className="scale-milestone-cell">
-                  <div className="milestone-year font-mono">{m.year}</div>
-                  <div className="milestone-target font-mono">{m.target}</div>
-                  <div className="milestone-phase">{m.phase}</div>
-                  <p className="milestone-desc">{m.desc}</p>
+              <div className="product-card-body">
+                <h3 className="product-card-title">Structural &amp; Specialty Plywood</h3>
+                <p className="product-card-desc">
+                  Engineered multi-layer wood panels built for structural strength, moisture resistance, and dimensional stability.
+                </p>
+                <div className="product-variants-box">
+                  <span className="product-variants-label font-mono">PORTFOLIO VARIANTS</span>
+                  <ul className="product-variants-list" role="list">
+                    <li>• Premium Plywood</li>
+                    <li>• Marine Plywood</li>
+                    <li>• BWR / BWP Plywood</li>
+                  </ul>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. COMMON SPECIFICATION QUESTIONS (FAQS) */}
-      <section id="faq" className="section section--warm-white section--no-border reveal-once" aria-labelledby="faq-heading">
-        <div className="container">
-          <div className="section-header-split">
-            <div>
-              <p className="eyebrow">TECHNICAL GUIDANCE &amp; PROCUREMENT FAQ</p>
-              <h2 id="faq-heading" className="section-title">
-                Frequently asked specification questions.
-              </h2>
-              <p className="lead-text" style={{ marginBottom: 0 }}>
-                Essential information for architects, furniture OEMs, institutional buyers, and export partners.
-              </p>
-            </div>
-            <div className="section-header-actions">
-              <Link href="/resources" className="btn btn--secondary">
-                Download Technical Datasheets →
-              </Link>
-            </div>
-          </div>
-
-          <div style={{ marginTop: 'var(--space-6)' }}>
-            {HOME_FAQS.map((faq, idx) => (
-              <details key={idx} className="guidance-accordion" open={idx === 0}>
-                <summary>
-                  <div>
-                    <h3 className="subsection-title" style={{ marginBottom: 0 }}>
-                      {faq.question}
-                    </h3>
-                  </div>
-                  <span className="guidance-accordion__action">View Specification</span>
-                </summary>
-                <div className="guidance-accordion__body">
-                  <p style={{ marginBottom: 0 }}>{faq.answer}</p>
+                <div className="product-card-actions">
+                  <Link href="/products/plywood" className="btn btn-secondary btn-sm">
+                    <span>Explore Range</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link href="/enquiry?family=Structural+%26+Specialty+Plywood" className="product-card-link-enquire">
+                    Enquire
+                  </Link>
                 </div>
-              </details>
-            ))}
-          </div>
-
-          {/* 11. COMMAND ACTION BANNER — DIRECT CONTACT (SLIDE 12) */}
-          <div className="home-cta-command-banner">
-            <div className="home-cta-command-copy">
-              <p className="home-cta-command-eyebrow font-mono">LET&apos;S BUILD BETTER SPACES TOGETHER</p>
-              <h2 className="home-cta-command-title">
-                Ready to specify NEOM Panels for your next project?
-              </h2>
-              <p className="home-cta-command-desc">
-                Order an architectural sample box, submit a project BOQ, or discuss regional dealership and export supply terms directly with our executive team.
-              </p>
-              <div className="home-cta-contacts-strip">
-                <a href="tel:+919745450618" className="cta-contact-pill font-mono">
-                  📞 +91 97454 50618
-                </a>
-                <a href="mailto:neompanels@gmail.com" className="cta-contact-pill font-mono">
-                  ✉️ neompanels@gmail.com
-                </a>
-                <span className="cta-contact-pill font-mono">
-                  🌐 www.neompanels.com
-                </span>
               </div>
             </div>
-            <div className="home-cta-command-actions">
-              <Link href="/enquiry" className="btn home-cta-btn-light">
-                Submit Project Requirement →
+
+            {/* Card 2: Engineered Boards */}
+            <div className="product-family-card">
+              <div className="product-card-img-wrap">
+                <img
+                  src="/assets/product-engineered-boards.jpg"
+                  alt="High-density fiberboard and engineered wood panel core cross-section"
+                  className="product-card-img"
+                  width="600"
+                  height="400"
+                  loading="lazy"
+                />
+                <span className="product-card-tag font-mono">DENSE CORE</span>
+              </div>
+              <div className="product-card-body">
+                <h3 className="product-card-title">Solid Engineered Boards</h3>
+                <p className="product-card-desc">
+                  High-density homogenous panels designed for precision CNC routing, moisture-critical interiors, and smooth surface finishing.
+                </p>
+                <div className="product-variants-box">
+                  <span className="product-variants-label font-mono">PORTFOLIO VARIANTS</span>
+                  <ul className="product-variants-list" role="list">
+                    <li>• Medium-Density Fiberboard (MDF)</li>
+                    <li>• High-Density Moisture-Resistant (HDHMR)</li>
+                    <li>• Pre-Laminated MDF</li>
+                  </ul>
+                </div>
+                <div className="product-card-actions">
+                  <Link href="/products/engineered-boards" className="btn btn-secondary btn-sm">
+                    <span>Explore Range</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link href="/enquiry?family=Engineered+Boards" className="product-card-link-enquire">
+                    Enquire
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Decorative Surfaces */}
+            <div className="product-family-card">
+              <div className="product-card-img-wrap">
+                <img
+                  src="/assets/product-decorative-surfaces.jpg"
+                  alt="Architectural wood veneers, acrylic surfaces, and fluted acoustic wall panels"
+                  className="product-card-img"
+                  width="600"
+                  height="400"
+                  loading="lazy"
+                />
+                <span className="product-card-tag font-mono">FINISHES &amp; TEXTURES</span>
+              </div>
+              <div className="product-card-body">
+                <h3 className="product-card-title">Decorative Surfaces</h3>
+                <p className="product-card-desc">
+                  Curated architectural veneers, durable laminates, and textured panels providing refined visual character to modern spaces.
+                </p>
+                <div className="product-variants-box">
+                  <span className="product-variants-label font-mono">PORTFOLIO VARIANTS</span>
+                  <ul className="product-variants-list" role="list">
+                    <li>• Architectural Natural &amp; Smoked Veneers</li>
+                    <li>• High-Pressure Laminates (HPL)</li>
+                    <li>• Acrylic &amp; Fluted Charcoal Panels</li>
+                  </ul>
+                </div>
+                <div className="product-card-actions">
+                  <Link href="/products/decorative-surfaces" className="btn btn-secondary btn-sm">
+                    <span>Explore Range</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link href="/enquiry?family=Decorative+Surfaces" className="product-card-link-enquire">
+                    Enquire
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION C: APPLICATIONS */}
+      <section className="section-spacing" aria-label="Supported Industries">
+        <div className="container">
+          <div className="section-header-compact">
+            <span className="section-eyebrow font-mono">SECTORS &amp; APPLICATIONS</span>
+            <h2 className="section-title">One brand. Multiple industries.</h2>
+            <p className="section-subtitle">
+              Engineered wood and interior materials configured for the specific operating conditions of four key sectors.
+            </p>
+          </div>
+
+          <div className="applications-grid">
+            {/* Sector 1: Construction */}
+            <div className="application-card">
+              <div className="application-img-wrap">
+                <img
+                  src="/assets/sector-construction.jpg"
+                  alt="Architectural construction site and timber framing"
+                  className="application-img"
+                  width="600"
+                  height="360"
+                  loading="lazy"
+                />
+              </div>
+              <div className="application-content">
+                <span className="application-num font-mono">01</span>
+                <h3 className="application-title">Construction</h3>
+                <p className="application-desc">
+                  Residential, commercial, and project-led building applications requiring reliable panel substrates for structural framing, formwork, and partitions.
+                </p>
+                <Link href="/applications#construction" className="application-link">
+                  <span>View Specifications</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Sector 2: Manufacturing */}
+            <div className="application-card">
+              <div className="application-img-wrap">
+                <img
+                  src="/assets/sector-manufacturing.jpg"
+                  alt="Industrial manufacturing facility and panel assembly line"
+                  className="application-img"
+                  width="600"
+                  height="360"
+                  loading="lazy"
+                />
+              </div>
+              <div className="application-content">
+                <span className="application-num font-mono">02</span>
+                <h3 className="application-title">Manufacturing</h3>
+                <p className="application-desc">
+                  Industrial facilities, production environments, and utility spaces needing uniform wood substrates for batch processing and industrial workbenches.
+                </p>
+                <Link href="/applications#manufacturing" className="application-link">
+                  <span>View Specifications</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Sector 3: Packaging & Warehousing */}
+            <div className="application-card">
+              <div className="application-img-wrap">
+                <img
+                  src="/assets/sector-packaging.jpg"
+                  alt="Industrial warehouse logistics, pallet storage, and plywood crates"
+                  className="application-img"
+                  width="600"
+                  height="360"
+                  loading="lazy"
+                />
+              </div>
+              <div className="application-content">
+                <span className="application-num font-mono">03</span>
+                <h3 className="application-title">Packaging &amp; Warehousing</h3>
+                <p className="application-desc">
+                  Storage systems, logistics environments, and warehouse-support spaces requiring tough packaging-grade panels for shipping crates and dividers.
+                </p>
+                <Link href="/applications#packaging" className="application-link">
+                  <span>View Specifications</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Sector 4: Furniture & Interiors */}
+            <div className="application-card">
+              <div className="application-img-wrap">
+                <img
+                  src="/assets/sector-furniture.jpg"
+                  alt="Luxury modern modular cabinetry, wardrobe joinery, and interior surfaces"
+                  className="application-img"
+                  width="600"
+                  height="360"
+                  loading="lazy"
+                />
+              </div>
+              <div className="application-content">
+                <span className="application-num font-mono">04</span>
+                <h3 className="application-title">Furniture &amp; Interiors</h3>
+                <p className="application-desc">
+                  Modular kitchens, wardrobe carcasses, architectural millwork, and design-led commercial spaces demanding crisp calibration and decorative finishes.
+                </p>
+                <Link href="/applications#furniture" className="application-link">
+                  <span>View Specifications</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION D: NEOM ECOSYSTEM (8 PILLARS) */}
+      <section className="section-spacing bg-forest text-warm" aria-label="Ecosystem Pillars">
+        <div className="container">
+          <div className="section-header-compact text-center">
+            <span className="section-eyebrow text-gold font-mono">STRATEGIC CAPABILITIES</span>
+            <h2 className="section-title text-warm">More than materials. A connected approach.</h2>
+            <p className="section-subtitle text-warm-muted" style={{ marginInline: 'auto' }}>
+              Eight core commitments forming the structural foundation of the NEOM Panels operating ecosystem.
+            </p>
+          </div>
+
+          <div className="ecosystem-editorial-grid">
+            <div className="ecosystem-pillar-card">
+              <span className="pillar-num font-mono">01</span>
+              <h3 className="pillar-title">Quality</h3>
+              <p className="pillar-desc">
+                Disciplined manufacturing partnerships and rigorous verification protocols ensuring consistent dimensional stability and core integrity.
+              </p>
+            </div>
+
+            <div className="ecosystem-pillar-card">
+              <span className="pillar-num font-mono">02</span>
+              <h3 className="pillar-title">Design Support</h3>
+              <p className="pillar-desc">
+                Assisting architects and interior specifiers with material compatibility, veneer grain orientation, and substrate selection guidance.
+              </p>
+            </div>
+
+            <div className="ecosystem-pillar-card">
+              <span className="pillar-num font-mono">03</span>
+              <h3 className="pillar-title">Dealer Enablement</h3>
+              <p className="pillar-desc">
+                Empowering channel distributors with transparent cataloguing, reliable delivery schedules, and dedicated regional product support.
+              </p>
+            </div>
+
+            <div className="ecosystem-pillar-card">
+              <span className="pillar-num font-mono">04</span>
+              <h3 className="pillar-title">Architect Engagement</h3>
+              <p className="pillar-desc">
+                Direct collaborative dialogue with design practices to align upcoming surface trends and project-specific interior requirements.
+              </p>
+            </div>
+
+            <div className="ecosystem-pillar-card">
+              <span className="pillar-num font-mono">05</span>
+              <h3 className="pillar-title">Digital Infrastructure</h3>
+              <p className="pillar-desc">
+                Building modern digital channels to streamline product enquiries, specification workflows, and partner communication.
+              </p>
+            </div>
+
+            <div className="ecosystem-pillar-card">
+              <span className="pillar-num font-mono">06</span>
+              <h3 className="pillar-title">Project Supply</h3>
+              <p className="pillar-desc">
+                Scalable fulfilment capability designed to meet the strict delivery timelines of commercial, residential, and institutional contracts.
+              </p>
+            </div>
+
+            <div className="ecosystem-pillar-card">
+              <span className="pillar-num font-mono">07</span>
+              <h3 className="pillar-title">Sustainability</h3>
+              <p className="pillar-desc">
+                Prioritising plantation agro-forestry timber, resource-efficient core compositions, and low-emission resin technologies.
+              </p>
+            </div>
+
+            <div className="ecosystem-pillar-card">
+              <span className="pillar-num font-mono">08</span>
+              <h3 className="pillar-title">Export Readiness</h3>
+              <p className="pillar-desc">
+                Developing product standards and containerised logistics frameworks aligned with the expansion into the GCC and international markets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION E: PARTNERSHIP INVITATION */}
+      <section className="section-spacing bg-warm-ivory" aria-label="Partnerships">
+        <div className="container">
+          <div className="section-header-compact">
+            <span className="section-eyebrow font-mono">CHANNEL &amp; COLLABORATION</span>
+            <h2 className="section-title">Built around the people who build spaces.</h2>
+            <p className="section-subtitle">
+              Whether specifying materials for a commercial landmark or stocking a regional distribution hub, we provide direct partnership channels.
+            </p>
+          </div>
+
+          <div className="partner-groups-grid">
+            <div className="partner-group-card">
+              <h3 className="partner-group-title">Architects &amp; Interior Designers</h3>
+              <p className="partner-group-desc">
+                Explore material combinations, request physical surface swatches, and review substrate specifications for custom interior projects.
+              </p>
+              <Link href="/enquiry?type=Sample+Request&role=Architects" className="btn btn-secondary btn-sm">
+                <span>Request Material Swatches</span>
+                <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/enquiry?category=sample-request" className="btn home-cta-btn-outline">
-                Order Material Sample Box
+            </div>
+
+            <div className="partner-group-card">
+              <h3 className="partner-group-title">Dealers &amp; Distributors</h3>
+              <p className="partner-group-desc">
+                Establish a reliable supply relationship with structured wholesale terms, catalog support, and disciplined regional delivery.
+              </p>
+              <Link href="/enquiry?type=Partnership&role=Dealers" className="btn btn-secondary btn-sm">
+                <span>Discuss Dealership</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+
+            <div className="partner-group-card">
+              <h3 className="partner-group-title">Manufacturers &amp; Contractors</h3>
+              <p className="partner-group-desc">
+                Source calibrated plywood and engineered boards tailored for precision CNC nesting, modular cabinetry, and bulk interior execution.
+              </p>
+              <Link href="/enquiry?type=Project+Supply&role=Furniture+Manufacturers" className="btn btn-secondary btn-sm">
+                <span>Procure Substrates</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+
+            <div className="partner-group-card">
+              <h3 className="partner-group-title">Institutional Buyers</h3>
+              <p className="partner-group-desc">
+                Direct engagement for large-scale enterprise, hospitality, government, and infrastructure project procurement needs.
+              </p>
+              <Link href="/enquiry?type=Project+Supply&role=Institutional+Buyers" className="btn btn-secondary btn-sm">
+                <span>Institutional Enquiry</span>
+                <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
         </div>
       </section>
-    </main>
+
+      {/* SECTION F: INDIA AND GCC AMBITION */}
+      <section className="section-spacing" aria-label="India and GCC Growth Corridor">
+        <div className="container">
+          <div className="corridor-editorial-layout">
+            <div className="corridor-copy">
+              <span className="section-eyebrow font-mono">GROWTH HORIZON</span>
+              <h2 className="section-title">Rooted in India. Looking towards the GCC.</h2>
+              <p className="corridor-lead">
+                India forms our primary domestic manufacturing and consumption foundation, anchored by the nationwide growth of urban residential housing, commercial fit-outs, and modular joinery.
+              </p>
+              <p className="corridor-body">
+                Building outward from this solid base, NEOM Panels views the Gulf Cooperation Council (GCC) as a natural, high-value strategic expansion corridor. Proximity to Western Indian maritime ports provides direct logistics access to key target markets across the Arabian Peninsula.
+              </p>
+
+              <div className="target-markets-box">
+                <span className="target-markets-title font-mono">TARGET EXPANSION CORRIDORS</span>
+                <div className="target-markets-tags">
+                  <span className="market-tag">United Arab Emirates (Dubai &amp; Abu Dhabi)</span>
+                  <span className="market-tag">Kingdom of Saudi Arabia (Riyadh &amp; Red Sea)</span>
+                  <span className="market-tag">State of Qatar</span>
+                  <span className="market-tag">Sultanate of Oman</span>
+                  <span className="market-tag">Kingdom of Bahrain</span>
+                  <span className="market-tag">State of Kuwait</span>
+                </div>
+              </div>
+
+              <div className="corridor-cta-row">
+                <Link href="/growth-vision" className="btn btn-secondary">
+                  <span>Explore 10-Year Growth Vision</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="corridor-visual">
+              <div className="corridor-img-grid">
+                <div className="corridor-img-card">
+                  <img
+                    src="/assets/gcc-dubai.jpg"
+                    alt="Dubai modern architectural skyline and commercial interior developments"
+                    className="corridor-img"
+                    width="500"
+                    height="350"
+                    loading="lazy"
+                  />
+                  <div className="corridor-img-label font-mono">DUBAI &amp; UAE CORRIDOR</div>
+                </div>
+                <div className="corridor-img-card">
+                  <img
+                    src="/assets/gcc-riyadh.jpg"
+                    alt="Riyadh urban expansion and hospitality infrastructure"
+                    className="corridor-img"
+                    width="500"
+                    height="350"
+                    loading="lazy"
+                  />
+                  <div className="corridor-img-label font-mono">RIYADH &amp; KSA EXPANSION</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION G: CLOSING ENQUIRY */}
+      <section className="section-spacing bg-forest-ghost border-top-divider" aria-label="Contact and Enquiry Desk">
+        <div className="container">
+          <div className="closing-enquiry-box">
+            <span className="section-eyebrow font-mono">DIRECT SPECIFICATION DESK</span>
+            <h2 className="section-title">Let’s build better spaces together.</h2>
+            <p className="closing-lead-text">
+              Connect with our material specialists to discuss project requirements, sample requests, or partnership opportunities.
+            </p>
+
+            <div className="closing-action-buttons">
+              <Link href="/enquiry" className="btn btn-primary">
+                <span>Send Detailed Enquiry</span>
+                <svg className="btn-icon-arrow" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14">
+                  <path fill="currentColor" d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06l2.97-2.97H2.75a.75.75 0 0 1 0-1.5h8.44L8.22 4.03a.75.75 0 0 1 0-1.06Z" />
+                </svg>
+              </Link>
+            </div>
+
+            <div className="closing-contact-row font-mono">
+              <a href="tel:+919745450618" className="closing-contact-pill">
+                <span className="contact-pill-label">PHONE:</span>
+                <span className="contact-pill-val">+91 97454 50618</span>
+              </a>
+              <a href="mailto:neompanels@gmail.com" className="closing-contact-pill">
+                <span className="contact-pill-label">EMAIL:</span>
+                <span className="contact-pill-val">neompanels@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

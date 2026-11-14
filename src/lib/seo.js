@@ -2,111 +2,94 @@ export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || 'https://neompanels-new.vercel.app'
 ).replace(/\/$/, '');
 export const SITE_NAME = 'NEOM Panels';
-export const DEFAULT_OG_IMAGE = '/assets/hero-neom-flagship.jpg';
+export const DEFAULT_OG_IMAGE = '/assets/arch-lobby-reception.jpg';
 
 export const CORE_SEO_KEYWORDS = [
   'NEOM Panels',
-  'wood panel manufacturer India',
-  'plywood manufacturer in India',
-  'calibrated plywood manufacturer India',
-  'B2B plywood supplier India',
-  'OEM furniture plywood substrates',
-  'modular kitchen plywood manufacturer',
-  'wardrobe grade calibrated plywood',
-  'architectural joinery wood panels',
-  'commercial interior plywood supplier India',
-  'industrial packaging plywood manufacturer',
-  'MR grade packing plywood India',
-  'moisture resistant packaging plywood',
-  'plywood for packing cases and crates',
-  'Starwoods plywood',
-  'NEOM Packing Plywood',
-  'multi-ply hardwood core panels',
-  'direct factory plywood supply India',
-  'institutional plywood procurement India',
-  'bulk plywood wholesale supplier India',
-  'plywood manufacturer Kerala India',
-  'commercial grade MR plywood wholesale'
+  'Engineered Excellence Designed for Spaces',
+  'wood panel ecosystem India',
+  'structural plywood supplier India',
+  'marine plywood India',
+  'BWR BWP plywood',
+  'solid engineered boards India',
+  'MDF board supplier',
+  'HDHMR board India',
+  'pre-laminated MDF panels',
+  'decorative surfaces India',
+  'architectural wood veneers',
+  'high pressure laminates HPL',
+  'acrylic panels interior',
+  'charcoal fluted wall panels',
+  'GCC wood panel export corridor',
+  'engineered wood ecosystem'
 ];
 
 export const SITE_NAVIGATION_ITEMS = [
   {
-    name: 'Home — NEOM Panels Wood-Panel Manufacturing',
+    name: 'Home — NEOM Panels',
     path: '/',
     description:
-      'Parent company overview, core manufactured panel substrates, material architecture and B2B specification desk.'
+      'Engineered Excellence, Designed for Spaces. Integrated engineered wood and interior materials ecosystem.'
   },
   {
-    name: 'Brands — Starwoods & NEOM Packing Plywood',
-    path: '/brands',
+    name: 'Products & Materials Portfolio',
+    path: '/products',
     description:
-      'Brand architecture showing NEOM Panels as parent company behind Starwoods and NEOM Packing Plywood.'
+      'Phase 1 portfolio: Structural & Specialty Plywood, Solid Engineered Boards, and Architectural Decorative Surfaces.'
   },
   {
-    name: 'NEOM Packing Plywood — Moisture-Resistant Industrial Packaging',
-    path: '/brands/neom-packing-plywood',
+    name: 'Structural & Specialty Plywood',
+    path: '/products/plywood',
     description:
-      'MR packaging-grade plywood for packing cases, export crates, pallet collars, dividers and protective enclosures.'
+      'Premium Plywood, Marine Plywood, and BWR / BWP calibrated plywood substrates.'
   },
   {
-    name: 'Manufacturing — Production, Calibration & 4-Stage Quality Checks',
-    path: '/manufacturing',
+    name: 'Solid Engineered Boards',
+    path: '/products/engineered-boards',
     description:
-      'In-house wood-panel production in India covering material selection, pressing, calibration, inspection and palletised dispatch.'
+      'High-density MDF, HDHMR moisture-resistant core boards, and pre-laminated MDF.'
   },
   {
-    name: 'Industries & Applications — B2B Buyer Contexts',
-    path: '/industries',
+    name: 'Architectural Decorative Surfaces',
+    path: '/products/decorative-surfaces',
     description:
-      'Specification guidance for furniture OEMs, modular kitchens, commercial interiors, institutional procurement, industrial packaging and distributors.'
+      'Architectural natural veneers, high-pressure laminates, acrylic panels, and fluted charcoal panels.'
   },
   {
-    name: 'Resources & Technical Documents',
-    path: '/resources',
+    name: 'Applications & Sectors',
+    path: '/applications',
     description:
-      'Corporate profiles, Starwoods and NEOM Packing Plywood literature, technical specification sheets and B2B buyer checklists.'
-  },
-  {
-    name: 'Insights, Technical Guides & Company News',
-    path: '/blog',
-    description:
-      'Technical B2B wood-panel specification guides, calibrated plywood buying checklists, MR packaging plywood articles and NEOM Panels company news.'
-  },
-  {
-    name: 'Sustainability — Responsible Wood-Panel Operations',
-    path: '/sustainability',
-    description:
-      'Practical sustainability across timber and agro-forestry veneer sourcing, material efficiency, workplace safety and durable panels.'
+      'Engineered wood solutions for Construction, Manufacturing, Packaging & Warehousing, and Furniture & Interiors.'
   },
   {
     name: 'About NEOM Panels',
     path: '/about',
     description:
-      'Company background, purpose, vision, mission and operating principles of NEOM Panels.'
+      'Corporate vision, mission, 8 ecosystem pillars, market context, and 4-stage business growth model.'
   },
   {
-    name: 'Our Leadership Team',
-    path: '/team',
+    name: 'Growth Vision & Expansion',
+    path: '/growth-vision',
     description:
-      'Executive leadership team guiding NEOM Panels: Managing Director Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A and CTO Muhammed Jabir.'
+      '10-year development horizon: Indian domestic anchor and GCC strategic expansion corridor.'
   },
   {
-    name: 'Jibin N — Managing Director Profile',
-    path: '/team/jibin-n',
+    name: 'Partners & Ecosystem',
+    path: '/partners',
     description:
-      'Dedicated leadership profile for Jibin N, Managing Director of NEOM Panels, focused on strategic direction, brand development and business growth.'
+      'Collaborative pathways for architects, interior designers, dealers, distributors, manufacturers, and buyers.'
   },
   {
-    name: 'Governance & Corporate Information',
-    path: '/governance',
+    name: 'Resources & Material Specifications',
+    path: '/resources',
     description:
-      'Official company facts, vendor onboarding details and adopted corporate governance policies.'
+      'Official technical data requests, physical material swatches, and specification assistance.'
   },
   {
-    name: 'Business Enquiry & Quotation Request',
+    name: 'Contact & Enquiries',
     path: '/enquiry',
     description:
-      'Direct B2B enquiry form for Starwoods, NEOM Packing Plywood, OEM manufacturing, project BOQs and distribution partnerships.'
+      'Direct specification desk, project enquiries, and official contact points (+91 97454 50618).'
   },
   {
     name: 'HTML Site Map & Crawler Index',

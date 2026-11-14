@@ -1,258 +1,102 @@
 import Link from 'next/link';
-import { getSiteContent } from '@/lib/storage';
-import DocumentRequestButton from '@/components/DocumentRequestButton';
-import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = buildPageMetadata({
-  title: 'Resources, Technical Documents & Buyer Checklists',
+export const metadata = {
+  title: 'Resources & Material Information | NEOM Panels',
   description:
-    'Request NEOM Panels corporate profiles, Starwoods and NEOM Packing Plywood brand literature, technical specification sheets, and practical B2B wood-panel buyer checklists.',
-  path: '/resources',
-  ogImage: '/assets/starwoods-brand-showcase.jpg',
-  ogImageAlt: 'NEOM Panels — Wood-Panel Specification Literature and B2B Buyer Checklists',
-  ogImages: [
-    {
-      url: '/assets/starwoods-brand-showcase.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels — Wood-Panel Specification Literature and Swatches'
-    },
-    {
-      url: '/assets/illustration-home-materials.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels Technical Specification Sheets and Buyer Checklists'
-    },
-    {
-      url: '/assets/packing-plywood-showcase.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Packing Plywood Technical Documentation'
-    }
-  ],
-  keywords: [
-    'plywood technical specification sheets India',
-    'wood panel B2B buyer checklist',
-    'Starwoods product catalogue download',
-    'NEOM Packing Plywood technical datasheet',
-    'MR grade vs waterproof plywood specification guide',
-    'furniture and interior plywood BOQ checklist',
-    'industrial packaging plywood handling guide'
-  ]
-});
+    'Request verified product information, material specifications, and architectural sample folders from the NEOM Panels specification desk.',
+  alternates: {
+    canonical: '/resources'
+  }
+};
 
 export default function ResourcesPage() {
-  const siteData = getSiteContent();
-  const docCategories = siteData.resourceCategories || [];
-  const guides = siteData.buyerGuidance || [];
-  const resourcesJsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      getBreadcrumbJsonLd([
-        { name: 'Home', path: '/' },
-        { name: 'Resources & Technical Documents', path: '/resources' }
-      ]),
-      {
-        '@type': 'CollectionPage',
-        '@id': `${SITE_URL}/resources#webpage`,
-        name: 'Resources, Technical Documents & Buyer Checklists — NEOM Panels',
-        url: `${SITE_URL}/resources`,
-        description:
-          'Request corporate profiles, Starwoods and NEOM Packing Plywood literature, technical specification sheets and B2B buyer checklists.'
-      }
-    ]
-  };
-
   return (
-    <main id="main-content">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(resourcesJsonLd) }}
-      />
-      {/* PAGE HEADER */}
-      <section
-        className="page-header section--architectural-grid"
-        aria-labelledby="main-heading"
-      >
-        <div className="container hero-split">
-          <div className="hero-animate">
-            <p className="eyebrow">RESOURCES &amp; TECHNICAL DOCUMENTS</p>
-            <h1 id="main-heading" tabIndex={-1} className="page-title">
-              Product literature and buyer checklists.
-            </h1>
-            <p className="lead-text">
-              Request corporate profiles, Starwoods and NEOM Packing Plywood brand documents, and
-              grade-specific technical specifications, or review our practical checklists before
-              submitting an enquiry.
+    <div className="page-view">
+      {/* Page Header */}
+      <section className="page-header-section bg-warm-ivory border-bottom-divider">
+        <div className="container">
+          <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+            <ol className="breadcrumb-list font-mono" role="list">
+              <li><Link href="/">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page">Resources</li>
+            </ol>
+          </nav>
+
+          <div className="page-header-content">
+            <span className="section-eyebrow font-mono">SPECIFICATION DESK</span>
+            <h1 className="page-title">Resources &amp; Material Information</h1>
+            <p className="page-lead-text">
+              Direct access to verified product data, technical guidance, and physical material swatch folders for architects, specifiers, and procurement managers.
             </p>
-            <div className="btn-group">
-              <a href="#document-categories" className="btn btn--primary">
-                Request Technical Documents
-              </a>
-              <a href="#buyer-guidance" className="btn btn--secondary">
-                Buyer Checklists
-              </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Request Options */}
+      <section className="section-spacing" aria-label="Resource Request Options">
+        <div className="container">
+          <div className="resource-options-grid">
+            {/* Card 1: Technical Information */}
+            <div className="resource-card bg-warm-ivory border-strong">
+              <span className="resource-card-tag font-mono">TECHNICAL DATA</span>
+              <h2 className="resource-card-title">Product Information &amp; Data Sheets</h2>
+              <p className="resource-card-desc">
+                Request up-to-date panel composition details, thickness options, surface tolerances, and palletization guidelines for our Structural Plywood, MDF, HDHMR, and Decorative Surfaces.
+              </p>
+              <div className="resource-card-action">
+                <Link
+                  href="/enquiry?type=Product+Enquiry&document=Technical+Data+Sheet"
+                  className="btn btn-primary"
+                >
+                  <span>Request Technical Information</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 2: Material Swatches */}
+            <div className="resource-card bg-forest text-warm">
+              <span className="resource-card-tag font-mono text-gold">PHYSICAL SAMPLES</span>
+              <h2 className="resource-card-title text-warm">Architectural Swatch Boxes</h2>
+              <p className="resource-card-desc text-warm-muted">
+                Registered design practices, interior creators, and modular furniture OEMs can request sample boxes containing core substrate cross-sections and decorative veneer/acrylic swatches.
+              </p>
+              <div className="resource-card-action">
+                <Link
+                  href="/enquiry?type=Sample+Request"
+                  className="btn btn-secondary text-warm"
+                >
+                  <span>Request Material Swatches</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 3: Project Supply & Tender Documentation */}
+            <div className="resource-card border-strong">
+              <span className="resource-card-tag font-mono">PROJECT SUPPLY</span>
+              <h2 className="resource-card-title">Tender &amp; BOQ Specification Guidance</h2>
+              <p className="resource-card-desc">
+                Procurement managers and institutional contractors can submit bill-of-quantities (BOQ) schedules to receive material compatibility advice and batch fulfillment schedules.
+              </p>
+              <div className="resource-card-action">
+                <Link
+                  href="/enquiry?type=Project+Supply"
+                  className="btn btn-secondary"
+                >
+                  <span>Submit BOQ Schedule</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
             </div>
           </div>
 
-          <figure className="architectural-photo-card hero-animate--delay" style={{ margin: 0 }}>
-            <img
-              src="/assets/starwoods-brand-showcase.jpg"
-              alt="Engineered wood-panel samples, grain swatches, and specification notes in a lighting studio."
-              width="760"
-              height="520"
-            />
-            <figcaption className="architectural-photo-meta">
-              <span>Furniture and Interior Applications</span>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      {/* SECTION 1 — DOCUMENT CATEGORIES */}
-      <section
-        id="document-categories"
-        className="section reveal-once"
-        aria-labelledby="doc-cat-heading"
-      >
-        <div className="container">
-          <p className="eyebrow">DOCUMENT CATEGORIES</p>
-          <h2 id="doc-cat-heading" className="section-title">
-            Corporate, brand and technical documents.
-          </h2>
-          <p className="lead-text">
-            Technical documents and batch specifications are issued against your target brand,
-            grade and thickness so your procurement or project team reviews accurate parameters.
-          </p>
-
-          <div className="applications-cards-grid" style={{ marginTop: 'var(--space-6)' }}>
-            {docCategories.map((cat) => (
-              <article key={cat.id || cat.title} className="application-feature-card">
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '0.75rem',
-                    flexWrap: 'wrap'
-                  }}
-                >
-                  <span className="status-pill">{cat.reviewType || cat.availability || 'Individual Review'}</span>
-                  {cat.id === 'brand-literature' || cat.code === 'DOC-BRAND' ? (
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        alignItems: 'center',
-                        gap: '0.75rem'
-                      }}
-                    >
-                      <img
-                        src="/assets/starwood-logo.png"
-                        alt="Starwoods — The Plywood Specialist"
-                        className="starwood-logo-img--xs"
-                        width="619"
-                        height="177"
-                      />
-                      <img
-                        src="/assets/neom-packing-plywood-logo-compact.svg"
-                        alt="NEOM Packing Plywood"
-                        className="packing-logo-img--xs"
-                        width="540"
-                        height="112"
-                      />
-                    </div>
-                  ) : null}
-                </div>
-
-                <h3 className="subsection-title" style={{ marginBottom: 0 }}>
-                  {cat.title}
-                </h3>
-                <p style={{ margin: 0, flex: 1 }}>{cat.description}</p>
-
-                <div
-                  style={{
-                    marginTop: 'auto',
-                    paddingTop: 'var(--space-4)',
-                    borderTop: '1px solid var(--color-border)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: 'var(--space-3)',
-                    flexWrap: 'wrap'
-                  }}
-                >
-                  <DocumentRequestButton
-                    docCategory={cat.categoryLabel || 'Technical Documentation'}
-                    documentTitle={cat.title}
-                    label="Request Technical Documents"
-                  />
-                  <Link href="/enquiry?category=product-info" className="editorial-link">
-                    <span>Submit Enquiry</span>
-                    <span className="link-arrow" aria-hidden="true">
-                      →
-                    </span>
-                  </Link>
-                </div>
-              </article>
-            ))}
+          <div className="resource-disclaimer-box font-mono text-center text-muted" style={{ marginTop: '3.5rem' }}>
+            NEOM Panels adheres to strict truthfulness: we only distribute current, verified technical documentation. To request official information, submit your project requirement above or email <a href="mailto:neompanels@gmail.com" className="text-forest underline">neompanels@gmail.com</a>.
           </div>
         </div>
       </section>
-
-      {/* SECTION 2 — BUYER GUIDANCE TOPICS */}
-      <section
-        id="buyer-guidance"
-        className="section section--sage-subtle section--no-border reveal-once"
-        aria-labelledby="guidance-heading"
-      >
-        <div className="container">
-          <p className="eyebrow">BUYER GUIDANCE</p>
-          <h2 id="guidance-heading" className="section-title">
-            Practical checklists for procurement and specification teams.
-          </h2>
-          <p className="lead-text" style={{ marginBottom: 'var(--space-6)' }}>
-            Use these checklists to prepare clear material specifications for furniture
-            manufacturing, interior projects, institutional tenders or industrial packaging orders.
-          </p>
-
-          <div>
-            {guides.map((guide, index) => (
-              <details
-                key={guide.id}
-                id={guide.id}
-                className="guidance-accordion"
-                open={index === 0}
-              >
-                <summary>
-                  <div>
-                    <h3 className="subsection-title" style={{ marginBottom: '0.25rem' }}>
-                      {guide.title}
-                    </h3>
-                    <p className="secondary-text" style={{ marginBottom: 0 }}>
-                      {guide.summary}
-                    </p>
-                  </div>
-                  <span className="guidance-accordion__action">View Checklist</span>
-                </summary>
-                <div className="guidance-accordion__body">
-                  <ul className="checklist-items" style={{ marginBottom: 'var(--space-4)' }}>
-                    {guide.points.map((pt) => (
-                      <li key={pt}>{pt}</li>
-                    ))}
-                  </ul>
-                  <Link href="/enquiry" className="editorial-link">
-                    <span>Discuss this requirement with our team</span>
-                    <span className="link-arrow" aria-hidden="true">
-                      →
-                    </span>
-                  </Link>
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
+    </div>
   );
 }

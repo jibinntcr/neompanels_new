@@ -14,7 +14,7 @@ import {
 } from '@/lib/seo';
 
 export const viewport = {
-  themeColor: '#0B3B24',
+  themeColor: '#103F2C',
   width: 'device-width',
   initialScale: 1
 };

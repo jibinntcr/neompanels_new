@@ -1,219 +1,110 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import EnquiryFormClient from '@/components/EnquiryFormClient';
-import { getVerifiedContactDetails } from '@/lib/storage';
-import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-export const metadata = buildPageMetadata({
-  title: 'Business Enquiry & Wood-Panel Quotation Request',
+export const metadata = {
+  title: 'Contact & Material Enquiry Desk | NEOM Panels',
   description:
-    'Submit a B2B enquiry to NEOM Panels. Share your required panel thickness, sheet dimensions, application and volume for Starwoods, NEOM Packing Plywood, OEM manufacturing or project supply in India.',
-  path: '/enquiry',
-  ogImage: '/assets/illustration-enquiry.jpg',
-  ogImageAlt: 'NEOM Panels — Submit a B2B Wood-Panel Quotation or Technical Document Request',
-  ogImages: [
-    {
-      url: '/assets/illustration-enquiry.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels — Submit a B2B Wood-Panel Quotation or Technical Document Request'
-    },
-    {
-      url: '/assets/hero-neom-flagship.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels Wood-Panel Manufacturing & Direct Factory Supply'
-    },
-    {
-      url: '/assets/packing-plywood-showcase.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Packing Plywood Quotation & Bulk Order Desk'
-    }
-  ],
-  keywords: [
-    'request plywood quotation India',
-    'NEOM Panels business enquiry',
-    'bulk plywood wholesale enquiry India',
-    'Starwoods plywood dealer enquiry',
-    'NEOM Packing Plywood quotation request',
-    'OEM furniture plywood quote India',
-    'commercial project plywood BOQ enquiry'
-  ]
-});
+    'Submit project requirements, sample requests, or partnership enquiries directly to the NEOM Panels specification team. Direct phone: +91 97454 50618, Email: neompanels@gmail.com.',
+  alternates: {
+    canonical: '/enquiry'
+  }
+};
 
 export default function EnquiryPage() {
-  const contactDetails = getVerifiedContactDetails();
-  const enquiryJsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      getBreadcrumbJsonLd([
-        { name: 'Home', path: '/' },
-        { name: 'Business Enquiry', path: '/enquiry' }
-      ]),
-      {
-        '@type': 'ContactPage',
-        '@id': `${SITE_URL}/enquiry#webpage`,
-        name: 'Business Enquiry & Quotation Request — NEOM Panels',
-        url: `${SITE_URL}/enquiry`,
-        description:
-          'Submit a business enquiry to NEOM Panels for wood-panel product information, technical documents or B2B quotations across India.'
-      }
-    ]
-  };
-
   return (
-    <main id="main-content">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(enquiryJsonLd) }}
-      />
-      {/* PAGE HEADER */}
-      <section
-        className="page-header section--architectural-grid"
-        aria-labelledby="main-heading"
-      >
-        <div className="container hero-animate">
-          <p className="eyebrow">BUSINESS ENQUIRY</p>
-          <h1 id="main-heading" tabIndex={-1} className="page-title">
-            Tell us what you need.
-          </h1>
-          <p className="lead-text" style={{ marginBottom: 0 }}>
-            Share your requirement, target specification and contact details to request product
-            information, technical documents or a quotation.
-          </p>
-        </div>
-      </section>
-
-      {/* ENQUIRY WORKSPACE */}
-      <section className="section section--no-border" aria-label="Business enquiry form and guidance">
+    <div className="page-view">
+      {/* Page Header */}
+      <section className="page-header-section bg-warm-ivory border-bottom-divider">
         <div className="container">
-          <div className="enquiry-layout">
-            {/* MAIN INTERACTIVE FORM */}
-            <div className="reveal-once">
-              <Suspense
-                fallback={
-                  <div className="enquiry-form-container">
-                    <p>Loading business enquiry form…</p>
-                  </div>
-                }
-              >
-                <EnquiryFormClient />
-              </Suspense>
-            </div>
+          <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+            <ol className="breadcrumb-list font-mono" role="list">
+              <li><Link href="/">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page">Contact &amp; Enquiries</li>
+            </ol>
+          </nav>
 
-            {/* SIDEBAR: PRACTICAL GUIDANCE & VERIFIED CONTACT */}
-            <aside className="enquiry-sidebar reveal-once" aria-label="Enquiry guidance">
-              <div className="enquiry-sidebar__card">
-                <figure className="architectural-photo-card" style={{ marginBottom: 'var(--space-4)' }}>
-                  <img
-                    src="/assets/illustration-enquiry.jpg"
-                    alt="Illustration of a project specification sheet, architectural drawing, and wood-panel sample."
-                    width="640"
-                    height="480"
-                  />
-                </figure>
-                <p className="eyebrow">WHAT TO INCLUDE</p>
-                <h2 className="subsection-title">Information for an accurate response</h2>
-                <p className="secondary-text" style={{ fontSize: '0.96rem' }}>
-                  Every submitted enquiry is recorded with a reference ID for our commercial and
-                  technical team:
-                </p>
-                <ul className="checklist-items" style={{ fontSize: '0.95rem', marginBottom: 0 }}>
-                  <li>
-                    <div style={{ marginBottom: '0.35rem' }}>
-                      <img
-                        src="/assets/starwood-logo.png"
-                        alt="Starwoods — The Plywood Specialist"
-                        className="starwood-logo-img--xs"
-                        width="619"
-                        height="177"
-                      />
-                    </div>
-                    <strong>Starwoods (Furniture &amp; Interiors):</strong> Application, grade,
-                    thickness, sheet dimensions and project or factory schedule.
-                  </li>
-                  <li>
-                    <div style={{ marginBottom: '0.35rem' }}>
-                      <img
-                        src="/assets/neom-packing-plywood-logo-compact.svg"
-                        alt="NEOM Packing Plywood"
-                        className="packing-logo-img--xs"
-                        width="540"
-                        height="112"
-                      />
-                    </div>
-                    <strong>NEOM Packing Plywood (Industrial Packaging):</strong> Packing cases,
-                    crates or dividers, required thickness, sheet dimensions, quantity and delivery
-                    location.
-                  </li>
-                  <li>
-                    <strong>Manufacturing &amp; Recurring Supply:</strong> Monthly or scheduled
-                    call-off volumes and delivery destination.
-                  </li>
-                  <li>
-                    <strong>Institutional &amp; Channel Enquiries:</strong> Tender specification
-                    clauses, required technical documents or regional distribution profile.
-                  </li>
-                </ul>
-              </div>
-
-              <div className="enquiry-sidebar__card enquiry-sidebar__card--sage">
-                <p className="eyebrow">CONTACT &amp; LOCATION</p>
-                <h3 className="subsection-title" style={{ marginBottom: '0.5rem' }}>
-                  Manufacturing &amp; commercial desk
-                </h3>
-                <p style={{ fontSize: '0.95rem', marginBottom: '0.75rem' }}>
-                  <strong>Facility:</strong> {contactDetails.factoryLocation}
-                </p>
-                {contactDetails.officeAddress ? (
-                  <p style={{ fontSize: '0.95rem', marginBottom: '0.75rem' }}>
-                    <strong>Office:</strong> {contactDetails.officeAddress}
-                  </p>
-                ) : null}
-                {contactDetails.email ? (
-                  <p style={{ fontSize: '0.95rem', marginBottom: '0.5rem' }}>
-                    <strong>Email:</strong>{' '}
-                    <a href={`mailto:${contactDetails.email}`} className="footer-contact-link">
-                      {contactDetails.email}
-                    </a>
-                  </p>
-                ) : null}
-                {contactDetails.phone ? (
-                  <p style={{ fontSize: '0.95rem', marginBottom: '0.5rem' }}>
-                    <strong>Phone:</strong>{' '}
-                    <a
-                      href={`tel:${String(contactDetails.phone).replace(/\s+/g, '')}`}
-                      className="footer-contact-link"
-                    >
-                      {contactDetails.phone}
-                    </a>
-                  </p>
-                ) : null}
-                {contactDetails.whatsapp ? (
-                  <p style={{ fontSize: '0.95rem', marginBottom: '0.75rem' }}>
-                    <strong>WhatsApp:</strong>{' '}
-                    <a
-                      href={`https://wa.me/${String(contactDetails.whatsapp).replace(/[^0-9]/g, '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="footer-contact-link"
-                    >
-                      Message Commercial Team
-                    </a>
-                  </p>
-                ) : null}
-                <Link href="/resources#before-you-request-quotation" className="editorial-link">
-                  <span>Read Quotation Checklist</span>
-                  <span className="link-arrow" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
-              </div>
-            </aside>
+          <div className="page-header-content">
+            <span className="section-eyebrow font-mono">DIRECT SPECIFICATION DESK</span>
+            <h1 className="page-title">Discuss Your Requirement</h1>
+            <p className="page-lead-text">
+              Connect with our material specialists for product information, substrate recommendations, architectural sample folders, or project supply planning.
+            </p>
           </div>
         </div>
       </section>
-    </main>
+
+      {/* Main Form and Direct Contact Split */}
+      <section className="section-spacing" aria-label="Enquiry Form and Direct Contacts">
+        <div className="container">
+          <div className="enquiry-split-layout">
+            {/* Left: Interactive Form */}
+            <div className="enquiry-form-wrapper">
+              <div className="form-card-box">
+                <div className="form-card-header">
+                  <h2 className="form-card-title">Project &amp; Material Enquiry</h2>
+                  <p className="form-card-subtitle">
+                    Complete the fields below to register your requirement with our specification desk.
+                  </p>
+                </div>
+
+                <Suspense fallback={<div className="form-loading font-mono">Loading enquiry desk...</div>}>
+                  <EnquiryFormClient />
+                </Suspense>
+              </div>
+            </div>
+
+            {/* Right: Direct Verified Contact Cards */}
+            <div className="enquiry-info-sidebar">
+              <div className="contact-card bg-forest text-warm">
+                <span className="contact-card-tag font-mono text-gold">OFFICIAL CONTACT POINTS</span>
+                <h3 className="contact-card-title text-warm">Direct Communication</h3>
+                <p className="contact-card-text text-warm-muted">
+                  For immediate assistance with ongoing commercial tenders, dispatch logistics, or partnership queries, contact our desk directly:
+                </p>
+
+                <div className="contact-card-items">
+                  <a href="tel:+919745450618" className="contact-card-link font-mono">
+                    <div className="contact-icon font-mono text-gold" aria-hidden="true">TEL</div>
+                    <div>
+                      <span className="contact-label font-mono">TELEPHONE / MOBILE</span>
+                      <span className="contact-value">+91 97454 50618</span>
+                    </div>
+                  </a>
+
+                  <a href="mailto:neompanels@gmail.com" className="contact-card-link">
+                    <div className="contact-icon font-mono text-gold" aria-hidden="true">MAIL</div>
+                    <div>
+                      <span className="contact-label font-mono">OFFICIAL EMAIL</span>
+                      <span className="contact-value">neompanels@gmail.com</span>
+                    </div>
+                  </a>
+
+                  <div className="contact-card-link" style={{ cursor: 'default' }}>
+                    <div className="contact-icon font-mono text-gold" aria-hidden="true">WEB</div>
+                    <div>
+                      <span className="contact-label font-mono">OFFICIAL WEBSITE</span>
+                      <span className="contact-value">www.neompanels.com</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="contact-card bg-warm-ivory border-strong" style={{ marginTop: '2rem' }}>
+                <span className="contact-card-tag font-mono">SUPPLY HORIZONS</span>
+                <h3 className="contact-card-title">Geographic Focus</h3>
+                <p className="contact-card-text text-body">
+                  <strong>India Domestic Anchor:</strong> Supply across residential hubs, modular furniture clusters, and commercial interior projects nationwide.
+                </p>
+                <p className="contact-card-text text-body" style={{ marginTop: '0.75rem' }}>
+                  <strong>GCC Expansion Corridor:</strong> Containerized export readiness for target markets in UAE, Saudi Arabia, Qatar, Oman, Bahrain, and Kuwait.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
