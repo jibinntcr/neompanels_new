@@ -87,15 +87,18 @@ export default function HomePage() {
               <div className="product-card-img-wrap">
                 <img
                   src="/assets/product-structural-plywood.jpg"
-                  alt="Multi-ply calibrated hardwood structural plywood panel stack"
+                  alt="Multi-ply calibrated hardwood structural plywood panel stack in modern architectural studio"
                   className="product-card-img"
                   width="600"
                   height="400"
                   loading="lazy"
                 />
-                <span className="product-card-tag font-mono">CORE SUBSTRATES</span>
               </div>
               <div className="product-card-body">
+                <div className="product-card-eyebrow-row font-mono">
+                  <span className="product-card-tag">CORE SUBSTRATES</span>
+                  <span className="product-card-phase">PHASE 1</span>
+                </div>
                 <h3 className="product-card-title">Structural &amp; Specialty Plywood</h3>
                 <p className="product-card-desc">
                   Engineered multi-layer wood panels built for structural strength, moisture resistance, and dimensional stability.
@@ -125,15 +128,18 @@ export default function HomePage() {
               <div className="product-card-img-wrap">
                 <img
                   src="/assets/product-engineered-boards.jpg"
-                  alt="High-density fiberboard and engineered wood panel core cross-section"
+                  alt="High-density fiberboard and engineered wood panel core cross-section in modern architectural studio"
                   className="product-card-img"
                   width="600"
                   height="400"
                   loading="lazy"
                 />
-                <span className="product-card-tag font-mono">DENSE CORE</span>
               </div>
               <div className="product-card-body">
+                <div className="product-card-eyebrow-row font-mono">
+                  <span className="product-card-tag">DENSE CORES</span>
+                  <span className="product-card-phase">PHASE 1</span>
+                </div>
                 <h3 className="product-card-title">Solid Engineered Boards</h3>
                 <p className="product-card-desc">
                   High-density homogenous panels designed for precision CNC routing, moisture-critical interiors, and smooth surface finishing.
@@ -163,15 +169,18 @@ export default function HomePage() {
               <div className="product-card-img-wrap">
                 <img
                   src="/assets/product-decorative-surfaces.jpg"
-                  alt="Architectural wood veneers, acrylic surfaces, and fluted acoustic wall panels"
+                  alt="Architectural wood veneers, acrylic surfaces, and fluted acoustic wall panels in studio flatlay"
                   className="product-card-img"
                   width="600"
                   height="400"
                   loading="lazy"
                 />
-                <span className="product-card-tag font-mono">FINISHES &amp; TEXTURES</span>
               </div>
               <div className="product-card-body">
+                <div className="product-card-eyebrow-row font-mono">
+                  <span className="product-card-tag">FINISHES &amp; TEXTURES</span>
+                  <span className="product-card-phase">PHASE 1</span>
+                </div>
                 <h3 className="product-card-title">Decorative Surfaces</h3>
                 <p className="product-card-desc">
                   Curated architectural veneers, durable laminates, and textured panels providing refined visual character to modern spaces.

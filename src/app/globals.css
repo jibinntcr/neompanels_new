@@ -9313,6 +9313,8 @@ dialog.corporate-dialog::backdrop {
 .product-card-img-wrap {
   position: relative;
   overflow: hidden;
+  background-color: var(--color-warm-ivory);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .product-card-img {
@@ -9320,19 +9322,36 @@ dialog.corporate-dialog::backdrop {
   height: 240px;
   object-fit: cover;
   display: block;
+  transition: transform var(--transition-fast);
+}
+
+.product-family-card:hover .product-card-img {
+  transform: scale(1.03);
+}
+
+.product-card-eyebrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
 }
 
 .product-card-tag {
-  position: absolute;
-  top: 0.875rem;
-  left: 0.875rem;
-  background: rgba(16, 63, 44, 0.9);
-  color: var(--color-white);
   font-size: 0.6875rem;
   font-weight: 600;
-  padding: 0.25rem 0.5rem;
+  letter-spacing: 0.08em;
+  color: var(--color-forest);
+  background: var(--color-forest-subtle);
+  padding: 0.2rem 0.5rem;
   border-radius: var(--radius-sm);
-  letter-spacing: 0.06em;
+  border: 1px solid rgba(16, 63, 44, 0.12);
+}
+
+.product-card-phase {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
 }
 
 .product-card-body {

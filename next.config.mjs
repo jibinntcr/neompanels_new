@@ -2,6 +2,7 @@
 const nextConfig = {
   distDir: process.env.NODE_ENV === 'development' ? '.next.nosync' : '.next',
   reactStrictMode: true,
+  optimizeFonts: false,
   images: {
     unoptimized: true
   },

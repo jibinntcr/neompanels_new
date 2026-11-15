@@ -91,6 +91,34 @@ export default function GrowthVisionPage() {
               </div>
             </div>
           </div>
+
+          {/* Visual Corridor Showcase */}
+          <div className="corridor-visual" style={{ marginTop: '3rem' }}>
+            <div className="corridor-img-grid">
+              <div className="corridor-img-card">
+                <img
+                  src="/assets/gcc-dubai.jpg"
+                  alt="Dubai modern architectural skyline and luxury waterfront timber pavilion"
+                  className="corridor-img"
+                  width="600"
+                  height="380"
+                  loading="lazy"
+                />
+                <div className="corridor-img-label font-mono">DUBAI &amp; UAE TRADE GATEWAY</div>
+              </div>
+              <div className="corridor-img-card">
+                <img
+                  src="/assets/gcc-riyadh.jpg"
+                  alt="Riyadh contemporary architectural district with wooden mashrabiya louvers"
+                  className="corridor-img"
+                  width="600"
+                  height="380"
+                  loading="lazy"
+                />
+                <div className="corridor-img-label font-mono">RIYADH &amp; KSA GIGA-PROJECT CORRIDOR</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
