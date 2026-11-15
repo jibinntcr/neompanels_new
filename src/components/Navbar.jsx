@@ -8,6 +8,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState(null); // 'products' | 'about' | null
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const navRef = useRef(null);
   const closeTimeoutRef = useRef(null);
@@ -16,6 +17,7 @@ export default function Navbar() {
   const isProducts = pathname?.startsWith('/products');
   const isApplications = pathname === '/applications' || pathname === '/industries';
   const isAbout = pathname === '/about' || pathname === '/growth-vision';
+  const isTeam = pathname?.startsWith('/team') || pathname === '/leadership';
   const isPartners = pathname === '/partners';
   const isContact = pathname === '/enquiry' || pathname === '/contact';
 
@@ -23,6 +25,15 @@ export default function Navbar() {
     setOpenDropdown(null);
     setMobileOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 12);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -72,14 +83,16 @@ export default function Navbar() {
       <div className="utility-bar">
         <div className="container utility-bar-inner">
           <div className="utility-bar-left">
-            <span className="utility-tag">
+            <span className="utility-tag font-mono">
               <span className="utility-dot" aria-hidden="true" />
               <span>NEOM PANELS · ENGINEERED EXCELLENCE, DESIGNED FOR SPACES</span>
             </span>
           </div>
           <div className="utility-bar-right">
+            <span className="utility-corridor-pill font-mono">India · GCC Corridor</span>
+            <span className="utility-divider" aria-hidden="true">|</span>
             <a href="tel:+919745450618" className="utility-contact-link font-mono">
-              <span className="utility-contact-label">Enquiry Desk:</span> +91 97454 50618
+              +91 97454 50618
             </a>
             <span className="utility-divider" aria-hidden="true">·</span>
             <a href="mailto:neompanels@gmail.com" className="utility-contact-link">
@@ -90,7 +103,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Architectural Header */}
-      <header className="site-header" ref={navRef}>
+      <header className={`site-header ${isScrolled ? 'site-header--scrolled' : ''}`} ref={navRef}>
         <div className="container header-inner">
           {/* Authentic NEOM Logo */}
           <Link href="/" className="brand-logo-link" aria-label="NEOM Panels — Home">
@@ -190,7 +203,7 @@ export default function Navbar() {
                   className={`nav-submenu ${openDropdown === 'products' ? 'nav-submenu--open' : ''}`}
                   hidden={openDropdown !== 'products'}
                 >
-                  <div className="nav-submenu-header">PHASE 1 PORTFOLIO</div>
+                  <div className="nav-submenu-header">PHASE 1 MATERIALS PORTFOLIO</div>
                   <ul className="nav-submenu-list" role="list">
                     <li>
                       <Link
@@ -198,9 +211,12 @@ export default function Navbar() {
                         className="nav-submenu-link"
                         onClick={() => setOpenDropdown(null)}
                       >
-                        <span className="nav-submenu-title">Portfolio Overview</span>
+                        <div className="nav-submenu-title-row">
+                          <span className="nav-submenu-title">Complete Portfolio Overview</span>
+                          <span className="nav-submenu-badge">3 Families</span>
+                        </div>
                         <span className="nav-submenu-desc">
-                          Overview of all 3 Phase 1 product families and architectural applications
+                          Explore all substrates, fibre cores, and decorative surface lines
                         </span>
                       </Link>
                     </li>
@@ -212,10 +228,10 @@ export default function Navbar() {
                       >
                         <div className="nav-submenu-title-row">
                           <span className="nav-submenu-title">Structural &amp; Specialty Plywood</span>
-                          <span className="nav-submenu-badge">Phase 1</span>
+                          <span className="nav-submenu-badge">01</span>
                         </div>
                         <span className="nav-submenu-desc">
-                          Premium Plywood, Marine Plywood, and BWR / BWP calibrated substrates
+                          Premium Plywood, Marine Plywood, and BWR / BWP calibrated panels
                         </span>
                       </Link>
                     </li>
@@ -226,11 +242,11 @@ export default function Navbar() {
                         onClick={() => setOpenDropdown(null)}
                       >
                         <div className="nav-submenu-title-row">
-                          <span className="nav-submenu-title">Engineered Boards</span>
-                          <span className="nav-submenu-badge">Phase 1</span>
+                          <span className="nav-submenu-title">Solid Engineered Boards</span>
+                          <span className="nav-submenu-badge">02</span>
                         </div>
                         <span className="nav-submenu-desc">
-                          High-density MDF, HDHMR moisture-resistant core, and pre-laminated MDF
+                          High-density MDF, HDHMR moisture-resistant cores, and Pre-Laminated MDF
                         </span>
                       </Link>
                     </li>
@@ -242,10 +258,10 @@ export default function Navbar() {
                       >
                         <div className="nav-submenu-title-row">
                           <span className="nav-submenu-title">Decorative Surfaces</span>
-                          <span className="nav-submenu-badge nav-submenu-badge--oak">Phase 1</span>
+                          <span className="nav-submenu-badge nav-submenu-badge--oak">03</span>
                         </div>
                         <span className="nav-submenu-desc">
-                          Architectural veneers, laminates, acrylic panels, and charcoal fluted surfaces
+                          Natural veneers, HPL laminates, acrylics, and fluted charcoal panels
                         </span>
                       </Link>
                     </li>
@@ -276,7 +292,7 @@ export default function Navbar() {
                     className={`nav-link ${isAbout ? 'nav-link--active' : ''}`}
                     aria-current={isAbout ? 'page' : undefined}
                   >
-                    About NEOM
+                    About
                   </Link>
                   <button
                     type="button"
@@ -302,7 +318,7 @@ export default function Navbar() {
                   className={`nav-submenu ${openDropdown === 'about' ? 'nav-submenu--open' : ''}`}
                   hidden={openDropdown !== 'about'}
                 >
-                  <div className="nav-submenu-header">STRATEGIC DIRECTION</div>
+                  <div className="nav-submenu-header">COMPANY &amp; CORPORATE STRATEGY</div>
                   <ul className="nav-submenu-list" role="list">
                     <li>
                       <Link
@@ -310,9 +326,24 @@ export default function Navbar() {
                         className="nav-submenu-link"
                         onClick={() => setOpenDropdown(null)}
                       >
-                        <span className="nav-submenu-title">Company Vision &amp; Mission</span>
+                        <span className="nav-submenu-title">Vision, Mission &amp; Ecosystem</span>
                         <span className="nav-submenu-desc">
-                          Our purpose, 8 ecosystem pillars, and 4-stage business growth model
+                          Our brand purpose, 8 ecosystem pillars, and 4-stage growth model
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/team"
+                        className="nav-submenu-link"
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        <div className="nav-submenu-title-row">
+                          <span className="nav-submenu-title">Executive Leadership Team</span>
+                          <span className="nav-submenu-badge">Board</span>
+                        </div>
+                        <span className="nav-submenu-desc">
+                          Meet MD Jibin N, CEO Muneer K H, CFO Muhamad Raneef T A &amp; CTO Muhammed Jabir
                         </span>
                       </Link>
                     </li>
@@ -323,16 +354,27 @@ export default function Navbar() {
                         onClick={() => setOpenDropdown(null)}
                       >
                         <div className="nav-submenu-title-row">
-                          <span className="nav-submenu-title">Growth Vision &amp; Expansion</span>
-                          <span className="nav-submenu-badge nav-submenu-badge--oak">Roadmap</span>
+                          <span className="nav-submenu-title">Growth Vision &amp; GCC Corridor</span>
+                          <span className="nav-submenu-badge nav-submenu-badge--oak">2026–2036</span>
                         </div>
                         <span className="nav-submenu-desc">
-                          Domestic foundation, GCC target corridor, and strategic timeline
+                          India domestic anchor, GCC expansion corridor, and 10-year horizon
                         </span>
                       </Link>
                     </li>
                   </ul>
                 </div>
+              </li>
+
+              {/* Team (Direct Primary Nav Item) */}
+              <li className="nav-item">
+                <Link
+                  href="/team"
+                  className={`nav-link ${isTeam ? 'nav-link--active' : ''}`}
+                  aria-current={isTeam ? 'page' : undefined}
+                >
+                  Team
+                </Link>
               </li>
 
               {/* Partners */}
@@ -407,7 +449,7 @@ export default function Navbar() {
                     </li>
                     <li>
                       <Link href="/products/engineered-boards" className="mobile-nav-sublink" onClick={() => setMobileOpen(false)}>
-                        Engineered Boards (MDF &amp; HDHMR)
+                        Solid Engineered Boards (MDF &amp; HDHMR)
                       </Link>
                     </li>
                     <li>
@@ -431,7 +473,12 @@ export default function Navbar() {
                   <ul className="mobile-nav-sublist" role="list">
                     <li>
                       <Link href="/about" className="mobile-nav-sublink" onClick={() => setMobileOpen(false)}>
-                        Vision, Mission &amp; Model
+                        Vision, Mission &amp; Growth Model
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/team" className="mobile-nav-sublink" onClick={() => setMobileOpen(false)}>
+                        Executive Leadership Team
                       </Link>
                     </li>
                     <li>
@@ -440,6 +487,11 @@ export default function Navbar() {
                       </Link>
                     </li>
                   </ul>
+                </li>
+                <li>
+                  <Link href="/team" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>
+                    Leadership Team
+                  </Link>
                 </li>
                 <li>
                   <Link href="/partners" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>

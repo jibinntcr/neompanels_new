@@ -24,6 +24,8 @@ import {
 } from '@/lib/enquiry-config';
 import { getMongoDatabase } from '@/lib/mongodb';
 
+export const dynamic = 'force-dynamic';
+
 const ALLOWED_CATEGORIES = new Set(ENQUIRY_CATEGORIES);
 
 export async function GET(request) {

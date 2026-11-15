@@ -1,8 +1,8 @@
 import { SITE_URL } from '@/lib/seo';
-import { INITIAL_SEO_POSTS } from '@/lib/posts-store';
+import { LEADERSHIP_PROFILES } from '@/lib/leadership-data';
 
 export default function sitemap() {
-  const lastModified = new Date('2026-11-04T15:30:00Z');
+  const lastModified = new Date('2026-11-15T06:00:00Z');
 
   const routes = [
     {
@@ -10,158 +10,90 @@ export default function sitemap() {
       changeFrequency: 'weekly',
       priority: 1.0,
       images: [
-        `${SITE_URL}/assets/hero-neom-flagship.jpg`,
-        `${SITE_URL}/assets/industry-furniture-oem.jpg`,
-        `${SITE_URL}/assets/industry-modular-interiors.jpg`,
-        `${SITE_URL}/assets/industry-commercial-projects.jpg`,
-        `${SITE_URL}/assets/packing-plywood-showcase.jpg`
-      ]
-    },
-    {
-      path: '/blog',
-      changeFrequency: 'daily',
-      priority: 0.92,
-      images: [
-        `${SITE_URL}/assets/hero-neom-flagship.jpg`,
-        `${SITE_URL}/assets/packing-plywood-showcase.jpg`
-      ]
-    },
-    ...INITIAL_SEO_POSTS.map((post) => ({
-      path: `/blog/${post.slug}`,
-      changeFrequency: 'weekly',
-      priority: 0.85,
-      images: post.coverImage ? [`${SITE_URL}${post.coverImage}`] : undefined
-    })),
-    {
-      path: '/brands',
-      changeFrequency: 'weekly',
-      priority: 0.9,
-      images: [
-        `${SITE_URL}/assets/starwoods-brand-showcase.jpg`,
-        `${SITE_URL}/assets/packing-plywood-showcase.jpg`
-      ]
-    },
-    {
-      path: '/brands/neom-packing-plywood',
-      changeFrequency: 'weekly',
-      priority: 0.95,
-      images: [
-        `${SITE_URL}/assets/packing-plywood-showcase.jpg`,
-        `${SITE_URL}/assets/packing-plywood-crates.jpg`
-      ]
-    },
-    {
-      path: '/manufacturing',
-      changeFrequency: 'monthly',
-      priority: 0.9,
-      images: [
-        `${SITE_URL}/assets/illustration-manufacturing.png`,
+        `${SITE_URL}/assets/hero-architectural-panels.jpg`,
         `${SITE_URL}/assets/hero-neom-flagship.jpg`
       ]
     },
     {
-      path: '/industries',
-      changeFrequency: 'monthly',
-      priority: 0.9,
+      path: '/products',
+      changeFrequency: 'weekly',
+      priority: 0.95,
       images: [
-        `${SITE_URL}/assets/industry-furniture-oem.jpg`,
-        `${SITE_URL}/assets/industry-modular-interiors.jpg`,
-        `${SITE_URL}/assets/industry-commercial-projects.jpg`,
-        `${SITE_URL}/assets/packing-plywood-crates.jpg`
+        `${SITE_URL}/assets/product-structural-plywood.jpg`,
+        `${SITE_URL}/assets/product-engineered-boards.jpg`,
+        `${SITE_URL}/assets/product-decorative-surfaces.jpg`
       ]
     },
     {
-      path: '/resources',
+      path: '/products/plywood',
       changeFrequency: 'weekly',
-      priority: 0.85,
-      images: [`${SITE_URL}/assets/illustration-home-materials.jpg`]
+      priority: 0.9,
+      images: [`${SITE_URL}/assets/product-structural-plywood.jpg`]
     },
     {
-      path: '/enquiry',
-      changeFrequency: 'monthly',
+      path: '/products/engineered-boards',
+      changeFrequency: 'weekly',
       priority: 0.9,
-      images: [`${SITE_URL}/assets/illustration-enquiry.jpg`]
+      images: [`${SITE_URL}/assets/product-engineered-boards.jpg`]
+    },
+    {
+      path: '/products/decorative-surfaces',
+      changeFrequency: 'weekly',
+      priority: 0.9,
+      images: [`${SITE_URL}/assets/product-decorative-surfaces.jpg`]
+    },
+    {
+      path: '/applications',
+      changeFrequency: 'monthly',
+      priority: 0.88,
+      images: [
+        `${SITE_URL}/assets/sector-construction.jpg`,
+        `${SITE_URL}/assets/sector-manufacturing.jpg`,
+        `${SITE_URL}/assets/sector-packaging.jpg`,
+        `${SITE_URL}/assets/sector-furniture.jpg`
+      ]
     },
     {
       path: '/about',
       changeFrequency: 'monthly',
-      priority: 0.8,
-      images: [`${SITE_URL}/assets/hero-neom-flagship.jpg`]
-    },
-    {
-      path: '/sustainability',
-      changeFrequency: 'monthly',
-      priority: 0.8,
-      images: [`${SITE_URL}/assets/sustainability-materials-studio.jpg`]
-    },
-    {
-      path: '/governance',
-      changeFrequency: 'monthly',
-      priority: 0.75,
+      priority: 0.85,
       images: [`${SITE_URL}/assets/hero-neom-flagship.jpg`]
     },
     {
       path: '/team',
       changeFrequency: 'monthly',
-      priority: 0.85,
-      images: [
-        `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.webp`,
-        `${SITE_URL}/assets/team/muneer-k-h-neom-panels-ceo.webp`,
-        `${SITE_URL}/assets/team/muhamad-raneef-t-a-neom-panels-cfo.webp`,
-        `${SITE_URL}/assets/team/muhammed-jabir-neom-panels-cto.webp`
-      ]
-    },
-    {
-      path: '/team/jibin-n',
-      changeFrequency: 'monthly',
       priority: 0.88,
-      images: [
-        `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.webp`,
-        `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.png`
-      ]
+      images: LEADERSHIP_PROFILES.map((l) => `${SITE_URL}${l.photo}`)
     },
-    {
-      path: '/team/muneer-k-h',
+    ...LEADERSHIP_PROFILES.map((leader) => ({
+      path: leader.profileHref,
       changeFrequency: 'monthly',
-      priority: 0.86,
-      images: [
-        `${SITE_URL}/assets/team/muneer-k-h-neom-panels-ceo.webp`,
-        `${SITE_URL}/assets/team/muneer-k-h.png`
-      ]
-    },
+      priority: 0.84,
+      images: [`${SITE_URL}${leader.photo}`]
+    })),
     {
-      path: '/team/muhamad-raneef-t-a',
+      path: '/growth-vision',
       changeFrequency: 'monthly',
-      priority: 0.86,
+      priority: 0.82,
       images: [
-        `${SITE_URL}/assets/team/muhamad-raneef-t-a-neom-panels-cfo.webp`,
-        `${SITE_URL}/assets/team/muhamad-raneef.jpeg`
+        `${SITE_URL}/assets/gcc-dubai.jpg`,
+        `${SITE_URL}/assets/gcc-riyadh.jpg`
       ]
     },
     {
-      path: '/team/muhammed-jabir',
+      path: '/partners',
       changeFrequency: 'monthly',
-      priority: 0.86,
-      images: [
-        `${SITE_URL}/assets/team/muhammed-jabir-neom-panels-cto.webp`,
-        `${SITE_URL}/assets/team/muhammed-jabir.png`
-      ]
+      priority: 0.82
     },
     {
-      path: '/leadership',
+      path: '/resources',
       changeFrequency: 'monthly',
-      priority: 0.7,
-      images: [
-        `${SITE_URL}/assets/team/jibin-n-neom-panels-managing-director.webp`,
-        `${SITE_URL}/assets/team/muneer-k-h.png`,
-        `${SITE_URL}/assets/team/muhamad-raneef.jpeg`,
-        `${SITE_URL}/assets/team/muhammed-jabir.png`
-      ]
+      priority: 0.78
     },
     {
-      path: '/site-map',
-      changeFrequency: 'weekly',
-      priority: 0.75
+      path: '/enquiry',
+      changeFrequency: 'monthly',
+      priority: 0.9
     },
     {
       path: '/privacy',
@@ -172,6 +104,11 @@ export default function sitemap() {
       path: '/terms',
       changeFrequency: 'yearly',
       priority: 0.4
+    },
+    {
+      path: '/site-map',
+      changeFrequency: 'monthly',
+      priority: 0.5
     }
   ];
 

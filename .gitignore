@@ -5,6 +5,7 @@ node_modules.nosync
 # Next.js build output
 .next
 .next.nosync
+.next-prod.nosync
 out
 
 # Runtime enquiry & private attachment storage

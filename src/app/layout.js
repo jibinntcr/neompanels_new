@@ -1,4 +1,5 @@
 import './globals.css';
+import './architectural-ui.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PublicLayoutChrome from '@/components/PublicLayoutChrome';

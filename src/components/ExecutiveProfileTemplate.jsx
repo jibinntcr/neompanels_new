@@ -30,6 +30,7 @@ export function buildLeaderMetadata(leader) {
 
 export default function ExecutiveProfileTemplate({ leader }) {
   const profileUrl = `${SITE_URL}${leader.profileHref}`;
+  const otherLeaders = LEADERSHIP_PROFILES.filter((item) => item.slug !== leader.slug);
 
   const profileJsonLd = {
     '@context': 'https://schema.org',
@@ -38,24 +39,9 @@ export default function ExecutiveProfileTemplate({ leader }) {
         '@type': 'BreadcrumbList',
         '@id': `${profileUrl}#breadcrumb`,
         itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: SITE_URL
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Team',
-            item: `${SITE_URL}/team`
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: leader.name,
-            item: profileUrl
-          }
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Leadership Team', item: `${SITE_URL}/team` },
+          { '@type': 'ListItem', position: 3, name: leader.name, item: profileUrl }
         ]
       },
       {
@@ -74,12 +60,8 @@ export default function ExecutiveProfileTemplate({ leader }) {
         jobTitle: leader.role,
         url: profileUrl,
         description: leader.biographyParagraphs[0],
-        image: {
-          '@id': `${profileUrl}#primaryimage`
-        },
-        worksFor: {
-          '@id': `${SITE_URL}/#organization`
-        },
+        image: { '@id': `${profileUrl}#primaryimage` },
+        worksFor: { '@id': `${SITE_URL}/#organization` },
         ...(leader.schemaAffiliations && leader.schemaAffiliations.length > 0
           ? { affiliation: leader.schemaAffiliations }
           : {}),
@@ -96,193 +78,129 @@ export default function ExecutiveProfileTemplate({ leader }) {
         name: leader.metaTitle,
         description: leader.metaDescription,
         inLanguage: 'en-IN',
-        isPartOf: {
-          '@id': `${SITE_URL}/#website`
-        },
-        breadcrumb: {
-          '@id': `${profileUrl}#breadcrumb`
-        },
-        primaryImageOfPage: {
-          '@id': `${profileUrl}#primaryimage`
-        },
-        about: {
-          '@id': `${profileUrl}#person`
-        },
-        mainEntity: {
-          '@id': `${profileUrl}#person`
-        }
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        breadcrumb: { '@id': `${profileUrl}#breadcrumb` },
+        primaryImageOfPage: { '@id': `${profileUrl}#primaryimage` },
+        about: { '@id': `${profileUrl}#person` },
+        mainEntity: { '@id': `${profileUrl}#person` }
       }
     ]
   };
 
   return (
-    <main id="main-content">
+    <main id="main-content" className="page-view">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
       />
 
-      {/* TOP IDENTITY HEADER */}
-      <section
-        className="page-header section--architectural-grid"
-        aria-labelledby="main-heading"
-      >
+      {/* Executive Profile Hero Header */}
+      <section className="arch-page-hero arch-page-hero--forest" aria-labelledby="main-heading">
         <div className="container">
-          <div className="exec-profile-nav-row">
-            <nav className="exec-breadcrumb" aria-label="Breadcrumb">
-              <ol className="exec-breadcrumb-list">
-                <li className="exec-breadcrumb-item">
-                  <Link href="/" className="exec-breadcrumb-link">
-                    Home
-                  </Link>
-                </li>
-                <li className="exec-breadcrumb-sep" aria-hidden="true">
-                  →
-                </li>
-                <li className="exec-breadcrumb-item">
-                  <Link href="/team" className="exec-breadcrumb-link">
-                    Team
-                  </Link>
-                </li>
-                <li className="exec-breadcrumb-sep" aria-hidden="true">
-                  →
-                </li>
-                <li className="exec-breadcrumb-current" aria-current="page">
-                  {leader.name}
-                </li>
+          <div className="exec-hero-topbar">
+            <nav className="breadcrumb-nav breadcrumb-nav--light" aria-label="Breadcrumb" style={{ marginBottom: 0 }}>
+              <ol className="breadcrumb-list font-mono" role="list">
+                <li><Link href="/">Home</Link></li>
+                <li aria-hidden="true">/</li>
+                <li><Link href="/team">Leadership Team</Link></li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page">{leader.name}</li>
               </ol>
             </nav>
 
-            <Link href="/team" className="exec-back-link">
+            <Link href="/team" className="exec-back-pill font-mono">
               <span aria-hidden="true">←</span>
-              <span>Back to Team</span>
+              <span>All Executive Profiles</span>
             </Link>
           </div>
 
-          <div className="exec-identity-card">
-            <div className="exec-identity-portrait-col">
-              <figure className="exec-identity-portrait-frame">
-                <picture>
-                  <source srcSet={leader.photo} type="image/webp" />
-                  <img
-                    src={leader.photo}
-                    alt={leader.photoAlt}
-                    width="800"
-                    height="800"
-                    sizes="(max-width: 768px) 220px, 232px"
-                    fetchPriority="high"
-                    decoding="async"
-                    className="exec-identity-portrait-img"
-                  />
-                </picture>
-              </figure>
+          <div className="exec-hero-card">
+            <div className="exec-hero-portrait-wrap">
+              <picture>
+                <source srcSet={leader.photo} type="image/webp" />
+                <img
+                  src={leader.photoFallback || leader.photo}
+                  alt={leader.photoAlt}
+                  width="640"
+                  height="640"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="exec-hero-portrait"
+                />
+              </picture>
             </div>
 
-            <div className="exec-identity-info-col">
-              <div>
-                <span className="exec-identity-badge">{leader.role}</span>
-                <h1 id="main-heading" tabIndex={-1} className="exec-identity-name">
-                  {leader.name}
-                </h1>
-                <p className="exec-identity-designation">{leader.designationFull}</p>
-                <p className="exec-identity-supporting">{leader.focus}</p>
-                <p className="exec-identity-summary">{leader.heroSummary}</p>
-              </div>
+            <div className="exec-hero-details">
+              <span className="exec-role-pill font-mono">{leader.role}</span>
+              <h1 id="main-heading" tabIndex={-1} className="exec-hero-name">
+                {leader.name}
+              </h1>
+              <p className="exec-hero-focus">{leader.focus}</p>
+              <p className="exec-hero-summary">{leader.heroSummary}</p>
 
-              <div className="exec-identity-actions-bar">
-                <div className="exec-identity-social-group">
-                  {leader.telHref ? (
-                    <a
-                      href={leader.telHref}
-                      className="leader-phone-logo-only"
-                      aria-label={`Call ${leader.name} (${leader.phone})`}
-                      title={`Call ${leader.name} (${leader.phone})`}
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z" />
-                      </svg>
-                    </a>
-                  ) : null}
-                  {leader.linkedin ? (
-                    <a
-                      href={leader.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer me"
-                      className="leader-linkedin-logo-only"
-                      aria-label={`${leader.name} on LinkedIn`}
-                      title={`${leader.name} — LinkedIn`}
-                    >
-                      <svg
-                        width="22"
-                        height="22"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                      </svg>
-                    </a>
-                  ) : null}
-                </div>
-
-                <div className="exec-identity-cta-group">
-                  <Link href="/enquiry" className="btn btn--primary exec-identity-btn">
-                    Business Enquiry
-                  </Link>
-                  <Link href="/brands" className="btn btn--secondary exec-identity-btn">
-                    Explore Product Brands
-                  </Link>
-                </div>
+              <div className="exec-hero-actions">
+                <Link href="/enquiry" className="btn btn-gold">
+                  <span>Business Enquiry</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/products" className="btn btn-outline-light">
+                  <span>Explore Materials Portfolio</span>
+                </Link>
+                {leader.telHref && (
+                  <a href={leader.telHref} className="btn btn-outline-light font-mono">
+                    <span>{leader.phone}</span>
+                  </a>
+                )}
+                {leader.linkedin && (
+                  <a
+                    href={leader.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer me"
+                    className="btn btn-outline-light"
+                    aria-label={`${leader.name} on LinkedIn`}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                    </svg>
+                    <span>LinkedIn</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* STRUCTURED 2-COLUMN PROFILE BODY */}
-      <section className="section reveal-once" aria-label={`${leader.name} Biography and Role`}>
+      {/* Two-Column Executive Detail Body */}
+      <section className="section-spacing bg-warm-ivory" aria-label={`${leader.name} Biography and Responsibilities`}>
         <div className="container">
-          <div className="exec-profile-body-grid">
-            {/* LEFT / MAIN COLUMN: BIOGRAPHY & RESPONSIBILITIES */}
-            <div className="exec-profile-main-col">
-              <article className="exec-content-card" aria-labelledby="biography-heading">
-                <div className="exec-card-header">
-                  <p className="eyebrow" style={{ marginBottom: '0.25rem' }}>
-                    EXECUTIVE BIOGRAPHY
-                  </p>
-                  <h2 id="biography-heading" className="exec-card-title">
-                    Professional Biography
-                  </h2>
-                </div>
-                <div className="exec-bio-paragraphs">
+          <div className="exec-detail-layout">
+            {/* Main Biography & Responsibilities */}
+            <div className="exec-detail-main">
+              <article className="exec-panel-card" aria-labelledby="biography-heading">
+                <span className="section-eyebrow font-mono">EXECUTIVE BIOGRAPHY</span>
+                <h2 id="biography-heading" className="exec-panel-title">
+                  Professional Overview
+                </h2>
+                <div className="exec-bio-prose">
                   {leader.biographyParagraphs.map((paragraph, idx) => (
                     <p key={idx}>{paragraph}</p>
                   ))}
                 </div>
               </article>
 
-              <article className="exec-content-card" aria-labelledby="responsibilities-heading">
-                <div className="exec-card-header">
-                  <p className="eyebrow" style={{ marginBottom: '0.25rem' }}>
-                    ROLE AT NEOM PANELS
-                  </p>
-                  <h2 id="responsibilities-heading" className="exec-card-title">
-                    Responsibilities at NEOM Panels
-                  </h2>
-                </div>
-                <div className="exec-responsibilities-list">
+              <article className="exec-panel-card" aria-labelledby="responsibilities-heading">
+                <span className="section-eyebrow font-mono">MANDATE AT NEOM PANELS</span>
+                <h2 id="responsibilities-heading" className="exec-panel-title">
+                  Core Executive Responsibilities
+                </h2>
+                <div className="exec-resp-list">
                   {leader.responsibilities.map((item, idx) => (
-                    <div key={item.title} className="exec-responsibility-row">
-                      <span className="exec-responsibility-num">0{idx + 1}</span>
+                    <div key={item.title} className="exec-resp-item">
+                      <span className="exec-resp-num font-mono">0{idx + 1}</span>
                       <div>
-                        <h3 className="exec-responsibility-title">{item.title}</h3>
-                        <p className="exec-responsibility-desc">{item.description}</p>
+                        <h3 className="exec-resp-heading">{item.title}</h3>
+                        <p className="exec-resp-text">{item.description}</p>
                       </div>
                     </div>
                   ))}
@@ -290,98 +208,48 @@ export default function ExecutiveProfileTemplate({ leader }) {
               </article>
             </div>
 
-            {/* RIGHT / SIDEBAR COLUMN: PROFESSIONAL BACKGROUND & PEER PROFILES */}
-            <aside className="exec-profile-side-col" aria-label="Professional Background and Team">
-              <div className="exec-side-card" aria-labelledby="background-heading">
-                <div className="exec-card-header">
-                  <p className="eyebrow" style={{ marginBottom: '0.25rem' }}>
-                    PROFESSIONAL BACKGROUND
-                  </p>
-                  <h2 id="background-heading" className="exec-side-title">
-                    Organisations &amp; Activities
-                  </h2>
-                </div>
-                <ul className="exec-background-list" role="list">
-                  {leader.backgroundItems.map((item) => (
-                    <li key={item.organisation} className="exec-background-item">
-                      <div className="exec-background-item-top">
-                        <strong className="exec-background-item-org">{item.organisation}</strong>
-                        <span className="exec-background-item-badge">{item.role}</span>
-                      </div>
-                      <p className="exec-background-item-desc">{item.summary}</p>
+            {/* Sidebar: Career Credentials & Fellow Directors */}
+            <aside className="exec-detail-sidebar" aria-label="Background and Fellow Executives">
+              <div className="exec-panel-card">
+                <span className="section-eyebrow font-mono">CREDENTIALS &amp; AFFILIATIONS</span>
+                <h2 className="exec-sidebar-heading">Professional Background</h2>
+                <ul className="exec-bg-list" role="list">
+                  {leader.backgroundItems.map((bg) => (
+                    <li key={`${bg.organisation}-${bg.role}`} className="exec-bg-item">
+                      <span className="exec-bg-role font-mono">{bg.role}</span>
+                      <strong className="exec-bg-org">{bg.organisation}</strong>
+                      <p className="exec-bg-summary">{bg.summary}</p>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="exec-side-card" aria-labelledby="team-directory-heading">
-                <div className="exec-card-header">
-                  <p className="eyebrow" style={{ marginBottom: '0.25rem' }}>
-                    EXECUTIVE LEADERSHIP
-                  </p>
-                  <h2 id="team-directory-heading" className="exec-side-title">
-                    NEOM Panels Leadership Team
-                  </h2>
-                </div>
-                <ul className="exec-peer-list" role="list">
-                  {LEADERSHIP_PROFILES.map((peer) => {
-                    const isCurrent = peer.slug === leader.slug;
-                    return (
-                      <li key={peer.slug}>
-                        <Link
-                          href={peer.profileHref}
-                          className={`exec-peer-link ${isCurrent ? 'is-current' : ''}`}
-                          aria-current={isCurrent ? 'page' : undefined}
-                        >
-                          <img
-                            src={peer.photo}
-                            alt={peer.photoAlt}
-                            width="46"
-                            height="46"
-                            className="exec-peer-avatar"
-                          />
-                          <div style={{ minWidth: 0, flex: 1 }}>
-                            <div className="exec-peer-name">{peer.name}</div>
-                            <div className="exec-peer-role">{peer.role}</div>
-                          </div>
-                          <span className="exec-peer-arrow" aria-hidden="true">
-                            {isCurrent ? '●' : '→'}
-                          </span>
-                        </Link>
-                      </li>
-                    );
-                  })}
+              <div className="exec-panel-card">
+                <span className="section-eyebrow font-mono">EXECUTIVE BOARD</span>
+                <h2 className="exec-sidebar-heading">Fellow Leadership Members</h2>
+                <ul className="exec-peers-list" role="list">
+                  {otherLeaders.map((peer) => (
+                    <li key={peer.id}>
+                      <Link href={peer.profileHref} className="exec-peer-link">
+                        <img
+                          src={peer.photo}
+                          alt={peer.photoAlt}
+                          width="56"
+                          height="56"
+                          loading="lazy"
+                          className="exec-peer-avatar"
+                        />
+                        <div className="exec-peer-info">
+                          <strong className="exec-peer-name">{peer.name}</strong>
+                          <span className="exec-peer-role font-mono">{peer.role}</span>
+                        </div>
+                        <span className="exec-peer-arrow" aria-hidden="true">→</span>
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </aside>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT CTA & BACK TO TEAM */}
-      <section
-        className="section section--sage-subtle section--no-border reveal-once"
-        aria-labelledby="profile-cta-heading"
-      >
-        <div className="container split-editorial">
-          <div>
-            <p className="eyebrow">BUSINESS ENQUIRIES &amp; LEADERSHIP</p>
-            <h2 id="profile-cta-heading" className="section-title">
-              Connect with NEOM Panels
-            </h2>
-            <p className="lead-text" style={{ marginBottom: 0 }}>
-              For product specifications, OEM wood-panel supply, industrial packaging plywood or
-              distribution enquiries, contact our commercial team or return to the full leadership
-              overview.
-            </p>
-          </div>
-          <div className="btn-group">
-            <Link href="/enquiry" className="btn btn--primary">
-              Submit a Business Enquiry
-            </Link>
-            <Link href="/team" className="btn btn--secondary">
-              Back to Team Overview
-            </Link>
           </div>
         </div>
       </section>

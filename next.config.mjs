@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: process.env.NODE_ENV === 'development' ? '.next.nosync' : '.next',
+  distDir: process.env.NEXT_BUILD_DIR || (process.env.NODE_ENV === 'development' ? '.next.nosync' : '.next'),
   reactStrictMode: true,
   optimizeFonts: false,
   images: {
