@@ -1,51 +1,78 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { STAKEHOLDER_ROLES, PRODUCT_FAMILIES } from '@/lib/enquiry-config';
-
-const ENQUIRY_TYPES = [
-  'Product Enquiry',
-  'Project Supply',
-  'Partnership',
-  'Sample Request',
-  'International Enquiry'
-];
+import {
+  ENQUIRY_BRANDS,
+  PRIMARY_ENQUIRY_TYPES,
+  STAKEHOLDER_ROLES,
+  PRODUCT_FAMILIES,
+  normalizeBrandParam,
+  normalizeCategoryParam,
+  normalizeFamilyParam,
+  normalizeRoleParam,
+  sanitizeQueryText
+} from '@/lib/enquiry-config';
 
 export default function EnquiryFormClient() {
   const searchParams = useSearchParams();
 
-  // Read URL params for prefilling
-  const initialFamily = searchParams?.get('family') || '';
-  const initialVariant = searchParams?.get('variant') || '';
-  const initialType = searchParams?.get('type') || searchParams?.get('category') || 'Product Enquiry';
-  const initialRole = searchParams?.get('role') || '';
-  const initialDocument = searchParams?.get('document') || '';
+  // Read and allowlist-validate URL query parameters
+  const rawBrand = searchParams?.get('brand') || '';
+  const rawType = searchParams?.get('type') || searchParams?.get('category') || '';
+  const rawFamily = searchParams?.get('family') || '';
+  const rawVariant = searchParams?.get('variant') || '';
+  const rawRole = searchParams?.get('role') || '';
+  const rawDocument = searchParams?.get('document') || '';
+
+  const safeVariant = sanitizeQueryText(rawVariant, 80);
+  const safeDocument = sanitizeQueryText(rawDocument, 120);
+
+  const resolvedBrand = normalizeBrandParam(rawBrand) || 'General NEOM Panels Enquiry';
+  const resolvedType = normalizeCategoryParam(rawType) || 'Product Enquiry';
+  const resolvedFamily =
+    normalizeFamilyParam(rawFamily) ||
+    normalizeFamilyParam(safeVariant) ||
+    (resolvedBrand === 'NEOM Packing Plywood' ? 'Packaging-Grade Plywood (MR)' : '');
+  const resolvedRole = normalizeRoleParam(rawRole) || '';
+
+  const hasPrefilledContext = Boolean(
+    normalizeBrandParam(rawBrand) ||
+      normalizeCategoryParam(rawType) ||
+      resolvedFamily ||
+      resolvedRole ||
+      safeVariant ||
+      safeDocument
+  );
+
+  const enquiryTypeOptions = useMemo(() => {
+    if (PRIMARY_ENQUIRY_TYPES.includes(resolvedType)) {
+      return PRIMARY_ENQUIRY_TYPES;
+    }
+    return [...PRIMARY_ENQUIRY_TYPES, resolvedType];
+  }, [resolvedType]);
 
   // Form State
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
-  const [role, setRole] = useState(initialRole);
+  const [brand, setBrand] = useState(resolvedBrand);
+  const [role, setRole] = useState(resolvedRole);
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [cityCountry, setCityCountry] = useState('');
-  const [enquiryType, setEnquiryType] = useState(
-    ENQUIRY_TYPES.find((t) => t.toLowerCase() === initialType.toLowerCase().replace(/-/g, ' ')) ||
-      'Product Enquiry'
-  );
-  const [productFamily, setProductFamily] = useState(
-    PRODUCT_FAMILIES.find((f) => f.toLowerCase() === initialFamily.toLowerCase()) ||
-      initialFamily ||
-      ''
-  );
-  const [requirement, setRequirement] = useState(
-    initialDocument
-      ? `Requesting technical documentation: ${initialDocument}. Intended project application: `
-      : initialVariant
-      ? `Interested in ${initialVariant}. Please provide specifications, minimum order quantities, and availability: `
-      : ''
-  );
+  const [enquiryType, setEnquiryType] = useState(resolvedType);
+  const [productFamily, setProductFamily] = useState(resolvedFamily);
+  const [procurementReference, setProcurementReference] = useState('');
+  const [requirement, setRequirement] = useState(() => {
+    if (safeDocument) {
+      return `Requesting product information: ${safeDocument}. Intended application: `;
+    }
+    if (safeVariant) {
+      return `Interested in ${safeVariant}. Application and approximate quantity: `;
+    }
+    return '';
+  });
   const [honeypot, setHoneypot] = useState('');
 
   // UI States
@@ -55,10 +82,41 @@ export default function EnquiryFormClient() {
   const [submitError, setSubmitError] = useState(null);
 
   useEffect(() => {
-    if (initialFamily && !productFamily) {
-      setProductFamily(initialFamily);
+    setBrand(resolvedBrand);
+  }, [resolvedBrand]);
+
+  useEffect(() => {
+    setEnquiryType(resolvedType);
+  }, [resolvedType]);
+
+  useEffect(() => {
+    if (resolvedFamily) {
+      setProductFamily(resolvedFamily);
     }
-  }, [initialFamily]);
+  }, [resolvedFamily]);
+
+  useEffect(() => {
+    if (resolvedRole) {
+      setRole(resolvedRole);
+    }
+  }, [resolvedRole]);
+
+  useEffect(() => {
+    // Never overwrite text the visitor has already typed
+    if (safeDocument) {
+      setRequirement((prev) =>
+        prev ? prev : `Requesting product information: ${safeDocument}. Intended application: `
+      );
+    } else if (safeVariant) {
+      setRequirement((prev) =>
+        prev ? prev : `Interested in ${safeVariant}. Application and approximate quantity: `
+      );
+    }
+  }, [safeDocument, safeVariant]);
+
+  const showInstitutionalReference =
+    role === 'Government & Institutional Buyers' ||
+    enquiryType === 'Institutional & public procurement';
 
   const validate = () => {
     const errs = {};
@@ -70,7 +128,8 @@ export default function EnquiryFormClient() {
     const hasPhone = Boolean(phone.trim() && phone.trim().replace(/\D/g, '').length >= 7);
 
     if (!email.trim() && !phone.trim()) {
-      errs.contact = 'Please provide at least one contact method: a valid email address or phone number.';
+      errs.contact =
+        'Please provide at least one contact method: a valid email address or telephone number.';
     } else {
       if (email.trim() && !hasEmail) {
         errs.email = 'Please enter a valid email address format (e.g. name@company.com).';
@@ -92,10 +151,10 @@ export default function EnquiryFormClient() {
     e.preventDefault();
     setSubmitError(null);
 
-    // Spam honeypot
     if (honeypot) {
       setSubmitSuccess({
         reference: 'NEOM-' + Math.floor(100000 + Math.random() * 900000),
+        brand,
         message: 'Your enquiry has been received.'
       });
       return;
@@ -110,7 +169,8 @@ export default function EnquiryFormClient() {
     try {
       const payload = {
         name: name.trim(),
-        organisation: company.trim() || 'Independent / Direct Specifier',
+        organisation: company.trim() || 'Direct Business Enquiry',
+        brand,
         role: role.trim() || 'Not specified',
         email: email.trim(),
         phone: phone.trim(),
@@ -119,9 +179,9 @@ export default function EnquiryFormClient() {
         category: enquiryType,
         enquiryType,
         productFamily: productFamily.trim(),
+        procurementReference: procurementReference.trim(),
         requirementDescription: requirement.trim(),
         description: requirement.trim(),
-        brand: 'NEOM Panels',
         preferredContactMethod: email.trim() ? 'Email' : 'Phone'
       };
 
@@ -138,15 +198,18 @@ export default function EnquiryFormClient() {
       if (res.ok && data.ok) {
         setSubmitSuccess({
           reference: data.reference || 'NEOM-REF',
-          message: 'Your requirement has been durably recorded by our specification desk.'
+          brand: data.brand || brand,
+          message: 'Your enquiry has been recorded by NEOM Panels.'
         });
       } else {
-        const errorList = data.errors || [data.message || 'Submission failed. Please check your entries.'];
+        const errorList = data.errors || [
+          data.message || 'Submission failed. Please check your entries.'
+        ];
         setSubmitError(errorList.join(' '));
       }
-    } catch (err) {
+    } catch (_) {
       setSubmitError(
-        'A connection issue occurred while submitting. Please call our desk directly at +91 97454 50618 or email neompanels@gmail.com.'
+        'A connection issue occurred while submitting. Please call +91 97454 50618 or email neompanels@gmail.com.'
       );
     } finally {
       setIsSubmitting(false);
@@ -161,18 +224,20 @@ export default function EnquiryFormClient() {
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <h2 className="success-title">Requirement Successfully Received</h2>
+        <h2 className="success-title">Enquiry Received</h2>
         <p className="success-lead">
-          Thank you, <strong>{name}</strong>. Your enquiry has been registered with the NEOM Panels specification team.
+          Thank you, <strong>{name}</strong>. Your enquiry ({submitSuccess.brand}) has been
+          recorded with the NEOM Panels team.
         </p>
 
         <div className="success-reference-box font-mono">
-          <span className="ref-label">OFFICIAL ENQUIRY REFERENCE:</span>
+          <span className="ref-label">ENQUIRY REFERENCE</span>
           <span className="ref-code">{submitSuccess.reference}</span>
         </div>
 
         <p className="success-detail">
-          A representative will review your requirement details and contact you via your provided {email.trim() ? 'email' : 'phone number'}.
+          Our team will review your details and reach out via your provided{' '}
+          {email.trim() ? 'email address' : 'telephone number'}.
         </p>
 
         <div className="success-actions">
@@ -185,14 +250,15 @@ export default function EnquiryFormClient() {
               setCompany('');
               setEmail('');
               setPhone('');
+              setProcurementReference('');
               setRequirement('');
               setErrors({});
             }}
           >
-            Submit Another Requirement
+            Submit Another Enquiry
           </button>
-          <Link href="/products" className="btn btn-primary">
-            <span>Explore Materials Portfolio</span>
+          <Link href="/brands" className="btn btn-primary">
+            <span>Explore Our Brands</span>
             <span aria-hidden="true">→</span>
           </Link>
         </div>
@@ -204,12 +270,22 @@ export default function EnquiryFormClient() {
     <form className="enquiry-form-clean" onSubmit={handleSubmit} noValidate>
       {submitError && (
         <div className="form-error-banner" role="alert">
-          <span className="font-mono text-error font-bold">SUBMISSION NOTICE:</span>
-          <p>{submitError}</p>
+          <span className="text-error font-bold">Submission notice:</span>
+          <p style={{ margin: '0.25rem 0 0' }}>{submitError}</p>
         </div>
       )}
 
-      {/* Honeypot field (hidden from screen) */}
+      {hasPrefilledContext && (
+        <div className="contact-rule-notice" role="status" style={{ marginBottom: '1.25rem' }}>
+          <span className="rule-dot" aria-hidden="true" />
+          <span>
+            Enquiry context preselected from your previous page. You can adjust any selection below
+            without losing your typed notes.
+          </span>
+        </div>
+      )}
+
+      {/* Honeypot field */}
       <div style={{ display: 'none' }} aria-hidden="true">
         <label htmlFor="company_website_hp">Do not fill this field</label>
         <input
@@ -223,6 +299,45 @@ export default function EnquiryFormClient() {
         />
       </div>
 
+      {/* Brand (Optional) & Enquiry Type */}
+      <div className="form-grid-two">
+        <div className="form-field">
+          <label htmlFor="enquiry-brand" className="field-label">
+            Brand <span className="field-optional">(Optional)</span>
+          </label>
+          <select
+            id="enquiry-brand"
+            className="field-select"
+            value={brand}
+            onChange={(e) => setBrand(e.target.value)}
+          >
+            {ENQUIRY_BRANDS.map((b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="enquiry-type" className="field-label">
+            Enquiry Type
+          </label>
+          <select
+            id="enquiry-type"
+            className="field-select"
+            value={enquiryType}
+            onChange={(e) => setEnquiryType(e.target.value)}
+          >
+            {enquiryTypeOptions.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       <div className="form-grid-two">
         {/* Name (Required) */}
         <div className="form-field">
@@ -233,7 +348,7 @@ export default function EnquiryFormClient() {
             type="text"
             id="enquiry-name"
             className={`field-input ${errors.name ? 'field-input--error' : ''}`}
-            placeholder="e.g. Ar. Rajesh Menon"
+            placeholder="Your full name"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -249,13 +364,13 @@ export default function EnquiryFormClient() {
         {/* Company (Optional) */}
         <div className="form-field">
           <label htmlFor="enquiry-company" className="field-label">
-            Company / Practice Name <span className="field-optional">(Optional)</span>
+            Company / Organisation <span className="field-optional">(Optional)</span>
           </label>
           <input
             type="text"
             id="enquiry-company"
             className="field-input"
-            placeholder="e.g. Studio Vista Architecture"
+            placeholder="Company, firm or workshop name"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
           />
@@ -263,10 +378,10 @@ export default function EnquiryFormClient() {
       </div>
 
       <div className="form-grid-two">
-        {/* Role (Optional, 8 deck groups) */}
+        {/* Customer / Business Group (Optional — 5 Confirmed Groups) */}
         <div className="form-field">
           <label htmlFor="enquiry-role" className="field-label">
-            Stakeholder Role <span className="field-optional">(Optional)</span>
+            Customer / Business Group <span className="field-optional">(Optional)</span>
           </label>
           <select
             id="enquiry-role"
@@ -274,7 +389,7 @@ export default function EnquiryFormClient() {
             value={role}
             onChange={(e) => setRole(e.target.value)}
           >
-            <option value="">Select your role...</option>
+            <option value="">Select your business group...</option>
             {STAKEHOLDER_ROLES.map((r) => (
               <option key={r} value={r}>
                 {r}
@@ -283,26 +398,48 @@ export default function EnquiryFormClient() {
           </select>
         </div>
 
-        {/* City / Country (Optional) */}
+        {/* Product Context (Optional) */}
         <div className="form-field">
-          <label htmlFor="enquiry-city" className="field-label">
-            City / Country <span className="field-optional">(Optional)</span>
+          <label htmlFor="enquiry-family" className="field-label">
+            Product Context <span className="field-optional">(Optional)</span>
           </label>
-          <input
-            type="text"
-            id="enquiry-city"
-            className="field-input"
-            placeholder="e.g. Kochi, Kerala / Dubai, UAE"
-            value={cityCountry}
-            onChange={(e) => setCityCountry(e.target.value)}
-          />
+          <select
+            id="enquiry-family"
+            className="field-select"
+            value={productFamily}
+            onChange={(e) => setProductFamily(e.target.value)}
+          >
+            <option value="">Not applicable / General corporate enquiry</option>
+            {PRODUCT_FAMILIES.map((f) => (
+              <option key={f} value={f}>
+                {f}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
-      {/* Contact Method Notice (Email or phone required) */}
-      <div className="contact-rule-notice font-mono">
+      {/* Optional Procurement / Tender Reference for Government & Institutional Buyers */}
+      {showInstitutionalReference && (
+        <div className="form-field">
+          <label htmlFor="enquiry-procurement-ref" className="field-label">
+            Procurement / Tender Reference <span className="field-optional">(Optional)</span>
+          </label>
+          <input
+            type="text"
+            id="enquiry-procurement-ref"
+            className="field-input"
+            placeholder="Optional tender, inquiry or schedule reference number"
+            value={procurementReference}
+            onChange={(e) => setProcurementReference(e.target.value)}
+          />
+        </div>
+      )}
+
+      {/* Contact Method Notice */}
+      <div className="contact-rule-notice">
         <span className="rule-dot" aria-hidden="true" />
-        <span>CONTACT REQUIREMENT: Provide at least one valid method (email or phone).</span>
+        <span>Contact requirement: Please provide at least one valid email address or telephone number.</span>
       </div>
 
       {errors.contact && (
@@ -321,7 +458,7 @@ export default function EnquiryFormClient() {
             type="email"
             id="enquiry-email"
             className={`field-input ${errors.email ? 'field-input--error' : ''}`}
-            placeholder="name@domain.com"
+            placeholder="name@company.com"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -336,7 +473,7 @@ export default function EnquiryFormClient() {
         {/* Phone */}
         <div className="form-field">
           <label htmlFor="enquiry-phone" className="field-label">
-            Telephone / Mobile Number
+            Telephone Number
           </label>
           <input
             type="tel"
@@ -355,57 +492,31 @@ export default function EnquiryFormClient() {
         </div>
       </div>
 
-      <div className="form-grid-two">
-        {/* Enquiry Type */}
-        <div className="form-field">
-          <label htmlFor="enquiry-type" className="field-label">
-            Enquiry Type
-          </label>
-          <select
-            id="enquiry-type"
-            className="field-select"
-            value={enquiryType}
-            onChange={(e) => setEnquiryType(e.target.value)}
-          >
-            {ENQUIRY_TYPES.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Product Family (Optional, prefilled) */}
-        <div className="form-field">
-          <label htmlFor="enquiry-family" className="field-label">
-            Product Family <span className="field-optional">(Optional)</span>
-          </label>
-          <select
-            id="enquiry-family"
-            className="field-select"
-            value={productFamily}
-            onChange={(e) => setProductFamily(e.target.value)}
-          >
-            <option value="">Select product family if applicable...</option>
-            {PRODUCT_FAMILIES.map((f) => (
-              <option key={f} value={f}>
-                {f}
-              </option>
-            ))}
-          </select>
-        </div>
+      {/* City / Location (Optional) */}
+      <div className="form-field">
+        <label htmlFor="enquiry-city" className="field-label">
+          City / Location <span className="field-optional">(Optional)</span>
+        </label>
+        <input
+          type="text"
+          id="enquiry-city"
+          className="field-input"
+          placeholder="e.g. Kochi, Bengaluru, Mumbai"
+          value={cityCountry}
+          onChange={(e) => setCityCountry(e.target.value)}
+        />
       </div>
 
       {/* Requirement (Required) */}
       <div className="form-field">
         <label htmlFor="enquiry-requirement" className="field-label">
-          Requirement Details <span className="field-required">*</span>
+          Requirement <span className="field-required">*</span>
         </label>
         <textarea
           id="enquiry-requirement"
           rows="4"
           className={`field-textarea ${errors.requirement ? 'field-input--error' : ''}`}
-          placeholder="Please describe your application, required sheet quantities, target project location, or questions..."
+          placeholder="Describe your requirement, intended application, nominal thickness, approximate quantity or question..."
           value={requirement}
           onChange={(e) => {
             setRequirement(e.target.value);
@@ -426,19 +537,15 @@ export default function EnquiryFormClient() {
           disabled={isSubmitting}
         >
           {isSubmitting ? (
-            <span>Recording Requirement...</span>
+            <span>Submitting Enquiry...</span>
           ) : (
-            <>
-              <span>Submit Requirement</span>
-              <svg className="btn-icon-arrow" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14">
-                <path fill="currentColor" d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06l2.97-2.97H2.75a.75.75 0 0 1 0-1.5h8.44L8.22 4.03a.75.75 0 0 1 0-1.06Z" />
-              </svg>
-            </>
+            <span>Submit Enquiry</span>
           )}
         </button>
 
         <div className="form-privacy-note secondary-text">
-          Submissions are directly reviewed by NEOM Panels management. We do not distribute contact information to third parties.
+          Submissions are reviewed by the NEOM Panels team in accordance with our{' '}
+          <Link href="/privacy">Privacy Policy</Link>.
         </div>
       </div>
     </form>

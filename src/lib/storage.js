@@ -22,11 +22,11 @@ export function getVerifiedContactDetails() {
   const c = rawContent?.company?.verifiedContactDetails || {};
   const phone = process.env.NEXT_PUBLIC_CONTACT_PHONE || c.verifiedPhone || null;
   const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || c.verifiedEmail || null;
-  const whatsapp = process.env.NEXT_PUBLIC_CONTACT_WHATSAPP || c.verifiedWhatsapp || null;
+  const whatsapp = process.env.NEXT_PUBLIC_CONTACT_WHATSAPP || null;
   const address =
     process.env.NEXT_PUBLIC_CONTACT_ADDRESS || c.verifiedRegisteredAddress || null;
   const factoryLocation =
-    c.verifiedFactoryLocation || 'India (Company-owned wood-panel manufacturing facility)';
+    c.verifiedFactoryLocation || 'India (Manufacturing foundation includes NEOM’s own factory)';
 
   return {
     phone,
@@ -181,15 +181,17 @@ export function getSiteContent() {
         {
           label: 'Principal Business Activity',
           value:
-            'Indian wood-panel manufacturing business with its own factory; corporate parent of Starwoods and NEOM Packing Plywood.'
+            'NEOM Panels is an Indian panel manufacturing company and the company behind Starwoods and NEOM Packing Plywood.'
         },
         {
-          label: 'Product Brands',
-          value: 'Starwoods (Furniture & Interiors) and NEOM Packing Plywood (Industrial Packaging)'
+          label: 'Active Brands',
+          value:
+            'Starwoods (Plywood and engineered boards) and NEOM Packing Plywood (Plywood for industrial packaging requirements)'
         },
         {
-          label: 'Manufacturing Footprint',
-          value: 'Company-owned wood-panel manufacturing facility in India'
+          label: 'Manufacturing Context',
+          value:
+            'Includes NEOM’s own factory in India; product-level manufacturing or sourcing status is confirmed per product and enquiry.'
         },
         {
           label: 'Business Enquiries & Document Requests',
@@ -234,8 +236,8 @@ export function getSiteContent() {
           status: 'Adopted Operating Principle',
           summary:
             'Guides raw-material yield discipline, offcut handling, and energy and water monitoring in factory operations.',
-          href: '/sustainability',
-          linkLabel: 'View Sustainability Practices'
+          href: '/responsibility',
+          linkLabel: 'View Responsibility Practices'
         },
         {
           id: 'privacy-notice',
@@ -268,11 +270,11 @@ export function getSiteContent() {
       },
       {
         id: 'brand-literature',
-        title: 'Starwoods & NEOM Packing Plywood brand briefs',
+        title: 'Starwoods & NEOM Packing Plywood product information requests',
         categoryLabel: 'Brand Information',
-        reviewType: 'Individual Review',
+        reviewType: 'Request — Reviewed by Team',
         description:
-          'Application overviews and specification checklists for Starwoods (furniture and interiors) and NEOM Packing Plywood (MR industrial packaging).'
+          'Request available catalogues, specification sheets or application guidance for Starwoods (plywood and engineered boards) or NEOM Packing Plywood.'
       },
       {
         id: 'product-documents',
@@ -284,7 +286,7 @@ export function getSiteContent() {
       },
       {
         id: 'corporate-policies',
-        title: 'Governance & sustainability policy copies',
+        title: 'Governance & responsibility policy copies',
         categoryLabel: 'Corporate Policies',
         reviewType: 'Published Online & Request',
         description:

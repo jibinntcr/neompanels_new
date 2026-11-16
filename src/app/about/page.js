@@ -1,245 +1,204 @@
 import Link from 'next/link';
+import BrandMarkPlaque from '@/components/BrandMarkPlaque';
 import { LEADERSHIP_PROFILES } from '@/lib/leadership-data';
+import {
+  PORTFOLIO_BRANDS,
+  PARENT_COMPANY,
+  CUSTOMER_COMMITMENTS
+} from '@/lib/portfolio-data';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'About NEOM Panels — Vision, Mission & Ecosystem',
+export const metadata = buildPageMetadata({
+  title: 'About NEOM',
   description:
-    'Learn about NEOM Panels: our corporate vision, mission, executive leadership team, 8 ecosystem pillars, market context, and 4-stage business growth model.',
-  alternates: {
-    canonical: '/about'
-  }
-};
+    'NEOM Panels is an Indian panel manufacturing company and the company behind Starwoods and NEOM Packing Plywood—focused on making panel buying more dependable and transparent.',
+  path: '/about'
+});
 
 export default function AboutPage() {
   return (
-    <main id="main-content" className="page-view">
-      {/* Architectural Page Hero */}
-      <section className="arch-page-hero arch-page-hero--forest" aria-labelledby="main-heading">
-        <div className="container">
-          <nav className="breadcrumb-nav breadcrumb-nav--light" aria-label="Breadcrumb">
-            <ol className="breadcrumb-list font-mono" role="list">
-              <li><Link href="/">Home</Link></li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page">About NEOM</li>
-            </ol>
+    <main id="main-content">
+      {/* Corporate Header */}
+      <section className="page-header-dark" aria-labelledby="main-heading">
+        <div className="container page-header-inner">
+          <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+            <Link href="/" className="breadcrumb-link">Home</Link>
+            <span className="breadcrumb-sep" aria-hidden="true">/</span>
+            <span className="breadcrumb-current">About NEOM</span>
           </nav>
 
-          <div className="arch-page-hero__grid">
-            <div className="arch-page-hero__copy">
-              <span className="section-eyebrow text-gold font-mono">PURPOSE &amp; CORPORATE IDENTITY</span>
-              <h1 id="main-heading" tabIndex={-1} className="page-title text-warm">
-                Building an Integrated Materials Ecosystem.
-              </h1>
-              <p className="page-lead-text text-warm-muted">
-                NEOM Panels is an Indian engineered wood and interior materials brand created with a disciplined long-term horizon: bridging quality, design relevance, and dependable project supply for spaces across India and global markets.
+          <span className="section-eyebrow text-gold">Company Overview</span>
+          <h1 id="main-heading" className="page-hero-title text-warm">
+            The company behind Starwoods and NEOM Packing Plywood.
+          </h1>
+          <p className="page-hero-lead text-warm-muted">
+            {PARENT_COMPANY.descriptor} We combine our manufacturing foundation with clear
+            information and accountable relationships so business buyers can source materials with
+            greater confidence.
+          </p>
+        </div>
+      </section>
+
+      {/* Who We Are & Why Dependable Buying Matters */}
+      <section className="section-spacing bg-white border-bottom-divider" aria-labelledby="who-we-are-heading">
+        <div className="container">
+          <div className="corp-split-section">
+            <div>
+              <span className="section-eyebrow">Who We Are</span>
+              <h2 id="who-we-are-heading" className="corp-section-title">
+                Making material buying more dependable and transparent.
+              </h2>
+              <p className="corp-body-text">
+                For dealers, contractors, furniture workshops, industrial packaging teams and
+                institutional buyers, choosing panel materials involves more than comparing sheet
+                prices. Buyers need honest clarity on what a board is suited to do, reliable updates
+                on order schedules and a team that stays accountable if questions arise.
               </p>
+              <p className="corp-body-text corp-body-text--secondary">
+                NEOM Panels brings together its own factory foundation in India with two focused
+                brands—<strong>Starwoods</strong> for plywood and engineered boards, and{' '}
+                <strong>NEOM Packing Plywood</strong> for industrial packaging requirements—while
+                confirming product-level manufacturing or sourcing details transparently per
+                requirement.
+              </p>
+              <div className="corp-split-section__actions">
+                <Link href="/brands" className="btn btn-primary">
+                  <span>Explore Our Brands</span>
+                </Link>
+                <Link href="/manufacturing" className="btn btn-secondary">
+                  <span>Explore Manufacturing</span>
+                </Link>
+              </div>
             </div>
 
-            <div className="arch-page-hero__stat-card">
-              <span className="arch-stat-label font-mono text-gold">BRAND PROMISE</span>
-              <p className="arch-stat-quote">
-                “Engineered Excellence, Designed for Spaces.”
+            <div className="resp-pillar-card" style={{ backgroundColor: 'var(--color-warm-ivory)' }}>
+              <span className="section-eyebrow">Brand Promise</span>
+              <h3 className="corp-section-title" style={{ fontSize: '1.6rem' }}>
+                “{PARENT_COMPANY.tagline}”
+              </h3>
+              <p className="corp-body-text corp-body-text--secondary" style={{ marginBottom: 0 }}>
+                Supported in everyday practice by straightforward material guidance, clear order
+                communication, ownership when issues arise and continuing availability after the
+                sale.
               </p>
-              <div className="arch-stat-meta font-mono">
-                <span>An integrated engineered wood, interior materials, and project supply ecosystem</span>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Vision & Mission Section */}
-      <section className="section-spacing" id="vision-mission" aria-label="Vision and Mission">
+      {/* Purpose, Vision, Mission & Behaviour-Based Values */}
+      <section
+        className="section-spacing bg-warm-ivory border-bottom-divider"
+        id="purpose-vision-values"
+        aria-labelledby="purpose-heading"
+      >
         <div className="container">
+          <div className="corp-section-header">
+            <span className="section-eyebrow">Purpose, Vision &amp; Values</span>
+            <h2 id="purpose-heading" className="corp-section-title">
+              What guides NEOM Panels.
+            </h2>
+            <p className="corp-section-subtitle">
+              <strong>Our Purpose:</strong> {PARENT_COMPANY.purpose}
+            </p>
+          </div>
+
           <div className="vision-mission-grid">
             <div className="vision-card bg-forest text-warm">
-              <span className="vm-badge font-mono text-gold">01 / OUR VISION</span>
+              <span className="vm-badge text-gold">Our Vision</span>
               <blockquote className="vm-statement">
-                “To become one of the most trusted engineered wood and interior materials brands from India, recognized for quality, design relevance, sustainability, digital excellence, and international market reach.”
+                “{PARENT_COMPANY.vision}”
               </blockquote>
-              <p className="vm-context text-warm-muted">
-                Anchoring an enduring Indian materials standard built for domestic leadership and international credibility.
-              </p>
             </div>
 
-            <div className="mission-card bg-warm-ivory border-strong">
-              <span className="vm-badge font-mono text-forest">02 / OUR MISSION</span>
+            <div className="mission-card bg-white border-strong">
+              <span className="vm-badge text-forest">Our Mission</span>
               <blockquote className="vm-statement text-forest">
-                “To deliver reliable, design-ready, and scalable panel solutions through strong manufacturing partnerships, disciplined quality systems, dealer empowerment, architect engagement, project supply capability, and digital-first customer experience.”
+                “{PARENT_COMPANY.mission}”
               </blockquote>
-              <p className="vm-context text-muted">
-                Translating architectural and commercial requirements into dependable everyday execution.
-              </p>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '3rem' }}>
+            <h3 className="corp-section-title" style={{ fontSize: '1.5rem', marginBottom: '1.25rem' }}>
+              Our values, expressed in everyday behaviour
+            </h3>
+            <div className="corp-five-audiences-grid">
+              {PARENT_COMPANY.values.map((val) => (
+                <article key={val.title} className="corp-priority-card" style={{ backgroundColor: 'var(--color-white)' }}>
+                  <h4 className="corp-priority-card__title">{val.title}</h4>
+                  <p className="corp-priority-card__detail">{val.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Six Market Demand Drivers */}
-      <section className="section-spacing bg-warm-ivory" id="market-drivers" aria-label="Market Context and Drivers">
+      {/* Two Active Brands & Customer Commitments */}
+      <section className="section-spacing bg-white border-bottom-divider" aria-labelledby="portfolio-summary-heading">
         <div className="container">
-          <div className="section-header-compact">
-            <span className="section-eyebrow font-mono">INDUSTRY CONTEXT</span>
-            <h2 className="section-title">Six Structural Demand Drivers</h2>
-            <p className="section-subtitle">
-              The fundamental shifts reshaping how residential, commercial, and hospitality spaces specify engineered wood and interior surfaces.
+          <div className="corp-section-header">
+            <span className="section-eyebrow">Our Active Brands</span>
+            <h2 id="portfolio-summary-heading" className="corp-section-title">
+              Two brands. One accountable company.
+            </h2>
+            <p className="corp-section-subtitle">
+              Our brands address different material needs, backed by the same customer commitments
+              from NEOM Panels.
             </p>
           </div>
 
-          <div className="drivers-grid">
-            <div className="driver-card">
-              <span className="driver-num font-mono">01</span>
-              <h3 className="driver-title">Urban Housing &amp; Modern Living</h3>
-              <p className="driver-desc">
-                Sustained residential apartment and villa development driving continuous demand for dimensionally stable furniture and interior panel substrates.
-              </p>
-            </div>
-
-            <div className="driver-card">
-              <span className="driver-num font-mono">02</span>
-              <h3 className="driver-title">Modular Furniture Shift</h3>
-              <p className="driver-desc">
-                Rapid transition from manual site carpentry to factory-machined modular kitchens, wardrobes, and CNC-nested cabinetry systems.
-              </p>
-            </div>
-
-            <div className="driver-card">
-              <span className="driver-num font-mono">03</span>
-              <h3 className="driver-title">Commercial Interiors</h3>
-              <p className="driver-desc">
-                Expansion across corporate workplaces, healthcare facilities, education, and organized retail requiring coordinated project supply.
-              </p>
-            </div>
-
-            <div className="driver-card">
-              <span className="driver-num font-mono">04</span>
-              <h3 className="driver-title">Hospitality &amp; Tourism</h3>
-              <p className="driver-desc">
-                Growth in boutique hotels, resorts, and dining spaces demanding expressive decorative veneers, fluted cladding, and moisture-resilient cores.
-              </p>
-            </div>
-
-            <div className="driver-card">
-              <span className="driver-num font-mono">05</span>
-              <h3 className="driver-title">Elevated Design Expectations</h3>
-              <p className="driver-desc">
-                Stronger specifier preference for authentic wood grain character, tactile matte finishes, and cohesive substrate-to-surface pairing.
-              </p>
-            </div>
-
-            <div className="driver-card">
-              <span className="driver-num font-mono">06</span>
-              <h3 className="driver-title">Sustainability &amp; Low-Emission Focus</h3>
-              <p className="driver-desc">
-                Growing emphasis on agro-forestry plantation timber, efficient fibre utilization, and healthier interior air-quality preferences.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* The 8 Ecosystem Pillars */}
-      <section className="section-spacing" id="pillars" aria-label="The 8-Pillar Ecosystem">
-        <div className="container">
-          <div className="section-header-compact">
-            <span className="section-eyebrow font-mono">OPERATING ARCHITECTURE</span>
-            <h2 className="section-title">The Eight Ecosystem Pillars</h2>
-            <p className="section-subtitle">
-              Eight interconnected commitments guiding how NEOM Panels engages manufacturing partners, specifiers, dealers, and project buyers.
-            </p>
+          <div className="brand-portfolio-grid brand-portfolio-grid--two">
+            {PORTFOLIO_BRANDS.map((brand) => (
+              <article key={brand.id} className="brand-card">
+                <div className="brand-card__body">
+                  <BrandMarkPlaque brand={brand} size="md" />
+                  <span className="brand-card__relationship">{brand.relationship}</span>
+                  <h3 className="brand-card__title">{brand.name}</h3>
+                  <p className="brand-card__descriptor" style={{ fontWeight: 600, color: '#103F2C', marginBottom: '0.4rem' }}>
+                    {brand.descriptor}
+                  </p>
+                  <p className="brand-card__descriptor">{brand.homeCopy}</p>
+                  <div className="brand-card__footer">
+                    <Link href={brand.href} className="corp-text-link">
+                      <span>{brand.actionLabel}</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
 
-          <div className="pillars-grid-eight">
-            {[
-              { num: '01', title: 'Quality', desc: 'Disciplined manufacturing partner selection, raw veneer grading, and systematic core verification.' },
-              { num: '02', title: 'Design Support', desc: 'Assisting specifiers with physical swatches, substrate pairing, and decorative finish selection.' },
-              { num: '03', title: 'Dealer Enablement', desc: 'Structured wholesale support, clear cataloguing, and transparent regional replenishment.' },
-              { num: '04', title: 'Architect Engagement', desc: 'Ongoing collaboration with design practices on emerging interior textures and joinery needs.' },
-              { num: '05', title: 'Digital Infrastructure', desc: 'Modern digital touchpoints connecting material discovery, enquiries, and partner coordination.' },
-              { num: '06', title: 'Project Supply', desc: 'Scheduled multi-batch fulfilment aligned with commercial, hospitality, and OEM timelines.' },
-              { num: '07', title: 'Sustainability', desc: 'Promoting renewable plantation timber sourcing and responsible fibre-board utilization.' },
-              { num: '08', title: 'Export Readiness', desc: 'Building packaging, documentation, and logistics standards for GCC and international corridors.' }
-            ].map((pillar) => (
-              <div key={pillar.num} className="pillar-item">
-                <span className="pillar-item-num font-mono">{pillar.num}</span>
-                <h3 className="pillar-item-title">{pillar.title}</h3>
-                <p className="pillar-item-desc">{pillar.desc}</p>
-              </div>
+          <div className="corp-commitments-grid" style={{ marginTop: '2.5rem' }}>
+            {CUSTOMER_COMMITMENTS.map((item) => (
+              <article key={item.title} className="corp-priority-card">
+                <h3 className="corp-priority-card__title">{item.title}</h3>
+                <p className="corp-priority-card__detail">{item.description}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4-Stage Growth Model */}
-      <section className="section-spacing bg-warm-ivory border-top-divider" id="growth-model" aria-label="Growth Model">
+      {/* Secondary Corporate Leadership Summary */}
+      <section className="section-spacing bg-warm-ivory border-bottom-divider" aria-labelledby="leadership-preview-heading">
         <div className="container">
           <div className="section-header-split">
             <div>
-              <span className="section-eyebrow font-mono">GROWTH MODEL</span>
-              <h2 className="section-title">Four-Stage Operating Progression</h2>
-              <p className="section-subtitle">
-                A pragmatic, capital-disciplined roadmap scaling from market entry and contract manufacturing toward a fully integrated manufacturing ecosystem.
-              </p>
-            </div>
-            <div className="section-header-action">
-              <Link href="/growth-vision" className="btn btn-secondary">
-                <span>10-Year Growth Vision</span>
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="growth-stages-grid">
-            <div className="growth-stage-card">
-              <div className="stage-card-step font-mono">STAGE 01</div>
-              <h3 className="stage-card-title">Brand Building + Trading</h3>
-              <p className="stage-card-desc">
-                Establishing the NEOM Panels brand identity, introducing Phase 1 product families, and cultivating core distributor and specifier relationships.
-              </p>
-            </div>
-
-            <div className="growth-stage-card">
-              <div className="stage-card-step font-mono">STAGE 02</div>
-              <h3 className="stage-card-title">Contract Manufacturing</h3>
-              <p className="stage-card-desc">
-                Scaling dedicated production runs through vetted manufacturing partners under defined NEOM Panels quality and grading parameters.
-              </p>
-            </div>
-
-            <div className="growth-stage-card">
-              <div className="stage-card-step font-mono">STAGE 03</div>
-              <h3 className="stage-card-title">Manufacturing Partnerships</h3>
-              <p className="stage-card-desc">
-                Deepening strategic joint production alliances to secure long-term capacity, specialized surface lines, and export-grade consistency.
-              </p>
-            </div>
-
-            <div className="growth-stage-card">
-              <div className="stage-card-step font-mono">STAGE 04</div>
-              <h3 className="stage-card-title">Integrated Manufacturing Ecosystem</h3>
-              <p className="stage-card-desc">
-                Realizing an integrated production, R&amp;D, and global supply platform serving domestic Indian clusters and international trade corridors.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Executive Leadership Summary Strip */}
-      <section className="section-spacing" aria-label="Executive Leadership Preview">
-        <div className="container">
-          <div className="section-header-split">
-            <div>
-              <span className="section-eyebrow font-mono">LEADERSHIP &amp; GOVERNANCE</span>
-              <h2 className="section-title">Executive Team</h2>
-              <p className="section-subtitle">
-                Meet the directors guiding NEOM Panels across corporate strategy, wood-panel operations, finance, and digital systems.
+              <span className="section-eyebrow">Leadership</span>
+              <h2 id="leadership-preview-heading" className="corp-section-title" style={{ marginBottom: '0.45rem' }}>
+                Leadership behind NEOM Panels.
+              </h2>
+              <p className="corp-body-text corp-body-text--secondary" style={{ marginBottom: 0 }}>
+                Explore the leadership team overseeing company direction, manufacturing execution,
+                financial stewardship and digital workflows.
               </p>
             </div>
             <div className="section-header-action">
               <Link href="/team" className="btn btn-primary">
-                <span>View Full Team Page</span>
-                <span aria-hidden="true">→</span>
+                <span>View Leadership Profiles</span>
               </Link>
             </div>
           </div>
@@ -261,20 +220,45 @@ export default function AboutPage() {
                   </picture>
                 </Link>
                 <div className="home-leader-card__body">
-                  <span className="home-leader-card__role font-mono">{leader.role}</span>
+                  <span className="home-leader-card__role">{leader.role}</span>
                   <h3 className="home-leader-card__name">
                     <Link href={leader.profileHref}>{leader.name}</Link>
                   </h3>
                   <p className="home-leader-card__focus">{leader.focus}</p>
                   <div className="home-leader-card__links">
                     <Link href={leader.profileHref} className="home-leader-card__profile-link">
-                      <span>Executive Bio</span>
+                      <span>View Profile</span>
                       <span aria-hidden="true">→</span>
                     </Link>
                   </div>
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Closing Action */}
+      <section className="section-spacing bg-white" aria-labelledby="about-closing-heading">
+        <div className="container">
+          <div className="closing-cta-panel">
+            <div className="closing-cta-panel__content">
+              <h2 id="about-closing-heading" className="closing-cta-panel__title">
+                Start a conversation with NEOM Panels.
+              </h2>
+              <p className="closing-cta-panel__desc">
+                Learn more about our responsible-growth direction, review corporate governance
+                information or connect with our team regarding your requirement.
+              </p>
+              <div className="closing-cta-panel__actions">
+                <Link href="/enquiry" className="btn btn-gold btn-lg">
+                  <span>Business Enquiry</span>
+                </Link>
+                <Link href="/responsibility" className="btn btn-outline-light btn-lg">
+                  <span>Responsibility</span>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

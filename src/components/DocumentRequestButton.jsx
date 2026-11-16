@@ -87,8 +87,8 @@ export default function DocumentRequestButton({
 
   return (
     <>
-      <button type="button" className="btn btn--secondary" onClick={openModal}>
-        {label || 'Request Technical Documents'}
+      <button type="button" className="btn btn-secondary" onClick={openModal}>
+        {label || 'Submit Information Request'}
       </button>
 
       <dialog
@@ -134,7 +134,7 @@ export default function DocumentRequestButton({
                 Reference ID: <strong>{reference}</strong>. Our team will review your requested
                 scope and respond to your business email.
               </p>
-              <button type="button" className="btn btn--primary" onClick={closeModal}>
+              <button type="button" className="btn btn-primary" onClick={closeModal}>
                 Done
               </button>
             </div>
@@ -210,13 +210,13 @@ export default function DocumentRequestButton({
                   <span className="required-marker" aria-hidden="true">*</span>
                 </label>
                 <span className="field-hint">
-                  State the brand (Starwoods or NEOM Packing Plywood), thickness or application so
-                  we can prepare the relevant specification details.
+                  State the brand (Starwoods or NEOM Packing Plywood), thickness or intended
+                  application so we can prepare the relevant specification details.
                 </span>
                 <textarea
                   id={`${dialogId}-scope`}
                   className="form-control"
-                  style={{ minHeight: '5.5rem' }}
+                  style={{ minHeight: '3.75rem' }}
                   value={applicationScope}
                   onChange={(e) => setApplicationScope(e.target.value)}
                   required
@@ -235,8 +235,8 @@ export default function DocumentRequestButton({
               </div>
 
               <div className="btn-group" style={{ marginTop: '1rem' }}>
-                <button type="submit" className="btn btn--primary" disabled={submitting}>
-                  {submitting ? 'Submitting…' : 'Request Technical Documents'}
+                <button type="submit" className="btn btn-primary" disabled={submitting}>
+                  {submitting ? 'Submitting…' : 'Submit Information Request'}
                 </button>
                 <Link
                   href={`/enquiry?category=product-info&document=${encodeURIComponent(

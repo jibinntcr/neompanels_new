@@ -5,10 +5,8 @@ export const LEADERSHIP_PROFILES = [
     profileHref: '/team/jibin-n',
     name: 'Jibin N',
     role: 'Managing Director',
-    shortRole: 'MD',
-    order: '01',
     designationFull: 'Managing Director, NEOM Panels',
-    focus: 'Strategic Direction, Brand Architecture & Ecosystem Growth',
+    focus: 'Strategic Direction, Brand Development & Business Growth',
     photo: '/assets/team/jibin-n-neom-panels-managing-director.webp',
     photoFallback: '/assets/team/jibin-n-neom-panels-managing-director.png',
     photoAlt: 'Jibin N, Managing Director of NEOM Panels',
@@ -16,33 +14,33 @@ export const LEADERSHIP_PROFILES = [
     linkedin: 'https://www.linkedin.com/in/jibintcr/',
     phone: null,
     telHref: null,
-    metaTitle: 'Jibin N — Managing Director | NEOM Panels Leadership',
+    metaTitle: 'Jibin N — Managing Director',
     metaDescription:
-      'Meet Jibin N, Managing Director of NEOM Panels, an IT professional and entrepreneur guiding strategic direction, brand architecture, digital systems, and long-term B2B ecosystem growth.',
+      'Meet Jibin N, Managing Director of NEOM Panels, an IT professional and entrepreneur focused on strategic direction, brand development and business growth.',
     overviewBio:
-      'Guides NEOM Panels’ strategic direction, brand development, and long-term business growth, drawing on extensive entrepreneurial leadership across information technology and institutional development.',
+      'Jibin N is the Managing Director of NEOM Panels. His work focuses on strategic direction, brand development and business growth, drawing on his background in information technology and entrepreneurship.',
     heroSummary:
-      'IT professional and entrepreneur guiding NEOM Panels’ strategic direction, unified brand architecture, digital touchpoints, and long-term B2B ecosystem expansion across India and international corridors.',
+      'IT professional and entrepreneur guiding NEOM Panels’ strategic direction, brand development and long-term B2B growth across India.',
     biographyParagraphs: [
-      'Jibin N is an IT professional and entrepreneur serving as the Managing Director of NEOM Panels. He guides the company’s long-term strategic direction, unified brand architecture, and ecosystem growth, with a core emphasis on digital readiness, customer experience, and enduring commercial relationships.',
-      'Beyond NEOM Panels, he is the Founder of Infinio Technology Solutions and Flexon Sports Foundation. His academic and professional engagements include teaching and evaluation through BITS Pilani’s Work Integrated Learning Programmes (WILP) and active leadership in professional capability development through the Indian Society for Training & Development (ISTD), Thrissur Chapter.',
-      'At NEOM Panels, his priorities focus on building a disciplined, design-aware materials brand—strengthening how architects, interior designers, OEMs, and channel partners discover, specify, and procure engineered wood substrates and decorative surfaces.'
+      'Jibin N is an IT professional and entrepreneur serving as the Managing Director of NEOM Panels. He guides the company’s strategic direction, brand development and business growth, with a focus on digital capabilities, customer experience and business relationships.',
+      'He is the Founder of Infinio Technology Solutions and Flexon Sports Foundation. His professional activities also include teaching and evaluation through BITS Pilani’s Work Integrated Learning Programmes and involvement in professional development through ISTD Thrissur Chapter.',
+      'At NEOM Panels, his priorities include strengthening the company’s market presence across its portfolio brands, improving how customers discover and engage with its products, and supporting the systems and partnerships needed for long-term responsible growth.'
     ],
     responsibilities: [
       {
-        title: 'Corporate Strategy & Long-Term Horizon',
+        title: 'Strategic Direction',
         description:
-          'Guiding strategic priorities across NEOM Panels’ staged evolution from brand establishment and domestic distribution toward international market readiness.'
+          'Guiding business priorities and supporting the company’s long-term development.'
       },
       {
-        title: 'Unified Brand & Market Positioning',
+        title: 'Brand Development',
         description:
-          'Shaping NEOM Panels’ architectural identity across Structural & Specialty Plywood, Solid Engineered Boards, and Decorative Surfaces.'
+          'Strengthening NEOM Panels’ parent identity and communicating its portfolio brands and capabilities clearly.'
       },
       {
-        title: 'Digital Ecosystem & Institutional Partnerships',
+        title: 'Digital Capabilities and Business Growth',
         description:
-          'Strengthening digital specification touchpoints and cultivating strategic relationships that anchor sustainable B2B growth.'
+          'Improving digital customer touchpoints and supporting relationships that contribute to business growth.'
       }
     ],
     backgroundItems: [
@@ -50,31 +48,30 @@ export const LEADERSHIP_PROFILES = [
         organisation: 'NEOM Panels',
         role: 'Managing Director',
         summary:
-          'Guides corporate strategy, unified master-brand positioning, digital customer experience, and long-term business growth.'
+          'Guides strategic direction, brand development (including Starwoods and NEOM Packing Plywood) and business growth.'
       },
       {
         organisation: 'Infinio Technology Solutions',
         role: 'Founder',
         summary:
-          'Entrepreneurial leadership in enterprise information technology solutions, software architecture, and digital transformation.'
+          'Entrepreneurial leadership in information technology solutions and digital systems.'
       },
       {
         organisation: 'Flexon Sports Foundation',
         role: 'Founder',
-        summary:
-          'Founder supporting structured community wellness, grassroots athletics, and youth sports development initiatives.'
+        summary: 'Founder supporting community and sports development initiatives.'
       },
       {
         organisation: 'BITS Pilani Work Integrated Learning Programmes',
-        role: 'Teaching & Academic Evaluation',
+        role: 'Teaching & Evaluation',
         summary:
-          'Academic teaching, mentoring, and evaluation for working professionals through BITS Pilani’s WILP division.'
+          'Academic teaching and evaluation activities through BITS Pilani’s Work Integrated Learning Programmes.'
       },
       {
         organisation: 'ISTD Thrissur Chapter',
         role: 'Professional Development',
         summary:
-          'Active involvement in executive learning and talent development with the Indian Society for Training & Development.'
+          'Involvement in professional learning and development through the Indian Society for Training & Development (ISTD) Thrissur Chapter.'
       }
     ],
     schemaAffiliations: [
@@ -86,9 +83,7 @@ export const LEADERSHIP_PROFILES = [
       'Jibin N',
       'Jibin N Managing Director NEOM Panels',
       'Jibin N NEOM Panels',
-      'Managing Director NEOM Panels',
-      'Infinio Technology Solutions',
-      'Flexon Sports Foundation'
+      'Managing Director NEOM Panels'
     ]
   },
   {
@@ -97,8 +92,6 @@ export const LEADERSHIP_PROFILES = [
     profileHref: '/team/muneer-k-h',
     name: 'Muneer K H',
     role: 'Chief Executive Officer',
-    shortRole: 'CEO',
-    order: '02',
     designationFull: 'Chief Executive Officer, NEOM Panels',
     focus: 'Operations, Wood Panel Solutions & Industry Partnerships',
     photo: '/assets/team/muneer-k-h-neom-panels-ceo.webp',
@@ -108,33 +101,33 @@ export const LEADERSHIP_PROFILES = [
     linkedin: 'https://www.linkedin.com/in/muneerply/',
     phone: '+91 97454 50618',
     telHref: 'tel:+919745450618',
-    metaTitle: 'Muneer K H — Chief Executive Officer | NEOM Panels Leadership',
+    metaTitle: 'Muneer K H — Chief Executive Officer',
     metaDescription:
-      'Meet Muneer K H, Chief Executive Officer of NEOM Panels, leading operational execution, engineered wood product solutions, manufacturing partnerships, and B2B channel growth.',
+      'Meet Muneer K H, Chief Executive Officer of NEOM Panels, focused on wood-panel manufacturing operations, commercial execution and B2B industry partnerships.',
     overviewBio:
-      'Leads operational execution, manufacturing partnerships, and product alignment across NEOM Panels, translating corporate vision into dependable everyday supply for B2B buyers and trade partners.',
+      'Muneer brings an entrepreneurial perspective spanning wood panel solutions, manufacturing, technology and business development. At NEOM Panels, his focus is on translating the company’s vision into everyday execution, strengthening operations and building relationships with customers and industry partners.',
     heroSummary:
-      'Entrepreneurial executive leading operational execution, manufacturing partner alignment, wood-panel specification solutions, and commercial relationships across NEOM Panels.',
+      'Entrepreneurial executive leading everyday manufacturing execution, wood-panel product solutions and B2B partner relationships at NEOM Panels.',
     biographyParagraphs: [
-      'Muneer K H serves as the Chief Executive Officer of NEOM Panels, bringing deep entrepreneurial and operational experience spanning engineered wood panels, manufacturing coordination, technology adoption, and B2B market development.',
-      'At NEOM Panels, he translates the company’s strategic blueprint into disciplined everyday execution—overseeing manufacturing partner alignment, core quality verification, and portfolio readiness across Structural & Specialty Plywood, Solid Engineered Boards, and Architectural Decorative Surfaces.',
-      'He works directly with architects, modular furniture OEMs, commercial interior contractors, packaging buyers, and regional distributors to build transparent, dependable long-term supply partnerships.'
+      'Muneer K H serves as the Chief Executive Officer of NEOM Panels, bringing an entrepreneurial perspective spanning wood-panel solutions, manufacturing operations, technology and B2B business development.',
+      'At NEOM Panels, his focus is on translating the company’s vision into disciplined everyday execution across production planning, product quality alignment and commercial fulfilment for Starwoods and NEOM Packing Plywood.',
+      'He works closely with furniture manufacturers, modular interior contractors, industrial packaging buyers and regional trade partners to build dependable, long-term supply relationships.'
     ],
     responsibilities: [
       {
-        title: 'Operational & Manufacturing Alignment',
+        title: 'Manufacturing & Operational Execution',
         description:
-          'Overseeing production partner coordination, batch scheduling, and disciplined quality checkpoints across panel families.'
+          'Overseeing day-to-day factory coordination, production scheduling and quality checkpoints across panel lines.'
       },
       {
-        title: 'Portfolio & Application Solutions',
+        title: 'Wood-Panel Product Solutions',
         description:
-          'Aligning plywood substrates, MDF/HDHMR cores, and decorative finishes with the practical technical requirements of commercial and residential projects.'
+          'Aligning Starwoods furniture/interior substrates and NEOM Packing Plywood grades with customer application requirements.'
       },
       {
-        title: 'Channel & Industry Partnerships',
+        title: 'Customer & Industry Partnerships',
         description:
-          'Building enduring commercial relationships with dealers, distributors, furniture manufacturers, contractors, and institutional buyers.'
+          'Developing long-term commercial relationships with manufacturers, project contractors, packaging fabricators and channel partners.'
       }
     ],
     backgroundItems: [
@@ -142,19 +135,19 @@ export const LEADERSHIP_PROFILES = [
         organisation: 'NEOM Panels',
         role: 'Chief Executive Officer',
         summary:
-          'Leads everyday operational execution, manufacturing partner alignment, and commercial B2B growth across the NEOM Panels portfolio.'
+          'Leads operational execution, manufacturing alignment and B2B commercial partnerships across Starwoods and NEOM Packing Plywood.'
       },
       {
-        organisation: 'Engineered Wood & Panel Solutions',
-        role: 'Operations & Commercial Leadership',
+        organisation: 'Wood-Panel Manufacturing & Solutions',
+        role: 'Operations & Business Development',
         summary:
-          'Hands-on industry background in plywood and wood-panel production ecosystems, substrate grading, and trade distribution.'
+          'Hands-on background in plywood and engineered wood-panel production, specification matching and trade supply.'
       },
       {
-        organisation: 'B2B Partner & Project Supply Network',
-        role: 'Executive Relationship Lead',
+        organisation: 'B2B Channel & Partner Network',
+        role: 'Commercial Leadership',
         summary:
-          'Coordinates project-scale panel fulfilment for modular joinery OEMs, commercial fit-out contractors, and regional wholesalers.'
+          'Coordinates factory supply conversations for furniture manufacturers, interior fit-out teams and industrial crating buyers.'
       }
     ],
     schemaAffiliations: [],
@@ -172,10 +165,8 @@ export const LEADERSHIP_PROFILES = [
     profileHref: '/team/muhamad-raneef-t-a',
     name: 'Muhamad Raneef T A',
     role: 'Chief Financial Officer',
-    shortRole: 'CFO',
-    order: '03',
     designationFull: 'Chief Financial Officer, NEOM Panels',
-    focus: 'Financial Planning, Commercial Governance & People Development',
+    focus: 'Financial Planning, Commercial Discipline & People Development',
     photo: '/assets/team/muhamad-raneef-t-a-neom-panels-cfo.webp',
     photoFallback: '/assets/team/muhamad-raneef.jpeg',
     photoAlt: 'Muhamad Raneef T A, Chief Financial Officer of NEOM Panels',
@@ -183,33 +174,33 @@ export const LEADERSHIP_PROFILES = [
     linkedin: 'https://www.linkedin.com/in/muhamad-raneef-t-a-752832232/',
     phone: '+91 90749 34014',
     telHref: 'tel:+919074934014',
-    metaTitle: 'Muhamad Raneef T A — Chief Financial Officer | NEOM Panels Leadership',
+    metaTitle: 'Muhamad Raneef T A — Chief Financial Officer',
     metaDescription:
-      'Meet Muhamad Raneef T A, Chief Financial Officer of NEOM Panels, overseeing financial planning, commercial discipline, capital stewardship, and organisational development.',
+      'Meet Muhamad Raneef T A, Chief Financial Officer of NEOM Panels, overseeing financial planning, commercial discipline, resource allocation and people development.',
     overviewBio:
-      'Oversees financial planning, commercial governance, and capital stewardship at NEOM Panels. An HRM postgraduate and national-level medal-winning athlete bringing high-performance discipline to leadership.',
+      'Raneef oversees NEOM Panels’ financial planning, commercial governance and resource allocation, combining financial discipline with a postgraduate background in Human Resource Management to support people development across the organisation.',
     heroSummary:
-      'HRM postgraduate and national-level medal-winning athlete overseeing financial planning, commercial discipline, capital stewardship, and people development at NEOM Panels.',
+      'Executive overseeing financial planning, commercial governance, resource allocation and people-focused leadership at NEOM Panels.',
     biographyParagraphs: [
-      'Muhamad Raneef T A serves as the Chief Financial Officer of NEOM Panels, overseeing financial planning, commercial governance, and disciplined resource allocation to support sustainable multi-stage business expansion.',
-      'An HRM postgraduate and national-level medal-winning athlete, he combines structured financial stewardship with a people-centered leadership philosophy, operational resilience, and strong organisational discipline.',
-      'At NEOM Panels, he ensures transparent commercial frameworks across supplier procurement, partner distribution accounts, and institutional project contracts while nurturing a high-accountability team culture.'
+      'Muhamad Raneef T A serves as the Chief Financial Officer of NEOM Panels, overseeing financial planning, commercial discipline, working-capital management and resource allocation across manufacturing and trade operations.',
+      'Combining financial stewardship with a postgraduate qualification in Human Resource Management (HRM), he supports structured people development, workplace accountability and cross-team alignment as the company grows.',
+      'A national-level medal-winning athlete, he brings competitive discipline, focus and teamwork to executive management and long-term organisational planning.'
     ],
     responsibilities: [
       {
-        title: 'Financial Planning & Capital Stewardship',
+        title: 'Financial Planning & Governance',
         description:
-          'Managing budgeting, working-capital discipline, and financial controls tailored to staged domestic and export growth.'
+          'Managing budgeting, working-capital discipline and transparent financial controls across manufacturing and commercial operations.'
       },
       {
-        title: 'Commercial & Procurement Governance',
+        title: 'Commercial Resource Allocation',
         description:
-          'Establishing clear, accountable commercial structures across manufacturing alliances, distributor networks, and B2B accounts.'
+          'Aligning procurement, production planning and partner credit/commercial structures for sustainable growth.'
       },
       {
-        title: 'People & Organisational Culture',
+        title: 'People & Organisational Development',
         description:
-          'Advancing human resource standards, collaborative team alignment, and high-performance discipline across the organisation.'
+          'Applying HRM principles to strengthen team capabilities, workplace culture and operational accountability.'
       }
     ],
     backgroundItems: [
@@ -217,19 +208,19 @@ export const LEADERSHIP_PROFILES = [
         organisation: 'NEOM Panels',
         role: 'Chief Financial Officer',
         summary:
-          'Oversees financial planning, commercial governance, capital allocation, and people development.'
+          'Oversees financial planning, commercial governance, resource allocation and people development.'
       },
       {
         organisation: 'Human Resource Management (HRM)',
         role: 'Postgraduate Qualification',
         summary:
-          'Postgraduate academic specialization in Human Resource Management supporting structured organisational leadership.'
+          'Postgraduate academic background in Human Resource Management supporting people-focused leadership.'
       },
       {
-        organisation: 'National-Level Competitive Athletics',
+        organisation: 'National-Level Athletics',
         role: 'Medal-Winning Athlete',
         summary:
-          'National-level athletics distinction bringing focus, endurance, and collaborative team execution to executive management.'
+          'National-level competitive athletics background bringing discipline, resilience and teamwork to management.'
       }
     ],
     schemaAffiliations: [],
@@ -247,10 +238,8 @@ export const LEADERSHIP_PROFILES = [
     profileHref: '/team/muhammed-jabir',
     name: 'Muhammed Jabir',
     role: 'Chief Technology Officer',
-    shortRole: 'CTO',
-    order: '04',
     designationFull: 'Chief Technology Officer, NEOM Panels',
-    focus: 'Digital Infrastructure, Supplier Networks & Trading Workflows',
+    focus: 'Digital Systems, Supplier Networks & Trading Workflows',
     photo: '/assets/team/muhammed-jabir-neom-panels-cto.webp',
     photoFallback: '/assets/team/muhammed-jabir.png',
     photoAlt: 'Muhammed Jabir, Chief Technology Officer of NEOM Panels',
@@ -258,33 +247,33 @@ export const LEADERSHIP_PROFILES = [
     linkedin: 'https://www.linkedin.com/in/muhammed-jabir-09579927b/',
     phone: '+91 97441 16147',
     telHref: 'tel:+919744116147',
-    metaTitle: 'Muhammed Jabir — Chief Technology Officer | NEOM Panels Leadership',
+    metaTitle: 'Muhammed Jabir — Chief Technology Officer',
     metaDescription:
-      'Meet Muhammed Jabir, Chief Technology Officer of NEOM Panels, leading digital infrastructure, B2B specification workflows, supplier network coordination, and trading operations.',
+      'Meet Muhammed Jabir, Chief Technology Officer of NEOM Panels, leading digital systems, B2B enquiry workflows, supplier network coordination and trading operations.',
     overviewBio:
-      'Leads NEOM Panels’ digital infrastructure, enquiry workflows, and supplier coordination. An M.Com graduate and entrepreneur with hands-on management experience in plywood and commodity trading.',
+      'Jabir leads NEOM Panels’ technology direction, focusing on digital systems that support operations, customer enquiries and business coordination. An M.Com graduate and entrepreneur with experience managing plywood and fruit trading businesses, he brings practical insight into supplier networks, customer needs and trading workflows.',
     heroSummary:
-      'M.Com graduate and entrepreneur leading NEOM Panels’ digital infrastructure, supplier network coordination, and streamlined B2B trading and dispatch workflows.',
+      'M.Com graduate and entrepreneur leading NEOM Panels’ digital systems, supplier network coordination and B2B enquiry workflows.',
     biographyParagraphs: [
-      'Muhammed Jabir serves as the Chief Technology Officer of NEOM Panels, leading the company’s digital infrastructure roadmap and operational workflows across customer enquiries, partner coordination, and supply fulfilment.',
-      'An M.Com graduate and seasoned entrepreneur with hands-on experience managing plywood and commodity trading ventures, he brings grounded commercial insight into supplier ecosystems, grading logistics, and trade buyer expectations.',
-      'At NEOM Panels, he bridges digital tools with real-world trading and dispatch operations—ensuring product enquiries, sample requests, quotations, and multi-batch schedules are managed with clarity and responsiveness.'
+      'Muhammed Jabir serves as the Chief Technology Officer of NEOM Panels, leading the company’s technology direction and digital workflows across operations, B2B customer enquiries and commercial coordination.',
+      'An M.Com graduate and entrepreneur with hands-on experience managing plywood and fruit trading businesses, he brings practical commercial insight into supplier networks, inventory coordination and B2B buyer expectations.',
+      'At NEOM Panels, he focuses on connecting digital systems with real-world factory and trading workflows so customer specifications, quotations and dispatch schedules are handled with clarity.'
     ],
     responsibilities: [
       {
-        title: 'Digital Infrastructure & Enquiry Systems',
+        title: 'Digital Systems & B2B Workflows',
         description:
-          'Architecting digital channels and internal workflows that streamline specification enquiries, sample coordination, and partner communication.'
+          'Developing and maintaining digital tools that streamline customer enquiries, specification tracking and internal coordination.'
       },
       {
-        title: 'Supplier & Sourcing Network Coordination',
+        title: 'Supplier Network Coordination',
         description:
-          'Applying practical plywood trading insight to strengthen raw-material and manufacturing-partner coordination.'
+          'Applying practical trading and sourcing insight to strengthen supplier relationships and raw-material coordination.'
       },
       {
-        title: 'Commercial & Dispatch Workflows',
+        title: 'Commercial & Trading Operations',
         description:
-          'Aligning order documentation, batch tracking, and trade fulfilment processes for domestic dealers and commercial project buyers.'
+          'Aligning order processing, documentation and dispatch workflows with the practical needs of B2B trade and industrial buyers.'
       }
     ],
     backgroundItems: [
@@ -292,19 +281,19 @@ export const LEADERSHIP_PROFILES = [
         organisation: 'NEOM Panels',
         role: 'Chief Technology Officer',
         summary:
-          'Leads digital infrastructure initiatives, B2B specification workflows, and supplier-to-customer operational coordination.'
+          'Leads digital systems, B2B enquiry coordination and operational workflow integration.'
       },
       {
-        organisation: 'Plywood & Commodity Trading Ventures',
+        organisation: 'Plywood & Commodity Trading',
         role: 'Entrepreneurial Management',
         summary:
-          'Practical entrepreneurial track record managing plywood and agricultural commodity trading networks and logistics.'
+          'Practical entrepreneurial experience managing plywood and fruit trading operations, supplier networks and trade logistics.'
       },
       {
         organisation: 'Master of Commerce (M.Com)',
         role: 'Postgraduate Qualification',
         summary:
-          'Postgraduate foundation in commerce, financial accounting, and commercial operations.'
+          'Academic foundation in commerce, accounting and business administration.'
       }
     ],
     schemaAffiliations: [],

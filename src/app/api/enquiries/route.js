@@ -20,7 +20,9 @@ import {
 import {
   ENQUIRY_CATEGORIES,
   normalizeBrandParam,
-  normalizeCategoryParam
+  normalizeCategoryParam,
+  normalizeFamilyParam,
+  normalizeRoleParam
 } from '@/lib/enquiry-config';
 import { getMongoDatabase } from '@/lib/mongodb';
 
@@ -176,11 +178,13 @@ export async function POST(request) {
     const errors = [];
     const rawCategory = String(fields.category || fields.enquiryType || fields.requirementCategory || '').trim();
     const category = normalizeCategoryParam(rawCategory) || rawCategory || 'Product Enquiry';
-    const rawBrand = String(fields.brand || 'NEOM Panels').trim();
-    const brand = normalizeBrandParam(rawBrand) || 'NEOM Panels';
+    const rawBrand = String(fields.brand || 'General NEOM Panels Enquiry').trim();
+    const brand = normalizeBrandParam(rawBrand) || 'General NEOM Panels Enquiry';
 
-    const role = String(fields.role || '').trim();
-    const productFamily = String(fields.productFamily || '').trim();
+    const rawRole = String(fields.role || '').trim();
+    const role = normalizeRoleParam(rawRole) || rawRole;
+    const rawProductFamily = String(fields.productFamily || '').trim();
+    const productFamily = normalizeFamilyParam(rawProductFamily) || rawProductFamily;
     const cityCountry = String(fields.cityCountry || fields.destination || fields.deliveryLocation || '').trim();
 
     const packagingApplication = String(
@@ -240,9 +244,11 @@ export async function POST(request) {
     const organisation = String(
       fields.organisation || fields.companyName || ''
     ).trim();
-    const preferredContactMethod = String(fields.preferredContactMethod || 'Email').trim();
     const email = String(fields.email || '').trim();
     const phone = String(fields.phone || '').trim();
+    const preferredContactMethod = String(
+      fields.preferredContactMethod || (email ? 'Email' : phone ? 'Phone' : 'Email')
+    ).trim();
     const marketingConsent =
       fields.marketingConsent === 'true' ||
       fields.marketingConsent === 'on' ||
@@ -329,6 +335,8 @@ export async function POST(request) {
           reference,
           category,
           brand: brand || null,
+          productFamily: productFamily || null,
+          role: role || null,
           createdAt,
           attachmentCount: verifiedFiles.length
         },

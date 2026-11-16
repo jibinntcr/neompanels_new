@@ -1,112 +1,111 @@
 import Link from 'next/link';
+import { PORTFOLIO_BRANDS } from '@/lib/portfolio-data';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Products & Materials Portfolio | NEOM Panels',
+export const metadata = buildPageMetadata({
+  title: 'Material Categories',
   description:
-    'Explore the NEOM Panels Phase 1 portfolio of engineered wood substrates: Structural & Specialty Plywood, Solid Engineered Boards (MDF & HDHMR), and Architectural Decorative Surfaces.',
-  alternates: {
-    canonical: '/products'
-  }
-};
+    'Supporting material-category information for NEOM Panels and Starwoods: Structural & Specialty Plywood and Engineered Boards (including MDF and HDHMR where available).',
+  path: '/products'
+});
 
 export default function ProductsPage() {
   return (
     <main id="main-content" className="page-view">
-      {/* Architectural Page Hero */}
-      <section className="arch-page-hero arch-page-hero--forest" aria-labelledby="main-heading">
-        <div className="container">
-          <nav className="breadcrumb-nav breadcrumb-nav--light" aria-label="Breadcrumb">
-            <ol className="breadcrumb-list font-mono" role="list">
-              <li><Link href="/">Home</Link></li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page">Products &amp; Materials</li>
-            </ol>
+      {/* Page Header */}
+      <section className="page-header-dark" aria-labelledby="main-heading">
+        <div className="container page-header-inner">
+          <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+            <Link href="/" className="breadcrumb-link">Home</Link>
+            <span className="breadcrumb-sep" aria-hidden="true">/</span>
+            <Link href="/brands" className="breadcrumb-link">Our Brands</Link>
+            <span className="breadcrumb-sep" aria-hidden="true">/</span>
+            <span className="breadcrumb-current">Material Categories</span>
           </nav>
 
-          <div className="arch-page-hero__grid">
-            <div className="arch-page-hero__copy">
-              <span className="section-eyebrow text-gold font-mono">PHASE 1 PORTFOLIO</span>
-              <h1 id="main-heading" tabIndex={-1} className="page-title text-warm">
-                The Materials Portfolio.
-              </h1>
-              <p className="page-lead-text text-warm-muted">
-                Three cohesive material families—engineered plywood substrates, high-density fibre cores, and curated decorative surfaces—designed to work together across residential, commercial, and industrial applications.
-              </p>
-              <div className="page-header-cta-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-                <Link href="/enquiry" className="btn btn-gold">
-                  <span>Discuss Your Requirement</span>
-                  <span aria-hidden="true">→</span>
-                </Link>
-                <Link href="/enquiry?type=Sample+Request" className="btn btn-outline-light">
-                  <span>Request Material Swatches</span>
-                </Link>
-              </div>
-            </div>
-
-            <div className="arch-page-hero__stat-card">
-              <span className="arch-stat-label font-mono text-gold">QUICK FAMILY JUMP</span>
-              <ul className="arch-jump-list" role="list">
-                <li><a href="#family-plywood">01 / Structural &amp; Specialty Plywood →</a></li>
-                <li><a href="#family-boards">02 / Solid Engineered Boards →</a></li>
-                <li><a href="#family-surfaces">03 / Architectural Decorative Surfaces →</a></li>
-              </ul>
-            </div>
+          <span className="section-eyebrow text-gold">Supporting Material Reference</span>
+          <h1 id="main-heading" className="page-hero-title text-warm">
+            Plywood and engineered-board categories.
+          </h1>
+          <p className="page-hero-lead text-warm-muted">
+            Review supporting category information for <strong>Starwoods</strong>—covering plywood
+            and engineered boards. For industrial packaging sheets, explore{' '}
+            <Link href="/brands/neom-packing-plywood" style={{ color: '#D2B683', textDecoration: 'underline' }}>
+              NEOM Packing Plywood
+            </Link>
+            .
+          </p>
+          <div className="page-header-cta-row" style={{ marginTop: '1.75rem' }}>
+            <Link href="/brands" className="btn btn-gold">
+              <span>Explore Our Brands</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link href="/enquiry?type=Sample+Request" className="btn btn-outline-light">
+              <span>Submit a Sample Request</span>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Main Portfolio Sections */}
-      <section className="section-spacing" aria-label="Portfolio Families">
+      {/* Two Confirmed Material Category Blocks */}
+      <section className="section-spacing bg-white border-bottom-divider" aria-label="Material Categories">
         <div className="container">
           <div className="portfolio-family-blocks">
-            {/* Family 1: Structural & Specialty Plywood */}
+            {/* Category 1: Structural & Specialty Plywood */}
             <article className="portfolio-block" id="family-plywood">
               <div className="portfolio-block-grid">
                 <div className="portfolio-block-img-wrap">
                   <img
                     src="/assets/product-structural-plywood.jpg"
-                    alt="Multi-ply calibrated hardwood structural plywood panel stack"
+                    alt="Multi-ply wood-panel cross-sections stacked on a studio surface"
                     className="portfolio-block-img"
                     width="700"
                     height="480"
                     loading="eager"
                   />
-                  <div className="portfolio-block-badge font-mono">01 / CORE SUBSTRATES</div>
                 </div>
 
                 <div className="portfolio-block-copy">
-                  <span className="portfolio-category font-mono">FAMILY 01 · PLYWOOD</span>
+                  <span className="section-eyebrow">Starwoods Category 01 · Plywood</span>
                   <h2 className="portfolio-title">Structural &amp; Specialty Plywood</h2>
                   <p className="portfolio-desc">
-                    Engineered multi-layer wood panels produced through disciplined manufacturing partnerships. Formulated for structural stability, moisture resilience, and dependable screw-holding across furniture carcasses, interior fit-outs, and wet-zone cabinetry.
+                    Multi-layer wood panels across dry-interior and moisture-exposed bonding grades
+                    for furniture carcasses, modular joinery and interior fit-outs. Specific grade
+                    availability, core construction and nominal thickness are matched to your
+                    application when you enquire.
                   </p>
 
                   <div className="portfolio-variants-card">
-                    <h3 className="portfolio-variants-heading font-mono">PHASE 1 VARIANTS</h3>
+                    <h3 className="portfolio-variants-heading">Plywood Grade Contexts</h3>
                     <ul className="portfolio-variants-list" role="list">
                       <li>
-                        <strong>Premium Plywood:</strong> Calibrated multi-ply substrate for bespoke furniture carcasses, wardrobes, and architectural joinery.
+                        <strong>Premium Plywood:</strong> Multi-ply substrate discussed for
+                        dry-interior furniture carcasses, wardrobes and general interior joinery.
                       </li>
                       <li>
-                        <strong>Marine Plywood:</strong> Moisture-resisting bonded plywood designed for elevated humidity, kitchen wet areas, and coastal interiors.
+                        <strong>Marine Plywood:</strong> Moisture-resistant bonded plywood option
+                        reviewed for higher-humidity interior zones where available.
                       </li>
                       <li>
-                        <strong>BWR / BWP Plywood:</strong> Boiling water resistant and boiling water proof grades for enduring cabinetry and utility partitions.
+                        <strong>BWR / BWP Plywood:</strong> Boiling Water Resistant and Boiling
+                        Water Proof grades selected according to actual humidity exposure and
+                        current availability.
                       </li>
                     </ul>
                   </div>
 
                   <div className="portfolio-specs-notice">
-                    Contact NEOM Panels for current product specifications, sheet dimensions, and availability.
+                    Available grades, nominal thicknesses and specification sheets are confirmed per
+                    enquiry.
                   </div>
 
                   <div className="portfolio-actions-row">
                     <Link href="/products/plywood" className="btn btn-primary">
-                      <span>Explore Plywood Family</span>
+                      <span>View Plywood Category</span>
                       <span aria-hidden="true">→</span>
                     </Link>
                     <Link
-                      href="/enquiry?family=Structural+%26+Specialty+Plywood"
+                      href="/enquiry?brand=Starwoods&family=Structural+%26+Specialty+Plywood"
                       className="btn btn-secondary"
                     >
                       <span>Enquire on Plywood</span>
@@ -116,45 +115,54 @@ export default function ProductsPage() {
               </div>
             </article>
 
-            {/* Family 2: Solid Engineered Boards */}
+            {/* Category 2: Engineered Boards */}
             <article className="portfolio-block" id="family-boards">
               <div className="portfolio-block-grid portfolio-block-grid--reverse">
                 <div className="portfolio-block-copy">
-                  <span className="portfolio-category font-mono">FAMILY 02 · FIBRE CORES</span>
-                  <h2 className="portfolio-title">Solid Engineered Boards</h2>
+                  <span className="section-eyebrow">Starwoods Category 02 · Wood-Fibre Boards</span>
+                  <h2 className="portfolio-title">Engineered Boards</h2>
                   <p className="portfolio-desc">
-                    High-density homogeneous panels engineered from refined wood fibres for precision CNC routing, clean edge profiling, and smooth lacquer, acrylic, or laminate pressing without surface telegraphing.
+                    Engineered wood-fibre panels—including MDF and HDHMR where available in the
+                    current Starwoods range. Each board type has distinct density and moisture
+                    limits, so suitability is reviewed against the actual application rather than
+                    assumed across all boards.
                   </p>
 
                   <div className="portfolio-variants-card">
-                    <h3 className="portfolio-variants-heading font-mono">PHASE 1 VARIANTS</h3>
+                    <h3 className="portfolio-variants-heading">Engineered Board Types</h3>
                     <ul className="portfolio-variants-list" role="list">
                       <li>
-                        <strong>Medium-Density Fiberboard (MDF):</strong> Uniform-density core for carved shutters, wall moldings, and painted cabinetry.
+                        <strong>Medium-Density Fiberboard (MDF):</strong> Smooth wood-fibre board
+                        for dry-interior CNC routing, trims and painted shutters (not for wet zones).
                       </li>
                       <li>
-                        <strong>High-Density Moisture-Resistant (HDHMR):</strong> Dense moisture-resisting fibre board built for humid environments, kitchens, and vanities.
+                        <strong>HDHMR Boards:</strong> Higher-density moisture-resistant fibreboard
+                        option discussed where improved humidity resistance is needed and available
+                        in the current range.
                       </li>
                       <li>
-                        <strong>Pre-Laminated MDF:</strong> Factory-pressed decorative melamine boards ready for rapid modular furniture fabrication.
+                        <strong>Pre-Laminated MDF:</strong> Factory-surfaced MDF boards for
+                        dry-interior shelving, storage internals and office furniture where
+                        available.
                       </li>
                     </ul>
                   </div>
 
                   <div className="portfolio-specs-notice">
-                    Contact NEOM Panels for current product specifications, sheet dimensions, and availability.
+                    Board density, moisture class, manufacturing or sourcing scope and sheet formats
+                    are confirmed per product line upon enquiry.
                   </div>
 
                   <div className="portfolio-actions-row">
                     <Link href="/products/engineered-boards" className="btn btn-primary">
-                      <span>Explore Engineered Boards</span>
+                      <span>View Engineered Boards</span>
                       <span aria-hidden="true">→</span>
                     </Link>
                     <Link
-                      href="/enquiry?family=Engineered+Boards"
+                      href="/enquiry?brand=Starwoods&family=Engineered+Boards"
                       className="btn btn-secondary"
                     >
-                      <span>Enquire on Boards</span>
+                      <span>Enquire on Engineered Boards</span>
                     </Link>
                   </div>
                 </div>
@@ -162,73 +170,12 @@ export default function ProductsPage() {
                 <div className="portfolio-block-img-wrap">
                   <img
                     src="/assets/product-engineered-boards.jpg"
-                    alt="Cross-section of high-density MDF and HDHMR engineered boards"
+                    alt="Plain MDF and moisture-resistant HDHMR engineered fibreboard samples"
                     className="portfolio-block-img"
                     width="700"
                     height="480"
                     loading="lazy"
                   />
-                  <div className="portfolio-block-badge font-mono">02 / FIBRE CORES</div>
-                </div>
-              </div>
-            </article>
-
-            {/* Family 3: Decorative Surfaces */}
-            <article className="portfolio-block" id="family-surfaces">
-              <div className="portfolio-block-grid">
-                <div className="portfolio-block-img-wrap">
-                  <img
-                    src="/assets/product-decorative-surfaces.jpg"
-                    alt="Architectural veneers, matte acrylics, and fluted charcoal panels"
-                    className="portfolio-block-img"
-                    width="700"
-                    height="480"
-                    loading="lazy"
-                  />
-                  <div className="portfolio-block-badge font-mono">03 / FINISHES &amp; TEXTURES</div>
-                </div>
-
-                <div className="portfolio-block-copy">
-                  <span className="portfolio-category font-mono">FAMILY 03 · DECORATIVE SURFACES</span>
-                  <h2 className="portfolio-title">Architectural Decorative Surfaces</h2>
-                  <p className="portfolio-desc">
-                    A curated range of interior surface materials bringing natural timber warmth, contemporary sheen, and three-dimensional fluted texture to modern residential and commercial spaces.
-                  </p>
-
-                  <div className="portfolio-variants-card">
-                    <h3 className="portfolio-variants-heading font-mono">PHASE 1 VARIANTS</h3>
-                    <ul className="portfolio-variants-list" role="list">
-                      <li>
-                        <strong>Veneers:</strong> Natural and smoked architectural wood veneers highlighting authentic timber grain geometry.
-                      </li>
-                      <li>
-                        <strong>Laminates:</strong> Durable high-pressure decorative laminates built for daily wear resistance across worktops and cabinetry.
-                      </li>
-                      <li>
-                        <strong>Acrylic Panels:</strong> High-clarity mirror gloss and silky anti-fingerprint matte surfaces for sleek modern shutters.
-                      </li>
-                      <li>
-                        <strong>Charcoal Panels:</strong> Linear fluted and sculpted wall panels creating focal depth in lounges, lobbies, and feature walls.
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="portfolio-specs-notice">
-                    Contact NEOM Panels for current product specifications, sheet dimensions, and availability.
-                  </div>
-
-                  <div className="portfolio-actions-row">
-                    <Link href="/products/decorative-surfaces" className="btn btn-primary">
-                      <span>Explore Decorative Surfaces</span>
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                    <Link
-                      href="/enquiry?family=Decorative+Surfaces"
-                      className="btn btn-secondary"
-                    >
-                      <span>Enquire on Surfaces</span>
-                    </Link>
-                  </div>
                 </div>
               </div>
             </article>
@@ -236,48 +183,27 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* Spaces & Material Inspiration Gallery */}
-      <section className="section-spacing bg-warm-ivory border-top-divider" aria-label="Spaces and Material Inspiration">
+      {/* Connect Categories Back to Active Brands */}
+      <section className="section-spacing bg-warm-ivory" aria-labelledby="brands-connection-heading">
         <div className="container">
-          <div className="section-header-compact">
-            <span className="section-eyebrow font-mono">SPACES &amp; MATERIAL INSPIRATION</span>
-            <h2 className="section-title">Designed for Architectural Harmony</h2>
-            <p className="section-subtitle">
-              Visual inspiration illustrating how engineered wood cores and decorative finishes shape contemporary workplaces, kitchens, and fabrication studios.
-            </p>
+          <div className="corp-section-header">
+            <span className="section-eyebrow">Our Active Brands</span>
+            <h2 id="brands-connection-heading" className="corp-section-title">
+              Connect through Starwoods or NEOM Packing Plywood.
+            </h2>
           </div>
 
-          <div className="inspiration-gallery-grid">
-            <figure className="inspiration-card">
-              <img
-                src="/assets/industry-commercial-projects.jpg"
-                alt="Commercial executive boardroom with fluted timber cladding and oak joinery"
-                width="640"
-                height="420"
-                loading="lazy"
-              />
-              <figcaption className="font-mono">Commercial Workplaces &amp; Acoustic Cladding</figcaption>
-            </figure>
-            <figure className="inspiration-card">
-              <img
-                src="/assets/industry-modular-interiors.jpg"
-                alt="Sage and natural oak modular kitchen and custom wardrobe joinery"
-                width="640"
-                height="420"
-                loading="lazy"
-              />
-              <figcaption className="font-mono">Modular Kitchens &amp; Residential Wardrobes</figcaption>
-            </figure>
-            <figure className="inspiration-card">
-              <img
-                src="/assets/industry-furniture-oem.jpg"
-                alt="Precision CNC woodworking and serial furniture manufacturing studio"
-                width="640"
-                height="420"
-                loading="lazy"
-              />
-              <figcaption className="font-mono">Serial OEM Furniture &amp; CNC Joinery</figcaption>
-            </figure>
+          <div className="brand-portfolio-grid brand-portfolio-grid--two">
+            {PORTFOLIO_BRANDS.map((brand) => (
+              <article key={brand.id} className="corp-audience-card">
+                <h3 className="corp-audience-card__title">{brand.name}</h3>
+                <p className="corp-audience-card__summary">{brand.descriptor} {brand.homeCopy}</p>
+                <Link href={brand.href} className="corp-text-link">
+                  <span>{brand.actionLabel}</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>

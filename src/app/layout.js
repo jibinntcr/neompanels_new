@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PublicLayoutChrome from '@/components/PublicLayoutChrome';
 import ScrollRevealObserver from '@/components/ScrollRevealObserver';
-import PageReloadLoader from '@/components/PageReloadLoader';
 import { getVerifiedContactDetails } from '@/lib/storage';
 import {
   SITE_URL,
@@ -24,17 +23,16 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: SITE_NAME,
   title: {
-    default:
-      'NEOM Panels | Engineered Excellence, Designed for Spaces — Indian Wood Panels & GCC Supply Ecosystem',
+    default: 'Indian Panel Manufacturing Company | NEOM Panels',
     template: '%s | NEOM Panels'
   },
   description:
-    'NEOM Panels is building a next-generation engineered wood, interior materials, and project supply ecosystem for India and global markets. High-performance structural plywood, MDF, HDHMR, and decorative surfaces.',
+    'NEOM Panels is an Indian panel manufacturing company and the company behind Starwoods and NEOM Packing Plywood.',
   keywords: CORE_SEO_KEYWORDS,
   authors: [{ name: 'NEOM Panels', url: SITE_URL }],
   creator: 'NEOM Panels',
   publisher: 'NEOM Panels',
-  category: 'Architectural Engineered Wood, Interior Materials & Project Supply',
+  category: 'Panel Manufacturing & Product Brands',
   formatDetection: {
     email: false,
     address: false,
@@ -55,10 +53,9 @@ export const metadata = {
     }
   },
   openGraph: {
-    title:
-      'NEOM Panels | Engineered Excellence, Designed for Spaces',
+    title: 'Indian Panel Manufacturing Company | NEOM Panels',
     description:
-      'Next-generation engineered wood, interior materials, and project supply ecosystem across India and the GCC corridor. Structural plywood, MDF, HDHMR, and architectural decorative surfaces.',
+      'NEOM Panels is an Indian panel manufacturing company and the company behind Starwoods and NEOM Packing Plywood.',
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: 'en_IN',
@@ -68,16 +65,15 @@ export const metadata = {
         url: DEFAULT_OG_IMAGE,
         width: 1400,
         height: 933,
-        alt: 'NEOM Panels — Engineered Excellence, Designed for Spaces'
+        alt: 'NEOM Panels — A dependable name behind the materials.'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title:
-      'NEOM Panels | Engineered Excellence, Designed for Spaces',
+    title: 'Indian Panel Manufacturing Company | NEOM Panels',
     description:
-      'Next-generation engineered wood, interior materials, and project supply ecosystem for India and global markets.',
+      'NEOM Panels is an Indian panel manufacturing company and the company behind Starwoods and NEOM Packing Plywood.',
     images: [DEFAULT_OG_IMAGE]
   }
 };
@@ -101,8 +97,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
-        <PageReloadLoader />
-        <a href="#main-heading" className="skip-link visually-hidden">
+        <a href="#main-content" className="skip-link visually-hidden">
           Skip to main content
         </a>
         <PublicLayoutChrome>

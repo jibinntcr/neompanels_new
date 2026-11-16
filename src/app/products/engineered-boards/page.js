@@ -1,41 +1,42 @@
 import Link from 'next/link';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Solid Engineered Boards (MDF & HDHMR) | NEOM Panels',
+export const metadata = buildPageMetadata({
+  title: 'Engineered Boards (MDF & HDHMR)',
   description:
-    'Explore NEOM Panels Solid Engineered Boards: Medium-Density Fiberboard (MDF), High-Density Moisture-Resistant (HDHMR), and Pre-Laminated MDF engineered for CNC routing and modern cabinetry.',
-  alternates: {
-    canonical: '/products/engineered-boards'
-  }
-};
+    'Supporting information on Engineered Boards under Starwoods and NEOM Panels—covering MDF, HDHMR and Pre-Laminated MDF options where available in the current range.',
+  path: '/products/engineered-boards'
+});
 
 export default function EngineeredBoardsFamilyPage() {
   return (
     <main id="main-content" className="product-family-view">
-      {/* Architectural Product Family Hero */}
+      {/* Header */}
       <section className="arch-page-hero arch-page-hero--forest" aria-labelledby="main-heading">
         <div className="container">
           <nav className="breadcrumb-nav breadcrumb-nav--light" aria-label="Breadcrumb">
-            <ol className="breadcrumb-list font-mono" role="list">
+            <ol className="breadcrumb-list" role="list">
               <li><Link href="/">Home</Link></li>
               <li aria-hidden="true">/</li>
-              <li><Link href="/products">Products</Link></li>
+              <li><Link href="/products">Material Categories</Link></li>
               <li aria-hidden="true">/</li>
-              <li aria-current="page">Solid Engineered Boards</li>
+              <li aria-current="page">Engineered Boards</li>
             </ol>
           </nav>
 
           <div className="product-header-grid">
             <div className="product-header-copy">
-              <span className="section-eyebrow text-gold font-mono">PRODUCT FAMILY 02 · FIBRE CORES</span>
-              <h1 id="main-heading" tabIndex={-1} className="page-title text-warm">
-                Solid Engineered Boards.
+              <span className="section-eyebrow text-gold">Starwoods Category · Wood-Fibre Boards</span>
+              <h1 id="main-heading" className="page-title text-warm">
+                Engineered Boards
               </h1>
               <p className="page-lead-text text-warm-muted">
-                Homogeneous high-density wood-fibre panels engineered for precision CNC routing, smooth lacquer or film pressing, and moisture-resisting modular joinery.
+                Engineered wood-fibre boards—including MDF and HDHMR where available in the current
+                Starwoods range. Because density and moisture resistance differ by board type, each
+                application is matched carefully with our team.
               </p>
               <div className="product-header-actions">
-                <Link href="/enquiry?family=Engineered+Boards" className="btn btn-gold">
+                <Link href="/enquiry?brand=Starwoods&family=Engineered+Boards" className="btn btn-gold">
                   <span>Enquire on Engineered Boards</span>
                   <span aria-hidden="true">→</span>
                 </Link>
@@ -43,7 +44,7 @@ export default function EngineeredBoardsFamilyPage() {
                   href="/enquiry?type=Sample+Request&family=Engineered+Boards"
                   className="btn btn-outline-light"
                 >
-                  <span>Request Material Swatches</span>
+                  <span>Submit a Sample Request</span>
                 </Link>
               </div>
             </div>
@@ -51,7 +52,7 @@ export default function EngineeredBoardsFamilyPage() {
             <div className="product-header-img-wrap">
               <img
                 src="/assets/product-engineered-boards.jpg"
-                alt="High-density MDF and green HDHMR engineered board cross-sections"
+                alt="Plain MDF and moisture-resistant HDHMR engineered board cross-sections"
                 className="product-hero-img"
                 width="700"
                 height="460"
@@ -62,33 +63,38 @@ export default function EngineeredBoardsFamilyPage() {
         </div>
       </section>
 
-      {/* Portfolio Variants Section */}
-      <section className="section-spacing bg-warm-ivory" aria-label="Product Variants">
+      {/* Variants */}
+      <section className="section-spacing bg-warm-ivory border-bottom-divider" aria-labelledby="board-variants-heading">
         <div className="container">
-          <div className="section-header-compact">
-            <span className="section-eyebrow font-mono">PHASE 1 PORTFOLIO</span>
-            <h2 className="section-title">Engineered Board Variants</h2>
-            <p className="section-subtitle">
-              Three precision fibre-board options tailored for routed shutters, humid interior cabinetry, and rapid modular manufacturing.
+          <div className="corp-section-header">
+            <span className="section-eyebrow">Engineered Board Types</span>
+            <h2 id="board-variants-heading" className="corp-section-title">
+              Understanding MDF, HDHMR and Pre-Laminated MDF.
+            </h2>
+            <p className="corp-section-subtitle">
+              Engineered boards are wood-fibre panels, not solid timber, and different grades serve
+              different exposure levels. Confirm current availability and product specifications
+              with our team before ordering.
             </p>
           </div>
 
           <div className="variants-detail-grid">
             <article className="variant-detail-card">
               <div className="variant-card-header">
-                <span className="variant-badge font-mono">BOARD 01</span>
+                <span className="variant-badge">Board Type 01</span>
                 <h3 className="variant-title">Medium-Density Fiberboard (MDF)</h3>
               </div>
               <p className="variant-desc">
-                Uniform internal fibre composition and smooth surfaces make MDF well suited for CNC grooved profiles, decorative wall moldings, and painted shutters.
+                Smooth wood-fibre board intended strictly for dry-interior applications such as
+                routed shutter profiles, trims and painted dry-zone furniture. Not suitable for wet
+                or damp locations.
               </p>
               <div className="variant-applications-box">
-                <span className="variant-box-title font-mono">TYPICAL USE CONTEXTS</span>
+                <span className="variant-box-title">Typical Dry-Interior Uses</span>
                 <ul className="variant-app-list" role="list">
-                  <li>• CNC-routed wardrobe &amp; cabinet shutter faces</li>
-                  <li>• Architectural wall moldings, trims, and wainscots</li>
-                  <li>• Retail fixtures and exhibition displays</li>
-                  <li>• Lacquered and PU-painted interior furniture</li>
+                  <li>• Dry-interior routed wardrobe and cabinet shutters</li>
+                  <li>• Interior wall mouldings and decorative trims</li>
+                  <li>• Retail displays and painted dry-zone furniture</li>
                 </ul>
               </div>
               <div className="variant-footer-action">
@@ -104,19 +110,20 @@ export default function EngineeredBoardsFamilyPage() {
 
             <article className="variant-detail-card">
               <div className="variant-card-header">
-                <span className="variant-badge font-mono">BOARD 02</span>
-                <h3 className="variant-title">High-Density Moisture-Resistant (HDHMR)</h3>
+                <span className="variant-badge">Board Type 02</span>
+                <h3 className="variant-title">HDHMR Engineered Board</h3>
               </div>
               <p className="variant-desc">
-                Dense fibre core formulated for enhanced moisture tolerance and dependable hardware retention across kitchens, vanities, and humid climates.
+                Higher-density engineered fibreboard formulated for improved moisture resistance
+                compared with standard MDF, where available in the current range. Suitability for
+                specific humid zones should be reviewed against site conditions and edge sealing.
               </p>
               <div className="variant-applications-box">
-                <span className="variant-box-title font-mono">TYPICAL USE CONTEXTS</span>
+                <span className="variant-box-title">Typical Application Discussions</span>
                 <ul className="variant-app-list" role="list">
-                  <li>• Modular kitchen carcasses, shutters, and drawers</li>
-                  <li>• Bathroom vanities and utility storage</li>
-                  <li>• High-traffic commercial workstations</li>
-                  <li>• Humid regional residential &amp; hospitality joinery</li>
+                  <li>• Shutters, drawers and cabinetry requiring higher screw holding</li>
+                  <li>• Interior zones exposed to moderate ambient humidity when properly sealed</li>
+                  <li>• Commercial workstations and modular furniture components</li>
                 </ul>
               </div>
               <div className="variant-footer-action">
@@ -132,19 +139,19 @@ export default function EngineeredBoardsFamilyPage() {
 
             <article className="variant-detail-card">
               <div className="variant-card-header">
-                <span className="variant-badge font-mono">BOARD 03</span>
+                <span className="variant-badge">Board Type 03</span>
                 <h3 className="variant-title">Pre-Laminated MDF</h3>
               </div>
               <p className="variant-desc">
-                Factory-surfaced decorative melamine boards offering immediate cut-and-edge readiness for fast-turnaround modular wardrobes and office furniture.
+                Factory-surfaced decorative MDF boards discussed for dry-interior modular shelving,
+                wardrobe internals and office storage where available in the current range.
               </p>
               <div className="variant-applications-box">
-                <span className="variant-box-title font-mono">TYPICAL USE CONTEXTS</span>
+                <span className="variant-box-title">Typical Dry-Interior Uses</span>
                 <ul className="variant-app-list" role="list">
-                  <li>• Modular office workstations &amp; storage pedestals</li>
-                  <li>• Wardrobe internals, shelves, and partitions</li>
-                  <li>• Educational and institutional furniture</li>
-                  <li>• Commercial retail shelving systems</li>
+                  <li>• Dry-interior office pedestals and modular storage</li>
+                  <li>• Wardrobe internals, shelves and dividers</li>
+                  <li>• Commercial and institutional dry-zone furniture</li>
                 </ul>
               </div>
               <div className="variant-footer-action">
@@ -161,22 +168,26 @@ export default function EngineeredBoardsFamilyPage() {
         </div>
       </section>
 
-      {/* Specification Guidance & Family Switcher */}
-      <section className="section-spacing border-top-divider" aria-label="Specifications and Other Families">
+      {/* Specification & Category Switcher */}
+      <section className="section-spacing bg-white" aria-label="Specifications and Other Categories">
         <div className="container">
           <div className="spec-guidance-card">
-            <span className="section-eyebrow font-mono">SPECIFICATIONS &amp; AVAILABILITY</span>
-            <h2 className="spec-guidance-title">Current Specifications &amp; Ordering</h2>
+            <span className="section-eyebrow">Specifications &amp; Availability</span>
+            <h2 className="spec-guidance-title">Confirm board availability and specifications.</h2>
             <p className="spec-guidance-text">
-              Contact NEOM Panels for current product specifications, board dimensions, thickness options, and batch availability.
+              Contact NEOM Panels to confirm available nominal thicknesses, sheet formats,
+              manufacturing or sourcing scope and relevant specifications for your requirement.
             </p>
             <div className="spec-guidance-actions">
               <Link href="/enquiry?family=Engineered+Boards" className="btn btn-primary">
-                <span>Contact Specification Desk</span>
+                <span>Business Enquiry</span>
                 <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/products/decorative-surfaces" className="btn btn-secondary">
-                <span>Next: Decorative Surfaces →</span>
+              <Link href="/brands/starwoods" className="btn btn-secondary">
+                <span>Explore Starwoods</span>
+              </Link>
+              <Link href="/products/plywood" className="btn btn-secondary">
+                <span>View Plywood Category →</span>
               </Link>
             </div>
           </div>

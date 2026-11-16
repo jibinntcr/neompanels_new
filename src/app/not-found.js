@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Page Not Found — Explore NEOM Panels Wood-Panel Solutions',
+  title: 'Page Not Found',
   description:
-    'The requested page could not be found. Explore NEOM Panels’ wood-panel manufacturing, Starwoods furniture & interior panels, NEOM Packing Plywood, or submit a B2B enquiry.',
+    'The requested page could not be found. Explore NEOM Panels, Starwoods and NEOM Packing Plywood, or submit a Business Enquiry.',
   robots: {
     index: false,
     follow: true
@@ -13,29 +13,25 @@ export const metadata = {
 export default function NotFound() {
   return (
     <main id="main-content">
-      <section className="page-header section--architectural-grid" aria-labelledby="main-heading">
-        <div className="container hero-animate">
-          <p className="eyebrow">404 · PAGE NOT FOUND</p>
-          <h1 id="main-heading" tabIndex={-1} className="page-title">
+      <section className="page-header-dark" aria-labelledby="main-heading">
+        <div className="container page-header-inner">
+          <span className="section-eyebrow text-gold">404 · Page Not Found</span>
+          <h1 id="main-heading" className="page-hero-title text-warm">
             We couldn’t find that page.
           </h1>
-          <p className="lead-text">
-            The link you followed may have moved or been updated. Use the direct links below to
-            explore NEOM Panels’ manufacturing capabilities, product brands, technical documents or
-            B2B enquiry desk.
+          <p className="page-hero-lead text-warm-muted">
+            The link you followed may have moved or been updated. Explore NEOM Panels and our active
+            brands using the links below.
           </p>
-          <div className="btn-group">
-            <Link href="/" className="btn btn--primary">
-              Return to NEOM Panels Home →
+          <div className="page-header-cta-row" style={{ marginTop: '1.75rem' }}>
+            <Link href="/" className="btn btn-gold">
+              <span>Return Home</span>
             </Link>
-            <Link href="/enquiry" className="btn btn--secondary">
-              Submit a Business Enquiry
+            <Link href="/brands" className="btn btn-outline-light">
+              <span>Explore Our Brands</span>
             </Link>
-            <Link href="/site-map" className="editorial-link" style={{ marginLeft: '0.5rem' }}>
-              <span>View Full Site Map</span>
-              <span className="link-arrow" aria-hidden="true">
-                →
-              </span>
+            <Link href="/enquiry" className="btn btn-outline-light">
+              <span>Business Enquiry</span>
             </Link>
           </div>
         </div>

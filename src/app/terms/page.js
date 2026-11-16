@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { buildPageMetadata, getBreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'Website Terms — Commercial & Specification Terms of Use',
+  title: 'Terms of Use',
   description:
     'Terms of use governing access to the NEOM Panels corporate website, Starwoods and NEOM Packing Plywood brand representations, and general B2B specification guidance.',
   path: '/terms',
@@ -44,10 +44,10 @@ export default function TermsPage() {
               <h2 className="subsection-title">1. Corporate information &amp; non-binding nature</h2>
               <p>
                 Content published on this website is intended to introduce NEOM Panels, its
-                manufacturing operations, and its product brands (Starwoods and NEOM Packing
-                Plywood) to business buyers, specifiers, and trade partners. Website content does
-                not constitute a binding commercial offer, product warranty, or automatic supply
-                commitment.
+                manufacturing operations, and its active brands (Starwoods and NEOM Packing Plywood)
+                to business buyers, specifiers, and trade partners.
+                Website content does not constitute a binding commercial offer, product warranty,
+                or automatic supply commitment.
               </p>
             </div>
 
@@ -66,9 +66,9 @@ export default function TermsPage() {
               <h2 className="subsection-title">3. Intellectual property &amp; brand marks</h2>
               <p>
                 The NEOM Panels name and logo, the Starwoods brand name and logo, the NEOM Packing
-                Plywood brand name and wordmark, website copy, and visual assets are the property
-                of NEOM Panels and may not be reproduced or misrepresented as third-party
-                endorsements without prior written permission.
+                Plywood brand name and wordmark, website copy,
+                and visual assets are the property of NEOM Panels and may not be reproduced or
+                misrepresented as third-party endorsements without prior written permission.
               </p>
             </div>
 

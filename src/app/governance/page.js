@@ -1,36 +1,15 @@
 import Link from 'next/link';
-import { getSiteContent } from '@/lib/storage';
+import BrandMarkPlaque from '@/components/BrandMarkPlaque';
 import DocumentRequestButton from '@/components/DocumentRequestButton';
+import { getSiteContent } from '@/lib/storage';
+import { PORTFOLIO_BRANDS } from '@/lib/portfolio-data';
 import { buildPageMetadata, getBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'Governance & Corporate Information — NEOM Panels',
+  title: 'Governance',
   description:
-    'Corporate structure, official company information, vendor onboarding details and adopted governance policies for customers, suppliers, institutional buyers and stakeholders of NEOM Panels.',
-  path: '/governance',
-  ogImage: '/assets/hero-neom-flagship.jpg',
-  ogImageAlt: 'NEOM Panels Corporate Governance and Adopted Policies',
-  ogImages: [
-    {
-      url: '/assets/hero-neom-flagship.jpg',
-      width: 1400,
-      height: 933,
-      alt: 'NEOM Panels Corporate Governance and Adopted Policies'
-    },
-    {
-      url: '/assets/logo-full.png',
-      width: 970,
-      height: 316,
-      alt: 'NEOM Panels Official Corporate Mark'
-    }
-  ],
-  keywords: [
-    'NEOM Panels corporate governance',
-    'NEOM Panels vendor onboarding information',
-    'wood panel manufacturer quality policy India',
-    'institutional supplier compliance wood panels',
-    'corporate policies NEOM Panels'
-  ]
+    'Corporate structure, verified company disclosures, portfolio brand ownership and adopted governance principles of NEOM Panels.',
+  path: '/governance'
 });
 
 export default function GovernancePage() {
@@ -41,15 +20,16 @@ export default function GovernancePage() {
     '@graph': [
       getBreadcrumbJsonLd([
         { name: 'Home', path: '/' },
-        { name: 'Governance & Corporate Information', path: '/governance' }
+        { name: 'Company', path: '/about' },
+        { name: 'Governance', path: '/governance' }
       ]),
       {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/governance#webpage`,
-        name: 'Governance & Corporate Information — NEOM Panels',
+        name: 'Governance | NEOM Panels',
         url: `${SITE_URL}/governance`,
         description:
-          'Corporate structure, official company information and adopted policies for customers, suppliers and institutional buyers of NEOM Panels.'
+          'Corporate structure, verified company information and adopted operating policies of NEOM Panels.'
       }
     ]
   };
@@ -60,114 +40,74 @@ export default function GovernancePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(governanceJsonLd) }}
       />
-      {/* PAGE HEADER */}
-      <section
-        className="page-header section--architectural-grid"
-        aria-labelledby="main-heading"
-      >
-        <div className="container hero-split">
-          <div className="hero-animate">
-            <p className="eyebrow">CORPORATE GOVERNANCE</p>
-            <h1 id="main-heading" tabIndex={-1} className="page-title">
-              A company built on clear responsibilities.
-            </h1>
-            <p className="lead-text">
-              NEOM Panels maintains a clear corporate structure for customers, suppliers,
-              institutional procurement teams and trade partners. Verified company facts and
-              adopted policies are published below.
-            </p>
-            <div className="btn-group">
-              <a href="#company-information" className="btn btn--primary">
-                Company Information
-              </a>
-              <a href="#corporate-policies" className="btn btn--secondary">
-                Policies &amp; Documents
-              </a>
-            </div>
-          </div>
 
-          <div className="brand-architecture-card hero-animate--delay">
-            <div>
-              <p className="eyebrow">DOCUMENTATION PRINCIPLE</p>
-              <h2 className="subsection-title">Verified corporate disclosures</h2>
-              <p className="secondary-text">
-                NEOM Panels maintains a disciplined corporate record designed for commercial
-                accountability, institutional vendor onboarding and long-term organisational
-                clarity.
-              </p>
-            </div>
-            <div className="mr-grade-notice-box" style={{ marginTop: 0 }}>
-              <p style={{ margin: 0, fontSize: '0.95rem' }}>
-                Only verified company facts and formally adopted policy documents are listed on this
-                page. Counterparties requiring vendor registration packs can request copies through
-                our corporate desk.
-              </p>
-            </div>
-          </div>
+      {/* Page Header */}
+      <section className="page-header-dark" aria-labelledby="main-heading">
+        <div className="container page-header-inner">
+          <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+            <Link href="/" className="breadcrumb-link">Home</Link>
+            <span className="breadcrumb-sep" aria-hidden="true">/</span>
+            <Link href="/about" className="breadcrumb-link">Company</Link>
+            <span className="breadcrumb-sep" aria-hidden="true">/</span>
+            <span className="breadcrumb-current">Governance</span>
+          </nav>
+
+          <span className="section-eyebrow text-gold">Corporate Governance</span>
+          <h1 id="main-heading" className="page-hero-title text-warm">
+            A company built on clear responsibilities.
+          </h1>
+          <p className="page-hero-lead text-warm-muted">
+            NEOM Panels maintains straightforward corporate records and operating principles for
+            customers, suppliers, institutional procurement teams and trade partners. Only verified
+            company facts and adopted policies are published here.
+          </p>
         </div>
       </section>
 
-      {/* SECTION 1 — COMPANY INFORMATION */}
-      <section
-        id="company-information"
-        className="section reveal-once"
-        aria-labelledby="company-info-heading"
-      >
+      {/* Section 1: Verified Company Information */}
+      <section id="company-information" className="section-spacing bg-white border-bottom-divider" aria-labelledby="company-info-heading">
         <div className="container">
-          <p className="eyebrow">CORPORATE RECORD</p>
-          <h2 id="company-info-heading" className="section-title">
-            Company information.
-          </h2>
-          <p className="lead-text">
-            Official corporate identity, brand ownership and communication routes for commercial
-            and institutional counterparties.
-          </p>
+          <div className="corp-section-header">
+            <span className="section-eyebrow">Corporate Record</span>
+            <h2 id="company-info-heading" className="corp-section-title">
+              Verified company information.
+            </h2>
+            <p className="corp-section-subtitle">
+              Official corporate identity, brand portfolio ownership and enquiry channels for
+              commercial and institutional counterparties.
+            </p>
+          </div>
 
-          <div
-            className="table-responsive"
-            role="region"
-            aria-labelledby="company-info-heading"
-            tabIndex={0}
-          >
-            <table className="spec-table">
-              <caption>NEOM Panels — Verified Corporate Registry</caption>
+          <div className="corp-table-wrap" role="region" aria-labelledby="company-info-heading" tabIndex={0}>
+            <table className="corp-spec-table">
               <thead>
                 <tr>
-                  <th scope="col" style={{ width: '32%' }}>
-                    Corporate Item
-                  </th>
+                  <th scope="col" style={{ width: '32%' }}>Corporate Item</th>
                   <th scope="col">Verified Details</th>
                 </tr>
               </thead>
               <tbody>
                 {governance.companyInfo.map((row) => (
                   <tr key={row.label}>
-                    <th scope="row">{row.label}</th>
+                    <td>{row.label}</td>
                     <td>
-                      {row.label === 'Product Brands' ||
-                      row.label === 'Official Brand Relationships' ? (
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '1.125rem',
-                            flexWrap: 'wrap'
-                          }}
-                        >
-                          <img
-                            src="/assets/starwood-logo.png"
-                            alt="Starwoods — The Plywood Specialist"
-                            className="starwood-logo-img--xs"
-                            width="619"
-                            height="177"
-                          />
-                          <img
-                            src="/assets/neom-packing-plywood-logo-compact.svg"
-                            alt="NEOM Packing Plywood"
-                            className="packing-logo-img--xs"
-                            width="540"
-                            height="112"
-                          />
+                      {row.label === 'Active Brands' ||
+                      row.label === 'Portfolio Brands' ||
+                      row.label === 'Product Brands' ? (
+                        <div>
+                          <div
+                            style={{
+                              display: 'flex',
+                              flexWrap: 'wrap',
+                              alignItems: 'center',
+                              gap: '0.85rem',
+                              marginBottom: '0.65rem'
+                            }}
+                          >
+                            {PORTFOLIO_BRANDS.map((b) => (
+                              <BrandMarkPlaque key={b.id} brand={b} size="sm" />
+                            ))}
+                          </div>
                           <span>{row.value}</span>
                         </div>
                       ) : (
@@ -182,45 +122,35 @@ export default function GovernancePage() {
         </div>
       </section>
 
-      {/* SECTION 2 — POLICIES AND DOCUMENTS */}
-      <section
-        id="corporate-policies"
-        className="section section--sage-subtle section--no-border reveal-once"
-        aria-labelledby="policies-heading"
-      >
+      {/* Section 2: Adopted Policies */}
+      <section id="corporate-policies" className="section-spacing bg-warm-ivory" aria-labelledby="policies-heading">
         <div className="container">
-          <p className="eyebrow">GOVERNANCE FRAMEWORK</p>
-          <h2 id="policies-heading" className="section-title">
-            Policies and documents.
-          </h2>
-          <p className="lead-text">
-            Approved corporate policies and operating principles governing business conduct,
-            product documentation, workplace safety, sourcing and data handling.
-          </p>
+          <div className="corp-section-header">
+            <span className="section-eyebrow">Operating Standards</span>
+            <h2 id="policies-heading" className="corp-section-title">
+              Adopted policies and principles.
+            </h2>
+            <p className="corp-section-subtitle">
+              Operating principles governing commercial conduct, specification accuracy, workplace
+              safety, supplier expectations and enquiry data handling.
+            </p>
+          </div>
 
-          <div className="applications-cards-grid" style={{ marginTop: 'var(--space-6)' }}>
+          <div className="resp-pillar-grid">
             {governance.policies.map((policy) => (
-              <article key={policy.id || policy.title} className="application-feature-card">
+              <article key={policy.id || policy.title} className="resp-pillar-card">
                 <div>
-                  <span className="status-pill">{policy.status}</span>
+                  <span className="section-eyebrow">{policy.status}</span>
+                  <h3 className="brand-card__title">{policy.title}</h3>
+                  <p className="corp-body-text corp-body-text--secondary" style={{ marginBottom: 0 }}>
+                    {policy.summary}
+                  </p>
                 </div>
-                <h3 className="subsection-title" style={{ marginBottom: 0 }}>
-                  {policy.title}
-                </h3>
-                <p style={{ margin: 0, flex: 1 }}>{policy.summary}</p>
-                <div
-                  style={{
-                    marginTop: 'auto',
-                    paddingTop: 'var(--space-4)',
-                    borderTop: '1px solid var(--color-border)'
-                  }}
-                >
+                <div style={{ marginTop: 'auto', paddingTop: '0.85rem', borderTop: '1px solid var(--color-border)' }}>
                   {policy.href ? (
-                    <Link href={policy.href} className="editorial-link">
+                    <Link href={policy.href} className="corp-text-link">
                       <span>{policy.linkLabel || 'Read Published Document'}</span>
-                      <span className="link-arrow" aria-hidden="true">
-                        →
-                      </span>
+                      <span aria-hidden="true">→</span>
                     </Link>
                   ) : (
                     <DocumentRequestButton

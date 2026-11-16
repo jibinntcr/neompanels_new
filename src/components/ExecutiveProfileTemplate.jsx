@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { SITE_URL } from '@/lib/seo';
+import { SITE_URL, buildPageMetadata } from '@/lib/seo';
 import { LEADERSHIP_PROFILES } from '@/lib/leadership-data';
 
 export function buildLeaderMetadata(leader) {
-  return {
+  return buildPageMetadata({
     title: leader.metaTitle,
     description: leader.metaDescription,
     path: leader.profileHref,
@@ -25,7 +25,7 @@ export function buildLeaderMetadata(leader) {
       }
     ],
     keywords: leader.keywords
-  };
+  });
 }
 
 export default function ExecutiveProfileTemplate({ leader }) {
@@ -40,7 +40,7 @@ export default function ExecutiveProfileTemplate({ leader }) {
         '@id': `${profileUrl}#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Leadership Team', item: `${SITE_URL}/team` },
+          { '@type': 'ListItem', position: 2, name: 'Leadership', item: `${SITE_URL}/team` },
           { '@type': 'ListItem', position: 3, name: leader.name, item: profileUrl }
         ]
       },
@@ -75,7 +75,7 @@ export default function ExecutiveProfileTemplate({ leader }) {
         '@type': 'ProfilePage',
         '@id': `${profileUrl}#profilepage`,
         url: profileUrl,
-        name: leader.metaTitle,
+        name: `${leader.metaTitle} | NEOM Panels`,
         description: leader.metaDescription,
         inLanguage: 'en-IN',
         isPartOf: { '@id': `${SITE_URL}/#website` },
@@ -94,23 +94,23 @@ export default function ExecutiveProfileTemplate({ leader }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
       />
 
-      {/* Executive Profile Hero Header */}
+      {/* Profile Header */}
       <section className="arch-page-hero arch-page-hero--forest" aria-labelledby="main-heading">
         <div className="container">
           <div className="exec-hero-topbar">
             <nav className="breadcrumb-nav breadcrumb-nav--light" aria-label="Breadcrumb" style={{ marginBottom: 0 }}>
-              <ol className="breadcrumb-list font-mono" role="list">
+              <ol className="breadcrumb-list" role="list">
                 <li><Link href="/">Home</Link></li>
                 <li aria-hidden="true">/</li>
-                <li><Link href="/team">Leadership Team</Link></li>
+                <li><Link href="/team">Leadership</Link></li>
                 <li aria-hidden="true">/</li>
                 <li aria-current="page">{leader.name}</li>
               </ol>
             </nav>
 
-            <Link href="/team" className="exec-back-pill font-mono">
+            <Link href="/team" className="exec-back-pill">
               <span aria-hidden="true">←</span>
-              <span>All Executive Profiles</span>
+              <span>All Leadership Profiles</span>
             </Link>
           </div>
 
@@ -131,8 +131,8 @@ export default function ExecutiveProfileTemplate({ leader }) {
             </div>
 
             <div className="exec-hero-details">
-              <span className="exec-role-pill font-mono">{leader.role}</span>
-              <h1 id="main-heading" tabIndex={-1} className="exec-hero-name">
+              <span className="exec-role-pill">{leader.role}</span>
+              <h1 id="main-heading" className="exec-hero-name">
                 {leader.name}
               </h1>
               <p className="exec-hero-focus">{leader.focus}</p>
@@ -143,11 +143,11 @@ export default function ExecutiveProfileTemplate({ leader }) {
                   <span>Business Enquiry</span>
                   <span aria-hidden="true">→</span>
                 </Link>
-                <Link href="/products" className="btn btn-outline-light">
-                  <span>Explore Materials Portfolio</span>
+                <Link href="/brands" className="btn btn-outline-light">
+                  <span>Explore Our Brands</span>
                 </Link>
                 {leader.telHref && (
-                  <a href={leader.telHref} className="btn btn-outline-light font-mono">
+                  <a href={leader.telHref} className="btn btn-outline-light">
                     <span>{leader.phone}</span>
                   </a>
                 )}
@@ -171,14 +171,13 @@ export default function ExecutiveProfileTemplate({ leader }) {
         </div>
       </section>
 
-      {/* Two-Column Executive Detail Body */}
+      {/* Two-Column Profile Detail Body */}
       <section className="section-spacing bg-warm-ivory" aria-label={`${leader.name} Biography and Responsibilities`}>
         <div className="container">
           <div className="exec-detail-layout">
-            {/* Main Biography & Responsibilities */}
             <div className="exec-detail-main">
               <article className="exec-panel-card" aria-labelledby="biography-heading">
-                <span className="section-eyebrow font-mono">EXECUTIVE BIOGRAPHY</span>
+                <span className="section-eyebrow">Biography</span>
                 <h2 id="biography-heading" className="exec-panel-title">
                   Professional Overview
                 </h2>
@@ -190,14 +189,14 @@ export default function ExecutiveProfileTemplate({ leader }) {
               </article>
 
               <article className="exec-panel-card" aria-labelledby="responsibilities-heading">
-                <span className="section-eyebrow font-mono">MANDATE AT NEOM PANELS</span>
+                <span className="section-eyebrow">Role at NEOM Panels</span>
                 <h2 id="responsibilities-heading" className="exec-panel-title">
-                  Core Executive Responsibilities
+                  Core Responsibilities
                 </h2>
                 <div className="exec-resp-list">
                   {leader.responsibilities.map((item, idx) => (
                     <div key={item.title} className="exec-resp-item">
-                      <span className="exec-resp-num font-mono">0{idx + 1}</span>
+                      <span className="exec-resp-num">0{idx + 1}</span>
                       <div>
                         <h3 className="exec-resp-heading">{item.title}</h3>
                         <p className="exec-resp-text">{item.description}</p>
@@ -208,15 +207,14 @@ export default function ExecutiveProfileTemplate({ leader }) {
               </article>
             </div>
 
-            {/* Sidebar: Career Credentials & Fellow Directors */}
-            <aside className="exec-detail-sidebar" aria-label="Background and Fellow Executives">
+            <aside className="exec-detail-sidebar" aria-label="Background and Other Leadership Profiles">
               <div className="exec-panel-card">
-                <span className="section-eyebrow font-mono">CREDENTIALS &amp; AFFILIATIONS</span>
+                <span className="section-eyebrow">Credentials &amp; Affiliations</span>
                 <h2 className="exec-sidebar-heading">Professional Background</h2>
                 <ul className="exec-bg-list" role="list">
                   {leader.backgroundItems.map((bg) => (
                     <li key={`${bg.organisation}-${bg.role}`} className="exec-bg-item">
-                      <span className="exec-bg-role font-mono">{bg.role}</span>
+                      <span className="exec-bg-role">{bg.role}</span>
                       <strong className="exec-bg-org">{bg.organisation}</strong>
                       <p className="exec-bg-summary">{bg.summary}</p>
                     </li>
@@ -225,8 +223,8 @@ export default function ExecutiveProfileTemplate({ leader }) {
               </div>
 
               <div className="exec-panel-card">
-                <span className="section-eyebrow font-mono">EXECUTIVE BOARD</span>
-                <h2 className="exec-sidebar-heading">Fellow Leadership Members</h2>
+                <span className="section-eyebrow">Leadership</span>
+                <h2 className="exec-sidebar-heading">Other Leadership Profiles</h2>
                 <ul className="exec-peers-list" role="list">
                   {otherLeaders.map((peer) => (
                     <li key={peer.id}>
@@ -241,7 +239,7 @@ export default function ExecutiveProfileTemplate({ leader }) {
                         />
                         <div className="exec-peer-info">
                           <strong className="exec-peer-name">{peer.name}</strong>
-                          <span className="exec-peer-role font-mono">{peer.role}</span>
+                          <span className="exec-peer-role">{peer.role}</span>
                         </div>
                         <span className="exec-peer-arrow" aria-hidden="true">→</span>
                       </Link>

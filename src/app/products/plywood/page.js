@@ -1,25 +1,24 @@
 import Link from 'next/link';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Structural & Specialty Plywood | NEOM Panels',
+export const metadata = buildPageMetadata({
+  title: 'Structural & Specialty Plywood',
   description:
-    'Explore NEOM Panels Structural & Specialty Plywood: Premium Plywood, Marine Plywood, and BWR / BWP Plywood engineered for furniture manufacturing, interior joinery, and building construction.',
-  alternates: {
-    canonical: '/products/plywood'
-  }
-};
+    'Explore Structural & Specialty Plywood options through NEOM Panels: Premium Plywood, Marine Plywood and BWR / BWP Plywood matched to interior and moisture-prone applications.',
+  path: '/products/plywood'
+});
 
 export default function PlywoodFamilyPage() {
   return (
     <main id="main-content" className="product-family-view">
-      {/* Architectural Product Family Hero */}
+      {/* Header */}
       <section className="arch-page-hero arch-page-hero--forest" aria-labelledby="main-heading">
         <div className="container">
           <nav className="breadcrumb-nav breadcrumb-nav--light" aria-label="Breadcrumb">
-            <ol className="breadcrumb-list font-mono" role="list">
+            <ol className="breadcrumb-list" role="list">
               <li><Link href="/">Home</Link></li>
               <li aria-hidden="true">/</li>
-              <li><Link href="/products">Products</Link></li>
+              <li><Link href="/products">Material Categories</Link></li>
               <li aria-hidden="true">/</li>
               <li aria-current="page">Structural &amp; Specialty Plywood</li>
             </ol>
@@ -27,16 +26,17 @@ export default function PlywoodFamilyPage() {
 
           <div className="product-header-grid">
             <div className="product-header-copy">
-              <span className="section-eyebrow text-gold font-mono">PRODUCT FAMILY 01 · CORE SUBSTRATES</span>
-              <h1 id="main-heading" tabIndex={-1} className="page-title text-warm">
-                Structural &amp; Specialty Plywood.
+              <span className="section-eyebrow text-gold">Material Category 01 · Plywood Substrates</span>
+              <h1 id="main-heading" className="page-title text-warm">
+                Structural &amp; Specialty Plywood
               </h1>
               <p className="page-lead-text text-warm-muted">
-                Multi-layer engineered wood panels built for structural stability, moisture resilience, and reliable screw-holding across furniture manufacturing, commercial interiors, and building applications.
+                Multi-layer wood panels across dry-interior and moisture-exposed bonding grades for
+                furniture manufacturing, modular joinery and commercial interior fit-outs.
               </p>
               <div className="product-header-actions">
                 <Link
-                  href="/enquiry?family=Structural+%26+Specialty+Plywood"
+                  href="/enquiry?brand=Starwoods&family=Structural+%26+Specialty+Plywood"
                   className="btn btn-gold"
                 >
                   <span>Enquire on Plywood</span>
@@ -46,7 +46,7 @@ export default function PlywoodFamilyPage() {
                   href="/enquiry?type=Sample+Request&family=Structural+%26+Specialty+Plywood"
                   className="btn btn-outline-light"
                 >
-                  <span>Request Material Swatches</span>
+                  <span>Discuss a Sample Request</span>
                 </Link>
               </div>
             </div>
@@ -54,7 +54,7 @@ export default function PlywoodFamilyPage() {
             <div className="product-header-img-wrap">
               <img
                 src="/assets/product-structural-plywood.jpg"
-                alt="Stacked cross-sections of calibrated structural plywood panels showing multi-ply construction"
+                alt="Multi-ply wood-panel cross-sections stacked on a neutral surface"
                 className="product-hero-img"
                 width="700"
                 height="460"
@@ -65,38 +65,41 @@ export default function PlywoodFamilyPage() {
         </div>
       </section>
 
-      {/* Portfolio Variants Section */}
-      <section className="section-spacing bg-warm-ivory" aria-label="Product Variants">
+      {/* Variants */}
+      <section className="section-spacing bg-warm-ivory border-bottom-divider" aria-labelledby="variants-heading">
         <div className="container">
-          <div className="section-header-compact">
-            <span className="section-eyebrow font-mono">PHASE 1 PORTFOLIO</span>
-            <h2 className="section-title">Plywood Variants</h2>
-            <p className="section-subtitle">
-              Three core plywood formulations aligned with residential joinery, wet-area cabinetry, and commercial interior fit-outs.
+          <div className="corp-section-header">
+            <span className="section-eyebrow">Plywood Options</span>
+            <h2 id="variants-heading" className="corp-section-title">
+              Matching plywood grades to exposure conditions.
+            </h2>
+            <p className="corp-section-subtitle">
+              Bonding grade, core species and nominal thickness vary by product line and are
+              confirmed against your application before supply.
             </p>
           </div>
 
           <div className="variants-detail-grid">
             <article className="variant-detail-card">
               <div className="variant-card-header">
-                <span className="variant-badge font-mono">VARIANT 01</span>
+                <span className="variant-badge">Option 01</span>
                 <h3 className="variant-title">Premium Plywood</h3>
               </div>
               <p className="variant-desc">
-                Multi-ply substrate designed for bespoke furniture carcasses, architectural wall linings, and custom wardrobe systems where flat pressing and clean machining matter.
+                Multi-ply wood substrate intended for dry-interior furniture carcasses, wardrobes
+                and architectural wall panelling.
               </p>
               <div className="variant-applications-box">
-                <span className="variant-box-title font-mono">TYPICAL USE CONTEXTS</span>
+                <span className="variant-box-title">Typical Use Contexts</span>
                 <ul className="variant-app-list" role="list">
-                  <li>• Residential &amp; executive office furniture carcasses</li>
-                  <li>• Architectural wall paneling backing substrates</li>
-                  <li>• Wardrobes, storage units, and shelving joinery</li>
-                  <li>• Commercial &amp; hospitality fit-out packages</li>
+                  <li>• Dry-interior residential and office furniture carcasses</li>
+                  <li>• Interior wall panelling backing substrates</li>
+                  <li>• Wardrobes, storage units and shelving joinery</li>
                 </ul>
               </div>
               <div className="variant-footer-action">
                 <Link
-                  href="/enquiry?family=Structural+%26+Specialty+Plywood&variant=Premium+Plywood"
+                  href="/enquiry?brand=Starwoods&family=Structural+%26+Specialty+Plywood&variant=Premium+Plywood"
                   className="btn btn-primary btn-sm"
                 >
                   <span>Enquire on Premium Plywood</span>
@@ -107,24 +110,24 @@ export default function PlywoodFamilyPage() {
 
             <article className="variant-detail-card">
               <div className="variant-card-header">
-                <span className="variant-badge font-mono">VARIANT 02</span>
+                <span className="variant-badge">Option 02</span>
                 <h3 className="variant-title">Marine Plywood</h3>
               </div>
               <p className="variant-desc">
-                Formulated for high-humidity interiors, wet zones, and coastal climates requiring enhanced moisture-resisting bonding and long-term core stability.
+                Moisture-resistant bonded plywood option selected for elevated-humidity interiors,
+                kitchen sink cabinets and coastal interior joinery.
               </p>
               <div className="variant-applications-box">
-                <span className="variant-box-title font-mono">TYPICAL USE CONTEXTS</span>
+                <span className="variant-box-title">Typical Use Contexts</span>
                 <ul className="variant-app-list" role="list">
-                  <li>• Modular kitchen under-sink &amp; wet-zone cabinets</li>
-                  <li>• Bathroom vanities and utility rooms</li>
-                  <li>• Coastal residential and hospitality interiors</li>
-                  <li>• Semi-exposed architectural soffits and joinery</li>
+                  <li>• Kitchen wet-zone and under-sink cabinetry</li>
+                  <li>• Bathroom vanities and humid utility interiors</li>
+                  <li>• High-humidity coastal residential and commercial fit-outs</li>
                 </ul>
               </div>
               <div className="variant-footer-action">
                 <Link
-                  href="/enquiry?family=Structural+%26+Specialty+Plywood&variant=Marine+Plywood"
+                  href="/enquiry?brand=Starwoods&family=Structural+%26+Specialty+Plywood&variant=Marine+Plywood"
                   className="btn btn-primary btn-sm"
                 >
                   <span>Enquire on Marine Plywood</span>
@@ -135,24 +138,24 @@ export default function PlywoodFamilyPage() {
 
             <article className="variant-detail-card">
               <div className="variant-card-header">
-                <span className="variant-badge font-mono">VARIANT 03</span>
+                <span className="variant-badge">Option 03</span>
                 <h3 className="variant-title">BWR / BWP Plywood</h3>
               </div>
               <p className="variant-desc">
-                Boiling Water Resistant (BWR) and Boiling Water Proof (BWP) panel options suited for everyday domestic kitchens, commercial pantries, and institutional cabinetry.
+                Boiling Water Resistant (BWR) and Boiling Water Proof (BWP) panel grades suited to
+                domestic kitchens, commercial pantries and utility partitions.
               </p>
               <div className="variant-applications-box">
-                <span className="variant-box-title font-mono">TYPICAL USE CONTEXTS</span>
+                <span className="variant-box-title">Typical Use Contexts</span>
                 <ul className="variant-app-list" role="list">
-                  <li>• Modular kitchen carcasses &amp; tall units</li>
-                  <li>• Commercial pantry, cafe, and dining counters</li>
-                  <li>• Institutional furniture for education &amp; healthcare</li>
-                  <li>• Interior partitions and utility enclosures</li>
+                  <li>• Modular kitchen carcasses and tall units</li>
+                  <li>• Commercial pantry and cafeteria cabinetry</li>
+                  <li>• Institutional and commercial interior partitions</li>
                 </ul>
               </div>
               <div className="variant-footer-action">
                 <Link
-                  href="/enquiry?family=Structural+%26+Specialty+Plywood&variant=BWR+/+BWP+Plywood"
+                  href="/enquiry?brand=Starwoods&family=Structural+%26+Specialty+Plywood&variant=BWR+/+BWP+Plywood"
                   className="btn btn-primary btn-sm"
                 >
                   <span>Enquire on BWR / BWP</span>
@@ -164,22 +167,27 @@ export default function PlywoodFamilyPage() {
         </div>
       </section>
 
-      {/* Specification Guidance & Family Switcher */}
-      <section className="section-spacing border-top-divider" aria-label="Specifications and Other Families">
+      {/* Brand Routing & Category Switcher */}
+      <section className="section-spacing bg-white" aria-label="Brand Routing and Category Switcher">
         <div className="container">
           <div className="spec-guidance-card">
-            <span className="section-eyebrow font-mono">SPECIFICATIONS &amp; AVAILABILITY</span>
-            <h2 className="spec-guidance-title">Current Specifications &amp; Ordering</h2>
+            <span className="section-eyebrow">Related Brands &amp; Categories</span>
+            <h2 className="spec-guidance-title">Looking for furniture panels or industrial packaging plywood?</h2>
             <p className="spec-guidance-text">
-              Contact NEOM Panels for current product specifications, sheet dimensions, thickness options, and batch availability.
+              Explore <strong>Starwoods</strong> for furniture and interior panel solutions, or
+              visit <strong>NEOM Packing Plywood</strong> for MR packaging-grade sheets for cases
+              and crates.
             </p>
             <div className="spec-guidance-actions">
-              <Link href="/enquiry?family=Structural+%26+Specialty+Plywood" className="btn btn-primary">
-                <span>Contact Specification Desk</span>
+              <Link href="/brands/starwoods" className="btn btn-primary">
+                <span>Explore Starwoods</span>
                 <span aria-hidden="true">→</span>
               </Link>
+              <Link href="/brands/neom-packing-plywood" className="btn btn-secondary">
+                <span>Explore NEOM Packing Plywood</span>
+              </Link>
               <Link href="/products/engineered-boards" className="btn btn-secondary">
-                <span>Next: Solid Engineered Boards →</span>
+                <span>Next: Engineered Boards →</span>
               </Link>
             </div>
           </div>

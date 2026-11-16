@@ -2,103 +2,99 @@ export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || 'https://neompanels-new.vercel.app'
 ).replace(/\/$/, '');
 export const SITE_NAME = 'NEOM Panels';
-export const DEFAULT_OG_IMAGE = '/assets/hero-architectural-panels.jpg';
+export const DEFAULT_OG_IMAGE = '/assets/product-structural-plywood.jpg';
 
 export const CORE_SEO_KEYWORDS = [
   'NEOM Panels',
-  'Engineered Excellence Designed for Spaces',
-  'engineered wood panels India',
-  'structural plywood supplier India',
-  'marine plywood India',
-  'BWR BWP plywood',
-  'solid engineered boards India',
-  'MDF board supplier',
-  'HDHMR board India',
-  'pre-laminated MDF panels',
-  'decorative surfaces India',
-  'architectural wood veneers',
-  'high pressure laminates HPL',
-  'acrylic panels interior',
-  'charcoal fluted wall panels',
-  'GCC wood panel export corridor',
-  'Jibin N NEOM Panels',
-  'Muneer K H NEOM Panels'
+  'Indian panel manufacturing company',
+  'Starwoods',
+  'NEOM Packing Plywood',
+  'plywood and engineered boards India',
+  'MDF and HDHMR boards India',
+  'industrial packaging plywood India',
+  'MR packaging grade plywood'
 ];
 
 export const SITE_NAVIGATION_ITEMS = [
   {
-    name: 'Home — NEOM Panels',
+    name: 'Home',
     path: '/',
     description:
-      'Engineered Excellence, Designed for Spaces. Integrated engineered wood, interior materials, and project supply ecosystem.'
+      'NEOM Panels is an Indian panel manufacturing company and the company behind Starwoods and NEOM Packing Plywood.'
   },
   {
-    name: 'Products & Materials Portfolio',
-    path: '/products',
-    description:
-      'Phase 1 portfolio: Structural & Specialty Plywood, Solid Engineered Boards, and Architectural Decorative Surfaces.'
-  },
-  {
-    name: 'Structural & Specialty Plywood',
-    path: '/products/plywood',
-    description:
-      'Premium Plywood, Marine Plywood, and BWR / BWP calibrated plywood substrates.'
-  },
-  {
-    name: 'Solid Engineered Boards',
-    path: '/products/engineered-boards',
-    description:
-      'High-density MDF, HDHMR moisture-resistant core boards, and pre-laminated MDF.'
-  },
-  {
-    name: 'Architectural Decorative Surfaces',
-    path: '/products/decorative-surfaces',
-    description:
-      'Architectural natural veneers, high-pressure laminates, acrylic panels, and fluted charcoal panels.'
-  },
-  {
-    name: 'Applications & Sectors',
-    path: '/applications',
-    description:
-      'Engineered wood solutions for Construction, Manufacturing, Packaging & Warehousing, and Furniture & Interiors.'
-  },
-  {
-    name: 'About NEOM Panels',
+    name: 'About NEOM',
     path: '/about',
     description:
-      'Corporate vision, mission, 8 ecosystem pillars, market context, and 4-stage business growth model.'
+      'Company introduction, purpose, vision, mission, behaviour-based values and manufacturing context.'
   },
   {
-    name: 'Executive Leadership & Team',
-    path: '/team',
+    name: 'Our Brands',
+    path: '/brands',
     description:
-      'Meet the executive leadership team guiding NEOM Panels: Jibin N (MD), Muneer K H (CEO), Muhamad Raneef T A (CFO), and Muhammed Jabir (CTO).'
+      'Explore the two active brands of NEOM Panels: Starwoods and NEOM Packing Plywood.'
   },
   {
-    name: 'Growth Vision & Expansion',
-    path: '/growth-vision',
+    name: 'Starwoods',
+    path: '/brands/starwoods',
     description:
-      '10-year development horizon: Indian domestic anchor and GCC strategic expansion corridor.'
+      'Starwoods — plywood and engineered boards, including MDF and HDHMR where available in the current range.'
   },
   {
-    name: 'Partners & Ecosystem',
+    name: 'NEOM Packing Plywood',
+    path: '/brands/neom-packing-plywood',
+    description:
+      'NEOM Packing Plywood — plywood for industrial packaging requirements.'
+  },
+  {
+    name: 'Manufacturing',
+    path: '/manufacturing',
+    description:
+      'NEOM Panels’ manufacturing foundation in India, process context and specification review parameters.'
+  },
+  {
+    name: 'Responsibility',
+    path: '/responsibility',
+    description:
+      'Principles and intended direction across Material Choices, Resource Use, People & Relationships and Clear Information.'
+  },
+  {
+    name: 'Industries',
+    path: '/applications',
+    description:
+      'Panel applications organised around real customer needs across furniture, construction, manufacturing and packaging.'
+  },
+  {
+    name: 'Partners',
     path: '/partners',
     description:
-      'Collaborative pathways for architects, interior designers, dealers, distributors, manufacturers, and buyers.'
+      'Business pathways for dealers, builders, furniture manufacturers, packaging businesses and institutional buyers.'
   },
   {
-    name: 'Resources & Material Specifications',
+    name: 'Product Information',
     path: '/resources',
     description:
-      'Official technical data requests, physical material swatches, and specification assistance.'
+      'Request brand catalogues, product specification details and sample evaluations from NEOM Panels.'
   },
   {
-    name: 'Contact & Enquiries',
+    name: 'Leadership',
+    path: '/team',
+    description:
+      'Leadership team at NEOM Panels: Jibin N, Muneer K H, Muhamad Raneef T A and Muhammed Jabir.'
+  },
+  {
+    name: 'Business Enquiry',
     path: '/enquiry',
     description:
-      'Direct specification desk, project enquiries, and official contact points (+91 97454 50618).'
+      'Start a corporate, brand, product or partnership enquiry with NEOM Panels (+91 97454 50618).'
   }
 ];
+
+export function stripBrandSuffix(rawTitle = '') {
+  return String(rawTitle)
+    .replace(/\s*[|—–-]\s*NEOM Panels\s*$/i, '')
+    .trim();
+}
 
 export function toAbsoluteAssetUrl(urlOrPath) {
   if (!urlOrPath) return `${SITE_URL}${DEFAULT_OG_IMAGE}`;
@@ -116,13 +112,19 @@ export function buildPageMetadata({
   path = '/',
   keywords = [],
   ogImage = DEFAULT_OG_IMAGE,
-  ogImageAlt = 'NEOM Panels — Engineered Excellence, Designed for Spaces',
+  ogImageAlt = 'NEOM Panels — Indian panel manufacturing company behind Starwoods and NEOM Packing Plywood',
   ogImages = [],
   type = 'website'
 }) {
   const canonicalUrl = path === '/' ? SITE_URL : `${SITE_URL}${path}`;
   const mergedKeywords = Array.from(new Set([...keywords, ...CORE_SEO_KEYWORDS]));
   const primaryImageUrl = toAbsoluteAssetUrl(ogImage);
+  const cleanTitle = title ? stripBrandSuffix(title) : SITE_NAME;
+  const fullOgTitle = absoluteTitle
+    ? `${stripBrandSuffix(absoluteTitle)} | ${SITE_NAME}`
+    : cleanTitle === SITE_NAME
+    ? SITE_NAME
+    : `${cleanTitle} | ${SITE_NAME}`;
 
   const resolvedOgImages =
     ogImages && ogImages.length > 0
@@ -142,14 +144,16 @@ export function buildPageMetadata({
         ];
 
   return {
-    ...(absoluteTitle ? { title: { absolute: absoluteTitle } } : { title }),
+    ...(absoluteTitle
+      ? { title: { absolute: fullOgTitle } }
+      : { title: cleanTitle }),
     description,
     keywords: mergedKeywords,
     alternates: {
       canonical: canonicalUrl
     },
     openGraph: {
-      title: absoluteTitle || `${title} | ${SITE_NAME}`,
+      title: fullOgTitle,
       description,
       url: canonicalUrl,
       siteName: SITE_NAME,
@@ -159,17 +163,12 @@ export function buildPageMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: absoluteTitle || `${title} | ${SITE_NAME}`,
+      title: fullOgTitle,
       description,
       images: resolvedOgImages.map((img) => ({
         url: img.url,
         alt: img.alt || ogImageAlt
       }))
-    },
-    other: {
-      image: primaryImageUrl,
-      thumbnail: primaryImageUrl,
-      'og:image:secure_url': primaryImageUrl
     }
   };
 }
@@ -191,22 +190,32 @@ export function getOrganizationJsonLd(contact = {}) {
           height: 316
         },
         image: [
-          `${SITE_URL}/assets/hero-architectural-panels.jpg`,
-          `${SITE_URL}/assets/hero-neom-flagship.jpg`,
           `${SITE_URL}/assets/product-structural-plywood.jpg`,
-          `${SITE_URL}/assets/product-engineered-boards.jpg`,
-          `${SITE_URL}/assets/product-decorative-surfaces.jpg`
+          `${SITE_URL}/assets/starwoods-brand-showcase.jpg`,
+          `${SITE_URL}/assets/packing-plywood-showcase.jpg`
         ],
         slogan: 'Engineered Excellence, Designed for Spaces.',
         description:
-          'NEOM Panels is building an integrated ecosystem of engineered wood, interior materials, and project supply solutions for India and global markets across Structural & Specialty Plywood, Solid Engineered Boards, and Decorative Surfaces.',
-        areaServed: [
-          { '@type': 'Country', name: 'India' }
-        ],
+          'NEOM Panels is an Indian panel manufacturing company and the company behind Starwoods and NEOM Packing Plywood.',
+        areaServed: [{ '@type': 'Country', name: 'India' }],
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'IN'
         },
+        brand: [
+          {
+            '@type': 'Brand',
+            name: 'Starwoods',
+            description: 'Plywood and engineered boards.',
+            url: `${SITE_URL}/brands/starwoods`
+          },
+          {
+            '@type': 'Brand',
+            name: 'NEOM Packing Plywood',
+            description: 'Plywood for industrial packaging requirements.',
+            url: `${SITE_URL}/brands/neom-packing-plywood`
+          }
+        ],
         contactPoint: [
           {
             '@type': 'ContactPoint',
@@ -214,50 +223,16 @@ export function getOrganizationJsonLd(contact = {}) {
             areaServed: 'IN',
             availableLanguage: ['English', 'Hindi', 'Malayalam'],
             url: `${SITE_URL}/enquiry`,
-            ...(contact.email ? { email: contact.email } : { email: 'neompanels@gmail.com' }),
-            ...(contact.phone ? { telephone: contact.phone } : { telephone: '+91 97454 50618' })
+            email: contact.email || 'neompanels@gmail.com',
+            telephone: contact.phone || '+91 97454 50618'
           }
-        ],
-        knowsAbout: [
-          'Structural & Specialty Plywood',
-          'Marine & BWR / BWP Plywood',
-          'Medium-Density Fiberboard (MDF)',
-          'High-Density Moisture-Resistant Boards (HDHMR)',
-          'Pre-Laminated MDF',
-          'Architectural Wood Veneers',
-          'High-Pressure Laminates (HPL)',
-          'Acrylic & Fluted Charcoal Interior Panels'
-        ],
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: 'NEOM Panels Phase 1 Materials Portfolio',
-          itemListElement: [
-            {
-              '@type': 'OfferCatalog',
-              name: 'Structural & Specialty Plywood',
-              description:
-                'Premium Plywood, Marine Plywood, and BWR / BWP engineered plywood panels.'
-            },
-            {
-              '@type': 'OfferCatalog',
-              name: 'Solid Engineered Boards',
-              description:
-                'MDF, HDHMR moisture-resistant cores, and Pre-Laminated MDF panels.'
-            },
-            {
-              '@type': 'OfferCatalog',
-              name: 'Architectural Decorative Surfaces',
-              description:
-                'Natural & smoked veneers, high-pressure laminates, acrylic panels, and charcoal fluted panels.'
-            }
-          ]
-        }
+        ]
       },
       {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
-        name: 'NEOM Panels — Engineered Excellence, Designed for Spaces',
+        name: 'NEOM Panels',
         publisher: {
           '@id': `${SITE_URL}/#organization`
         },

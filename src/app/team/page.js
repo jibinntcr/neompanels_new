@@ -3,15 +3,15 @@ import { SITE_URL, buildPageMetadata } from '@/lib/seo';
 import { LEADERSHIP_PROFILES } from '@/lib/leadership-data';
 
 export const metadata = buildPageMetadata({
-  title: 'Executive Leadership & Team',
+  title: 'Leadership',
   description:
-    'Meet the executive leadership team guiding NEOM Panels: Managing Director Jibin N, Chief Executive Officer Muneer K H, Chief Financial Officer Muhamad Raneef T A, and Chief Technology Officer Muhammed Jabir.',
+    'Meet the leadership team at NEOM Panels: Managing Director Jibin N, Chief Executive Officer Muneer K H, Chief Financial Officer Muhamad Raneef T A and Chief Technology Officer Muhammed Jabir.',
   path: '/team',
   ogImage: '/assets/team/jibin-n-neom-panels-managing-director.webp',
   ogImageAlt: 'Jibin N, Managing Director of NEOM Panels',
   keywords: [
-    'NEOM Panels team',
     'NEOM Panels leadership',
+    'NEOM Panels team',
     'Jibin N Managing Director NEOM Panels',
     'Muneer K H CEO NEOM Panels',
     'Muhamad Raneef T A CFO NEOM Panels',
@@ -28,16 +28,17 @@ export default function TeamPage() {
         '@id': `${SITE_URL}/team#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Leadership Team', item: `${SITE_URL}/team` }
+          { '@type': 'ListItem', position: 2, name: 'Company', item: `${SITE_URL}/about` },
+          { '@type': 'ListItem', position: 3, name: 'Leadership', item: `${SITE_URL}/team` }
         ]
       },
       {
         '@type': 'AboutPage',
         '@id': `${SITE_URL}/team#webpage`,
         url: `${SITE_URL}/team`,
-        name: 'Executive Leadership & Team | NEOM Panels',
+        name: 'Leadership | NEOM Panels',
         description:
-          'Executive leadership team guiding NEOM Panels across strategic direction, wood-panel operations, financial stewardship, and digital infrastructure.',
+          'Leadership team guiding NEOM Panels across corporate strategy, wood-panel operations, finance and digital systems.',
         isPartOf: { '@id': `${SITE_URL}/#website` },
         breadcrumb: { '@id': `${SITE_URL}/team#breadcrumb` },
         mainEntity: {
@@ -69,55 +70,42 @@ export default function TeamPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(teamJsonLd) }}
       />
 
-      {/* Architectural Dark-Forest Page Hero */}
-      <section className="arch-page-hero arch-page-hero--forest" aria-labelledby="main-heading">
-        <div className="container">
-          <nav className="breadcrumb-nav breadcrumb-nav--light" aria-label="Breadcrumb">
-            <ol className="breadcrumb-list font-mono" role="list">
-              <li><Link href="/">Home</Link></li>
-              <li aria-hidden="true">/</li>
-              <li><Link href="/about">About NEOM</Link></li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page">Leadership Team</li>
-            </ol>
+      {/* Page Header */}
+      <section className="page-header-dark" aria-labelledby="main-heading">
+        <div className="container page-header-inner">
+          <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+            <Link href="/" className="breadcrumb-link">Home</Link>
+            <span className="breadcrumb-sep" aria-hidden="true">/</span>
+            <Link href="/about" className="breadcrumb-link">Company</Link>
+            <span className="breadcrumb-sep" aria-hidden="true">/</span>
+            <span className="breadcrumb-current">Leadership</span>
           </nav>
 
-          <div className="arch-page-hero__grid">
-            <div className="arch-page-hero__copy">
-              <span className="section-eyebrow text-gold font-mono">EXECUTIVE BOARD &amp; STEWARDSHIP</span>
-              <h1 id="main-heading" tabIndex={-1} className="page-title text-warm">
-                Leadership Guiding the NEOM Panels Ecosystem.
-              </h1>
-              <p className="page-lead-text text-warm-muted">
-                NEOM Panels is led by an executive team combining entrepreneurial vision, wood-panel manufacturing and trading insight, disciplined financial governance, and digital systems capability.
-              </p>
-            </div>
-
-            <div className="arch-page-hero__stat-card">
-              <span className="arch-stat-label font-mono text-gold">UNIFIED MANDATE</span>
-              <p className="arch-stat-quote">
-                “Building one of India’s most trusted engineered wood and interior materials brands—anchored in quality, design relevance, and international readiness.”
-              </p>
-              <div className="arch-stat-meta font-mono">
-                <span>4 Executive Directors</span>
-                <span aria-hidden="true">·</span>
-                <span>India &amp; GCC Horizon</span>
-              </div>
-            </div>
-          </div>
+          <span className="section-eyebrow text-gold">Company Leadership</span>
+          <h1 id="main-heading" className="page-hero-title text-warm">
+            Leadership guiding NEOM Panels and its brands.
+          </h1>
+          <p className="page-hero-lead text-warm-muted">
+            NEOM Panels is led by a leadership team combining entrepreneurial direction, practical
+            wood-panel manufacturing and trade experience, financial discipline and digital
+            operations.
+          </p>
         </div>
       </section>
 
-      {/* Executive Profiles 2x2 Architectural Gallery */}
-      <section className="section-spacing bg-warm-ivory" aria-label="Executive Leadership Profiles">
+      {/* Leadership Profiles 2x2 Gallery */}
+      <section className="section-spacing bg-warm-ivory border-bottom-divider" aria-labelledby="directory-heading">
         <div className="container">
           <div className="section-header-split">
             <div>
-              <span className="section-eyebrow font-mono">EXECUTIVE DIRECTORY</span>
-              <h2 className="section-title">Board &amp; Executive Management</h2>
+              <span className="section-eyebrow">Leadership Directory</span>
+              <h2 id="directory-heading" className="corp-section-title" style={{ marginBottom: 0 }}>
+                Meet our leadership team.
+              </h2>
             </div>
-            <p className="section-subtitle">
-              Select any executive profile below to view full professional background, core responsibilities, and direct communication channels.
+            <p className="section-subtitle" style={{ maxWidth: '48ch' }}>
+              Select any profile below to read full professional background, core responsibilities
+              at NEOM Panels and verified contact details.
             </p>
           </div>
 
@@ -128,7 +116,7 @@ export default function TeamPage() {
                   <Link
                     href={leader.profileHref}
                     className="team-exec-card__portrait-link"
-                    aria-label={`View ${leader.name} full executive profile`}
+                    aria-label={`View ${leader.name} profile`}
                   >
                     <picture>
                       <source srcSet={leader.photo} type="image/webp" />
@@ -143,12 +131,11 @@ export default function TeamPage() {
                       />
                     </picture>
                   </Link>
-                  <span className="team-exec-card__index font-mono">{leader.order}</span>
                 </div>
 
                 <div className="team-exec-card__body">
                   <div className="team-exec-card__role-row">
-                    <span className="team-exec-card__role font-mono">{leader.role}</span>
+                    <span className="team-exec-card__role">{leader.role}</span>
                   </div>
 
                   <h3 className="team-exec-card__name">
@@ -170,7 +157,7 @@ export default function TeamPage() {
 
                   <div className="team-exec-card__footer">
                     <Link href={leader.profileHref} className="btn btn-secondary btn-sm">
-                      <span>Executive Profile</span>
+                      <span>View Profile</span>
                       <span aria-hidden="true">→</span>
                     </Link>
 
@@ -210,72 +197,26 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Four Pillars of Leadership Stewardship */}
-      <section className="section-spacing" aria-label="Leadership Principles">
+      {/* Closing Engagement Banner */}
+      <section className="section-spacing bg-white" aria-labelledby="team-cta-heading">
         <div className="container">
-          <div className="section-header-compact">
-            <span className="section-eyebrow font-mono">HOW WE OPERATE</span>
-            <h2 className="section-title">Complementary Capabilities Across Every Stage</h2>
-            <p className="section-subtitle">
-              Our leadership structure is deliberately balanced across strategy, manufacturing partnerships, financial discipline, and digital operations.
-            </p>
-          </div>
-
-          <div className="stewardship-grid">
-            <div className="stewardship-card">
-              <span className="stewardship-num font-mono">01 / STRATEGY &amp; BRAND</span>
-              <h3 className="stewardship-title">Long-Term Brand Architecture</h3>
-              <p className="stewardship-desc">
-                Building NEOM Panels with clear market positioning, design-first material presentation, and structured expansion across India and global corridors.
+          <div className="closing-cta-panel">
+            <div className="closing-cta-panel__content">
+              <h2 id="team-cta-heading" className="closing-cta-panel__title">
+                Connect directly with the NEOM Panels team.
+              </h2>
+              <p className="closing-cta-panel__desc">
+                Whether exploring regional trade partnerships, recurring supply schedules or
+                interior project specifications, our team welcomes direct conversation.
               </p>
-            </div>
-
-            <div className="stewardship-card">
-              <span className="stewardship-num font-mono">02 / OPERATIONS &amp; QUALITY</span>
-              <h3 className="stewardship-title">Disciplined Supply Execution</h3>
-              <p className="stewardship-desc">
-                Working hands-on with manufacturing alliances and grading checkpoints so substrates and decorative surfaces meet real-world joinery demands.
-              </p>
-            </div>
-
-            <div className="stewardship-card">
-              <span className="stewardship-num font-mono">03 / FINANCIAL GOVERNANCE</span>
-              <h3 className="stewardship-title">Transparent Commercial Terms</h3>
-              <p className="stewardship-desc">
-                Maintaining responsible capital allocation, accountable procurement, and dependable commercial commitments with dealers and institutional buyers.
-              </p>
-            </div>
-
-            <div className="stewardship-card">
-              <span className="stewardship-num font-mono">04 / DIGITAL WORKFLOWS</span>
-              <h3 className="stewardship-title">Connected Customer Experience</h3>
-              <p className="stewardship-desc">
-                Connecting modern digital enquiry systems with practical trading and logistics coordination for responsive B2B communication.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Direct Executive Engagement Banner */}
-      <section className="section-spacing bg-forest text-warm" aria-label="Connect with Leadership">
-        <div className="container">
-          <div className="consultation-banner">
-            <div className="consultation-copy">
-              <span className="section-eyebrow text-gold font-mono">PARTNERSHIPS &amp; COMMERCIAL DIALOGUE</span>
-              <h2 className="section-title text-warm">Connect directly with the NEOM Panels team.</h2>
-              <p className="consultation-desc text-warm-muted">
-                Whether exploring regional dealership opportunities, OEM supply schedules, or architectural project specifications, our team welcomes direct conversation.
-              </p>
-            </div>
-            <div className="consultation-action" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-              <Link href="/enquiry?type=Partnership" className="btn btn-gold">
-                <span>Discuss a Partnership</span>
-                <span aria-hidden="true">→</span>
-              </Link>
-              <Link href="/products" className="btn btn-outline-light">
-                <span>Explore Portfolio</span>
-              </Link>
+              <div className="closing-cta-panel__actions">
+                <Link href="/enquiry" className="btn btn-gold btn-lg">
+                  <span>Business Enquiry</span>
+                </Link>
+                <Link href="/brands" className="btn btn-outline-light btn-lg">
+                  <span>Explore Our Brands</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

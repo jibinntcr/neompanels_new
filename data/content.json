@@ -20,9 +20,9 @@
       "enquiryRouteUrl": "/enquiry",
       "verifiedEmail": "neompanels@gmail.com",
       "verifiedPhone": "+91 97454 50618",
-      "verifiedWhatsapp": "+91 97454 50618",
-      "verifiedRegisteredAddress": "India (Corporate Headquarters & Project Supply Hub)",
-      "verifiedFactoryLocation": "India (Company-owned & Partner Wood-Panel Manufacturing Network)",
+      "verifiedWhatsapp": null,
+      "verifiedRegisteredAddress": "India",
+      "verifiedFactoryLocation": "India (Own factory forms part of NEOM’s manufacturing foundation)",
       "verifiedWebsite": "https://www.neompanels.com",
       "verifiedSocialLinks": [
         {
@@ -158,10 +158,10 @@
           "reviewDate": "2026-11-04"
         },
         {
-          "label": "Product Brand Portfolio",
+          "label": "Active Product Brands",
           "value": "Starwoods and NEOM Packing Plywood",
           "status": "verified",
-          "reviewDate": "2026-11-04"
+          "reviewDate": "2026-11-16"
         },
         {
           "label": "Commercial Focus",
@@ -194,7 +194,7 @@
           "summary": "Distinguishes between current operational practices and planned initiatives, identifying the exact period and scope whenever figures are published.",
           "publicationStatus": "published",
           "reviewDate": "2026-11-04",
-          "linkHref": "/sustainability#planned-improvements"
+          "linkHref": "/responsibility#material-sourcing"
         },
         {
           "id": "policy-privacy",

@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { buildPageMetadata, getBreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'Privacy Notice — Corporate Data Governance',
+  title: 'Privacy Policy',
   description:
-    'Privacy Notice explaining how NEOM Panels collects, uses, stores and safeguards B2B enquiry, vendor and corporate contact information.',
+    'Privacy Policy explaining how NEOM Panels collects, uses, stores and safeguards B2B enquiry, vendor and corporate contact information.',
   path: '/privacy',
-  keywords: ['NEOM Panels privacy notice', 'B2B enquiry data privacy NEOM Panels']
+  keywords: ['NEOM Panels privacy policy', 'B2B enquiry data privacy NEOM Panels']
 });
 
 export default function PrivacyPage() {
@@ -55,8 +55,9 @@ export default function PrivacyPage() {
                 When you submit a Business Enquiry or a Document Request, we collect the
                 information you choose to provide: your full name, company or organisation name,
                 role or buyer type, email address, phone number, city/state/country, requirement
-                category, brand interest (Starwoods or NEOM Packing Plywood), specification
-                details, and any attached specification or BOQ file (PDF, JPG, or PNG).
+                category, brand interest (Starwoods or NEOM Packing Plywood),
+                specification details, and any attached specification or BOQ file (PDF, JPG, or
+                PNG).
               </p>
             </div>
 
@@ -72,7 +73,8 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   Coordinating your enquiry with the relevant commercial, brand (Starwoods or NEOM
-                  Packing Plywood), or technical representative within NEOM Panels.
+                  Packing Plywood), or technical representative within NEOM
+                  Panels.
                 </li>
                 <li>
                   Providing requested corporate policies, technical documents, or vendor
