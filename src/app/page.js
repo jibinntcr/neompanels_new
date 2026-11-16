@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import BrandMarkPlaque from '@/components/BrandMarkPlaque';
-import HeroMaterialShowcase from '@/components/HeroMaterialShowcase';
+import FullScreenHeroSlider from '@/components/FullScreenHeroSlider';
 import {
   PORTFOLIO_BRANDS,
   CUSTOMER_COMMITMENTS,
@@ -18,32 +18,8 @@ export const metadata = buildPageMetadata({
 export default function HomePage() {
   return (
     <main id="main-content">
-      {/* A. Fixed Editorial Hero — Light Warm-Ivory Split Composition */}
-      <section className="corp-hero corp-hero--light" aria-labelledby="main-heading">
-        <div className="container corp-hero__grid">
-          <div className="corp-hero__copy">
-            <span className="corp-hero__eyebrow corp-hero__eyebrow--dark">NEOM PANELS</span>
-            <h1 id="main-heading" className="corp-hero__title corp-hero__title--dark">
-              A dependable name behind the materials.
-            </h1>
-            <p className="corp-hero__lead corp-hero__lead--dark">
-              NEOM Panels brings together manufacturing capability, focused product brands and
-              accountable customer relationships. Through Starwoods and NEOM Packing Plywood, we
-              help businesses choose and source panel materials with greater clarity and confidence.
-            </p>
-            <div className="corp-hero__actions">
-              <Link href="/brands" className="btn btn-primary btn-lg">
-                <span>Explore Our Brands</span>
-              </Link>
-              <Link href="/about" className="btn btn-secondary btn-lg">
-                <span>About NEOM</span>
-              </Link>
-            </div>
-          </div>
-
-          <HeroMaterialShowcase />
-        </div>
-      </section>
+      {/* A. Full-Screen Hero Slider */}
+      <FullScreenHeroSlider />
 
       {/* B. Company Introduction */}
       <section className="section-spacing bg-white border-bottom-divider" aria-labelledby="company-intro-heading">
